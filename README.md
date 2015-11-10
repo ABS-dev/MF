@@ -3,7 +3,7 @@ MF
 
 Mitigated Fraction
 
-#### First-time usage
+#### To install or update MF
 
 From **within R**
 
