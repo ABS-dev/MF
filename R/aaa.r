@@ -36,3 +36,28 @@ emp.hpd <- function (X, alpha){
     # see documentation for quantile() for type
     return(hpd)
 }
+
+
+resampleHier <- function(dat, cluster) {
+  
+  # exit early for trivial data
+  if(nrow(dat) == 1 )
+    return(dat)
+  
+  # sample the clustering factor
+  cls <- sample(unique(dat[[cluster[1]]]), replace=TRUE)
+
+  # subset on the sampled clustering factors
+  sub <- lapply(cls, function(b) subset(dat, dat[[cluster[1]]]==b))
+ 
+  # sample lower levels of hierarchy (if any)
+  # recursive call to resample
+  if(length(cluster) > 1)
+    sub <- lapply(sub, resampleHier, cluster=cluster[-1])
+  
+  # join and return samples
+  rbind.fill(sub)
+  
+}
+
+
