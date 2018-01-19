@@ -67,6 +67,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 	
 	# truncate
 	ci["upper"] <- min(ci["upper"], 1)
+	ci["lower"] <- max(ci["lower"], -1)
 
 	# out <- list(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist, df = df)
 	# class(out) <- 'mfmp'
