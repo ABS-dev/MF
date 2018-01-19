@@ -11,6 +11,7 @@
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence interval? Default t distribution.
 #' @export
+#' @note upper confidence interval is truncated to 1; lower confidence interval is truncated to -1
 #' @return a \code{\link{mfmp-class}} data object
 #' @seealso \code{\link{mfmp-class}}
 #' @references Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
@@ -19,7 +20,7 @@
 #' MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
 #' MFmp(x = c(12, 12, 2))
 MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NULL, 
-	alpha = 0.05, df = NULL, tdist = T){
+	alpha = 0.05, df = NA, tdist = T){
 	# asymptotic CI for matched pairs
 	# x is a trinomial frequency vector
 	# c(x>y,x=y,x<y))
@@ -63,6 +64,10 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 
 	ci <- B + q * sqrt(VB) 
 	names(ci) <- c("point", "lower", "upper")
+	
+	# truncate
+	ci["upper"] <- min(ci["upper"], 1)
+	ci["lower"] <- max(ci["lower"], -1)
 
 	# out <- list(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist, df = df)
 	# class(out) <- 'mfmp'
