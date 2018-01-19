@@ -11,7 +11,7 @@
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence interval? Default t distribution.
 #' @export
-#' @note upper confidence interval is truncated to 1
+#' @note upper confidence interval is truncated to 1; lower confidence interval is truncated to -1
 #' @return a \code{\link{mfmp-class}} data object
 #' @seealso \code{\link{mfmp-class}}
 #' @references Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
