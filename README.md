@@ -18,5 +18,5 @@ install_github("ABS-dev/MF", ref = "4.3.3")
 
 ```
 require(devtools)
-install_github("ABS-dev/DiagTestKit")
+install_github("ABS-dev/MF")
 ```
