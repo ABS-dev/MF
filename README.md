@@ -7,7 +7,7 @@ Mitigated Fraction
 
 From **within R**
 
-1. Installing release v4.3.3
+1. Installing last release v4.3.3
 
 ```
 require(devtools)
