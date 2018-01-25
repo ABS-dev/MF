@@ -50,11 +50,11 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 	logB <- log(B)
 	VlogB <- t(gradl) %*% V %*% gradl
 
-	if(tdist & is.null(df)){
+	if(tdist & is.na(df)){
 		df <- N - 2
 	}
 	
-	if(!is.null(df)){
+	if(!is.na(df)){
 		q <- qt(c(0.5, alpha/2, 1 - alpha/2), df)
 		what <- paste(100 * (1 - alpha), "% t intervals on ", df, " df\n", sep = "")
 	} else {
