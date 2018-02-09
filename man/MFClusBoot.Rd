@@ -4,9 +4,9 @@
 \alias{MFClusBoot}
 \title{Boostrap MF CI from clustered data}
 \usage{
-MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, 
-   boot.unit = FALSE, b = 100, B = 100, alpha = 0.05, hpd = TRUE, 
-   return.boot = FALSE, trace.it = FALSE)
+MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
+  boot.unit = FALSE, b = 100, B = 100, alpha = 0.05, hpd = TRUE,
+  return.boot = FALSE, trace.it = FALSE)
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.}
@@ -15,9 +15,9 @@ MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
 
 \item{compare}{Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared}
 
-\item{boot.cluster}{Resample the clusters? Default TRUE}
+\item{boot.cluster}{Boolean whether to resample the clusters.}
 
-\item{boot.unit}{Resample the units within cluster? Default FALSE}
+\item{boot.unit}{Boolean whether to resample the units within cluster.}
 
 \item{b}{Number of bootstrap samples to take with each cycle}
 
@@ -25,11 +25,11 @@ MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
 
 \item{alpha}{Complement of the confidence level}
 
-\item{hpd}{Estimate highest density intervals? Default TRUE}
+\item{hpd}{Boolean whether to estimate highest density intervals.}
 
-\item{return.boot}{Save the bootstrap sample of the MF statistic? Default FALSE}
+\item{return.boot}{Boolean whether to save the bootstrap sample of the MF statistic.}
 
-\item{trace.it}{Verbose tracking of the cycles? Default FALSE}
+\item{trace.it}{Boolean whether to display verbose tracking of the cycles.}
 }
 \value{
 a \code{\link{mfbootcluster-class}} data object
