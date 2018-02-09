@@ -205,7 +205,8 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = 
 
 
     q <- c(.5,alpha/2, 1 - alpha/2)
-    mf.obs <- MFClus(formula, data, compare = compare)$All$mf
+    mf.All <-  MFClus(formula, data, compare = compare)$All
+    mf.obs <-mf.All$mf
 
     nboot <- b * B
     cluster.text <- ifelse(boot.cluster, "clusters", "")
@@ -231,5 +232,5 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = 
 
 	return(mfbootcluster$new(stat = stat, nboot = nboot, alpha = alpha, what = the.text, 
 		excludedClusters = excluded.clusters, seed = seed, call = match.call(), 
-		compare = compare, rng = rng, sample = sample))
+		compare = compare, rng = rng, sample = sample, All =  mf.All))
 }
