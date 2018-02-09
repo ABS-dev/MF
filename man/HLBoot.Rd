@@ -40,7 +40,8 @@ Estimates bootstrap confidence intervals for MF, HL, and Qdif.
 }
 \details{
 Estimates bootstrap confidence intervals for the mitigated fraction (MF), Hodge-Lehmann estimator (HL), and the difference of medians and quartiles (Qdif). 
-The Hodges-Lehmann estimator is the media difference; it assumes that the two distributions have the same shape and differ by a constant shift.
+The Hodges-Lehmann estimator is the media difference; it assumes that the two distributions have the same shape and differ by a constant shift. Assumes data is
+single pool (no nesting).
 }
 \examples{
 HLBoot(lesion~group,calflung)

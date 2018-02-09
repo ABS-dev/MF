@@ -1,6 +1,7 @@
 #' @description Estimates bootstrap confidence intervals for MF, HL, and Qdif.
 #' @details Estimates bootstrap confidence intervals for the mitigated fraction (MF), Hodge-Lehmann estimator (HL), and the difference of medians and quartiles (Qdif). 
-#' The Hodges-Lehmann estimator is the media difference; it assumes that the two distributions have the same shape and differ by a constant shift.
+#' The Hodges-Lehmann estimator is the media difference; it assumes that the two distributions have the same shape and differ by a constant shift. Assumes data is
+#' single pool (no nesting).
 #' @title Bootstrap CI for MF, HL, and Qdif
 #' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, 
 #'   and w is a factor indicating the clusters.
