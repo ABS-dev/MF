@@ -4,8 +4,8 @@
 \alias{HLBoot}
 \title{Bootstrap CI for MF, HL, and Qdif}
 \usage{
-HLBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-  alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, 
+HLBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100,
+  alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
   trace.it = FALSE, seed = NULL)
 }
 \arguments{
@@ -22,13 +22,13 @@ and w is a factor indicating the clusters.}
 
 \item{alpha}{Complement of the confidence level}
 
-\item{hpd}{Estimate highest density intervals for MF and HL? Default TRUE.}
+\item{hpd}{Boolean whether to estimate highest density intervals for MF and HL.}
 
-\item{bca}{Estimate BCa intervals for MF? Default FALSE.}
+\item{bca}{Boolean whether to estimate BCa intervals for MF.}
 
-\item{return.boot}{Save the bootstrap samples of the statistics? Default FALSE.}
+\item{return.boot}{Boolean whether to save the bootstrap samples of the statistics.}
 
-\item{trace.it}{Verbose tracking of the cycles? Default FALSE.}
+\item{trace.it}{Boolean whether to display verbose tracking of the cycles.}
 
 \item{seed}{initial seed value. Ignored.}
 }
