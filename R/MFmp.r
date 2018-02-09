@@ -11,7 +11,8 @@
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence interval? Default t distribution.
 #' @export
-#' @note upper confidence interval is truncated to 1; lower confidence interval is truncated to -1
+#' @note upper confidence interval is truncated to 1; lower confidence interval is truncated to -1.
+#' Point estimate of 1.0 indicates complete separation.
 #' @return a \code{\link{mfmp-class}} data object
 #' @seealso \code{\link{mfmp-class}}
 #' @references Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
@@ -65,13 +66,14 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 	ci <- B + q * sqrt(VB) 
 	names(ci) <- c("point", "lower", "upper")
 	
+	if(round(ci[["point"]], digits = 1) == 1.0){
+	  message("Complete separation observed")
+	}
 	# truncate
 	ci["upper"] <- min(ci["upper"], 1)
 	ci["lower"] <- max(ci["lower"], -1)
 
-	# out <- list(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist, df = df)
-	# class(out) <- 'mfmp'
-	# return(out)
+
 	return(mfmp$new(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist, df = df))
 }
 	

@@ -31,7 +31,8 @@ Estimates mitigated fraction from matched pairs.
 Estimates \emph{MF} from matched pairs by the difference of multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
 }
 \note{
-upper confidence interval is truncated to 1; lower confidence interval is truncated to -1
+upper confidence interval is truncated to 1; lower confidence interval is truncated to -1.
+Point estimate of 1.0 indicates complete separation.
 }
 \examples{
 MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
