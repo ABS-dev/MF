@@ -128,6 +128,7 @@ mfmp <- setRefClass('mfmp',
 #' \item{\code{excludedClusters: }}{character vector naming clusters excluded because of missing treatment(s)}
 #' \item{\code{call: }}{the call to \code{MFClusBoot}}
 #' \item{\code{sample: }}{what is this?}
+#' \item{\code{All: }}{Field "All" from MFClus call.}
 #' }
 #' @section Contains:
 #' \code{\link{mf-class}}
@@ -137,7 +138,7 @@ mfmp <- setRefClass('mfmp',
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 mfbootcluster <- setRefClass('mfbootcluster', contains = 'mf', fields = list(
 	stat = 'matrix', what = 'character', excludedClusters = 'character', call = 'call',
-	sample = 'numericORNULL'))
+	sample = 'numericORNULL', All = 'data.frame'))
 	
 #' @name mfcluster-class
 #' @title Class mfcluster

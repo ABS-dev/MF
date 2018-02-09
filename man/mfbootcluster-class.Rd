@@ -26,6 +26,7 @@ estimates}
 \item{\code{excludedClusters: }}{character vector naming clusters excluded because of missing treatment(s)}
 \item{\code{call: }}{the call to \code{MFClusBoot}}
 \item{\code{sample: }}{what is this?}
+\item{\code{All: }}{Field "All" from MFClus call.}
 }
 }
 
