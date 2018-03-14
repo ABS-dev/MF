@@ -52,6 +52,20 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     tx <- A[, 2]
     x <- resp[tx == compare[1]]
     y <- resp[tx == compare[2]]
+    
+    ## shortcircuit if complete separation
+    if(range(x)[1] < range(y)[1]){
+      lowtx <- x
+      hitx <- y
+    } else{
+      lowtx <- y
+      hitx <- x
+    }
+    
+    if(max(lowtx) < min(hitx)){
+      message('Complete separation observed. MF is 1.0 with no c.i.')
+      return()
+    }
 
     rng <- 'Mersenne-Twister'
     RNGkind(rng)
@@ -69,6 +83,7 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     }
     MF <- ((2 * W - n.x * (1 + n.x + n.y))/(n.x * n.y))
     mf <- ((2 * w(c(x, y), n.x) - n.x * (1 + n.x + n.y))/(n.x * n.y))
+    
     qprob <- c(0.5, alpha/2, 1 - alpha/2)
     qmf <- quantile(MF, prob = qprob)
     stat <- matrix(c(mf, qmf), 1, 4, dimnames = list(c('Equal Tailed'), c("observed", "median", "lower", "upper")))
@@ -101,13 +116,10 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         qmf <- quantile(MF, prob = qprob)
         stat <- rbind(stat, 'BC.a'= c(mf, qmf))
     }
-    if(return.boot){
-        out <- mfboot$new(stat = stat, nboot = nboot, alpha = alpha, seed = seed, 
+   
+    out <- mfboot$new(stat = stat, nboot = nboot, alpha = alpha, seed = seed, 
 			rng = rng, compare = compare, sample = MF)
-	} else {
-		out <- mfboot$new(stat = stat, nboot = nboot, alpha = alpha, seed = seed, 
-			rng = rng, compare = compare, sample = NULL)
-	}
+
 
     return(out)
 }
