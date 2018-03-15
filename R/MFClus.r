@@ -103,6 +103,10 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
     All["mf"] <- MF
     All <- data.frame(t(All))
     dimnames(All)[[1]] <- 'All'
+    
+    if(round(All$mf, digits = 1) == 1.0){
+      message("Complete separation observed.")
+    }
 	return(mfcluster$new(All = All, byCluster = out, excludedClusters = excluded.clusters,
 		call = match.call(), compare = compare))
 }

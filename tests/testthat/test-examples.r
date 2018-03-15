@@ -5,6 +5,9 @@ context("examples")
 ###################
 
 hlboot_ex <- HLBoot(lesion~group,calflung)
+complete_sep <- data.frame(lesion = c(rnorm(25, mean = .2, sd = 0.1), 
+                                      rnorm(25, mean = 1, sd = 0.1)),
+                           group = rep(c('con', 'vac'), each = 25))
 test_that("HLBoot", {
   expect_equal(hlboot_ex$nboot, expected = 10000, tolerance = 0)
   expect_equal(hlboot_ex$alpha, expected = 0.05, tolerance = 0)
@@ -33,20 +36,29 @@ test_that("HLBoot", {
   expect_equal(hlboot_ex$QYstat["Q75", "observed"], expected = 0.14700)
 
   ## TODO: if seed is made reproducible, check median, lower and upper
+  
+  # complete separation
+  expect_message(HLBoot(lesion~group, complete_sep))
 })
 
 ###################
 ## MFBoot
 ###################
-mfboot_ex <- MFBoot(lesion~group, calflung)
+mfboot_ex1 <- MFBoot(lesion~group, calflung)
+complete_sep <- data.frame(lesion = c(rnorm(25, mean = .2, sd = 0.1), 
+                                      rnorm(25, mean = 1, sd = 0.1)),
+                           group = rep(c('con', 'vac'), each = 25))
 test_that("MFBoot",  {
-  expect_equal(mfboot_ex$nboot, expected = 10000, tolerance = 0)
-  expect_equal(mfboot_ex$alpha, expected = 0.05, tolerance = 0)
-  expect_identical(mfboot_ex$compare, expected = c('con', 'vac'))
-  expect_identical(mfboot_ex$rng, expected = "Mersenne-Twister")
-  expect_equal(mfboot_ex$stat[1, 'observed'], expected = 0.4400, tolerance = 0)
-  expect_equal(mfboot_ex$stat[2, 'observed'], expected = 0.4400, tolerance = 0)
+  expect_equal(mfboot_ex1$nboot, expected = 10000, tolerance = 0)
+  expect_equal(mfboot_ex1$alpha, expected = 0.05, tolerance = 0)
+  expect_identical(mfboot_ex1$compare, expected = c('con', 'vac'))
+  expect_identical(mfboot_ex1$rng, expected = "Mersenne-Twister")
+  expect_equal(mfboot_ex1$stat[1, 'observed'], expected = 0.4400, tolerance = 0)
+  expect_equal(mfboot_ex1$stat[2, 'observed'], expected = 0.4400, tolerance = 0)
   ## TODO: if seed is made reproducible, check median, lower and upper
+  
+  ## complete separation
+  expect_message(MFBoot(lesion~group, complete_sep))
 })
 
 ###################

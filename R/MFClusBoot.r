@@ -65,7 +65,7 @@
 ##--------------------------------------------------------------------
 ## Bootstrap stratified or clustered MF
 ##--------------------------------------------------------------------
-MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = FALSE, b = 100, 
+MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = TRUE, b = 100, 
 	B = 100, alpha = 0.05, hpd=TRUE, return.boot = FALSE,trace.it= FALSE){
     # takes b bootstrap samples B times, so nboot = B * b
     # 3/19/01 initial coding
@@ -128,7 +128,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = 
 			
         }
 		
-	
+        cat('\n')
     }
     else strat.b <- matrix(strat, b * B, n.strat, byrow = T)
 

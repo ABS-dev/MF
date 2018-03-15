@@ -5,7 +5,7 @@
 \title{Boostrap MF CI from clustered data}
 \usage{
 MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
-  boot.unit = FALSE, b = 100, B = 100, alpha = 0.05, hpd = TRUE,
+  boot.unit = TRUE, b = 100, B = 100, alpha = 0.05, hpd = TRUE,
   return.boot = FALSE, trace.it = FALSE)
 }
 \arguments{
