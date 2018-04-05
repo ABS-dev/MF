@@ -2,18 +2,20 @@
 reshapeCluster <- function(data, formula, compare, envir){
 
 	cluster <- function(x){return(x)}
-    this.call <- match.call()
-    Terms <- terms(formula, specials = 'cluster', data = data)
+  this.call <- match.call()
+  Terms <- terms(formula, specials = 'cluster', data = data)
 	environment(Terms) <- environment()
-    A <- model.frame(formula = Terms, data = data)
+  A <- model.frame(formula = Terms, data = data)
+  
+
 ## subset data for only the comparison groups - mcv 09/03/13
 	A <- A[A[,attr(Terms, "term.labels")[1]] %in% compare, ]
-    dat <- A[, 1]
-    group <- A[, 2]
+  dat <- A[, 1]
+  group <- A[, 2]
 ## remove any group levels that aren't present; don't want to evaluate for empty groups - mcv 08/27/13
 	group <- factor(group)
-    clusters <- A[, 3]
-    strat <- unique(as.character(clusters))
+  clusters <- A[, 3]
+  strat <- unique(as.character(clusters))
 	
 	assign('dat', dat, envir = envir)
 	assign('group', group, envir = envir)
