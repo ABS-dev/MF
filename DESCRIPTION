@@ -21,7 +21,7 @@ Collate:
     'MFBoot.r'
     'MFClus.r'
     'MFClusBoot.r'
-    'MFClusHier.r'
+    'MFClusHier.R'
     'MFmp.r'
     'MFr.r'
     'MFSubj.r'
