@@ -1,9 +1,6 @@
 # shared reshaping portion of MFClus and MFClusBoot
 reshapeCluster <- function(data, formula, compare, envir){
 
-	
-## remove assignment to global; this is bad practice!!
-    #assign('cluster', function(x){return(x)}, envir = .GlobalEnv)
 	cluster <- function(x){return(x)}
     this.call <- match.call()
     Terms <- terms(formula, specials = 'cluster', data = data)
