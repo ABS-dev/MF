@@ -34,6 +34,15 @@ test_that("historical", {
   expect_identical(mfhist4$All$mf, expected = 0.25)
 })
 
+## hierarchal usage
+## TODO: expected outcomes need to be checked. wait for output structure to be defined first.
+MFClusNested(lesion ~ group + cluster(litter), nesteddf1)
+MFClusNested(lesion ~ group + cluster(sex), nesteddf1)
+MFClusNested(lesion ~ group + cluster(litter/sex ), nesteddf1)
+MFClusNested(lesion ~ group + cluster(room), nesteddf2)
+MFClusNested(lesion ~ group + cluster(pen), nesteddf2)
+MFClusNested(lesion ~ group + cluster(room/pen ), nesteddf2)
+
 
 
 
