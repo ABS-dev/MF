@@ -23,60 +23,60 @@ tree. Nest variables are those above the core. All refers to a summary of the en
 }
 \examples{
 MFnest(aCore)
-#   variable level  N  U    MF
-# 1      All   All 48 45 0.875
+#   level  N  U    MF
+# 1   All 48 45 0.875
 
 MFnest(aCore, 'room')
-#  variable  level  N  U        MF
-# 1     room Room W 24 22 0.8333333
-# 2     room Room Z 24 23 0.9166667
+#    level  N  U        MF
+# 1 Room W 24 22 0.8333333
+# 2 Room Z 24 23 0.9166667
 
 MFnest(aCore, 'pen')
-#   variable level N U   MF
-# 1      pen Pen A 8 6 0.50
-# 2      pen Pen B 8 8 1.00
-# 3      pen Pen C 8 8 1.00
-# 4      pen Pen D 8 7 0.75
-# 5      pen Pen E 8 8 1.00
-# 6      pen Pen F 8 8 1.00
- 
+#   level N U   MF
+# 1 Pen A 8 6 0.50
+# 2 Pen B 8 8 1.00
+# 3 Pen C 8 8 1.00
+# 4 Pen D 8 7 0.75
+# 5 Pen E 8 8 1.00
+# 6 Pen F 8 8 1.00
+
 MFnest(aCore, 'litter')
-#    variable     level N U  MF
-# 1    litter Litter 11 4 4 1.0
-# 2    litter Litter 12 4 2 0.0
-# 3    litter Litter 13 4 4 1.0
-# 4    litter Litter 14 4 4 1.0
-# 5    litter Litter 15 4 4 1.0
-# 6    litter Litter 16 4 4 1.0
-# 7    litter Litter 17 4 4 1.0
-# 8    litter Litter 18 4 3 0.5
-# 9    litter Litter 19 4 4 1.0
-# 10   litter Litter 20 4 4 1.0
-# 11   litter Litter 21 4 4 1.0
-# 12   litter Litter 22 4 4 1.0
+#        level N U  MF
+# 1  Litter 11 4 4 1.0
+# 2  Litter 12 4 2 0.0
+# 3  Litter 13 4 4 1.0
+# 4  Litter 14 4 4 1.0
+# 5  Litter 15 4 4 1.0
+# 6  Litter 16 4 4 1.0
+# 7  Litter 17 4 4 1.0
+# 8  Litter 18 4 3 0.5
+# 9  Litter 19 4 4 1.0
+# 10 Litter 20 4 4 1.0
+# 11 Litter 21 4 4 1.0
+# 12 Litter 22 4 4 1.0
 
 MFnest(aCore, c('room', 'pen', 'litter'))
-#    variable     level  N  U        MF
-# 1      room    Room W 24 22 0.8333333
-# 2      room    Room Z 24 23 0.9166667
-# 3       pen     Pen A  8  6 0.5000000
-# 4       pen     Pen B  8  8 1.0000000
-# 5       pen     Pen C  8  8 1.0000000
-# 6       pen     Pen D  8  7 0.7500000
-# 7       pen     Pen E  8  8 1.0000000
-# 8       pen     Pen F  8  8 1.0000000
-# 9    litter Litter 11  4  4 1.0000000
-# 10   litter Litter 12  4  2 0.0000000
-# 11   litter Litter 13  4  4 1.0000000
-# 12   litter Litter 14  4  4 1.0000000
-# 13   litter Litter 15  4  4 1.0000000
-# 14   litter Litter 16  4  4 1.0000000
-# 15   litter Litter 17  4  4 1.0000000
-# 16   litter Litter 18  4  3 0.5000000
-# 17   litter Litter 19  4  4 1.0000000
-# 18   litter Litter 20  4  4 1.0000000
-# 19   litter Litter 21  4  4 1.0000000
-# 20   litter Litter 22  4  4 1.0000000
+# level  N  U        MF
+# 1     Room W 24 22 0.8333333
+# 2     Room Z 24 23 0.9166667
+# 3      Pen A  8  6 0.5000000
+# 4      Pen B  8  8 1.0000000
+# 5      Pen C  8  8 1.0000000
+# 6      Pen D  8  7 0.7500000
+# 7      Pen E  8  8 1.0000000
+# 8      Pen F  8  8 1.0000000
+# 9  Litter 11  4  4 1.0000000
+# 10 Litter 12  4  2 0.0000000
+# 11 Litter 13  4  4 1.0000000
+# 12 Litter 14  4  4 1.0000000
+# 13 Litter 15  4  4 1.0000000
+# 14 Litter 16  4  4 1.0000000
+# 15 Litter 17  4  4 1.0000000
+# 16 Litter 18  4  3 0.5000000
+# 17 Litter 19  4  4 1.0000000
+# 18 Litter 20  4  4 1.0000000
+# 19 Litter 21  4  4 1.0000000
+# 20 Litter 22  4  4 1.0000000
 }
 \seealso{
 \code{\link{MFh}}
