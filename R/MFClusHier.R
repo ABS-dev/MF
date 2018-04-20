@@ -80,9 +80,9 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   })
   coreTbl$N <- coreTbl$nx * coreTbl$ny
   coreTbl$u <- coreTbl$w - (coreTbl$nx * (coreTbl$nx + 1))/2
-  
-  cat("\n", nests[length(nests)], "\n")
+
   coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
+  names(coreTbl)[1] <- paste("Core:", nests[length(nests)])
   
   return(coreTbl)
 }
