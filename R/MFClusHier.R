@@ -157,9 +157,11 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' @export
 MFnest <- function(Y, which.factor = NULL) {
   ## if no factor specified, look at "All"
-  if (is.null(which.factor)) {
+  if(is.null(which.factor)){
+    which.factor <- 'All'
+  }
+  if ("all" %in% tolower(which.factor)) {
     Y <- cbind(All = rep("All", nrow(Y)), Y)
-    which.factor <- "All"
   }
   
   ## evaluate N, U and MF for each variable specified in which.factor
