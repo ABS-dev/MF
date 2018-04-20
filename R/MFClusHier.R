@@ -160,6 +160,8 @@ MFnest <- function(Y, which.factor = NULL) {
   if(is.null(which.factor)){
     which.factor <- 'All'
   }
+  
+  ## create the All variable if it is a variable to be calculated
   if ("all" %in% tolower(which.factor)) {
     Y <- cbind(All = rep("All", nrow(Y)), Y)
   }
@@ -170,6 +172,8 @@ MFnest <- function(Y, which.factor = NULL) {
     X <- sapply(as.character(unique(Y[, x])), FUN = function(a){
       as.numeric(Y[, x] == a)
     })
+    
+    ## calculations for MF, N, U
     out <- data.frame(variable = x, level = unique(Y[, x]))
     out$N <- t(X) %*% Y$N
     out$U <- t(X) %*% Y$u
