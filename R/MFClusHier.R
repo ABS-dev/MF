@@ -15,45 +15,61 @@
 # function - now it just returns the core table - all it needs are the ranks
 #' @export
 MFh <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
-  termlab <- attr(terms(formula), 'term.labels')
+  ## get all variables from formula & identify role
+  termlab <- attr(terms(formula), "term.labels")
+  nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
+  core <- nests[length(nests)]
   tgroup <- termlab[1]
+  resp <- all.vars(formula)[1]
+  
+  
+  ## groups for comparison
   xname <- compare[1]
   yname <- compare[2]
-  nests <- unlist(strsplit(termlab[[length(termlab)]],split=':'))
-  core <- nests[length(nests)]
-  # Error checking?
-  # need unique id at all levels
-  # one way of doing that is concatenation
-  newdat <- data[,nests]
-  names(newdat) <- paste(names(newdat),'ID',sep='')
-  for(i in ncol(newdat):2){
-    newdat[,i]   <- apply(newdat[,1:i], 1, paste, collapse=' ')
-  }
-  # rank within core level
-  coreID <- newdat[,ncol(newdat)]
-  newdat <- cbind(newdat, data[,nests])
-  newdat$tgroup <- data[,tgroup]
-  newdat$rank <- rep(NA, nrow(newdat))
-  for(cID in unique(coreID))
-    newdat$rank[coreID==cID] <- rank(data$lung[coreID==cID])
-  # sum ranks for MF at each level
-  nestID <- paste(nests, 'ID', sep='')
   
-  coreLevels <- unique(coreID)
-  allLevels <- UniqueRows(cbind(newdat[,nests],coreID))
-  coreTbl <- data.frame(
-    matrix(NA, nrow=length(coreLevels), ncol=5, dimnames=list(coreLevels, c('nx','ny','N','w','u')))
-  )
-  for(lev in coreLevels){
-    coreTbl[lev,'nx'] <- length(newdat$rank[coreID==lev & newdat$tgroup==xname])
-    coreTbl[lev, 'ny'] <- length(newdat$rank[coreID==lev & newdat$tgroup==yname])
-    coreTbl[lev, 'w'] <- sum(newdat$rank[coreID==lev & newdat$tgroup==xname])
+  ## create new data.frame with all nest variables to be unique across entire dataset.
+  ##    these are ID forms for the nest variables.
+  ##
+  ## combine with orig data.frame excluding response
+  ## row order is preserved.
+  ##
+  ## left-to-right variable order of final data.frame (newdat):
+  ##    nest variables in ID form (unique), same order as formula
+  ##    nest variables in original data form (not necessarily unique), same order as formula
+  ##    compare variable 
+  ##    response variable in last position
+  newdat <- data[, nests]
+  nestID <- paste(nests, "ID", sep = "")
+  names(newdat) <- nestID
+  for (i in ncol(newdat):2) {
+    newdat[, i] <- apply(newdat[, 1:i], 1, paste, collapse = " ")
   }
-  coreTbl$N <-coreTbl$nx * coreTbl$ny
+  newdat <- cbind(newdat, data[, nests])
+  newdat$tgroup <- data[, tgroup]
+  newdat$resp <- data[, resp]
+  
+  ## for navigating core variable
+  coreID <- newdat[, length(nests)]
+  coreLevels <- unique(coreID)
+  coreIDname <- names(newdat)[length(nests)]
+  
+  ## rank response for each unique core level
+  for (cID in coreLevels) {
+    newdat[newdat[, coreIDname] == cID, "rank"] <- 
+      rank(newdat[newdat[, coreIDname] == cID, "resp"])
+  }
+  
+  ## sum ranks for MF for each unique coreID for internal summaries
+  coreTbl <- ddply(newdat, coreIDname, .fun = function(x) {
+    data.frame(nx = length(x[x$tgroup == xname, "rank"]), 
+               ny = length(x[x$tgroup == yname, "rank"]), 
+               w = sum(x[x$tgroup == xname, "rank"]))
+  })
+  coreTbl$N <- coreTbl$nx * coreTbl$ny
   coreTbl$u <- coreTbl$w - (coreTbl$nx * (coreTbl$nx + 1))/2
   
-  cat('\n', nests[length(nests)],'\n')
-  coreTbl <- cbind(allLevels, coreTbl)
+  cat("\n", nests[length(nests)], "\n")
+  coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
   
   return(coreTbl)
 }
