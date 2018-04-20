@@ -2,9 +2,29 @@
 % Please edit documentation in R/MFClusHier.R
 \name{MFh}
 \alias{MFh}
-\title{MFh}
+\title{Identify ranks for use when evaluating MF for nested hierarchy.}
 \usage{
-MFh(formula, data, compare = c("con", "vac"), trace.it = FALSE)
+MFh(formula, data, compare = c("con", "vac"))
+}
+\arguments{
+\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous 
+response, x is a factor with two levels of treatment, and a/b/c are variables 
+corresponding to the clusters. It is expected that levels of "c" are nested within 
+levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.}
+
+\item{data}{a data.frame with the variables specified in formula. Additional variables will
+be ignored.}
+
+\item{compare}{Text vector stating the factor levels - compare[1] is the control or 
+reference group to which compare[2] is compared.}
+}
+\value{
+a data.frame with one row for each unique core level showing values for
+\code{nx}, \code{ny}, \code{N}, \code{w}, and \code{u}
+}
+\note{
+Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+tree. Nest variables are those above the core.
 }
 \examples{
 a <- data.frame(
@@ -18,5 +38,8 @@ a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 
 aCore <- MFh(lung ~ tx + room/pen/litter,a)
+}
+\seealso{
+\code{\link{MFnest}} for calculation of MF for nest, core and all variables.
 }
 

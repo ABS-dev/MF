@@ -2,16 +2,26 @@
 % Please edit documentation in R/MFClusHier.R
 \name{MFnest}
 \alias{MFnest}
-\title{MFnest}
+\title{Summations to calculate the MF for nested data from a rank table.}
 \usage{
 MFnest(Y, which.factor = NULL)
 }
-\examples{
+\arguments{
+\item{Y}{rank table, as output from \code{\link{MFh}}.}
 
-MFnest(aCore)
-MFnest(aCore, 'room')
-MFnest(aCore, 'pen')
-MFnest(aCore, 'litter')
+\item{which.factor}{one or more variable(s) of interest. This can be any of the core or nest variables
+from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
+tree.}
+}
+\value{
+data.frame with each unique level of a variable as a row. Values \code{N}, 
+\code{U}, and \code{MF} returned.
+}
+\note{
+Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+tree. Nest variables are those above the core. All refers to a summary of the entire tree.
+}
+\examples{
 MFnest(aCore)
 #   level  N  U    MF
 # 1   All 48 45 0.875
@@ -44,5 +54,31 @@ MFnest(aCore, 'litter')
 # 10 Litter 20 4 4 1.0
 # 11 Litter 21 4 4 1.0
 # 12 Litter 22 4 4 1.0
+
+MFnest(aCore, c('room', 'pen', 'litter'))
+# level  N  U        MF
+# 1     Room W 24 22 0.8333333
+# 2     Room Z 24 23 0.9166667
+# 3      Pen A  8  6 0.5000000
+# 4      Pen B  8  8 1.0000000
+# 5      Pen C  8  8 1.0000000
+# 6      Pen D  8  7 0.7500000
+# 7      Pen E  8  8 1.0000000
+# 8      Pen F  8  8 1.0000000
+# 9  Litter 11  4  4 1.0000000
+# 10 Litter 12  4  2 0.0000000
+# 11 Litter 13  4  4 1.0000000
+# 12 Litter 14  4  4 1.0000000
+# 13 Litter 15  4  4 1.0000000
+# 14 Litter 16  4  4 1.0000000
+# 15 Litter 17  4  4 1.0000000
+# 16 Litter 18  4  3 0.5000000
+# 17 Litter 19  4  4 1.0000000
+# 18 Litter 20  4  4 1.0000000
+# 19 Litter 21  4  4 1.0000000
+# 20 Litter 22  4  4 1.0000000
+}
+\seealso{
+\code{\link{MFh}}
 }
 
