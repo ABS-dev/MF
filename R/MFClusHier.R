@@ -1,5 +1,18 @@
 #' @name MFh
-#' @title MFh
+#' @title Identify ranks for use when evaluating MF for nested hierarchy.
+#' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous 
+#' response, x is a factor with two levels of treatment, and a/b/c are variables 
+#' corresponding to the clusters. It is expected that levels of "c" are nested within 
+#' levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
+#' @param data a data.frame with the variables specified in formula. Additional variables will
+#' be ignored.
+#' @param compare Text vector stating the factor levels - compare[1] is the control or 
+#' reference group to which compare[2] is compared.
+#' @return a data.frame with one row for each unique core level showing values for
+#' \code{nx}, \code{ny}, \code{N}, \code{w}, and \code{u}
+#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' tree. Nest variables are those above the core.
+#' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all variables.
 #' @examples 
 #' a <- data.frame(
 #'  room = paste('Room',rep(c('W','Z'),each=24)),
@@ -14,7 +27,7 @@
 #' aCore <- MFh(lung ~ tx + room/pen/litter,a)
 # function - now it just returns the core table - all it needs are the ranks
 #' @export
-MFh <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
+MFh <- function(formula, data, compare = c("con", "vac")){
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
@@ -88,7 +101,13 @@ dMat <- function(x){
 }
 
 #' @name MFnest
-#' @title MFnest
+#' @title Calculate the MF for nested data from a rank table.
+#' @param Y rank table, as output from \code{\link{MFh}}.
+#' @param which.factor variable name of interest. This can be any of the core or nest variables
+#' from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
+#' tree.
+#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' tree. Nest variables are those above the core. All refers to a summary of the entire tree.
 #' @examples
 #' 
 #' MFnest(aCore)
