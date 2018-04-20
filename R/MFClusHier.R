@@ -86,22 +86,9 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   
   return(coreTbl)
 }
-# end function
-
-
-#-------------------------------
-dMat <- function(x){
-  # simple design matrix from a vector
-  a <- NULL
-  u <- unique(x)
-  for(i in 1:length(u))
-    a <- cbind(a, as.numeric(x == u[i]))
-  dimnames(a) <- list(NULL, as.character(u))
-  return(a)
-}
 
 #' @name MFnest
-#' @title Calculate the MF for nested data from a rank table.
+#' @title Summations to calculate the MF for nested data from a rank table.
 #' @param Y rank table, as output from \code{\link{MFh}}.
 #' @param which.factor one or more variable(s) of interest. This can be any of the core or nest variables
 #' from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
@@ -110,6 +97,7 @@ dMat <- function(x){
 #' \code{U}, and \code{MF} returned.
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core. All refers to a summary of the entire tree.
+#' @seealso \code{\link{MFh}}
 #' @examples
 #' MFnest(aCore)
 #' #   level  N  U    MF
@@ -167,15 +155,19 @@ dMat <- function(x){
 #' # 19 Litter 21  4  4 1.0000000
 #' # 20 Litter 22  4  4 1.0000000
 #' @export
-# this does the summations on the core table
 MFnest <- function(Y, which.factor = NULL) {
   ## if no factor specified, look at "All"
   if (is.null(which.factor)) {
     Y <- cbind(All = rep("All", nrow(Y)), Y)
     which.factor <- "All"
   }
+  
+  ## evaluate N, U and MF for each variable specified in which.factor
   rbind.fill(lapply(which.factor, FUN = function(x){
-    X <- dMat(Y[, x])
+    ## get the design matrix
+    X <- sapply(as.character(unique(Y[, x])), FUN = function(a){
+      as.numeric(Y[, x] == a)
+    })
     out <- data.frame(variable = x, level = unique(Y[, x]))
     out$N <- t(X) %*% Y$N
     out$U <- t(X) %*% Y$u
