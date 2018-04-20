@@ -148,16 +148,16 @@ dMat <- function(x){
 #' # 12 Litter 22 4 4 1.0
 #' @export
 # this does the summations on the core table
-MFnest <- function(Y, which.factor=NULL){
-  if(is.null(which.factor)){
-    Y <- cbind(All=rep('All', nrow(Y)), Y)
-    which.factor <- 'All'
+MFnest <- function(Y, which.factor = NULL) {
+  if (is.null(which.factor)) {
+    Y <- cbind(All = rep("All", nrow(Y)), Y)
+    which.factor <- "All"
   }
-  X <- dMat(Y[,which.factor])
-  out <- data.frame(level=unique(Y[,which.factor]))
+  X <- dMat(Y[, which.factor])
+  out <- data.frame(level = unique(Y[, which.factor]))
   out$N <- t(X) %*% Y$N
   out$U <- t(X) %*% Y$u
-  R <- out$U / out$N
+  R <- out$U/out$N
   out$MF <- 2 * R - 1
   return(out)
 }
