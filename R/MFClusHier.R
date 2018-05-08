@@ -229,7 +229,7 @@ MFnest <- function(Y, which.factor = NULL) {
     names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
     names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
     
-    if(round(out$MF, digits = 1) == 1.0){
+    if(1.0 %in% round(out$MF, digits = 1) ){
       message("Complete separation observed.")
     }
     return(out)
