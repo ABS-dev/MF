@@ -9,7 +9,7 @@
 #' @param compare Text vector stating the factor levels - compare[1] is the control or 
 #' reference group to which compare[2] is compared.
 #' @return a data.frame with one row for each unique core level showing values for
-#' \code{nx}, \code{ny}, \code{N}, \code{w}, and \code{u}
+#' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response.
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core.
 #' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all variables.
@@ -74,15 +74,20 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   
   ## sum ranks for MF for each unique coreID for internal summaries
   coreTbl <- ddply(newdat, coreIDname, .fun = function(x) {
-    data.frame(nx = length(x[x$tgroup == xname, "rank"]), 
-               ny = length(x[x$tgroup == yname, "rank"]), 
-               w = sum(x[x$tgroup == xname, "rank"]))
+    out <- data.frame(nx = length(x[x$tgroup == xname, "rank"]), 
+                      ny = length(x[x$tgroup == yname, "rank"]), 
+                      w = sum(x[x$tgroup == xname, "rank"]),
+                      median(x[x$tgroup == xname, 'resp'], na.rm = TRUE),
+                      median(x[x$tgroup == yname, 'resp'], na.rm = TRUE))
+    names(out)[4:5] <- c(paste("median_resp:", xname, sep = ''),
+                         paste("median_resp:", yname, sep = ''))
+    out
   })
   coreTbl$N <- coreTbl$nx * coreTbl$ny
   coreTbl$u <- coreTbl$w - (coreTbl$nx * (coreTbl$nx + 1))/2
 
   coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
-  names(coreTbl)[1] <- paste("Core:", nests[length(nests)])
+  names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
   
   return(coreTbl)
 }
