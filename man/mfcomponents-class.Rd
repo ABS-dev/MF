@@ -9,7 +9,7 @@
 mfcomponents$new(mf, x, y, subj, compare)
 }
 \description{
-Class mfcomponens is created from output of function MFSubj
+Class mfcomponents is created from output of function MFSubj
 }
 \section{Fields}{
 
