@@ -171,7 +171,7 @@ mfcluster <- setRefClass('mfcluster', fields = list(All = 'data.frame', byCluste
 #' @name mfcomponents-class
 #' @title Class mfcomponents
 #' @usage mfcomponents$new(mf, x, y, subj, compare)
-#' @description Class mfcomponens is created from output of function MFSubj
+#' @description Class mfcomponents is created from output of function MFSubj
 #' @docType class
 #' @section Fields:
 #' \itemize{
@@ -187,3 +187,20 @@ mfcluster <- setRefClass('mfcluster', fields = list(All = 'data.frame', byCluste
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 mfcomponents <- setRefClass('mfcomponents', fields = list(mf = 'numeric', x = 'numeric',
 	y = 'numeric', subj = 'matrix', compare = 'character'))
+
+#' @name mfhierdata-class
+#' @title Class mfhierdata
+#' @usage mfhierdata$new(coreTbl, data)
+#' @description Class mfhierdata is created from output of function MFh
+#' @docType class
+#' @section Fields:
+#' \itemize{
+#' \item{\code{coreTbl: }}{data.frame with one row for each unique core level showing values for
+#' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response.}
+#' \item{\code{data: }}{data.frame is the restructured input data used for calculations in MFh and MFnest.}
+#' }
+#' @keywords documentation
+#' @family mfhierdata
+#' @seealso \code{\link{MFh}}
+#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+mfhierdata <- setRefClass('mfhierdata', fields = list(coreTbl = 'data.frame', data = 'data.frame'))

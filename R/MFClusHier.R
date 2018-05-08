@@ -99,13 +99,13 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
   names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
   
-  return(invisible(list(coreTbl = coreTbl, data = newdat)))
-  coreTbl
+  return(mfhierdata$new(coreTbl = coreTbl, data = newdat))
 }
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
-#' @param Y rank table, as output from \code{\link{MFh}}.
+#' @param Y rank table, structured as \code{$coreTbl} output from \code{\link{MFh}} or
+#'  output list from MFh
 #' @param which.factor one or more variable(s) of interest. This can be any of the core or nest variables
 #' from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
 #' tree.
@@ -116,6 +116,10 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' @seealso \code{\link{MFh}}
 #' @examples
 #' MFnest(aCore)
+#' #   variable level  N  U    MF
+#' # 1      All   All 48 45 0.875
+#' 
+#' MFnest(aCore$coreTbl)
 #' #   variable level  N  U    MF
 #' # 1      All   All 48 45 0.875
 #' 
@@ -173,7 +177,10 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' @export
 MFnest <- function(Y, which.factor = NULL) {
   
-  
+  if(class(Y) == 'mfhierdata'){
+    input <- Y
+    Y <- input$coreTbl
+  }
   ## if no factor specified, look at "All"
   if(is.null(which.factor)){
     which.factor <- 'All'
