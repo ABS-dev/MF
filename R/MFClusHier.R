@@ -8,8 +8,8 @@
 #' be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control or 
 #' reference group to which compare[2] is compared.
-#' @return a data.frame with one row for each unique core level showing values for
-#' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response.
+#' @return a list of two data.frames. \emph{coreTbl} is a data.frame with one row for each unique core level showing values for
+#' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations.
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core.
 #' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all variables.
@@ -71,8 +71,10 @@ MFh <- function(formula, data, compare = c("con", "vac")){
     if(length(unique(newdat[newdat[, coreIDname] == x, "tgroup"])) == 1){
       return(x)
     }})))
-  message(paste("Excluded clusters:", paste(excluded.clusters, collapse = ',')))
-  newdat <- newdat[newdat[, coreIDname] != excluded.clusters,]
+  if(length(excluded.clusters > 0)){
+    message(paste("Excluded clusters:", paste(excluded.clusters, collapse = ',')))
+    newdat <- newdat[newdat[, coreIDname] != excluded.clusters,]
+  }
   
   ## rank response for each unique core level
   for (cID in coreLevels) {
@@ -97,7 +99,8 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
   names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
   
-  return(coreTbl)
+  return(invisible(list(coreTbl = coreTbl, data = newdat)))
+  coreTbl
 }
 
 #' @name MFnest
@@ -169,6 +172,8 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' # 20   litter Litter 22  4  4 1.0000000
 #' @export
 MFnest <- function(Y, which.factor = NULL) {
+  
+  
   ## if no factor specified, look at "All"
   if(is.null(which.factor)){
     which.factor <- 'All'
