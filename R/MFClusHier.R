@@ -192,7 +192,7 @@ MFnest <- function(Y, which.factor = NULL) {
   
   ## inform user why medians are not available
   if(!exists('input')){
-    message('Skipping median summary, no response data provided')
+    message('Skipping median summary, no response data provided.')
   }
   
   ## evaluate N, U and MF for each variable specified in which.factor
@@ -227,6 +227,10 @@ MFnest <- function(Y, which.factor = NULL) {
     }
     names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
     names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
+    
+    if(round(out$MF, digits = 1) == 1.0){
+      message("Complete separation observed.")
+    }
     return(out)
   }))
 
