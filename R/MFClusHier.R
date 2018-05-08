@@ -110,7 +110,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
 #' tree.
 #' @return data.frame with each unique level of a variable as a row. Values \code{N}, 
-#' \code{U}, and \code{MF} returned.
+#' \code{U}, \code{MF} and median of responses returned.
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core. All refers to a summary of the entire tree.
 #' @seealso \code{\link{MFh}}
