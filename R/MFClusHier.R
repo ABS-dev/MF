@@ -8,8 +8,9 @@
 #' be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control or 
 #' reference group to which compare[2] is compared.
-#' @return a list of two data.frames. \emph{coreTbl} is a data.frame with one row for each unique core level showing values for
+#' @return a list of three items. \emph{coreTbl} is a data.frame with one row for each unique core level showing values for
 #' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations.
+#' \emph{compare} is the compare variable as input by user.
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core.
 #' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all variables.
@@ -99,7 +100,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
   names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
   
-  return(mfhierdata$new(coreTbl = coreTbl, data = newdat))
+  return(mfhierdata$new(coreTbl = coreTbl, data = newdat, compare = compare))
 }
 
 #' @name MFnest
@@ -209,8 +210,8 @@ MFnest <- function(Y, which.factor = NULL) {
     R <- out$U/out$N
     out$MF <- 2 * R - 1
     if(exists('input')){
-      comparex <- unique(input$data$tgroup)[1]
-      comparey <- unique(input$data$tgroup)[2]
+      comparex <- input$compare[1]
+      comparey <- input$compare[2]
       if(x == 'All'){
         out$medianx <- median(input$data[input$data$tgroup == comparex, 'resp'],
                               na.rm = TRUE)

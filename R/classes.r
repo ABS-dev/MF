@@ -198,9 +198,10 @@ mfcomponents <- setRefClass('mfcomponents', fields = list(mf = 'numeric', x = 'n
 #' \item{\code{coreTbl: }}{data.frame with one row for each unique core level showing values for
 #' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response.}
 #' \item{\code{data: }}{data.frame is the restructured input data used for calculations in MFh and MFnest.}
+#' \item{\code{compare: }}{character vector naming groups being compared.}
 #' }
 #' @keywords documentation
 #' @family mfhierdata
 #' @seealso \code{\link{MFh}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfhierdata <- setRefClass('mfhierdata', fields = list(coreTbl = 'data.frame', data = 'data.frame'))
+mfhierdata <- setRefClass('mfhierdata', fields = list(coreTbl = 'data.frame', data = 'data.frame', compare = 'character'))
