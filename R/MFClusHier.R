@@ -176,7 +176,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' # 20   litter Litter 22  4  4 1.0000000
 #' @export
 MFnest <- function(Y, which.factor = NULL) {
-  
+  ## restructure if using output from MFh
   if(class(Y) == 'mfhierdata'){
     input <- Y
     Y <- input$coreTbl
@@ -188,6 +188,11 @@ MFnest <- function(Y, which.factor = NULL) {
   ## create the All variable if it is a variable to be calculated
   if ("all" %in% tolower(which.factor)) {
     Y <- cbind(All = rep("All", nrow(Y)), Y)
+  }
+  
+  ## inform user why medians are not available
+  if(!exists('input')){
+    message('Skipping median summary, no response data provided')
   }
   
   ## evaluate N, U and MF for each variable specified in which.factor
@@ -203,7 +208,25 @@ MFnest <- function(Y, which.factor = NULL) {
     out$U <- t(X) %*% Y$u
     R <- out$U/out$N
     out$MF <- 2 * R - 1
-    
+    if(exists('input')){
+      comparex <- unique(input$data$tgroup)[1]
+      comparey <- unique(input$data$tgroup)[2]
+      if(x == 'All'){
+        out$medianx <- median(input$data[input$data$tgroup == comparex, 'resp'],
+                              na.rm = TRUE)
+        out$mediany <- median(input$data[input$data$tgroup == comparey, 'resp'],
+                              na.rm = TRUE)
+      } else{
+        thismedians <- ddply(input$data, x, .fun = function(y){
+          return(data.frame(medianx = median(y[y$tgroup == comparex, 'resp'], na.rm = TRUE),
+                            mediany = median(y[y$tgroup == comparey, 'resp'], na.rm = TRUE)))})
+        names(thismedians)[1] <- 'level'
+        thismedians$variable <- x
+        out <- merge(out, thismedians, by = c('variable', 'level'))
+      }
+    }
+    names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
+    names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
     return(out)
   }))
 
