@@ -16,6 +16,7 @@ tree.}
 }
 \value{
 data.frame with each unique level of a variable as a row. Values \code{N}, 
+\code{U}, \code{MF} and median of responses returned.
 }
 \note{
 Core variable is the variable corresponding to the lowest nodes of the hierarchial 
