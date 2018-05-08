@@ -19,8 +19,9 @@ be ignored.}
 reference group to which compare[2] is compared.}
 }
 \value{
-a list of two data.frames. \emph{coreTbl} is a data.frame with one row for each unique core level showing values for
+a list of three items. \emph{coreTbl} is a data.frame with one row for each unique core level showing values for
 \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations.
+\emph{compare} is the compare variable as input by user.
 }
 \note{
 Core variable is the variable corresponding to the lowest nodes of the hierarchial 
