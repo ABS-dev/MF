@@ -66,6 +66,14 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   coreLevels <- unique(coreID)
   coreIDname <- names(newdat)[length(nests)]
   
+  ## remove clusters missing a treatment
+  excluded.clusters <- unlist(unique(sapply(coreID, FUN = function(x){
+    if(length(unique(newdat[newdat[, coreIDname] == x, "tgroup"])) == 1){
+      return(x)
+    }})))
+  message(paste("Excluded clusters:", paste(excluded.clusters, collapse = ',')))
+  newdat <- newdat[newdat[, coreIDname] != excluded.clusters,]
+  
   ## rank response for each unique core level
   for (cID in coreLevels) {
     newdat[newdat[, coreIDname] == cID, "rank"] <- 
