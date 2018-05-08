@@ -20,7 +20,7 @@ reference group to which compare[2] is compared.}
 }
 \value{
 a data.frame with one row for each unique core level showing values for
-\code{nx}, \code{ny}, \code{N}, \code{w}, and \code{u}
+\code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response.
 }
 \note{
 Core variable is the variable corresponding to the lowest nodes of the hierarchial 
