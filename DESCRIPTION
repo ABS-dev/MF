@@ -12,7 +12,8 @@ LazyData: yes
 Depends:
     R (>= 3.2.0),
     methods,
-    plyr
+    plyr,
+    data.table
 Collate:
     'aaa.r'
     'classes.r'
@@ -24,6 +25,7 @@ Collate:
     'MFClusBoot.r'
     'MFClusHier.R'
     'MFmp.r'
+    'MFnestBoot.r'
     'MFr.r'
     'MFSubj.r'
 RoxygenNote: 5.0.1
