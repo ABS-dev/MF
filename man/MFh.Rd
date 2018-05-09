@@ -39,6 +39,20 @@ a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 
 aCore <- MFh(lung ~ tx + room/pen/litter,a)
+# aCore
+# Core:litter   room   pen    litter nx ny w median_resp:con median_resp:vac N u
+# 1  Room W Pen A Litter 11 Room W Pen A Litter 11  2  2 7        8.237194        5.125583 4 4
+# 2  Room W Pen A Litter 12 Room W Pen A Litter 12  2  2 5        4.914294        3.808685 4 2
+# 3  Room W Pen B Litter 13 Room W Pen B Litter 13  2  2 7        8.103441        5.227177 4 4
+# 4  Room W Pen B Litter 14 Room W Pen B Litter 14  2  2 7        8.113648        5.594649 4 4
+# 5  Room W Pen C Litter 15 Room W Pen C Litter 15  2  2 7        8.087914        5.256611 4 4
+# 6  Room W Pen C Litter 16 Room W Pen C Litter 16  2  2 7        6.770457        4.503342 4 4
+# 7  Room Z Pen D Litter 17 Room Z Pen D Litter 17  2  2 7        5.575649        4.258613 4 4
+# 8  Room Z Pen D Litter 18 Room Z Pen D Litter 18  2  2 6        7.442926        6.329360 4 3
+# 9  Room Z Pen E Litter 19 Room Z Pen E Litter 19  2  2 7        7.980120        4.584041 4 4
+# 10 Room Z Pen E Litter 20 Room Z Pen E Litter 20  2  2 7        6.781480        4.858916 4 4
+# 11 Room Z Pen F Litter 21 Room Z Pen F Litter 21  2  2 7        6.819483        5.363069 4 4
+# 12 Room Z Pen F Litter 22 Room Z Pen F Litter 22  2  2 7        7.272879        5.134238 4 4
 }
 \seealso{
 \code{\link{MFnest}} for calculation of MF for nest, core and all variables.

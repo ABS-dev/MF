@@ -26,6 +26,20 @@
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 #' 
 #' aCore <- MFh(lung ~ tx + room/pen/litter,a)
+#' # aCore
+#' # Core:litter   room   pen    litter nx ny w median_resp:con median_resp:vac N u
+#' # 1  Room W Pen A Litter 11 Room W Pen A Litter 11  2  2 7        8.237194        5.125583 4 4
+#' # 2  Room W Pen A Litter 12 Room W Pen A Litter 12  2  2 5        4.914294        3.808685 4 2
+#' # 3  Room W Pen B Litter 13 Room W Pen B Litter 13  2  2 7        8.103441        5.227177 4 4
+#' # 4  Room W Pen B Litter 14 Room W Pen B Litter 14  2  2 7        8.113648        5.594649 4 4
+#' # 5  Room W Pen C Litter 15 Room W Pen C Litter 15  2  2 7        8.087914        5.256611 4 4
+#' # 6  Room W Pen C Litter 16 Room W Pen C Litter 16  2  2 7        6.770457        4.503342 4 4
+#' # 7  Room Z Pen D Litter 17 Room Z Pen D Litter 17  2  2 7        5.575649        4.258613 4 4
+#' # 8  Room Z Pen D Litter 18 Room Z Pen D Litter 18  2  2 6        7.442926        6.329360 4 3
+#' # 9  Room Z Pen E Litter 19 Room Z Pen E Litter 19  2  2 7        7.980120        4.584041 4 4
+#' # 10 Room Z Pen E Litter 20 Room Z Pen E Litter 20  2  2 7        6.781480        4.858916 4 4
+#' # 11 Room Z Pen F Litter 21 Room Z Pen F Litter 21  2  2 7        6.819483        5.363069 4 4
+#' # 12 Room Z Pen F Litter 22 Room Z Pen F Litter 22  2  2 7        7.272879        5.134238 4 4
 # function - now it just returns the core table - all it needs are the ranks
 #' @export
 MFh <- function(formula, data, compare = c("con", "vac")){
@@ -118,64 +132,65 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' @seealso \code{\link{MFh}}
 #' @examples
 #' MFnest(aCore)
-#' #   variable level  N  U    MF
-#' # 1      All   All 48 45 0.875
+#' #   variable level  N  U    MF median_resp:con median_resp:vac
+#' # 1      All   All 48 45 0.875        7.244466        4.909263
 #' 
 #' MFnest(aCore$coreTbl)
+#' # Skipping median summary, no response data provided.
 #' #   variable level  N  U    MF
 #' # 1      All   All 48 45 0.875
 #' 
 #' MFnest(aCore, 'room')
-#' #  variable  level  N  U        MF
-#' # 1     room Room W 24 22 0.8333333
-#' # 2     room Room Z 24 23 0.9166667
+#' #  variable  level  N  U        MF median_resp:con median_resp:vac
+#' # 1     room Room W 24 22 0.8333333        7.792846        4.846574
+#' # 2     room Room Z 24 23 0.9166667        6.708765        4.978941
 #' 
 #' MFnest(aCore, 'pen')
-#' #   variable level N U   MF
-#' # 1      pen Pen A 8 6 0.50
-#' # 2      pen Pen B 8 8 1.00
-#' # 3      pen Pen C 8 8 1.00
-#' # 4      pen Pen D 8 7 0.75
-#' # 5      pen Pen E 8 8 1.00
-#' # 6      pen Pen F 8 8 1.00
+#' #   variable level N U   MF median_resp:con median_resp:vac
+#' # 1      pen Pen A 8 6 0.50        6.792419        4.237541
+#' # 2      pen Pen B 8 8 1.00        8.113648        5.594649
+#' # 3      pen Pen C 8 8 1.00        7.688790        4.846574
+#' # 4      pen Pen D 8 7 0.75        6.097081        4.978941
+#' # 5      pen Pen E 8 8 1.00        6.858526        4.858916
+#' # 6      pen Pen F 8 8 1.00        6.884332        5.134238
 #'  
 #' MFnest(aCore, 'litter')
-#' #    variable     level N U  MF
-#' # 1    litter Litter 11 4 4 1.0
-#' # 2    litter Litter 12 4 2 0.0
-#' # 3    litter Litter 13 4 4 1.0
-#' # 4    litter Litter 14 4 4 1.0
-#' # 5    litter Litter 15 4 4 1.0
-#' # 6    litter Litter 16 4 4 1.0
-#' # 7    litter Litter 17 4 4 1.0
-#' # 8    litter Litter 18 4 3 0.5
-#' # 9    litter Litter 19 4 4 1.0
-#' # 10   litter Litter 20 4 4 1.0
-#' # 11   litter Litter 21 4 4 1.0
-#' # 12   litter Litter 22 4 4 1.0
+#' #    variable     level N U  MF median_resp:con median_resp:vac
+#' # 1    litter Litter 11 4 4 1.0        8.237194        5.125583
+#' # 2    litter Litter 12 4 2 0.0        4.914294        3.808685
+#' # 3    litter Litter 13 4 4 1.0        8.103441        5.227177
+#' # 4    litter Litter 14 4 4 1.0        8.113648        5.594649
+#' # 5    litter Litter 15 4 4 1.0        8.087914        5.256611
+#' # 6    litter Litter 16 4 4 1.0        6.770457        4.503342
+#' # 7    litter Litter 17 4 4 1.0        5.575649        4.258613
+#' # 8    litter Litter 18 4 3 0.5        7.442926        6.329360
+#' # 9    litter Litter 19 4 4 1.0        7.980120        4.584041
+#' # 10   litter Litter 20 4 4 1.0        6.781480        4.858916
+#' # 11   litter Litter 21 4 4 1.0        6.819483        5.363069
+#' # 12   litter Litter 22 4 4 1.0        7.272879        5.134238
 #' 
 #' MFnest(aCore, c('room', 'pen', 'litter'))
-#' #    variable     level  N  U        MF
-#' # 1      room    Room W 24 22 0.8333333
-#' # 2      room    Room Z 24 23 0.9166667
-#' # 3       pen     Pen A  8  6 0.5000000
-#' # 4       pen     Pen B  8  8 1.0000000
-#' # 5       pen     Pen C  8  8 1.0000000
-#' # 6       pen     Pen D  8  7 0.7500000
-#' # 7       pen     Pen E  8  8 1.0000000
-#' # 8       pen     Pen F  8  8 1.0000000
-#' # 9    litter Litter 11  4  4 1.0000000
-#' # 10   litter Litter 12  4  2 0.0000000
-#' # 11   litter Litter 13  4  4 1.0000000
-#' # 12   litter Litter 14  4  4 1.0000000
-#' # 13   litter Litter 15  4  4 1.0000000
-#' # 14   litter Litter 16  4  4 1.0000000
-#' # 15   litter Litter 17  4  4 1.0000000
-#' # 16   litter Litter 18  4  3 0.5000000
-#' # 17   litter Litter 19  4  4 1.0000000
-#' # 18   litter Litter 20  4  4 1.0000000
-#' # 19   litter Litter 21  4  4 1.0000000
-#' # 20   litter Litter 22  4  4 1.0000000
+#' #    variable     level  N  U        MF median_resp:con median_resp:vac
+#' # 1      room    Room W 24 22 0.8333333        7.792846        4.846574
+#' # 2      room    Room Z 24 23 0.9166667        6.708765        4.978941
+#' # 3       pen     Pen A  8  6 0.5000000        6.792419        4.237541
+#' # 4       pen     Pen B  8  8 1.0000000        8.113648        5.594649
+#' # 5       pen     Pen C  8  8 1.0000000        7.688790        4.846574
+#' # 6       pen     Pen D  8  7 0.7500000        6.097081        4.978941
+#' # 7       pen     Pen E  8  8 1.0000000        6.858526        4.858916
+#' # 8       pen     Pen F  8  8 1.0000000        6.884332        5.134238
+#' # 9    litter Litter 11  4  4 1.0000000        8.237194        5.125583
+#' # 10   litter Litter 12  4  2 0.0000000        4.914294        3.808685
+#' # 11   litter Litter 13  4  4 1.0000000        8.103441        5.227177
+#' # 12   litter Litter 14  4  4 1.0000000        8.113648        5.594649
+#' # 13   litter Litter 15  4  4 1.0000000        8.087914        5.256611
+#' # 14   litter Litter 16  4  4 1.0000000        6.770457        4.503342
+#' # 15   litter Litter 17  4  4 1.0000000        5.575649        4.258613
+#' # 16   litter Litter 18  4  3 0.5000000        7.442926        6.329360
+#' # 17   litter Litter 19  4  4 1.0000000        7.980120        4.584041
+#' # 18   litter Litter 20  4  4 1.0000000        6.781480        4.858916
+#' # 19   litter Litter 21  4  4 1.0000000        6.819483        5.363069
+#' # 20   litter Litter 22  4  4 1.0000000        7.272879        5.134238
 #' @export
 MFnest <- function(Y, which.factor = NULL) {
   ## restructure if using output from MFh
@@ -232,7 +247,7 @@ MFnest <- function(Y, which.factor = NULL) {
     }
 
     if(1.0 %in% round(out$MF, digits = 1) ){
-      message("Complete separation observed.")
+      message("Complete separation for variable ", x, " observed.")
     }
     return(out)
   }))
