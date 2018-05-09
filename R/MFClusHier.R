@@ -68,10 +68,11 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   coreIDname <- names(newdat)[length(nests)]
   
   ## remove clusters missing a treatment
-  excluded.clusters <- unlist(unique(sapply(coreID, FUN = function(x){
+  excluded.clusters <- unlist(sapply(coreLevels, FUN = function(x){
     if(length(unique(newdat[newdat[, coreIDname] == x, "tgroup"])) == 1){
       return(x)
-    }})))
+    }}))
+  
   if(length(excluded.clusters > 0)){
     message(paste("Excluded clusters:", paste(excluded.clusters, collapse = ',')))
     newdat <- newdat[newdat[, coreIDname] != excluded.clusters,]
@@ -225,10 +226,11 @@ MFnest <- function(Y, which.factor = NULL) {
         thismedians$variable <- x
         out <- merge(out, thismedians, by = c('variable', 'level'))
       }
+      names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
+      names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
+      
     }
-    names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
-    names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
-    
+
     if(1.0 %in% round(out$MF, digits = 1) ){
       message("Complete separation observed.")
     }
