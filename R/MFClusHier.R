@@ -46,6 +46,9 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
+  if(length(nests) == 1){
+    stop("This is not nested hierarchy. See MFClus.")
+  }
   core <- nests[length(nests)]
   tgroup <- termlab[1]
   resp <- all.vars(formula)[1]
