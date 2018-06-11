@@ -112,15 +112,16 @@ MFh <- function(formula, data, compare = c("con", "vac")){
     gather(variable, value, -c(tgroup:!!this_coreIDname)) %>%
     unite(temp, tgroup, variable) %>%
     spread(temp, value) %>%
-    full_join(., 
+    left_join(., 
               filter(newdat, tgroup == xname) %>%
                 group_by(!!this_coreIDname) %>%
                 summarize(.,w = sum(rank))) %>%
     mutate(., 
            N = !!nx * !!ny,
            u = w - (!!nx * (!!nx + 1))/2) %>%
-    full_join(.,
-              select(newdat, c(nests, coreIDname)))
+    left_join(.,
+              distinct(select(newdat, c(nests, coreIDname))), by = "litterID") %>%
+    ungroup(.)
     
   names(thiscoreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
   # coreTbl$N <- coreTbl$nx * coreTbl$ny
@@ -226,18 +227,28 @@ MFnest <- function(Y, which.factor = NULL) {
   }
   
   ## evaluate N, U and MF for each variable specified in which.factor
-  rbind.fill(lapply(which.factor, FUN = function(x){
+  plyr::rbind.fill(lapply(which.factor, FUN = function(x){
     ## get the design matrix
-    X <- sapply(as.character(unique(Y[, x])), FUN = function(a){
-      as.numeric(Y[, x] == a)
-    })
+    thisY <- Y
+    thisx <- sym(x)
+    out <- thisY %>% 
+      group_by(., !!thisx ) %>%
+      summarize(., N = sum(N), U = sum(u)) %>%
+      mutate(., R = U/N, MF = 2 * R - 1, variable = x) %>%
+      select(., -R)
+
+    #   
+    # Y <- as.data.frame(Y)
+    # X <- sapply(as.character(unique(Y[, x])), FUN = function(a){
+    #   as.numeric(Y[, x] == a)
+    # })
     
     ## calculations for MF, N, U
-    out <- data.frame(variable = x, level = unique(Y[, x]))
-    out$N <- t(X) %*% Y$N
-    out$U <- t(X) %*% Y$u
-    R <- out$U/out$N
-    out$MF <- 2 * R - 1
+    # out <- data.frame(variable = x, level = unique(Y[, x]))
+    # out$N <- t(X) %*% Y$N
+    # out$U <- t(X) %*% Y$u
+    # R <- out$U/out$N
+    # out$MF <- 2 * R - 1
     if(exists('input')){
       comparex <- input$compare[1]
       comparey <- input$compare[2]
@@ -247,15 +258,26 @@ MFnest <- function(Y, which.factor = NULL) {
         out$mediany <- median(input$data[input$data$tgroup == comparey, 'resp'],
                               na.rm = TRUE)
       } else{
-        thismedians <- ddply(input$data, x, .fun = function(y){
-          return(data.frame(medianx = median(y[y$tgroup == comparex, 'resp'], na.rm = TRUE),
-                            mediany = median(y[y$tgroup == comparey, 'resp'], na.rm = TRUE)))})
-        names(thismedians)[1] <- 'level'
-        thismedians$variable <- x
-        out <- merge(out, thismedians, by = c('variable', 'level'))
+        thisdata <- as_tibble(input$data)
+        out <- thisdata %>%
+          group_by(!!thisx, tgroup) %>%
+          summarize(med = median(resp, na.rm = TRUE)) %>%
+          spread(tgroup, med) %>%
+          rename_at(vars(-!!thisx), funs(paste0("median_resp:",.))) %>%
+          full_join(out, .) %>%
+          rename_at(vars(!!thisx), funs(paste0("level")))
+          
+        
+        # thismedians <- plyr::ddply(input$data, x, .fun = function(y){
+        #   return(data.frame(medianx = median(y[y$tgroup == comparex, 'resp'], na.rm = TRUE),
+        #                     mediany = median(y[y$tgroup == comparey, 'resp'], na.rm = TRUE)))})
+        # names(thismedians)[1] <- 'level'
+        # thismedians$variable <- x
+        # out <- merge(out, thismedians, by = c('variable', 'level'))
       }
-      names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
-      names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
+      out <- select(out, variable, everything())
+      # names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
+      # names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
       
     }
 
