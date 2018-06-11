@@ -10,10 +10,11 @@ License: MIT + file LICENSE
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.2.0),
+    R (>= 3.4.4),
     methods,
-    plyr,
-    data.table
+    dplyr (>= 0.7.1),
+    stringr,
+    tidyr
 Collate:
     'aaa.r'
     'classes.r'

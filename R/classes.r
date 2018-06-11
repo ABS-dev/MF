@@ -204,4 +204,4 @@ mfcomponents <- setRefClass('mfcomponents', fields = list(mf = 'numeric', x = 'n
 #' @family mfhierdata
 #' @seealso \code{\link{MFh}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfhierdata <- setRefClass('mfhierdata', fields = list(coreTbl = 'data.frame', data = 'data.frame', compare = 'character'))
+mfhierdata <- setRefClass('mfhierdata', fields = list(coreTbl = 'tbl', data = 'data.frame', compare = 'character'))

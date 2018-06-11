@@ -105,6 +105,7 @@ setMethod('print', 'mfcomponents', function(x, ...){
 setMethod('show', 'mfcomponents', function(object){print(object)})
 
 setMethod('print', 'mfhierdata', function(x, ...){
+
   print(x$coreTbl)
 })
 

@@ -15,7 +15,7 @@
 #' MFnestBoot(lung ~ tx + room/pen/litter, a, n.boot = 144, boot.cluster = FALSE)
 #'
 MFnestBoot <- function(formula, data, compare = c("con", "vac"),
-                       B = 100, b = 100, alpha = 0.05,
+                       B = 100, b = 100, alpha = 0.05, hpd = TRUE,
                        boot.unit = TRUE, boot.cluster = TRUE){
   
   ## get all variables from formula & identify role
@@ -103,21 +103,27 @@ MFnestBoot <- function(formula, data, compare = c("con", "vac"),
                     clusterID = clusterID),
                uniquelevID, 
                by = 'clusterID', all = TRUE)[order(B, b)]
-  q <- c(.5,alpha/2, 1 - alpha/2)
+
   
   ## bootstrapping of observations, if needed
   if(!boot.unit){
     intstats <- strat.b[, get_w_noBootUnit(.SD), by = nests, .SDcols = names(strat.b)]
     newstrat.b <- merge(strat.b, intstats, by = nests)
-    stats <- newstrat.b[,get_stat_noBootUnit(.SD), by = .(B, b), .SDcols = names(newstrat.b)]
-    print(stats)
+    detailedstats <- newstrat.b[,get_stat_noBootUnit(.SD), by = .(B, b), .SDcols = names(newstrat.b)]
   }
-  stat <- c(Observed = mf.obs, quantile(MF, prob = q))
+  
   
   mfnest_call <- MFnest(MFh(formula = formula, data = data, compare = compare), 
-                        which.factor = core)
-  
-  
+                        which.factor = "All")
+  q <- c(.5,alpha/2, 1 - alpha/2)
+  stat <- matrix(c(Observed = mfnest_call$MF, 
+                   quantile(detailedstats$MF, prob = q)), 1, 4, 
+                 dimnames = list(c('Equal Tailed'), 
+                                 c('observed', 'median', 'lower', 'upper')))
+  if(hpd){
+    hpdmf <- MF:::emp.hpd(detailedstats$MF, alpha = alpha)
+    stat <- rbind(stat, 'Highest Density' = c(mfnest_call$MF, stat[1, 'median'], hpdmf))
+  }
   return(list(MFnest = mfnest_call,  n.boot = B * b, call = match.call(), 
-              compare = compare, strat.b = newstrat.b, intstats = intstats))
+              compare = compare, stat = stat, strat.b = newstrat.b, intstats = intstats))
 }

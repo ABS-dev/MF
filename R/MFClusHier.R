@@ -19,27 +19,15 @@
 #'  room = paste('Room',rep(c('W','Z'),each=24)),
 #'  pen = paste('Pen',rep(LETTERS[1:6],each=8)),
 #'  litter = paste('Litter',rep(11:22,each=4)),
-#'  tx = rep(rep(c('vac','con'),each=2),12)
+#'  tx = rep(rep(c('vac','con'),each=2),12),
+#'  stringsAsFactors = FALSE
 #'  )
 #' set.seed(76153)
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 #' 
 #' aCore <- MFh(lung ~ tx + room/pen/litter,a)
-#' # aCore
-#' # Core:litter   room   pen    litter nx ny w median_resp:con median_resp:vac N u
-#' # 1  Room W Pen A Litter 11 Room W Pen A Litter 11  2  2 7        8.237194        5.125583 4 4
-#' # 2  Room W Pen A Litter 12 Room W Pen A Litter 12  2  2 5        4.914294        3.808685 4 2
-#' # 3  Room W Pen B Litter 13 Room W Pen B Litter 13  2  2 7        8.103441        5.227177 4 4
-#' # 4  Room W Pen B Litter 14 Room W Pen B Litter 14  2  2 7        8.113648        5.594649 4 4
-#' # 5  Room W Pen C Litter 15 Room W Pen C Litter 15  2  2 7        8.087914        5.256611 4 4
-#' # 6  Room W Pen C Litter 16 Room W Pen C Litter 16  2  2 7        6.770457        4.503342 4 4
-#' # 7  Room Z Pen D Litter 17 Room Z Pen D Litter 17  2  2 7        5.575649        4.258613 4 4
-#' # 8  Room Z Pen D Litter 18 Room Z Pen D Litter 18  2  2 6        7.442926        6.329360 4 3
-#' # 9  Room Z Pen E Litter 19 Room Z Pen E Litter 19  2  2 7        7.980120        4.584041 4 4
-#' # 10 Room Z Pen E Litter 20 Room Z Pen E Litter 20  2  2 7        6.781480        4.858916 4 4
-#' # 11 Room Z Pen F Litter 21 Room Z Pen F Litter 21  2  2 7        6.819483        5.363069 4 4
-#' # 12 Room Z Pen F Litter 22 Room Z Pen F Litter 22  2  2 7        7.272879        5.134238 4 4
+#' aCore
 # function - now it just returns the core table - all it needs are the ranks
 #' @export
 MFh <- function(formula, data, compare = c("con", "vac")){
@@ -102,23 +90,45 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   }
   
   ## sum ranks for MF for each unique coreID for internal summaries
-  coreTbl <- ddply(newdat, coreIDname, .fun = function(x) {
-    out <- data.frame(nx = length(x[x$tgroup == xname, "rank"]), 
-                      ny = length(x[x$tgroup == yname, "rank"]), 
-                      w = sum(x[x$tgroup == xname, "rank"]),
-                      median(x[x$tgroup == xname, 'resp'], na.rm = TRUE),
-                      median(x[x$tgroup == yname, 'resp'], na.rm = TRUE))
-    names(out)[4:5] <- c(paste("median_resp:", xname, sep = ''),
-                         paste("median_resp:", yname, sep = ''))
-    out
-  })
-  coreTbl$N <- coreTbl$nx * coreTbl$ny
-  coreTbl$u <- coreTbl$w - (coreTbl$nx * (coreTbl$nx + 1))/2
-
-  coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
-  names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
   
-  return(mfhierdata$new(coreTbl = coreTbl, data = newdat, compare = compare))
+  # coreTbl <- ddply(newdat, coreIDname, .fun = function(x) {
+  #   out <- data.frame(nx = length(x[x$tgroup == xname, "rank"]),
+  #                     ny = length(x[x$tgroup == yname, "rank"]),
+  #                     w = sum(x[x$tgroup == xname, "rank"]),
+  #                     median(x[x$tgroup == xname, 'resp'], na.rm = TRUE),
+  #                     median(x[x$tgroup == yname, 'resp'], na.rm = TRUE))
+  #   names(out)[4:5] <- c(paste("median_resp:", xname, sep = ''),
+  #                        paste("median_resp:", yname, sep = ''))
+  #   out
+  # })
+  
+  this_coreIDname <- sym(coreIDname)
+  nx <- sym(str_c(xname, "n", sep = "_"))
+  ny <- sym(str_c(yname, "n", sep = '_'))
+  thiscoreTbl <- newdat %>%
+    group_by(!!this_coreIDname, tgroup) %>%
+    summarize(., n = length(rank),
+              medResp = median(resp, na.rm = TRUE)) %>%
+    gather(variable, value, -c(tgroup:!!this_coreIDname)) %>%
+    unite(temp, tgroup, variable) %>%
+    spread(temp, value) %>%
+    full_join(., 
+              filter(newdat, tgroup == xname) %>%
+                group_by(!!this_coreIDname) %>%
+                summarize(.,w = sum(rank))) %>%
+    mutate(., 
+           N = !!nx * !!ny,
+           u = w - (!!nx * (!!nx + 1))/2) %>%
+    full_join(.,
+              select(newdat, c(nests, coreIDname)))
+    
+  names(thiscoreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
+  # coreTbl$N <- coreTbl$nx * coreTbl$ny
+  # coreTbl$u <- coreTbl$w - (coreTbl$nx * (coreTbl$nx + 1))/2
+  # 
+  # coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
+  # names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
+  return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat, compare = compare))
 }
 
 #' @name MFnest
