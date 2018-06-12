@@ -41,7 +41,6 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   tgroup <- termlab[1]
   resp <- all.vars(formula)[1]
   
-  
   ## groups for comparison
   xname <- compare[1]
   yname <- compare[2]
@@ -132,8 +131,8 @@ MFh <- function(formula, data, compare = c("con", "vac")){
     rename(w = !!wx) %>%
     mutate(N = !!nx * !!ny,
            u = w - (!!nx * (!!nx + 1))/2) %>%
-    
-    ungroup(.)
+    select(everything(), w, N, u) %>%
+    ungroup()
 
   return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat, compare = compare))
 }
@@ -212,38 +211,75 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' # 19   litter Litter 21  4  4 1.0000000        6.819483        5.363069
 #' # 20   litter Litter 22  4  4 1.0000000        7.272879        5.134238
 #' @export
-MFnest <- function(Y, which.factor = NULL) {
+MFnest <- function(Y, which.factor = 'All') {
   ## restructure if using output from MFh
   if(class(Y) == 'mfhierdata'){
     input <- Y
     Y <- input$coreTbl
+  } else if(class(Y) != 'tbl'){
+    Y <- as_tibble(Y)
   }
+  
   ## if no factor specified, look at "All"
-  if(is.null(which.factor)){
-    which.factor <- 'All'
-  }
+  # if(is.null(which.factor)){
+  #   which.factor <- 'All'
+  # }
   ## create the All variable if it is a variable to be calculated
-  if ("all" %in% tolower(which.factor)) {
-    Y <- cbind(All = rep("All", nrow(Y)), Y)
+  # if ("all" %in% tolower(which.factor)) {
+  #   Y <- cbind(All = rep("All", nrow(Y)), Y)
+  # }
+  stat.names <- c(str_subset(names(Y), "_medResp"), 
+                  str_subset(names(Y), "_n"), 'N', 'u', 'w')
+  out <- Y %>%
+    gather(variable, level, -stat.names) %>%
+    bind_rows(., 
+              select(Y, stat.names) %>%
+              mutate(variable = 'All', level = 'All')) %>%
+    group_by(variable, level) %>%
+    summarize(N = sum(N), U = sum(u)) %>%
+    mutate(R = U/N, MF = 2 * R - 1) %>%
+    select(-R) %>%
+    filter(tolower(variable) %in% tolower(which.factor)) %>%
+    ungroup()
+
+  ## inform user of complete separation
+  ## TODO: this message might need to go away for bootstrap calls to this function.
+  if(1.0 %in% round(out$MF, digits = 1) ){
+    out %>%
+    filter(round(MF, digits = 1) == 1.0) %>%
+    distinct(variable) %>%
+    pull() %>%
+    paste0(collapse = ', ') %>%
+    message("Complete separation observed for variable(s): ", ., collapse = "")
   }
   
   ## inform user why medians are not available
+  ## TODO: this message might need to go away for bootstrap calls to this function.
   if(!exists('input')){
-    message('Skipping median summary, no response data provided.')
-  }
-  
-  ## evaluate N, U and MF for each variable specified in which.factor
-  plyr::rbind.fill(lapply(which.factor, FUN = function(x){
-    ## get the design matrix
-    thisY <- Y
-    thisx <- sym(x)
-    out <- thisY %>% 
-      group_by(., !!thisx ) %>%
-      summarize(., N = sum(N), U = sum(u)) %>%
-      mutate(., R = U/N, MF = 2 * R - 1, variable = x) %>%
-      select(., -R)
+    message('Skipping median summary, no response data provided.') 
+  } else{
+    thisdata <- input$data
+    compare <- input$compare
+    names(input$compare) <- paste0("median_resp:", input$compare, sep = '')
 
-    #   
+    out <- thisdata %>%
+      gather(variable, level, -c(tgroup, resp)) %>%
+      bind_rows(.,
+                select(thisdata, c(tgroup, resp)) %>%
+                mutate(variable = "All", level = "All")) %>%
+      group_by(variable, level, tgroup) %>%
+      summarize(median_resp = median(resp, na.rm = TRUE)) %>%
+      spread(tgroup, median_resp) %>%
+      rename(!!compare) %>%
+      filter(tolower(variable) %in% tolower(which.factor)) %>%
+      left_join(out,.) %>%
+      ungroup()
+  }    
+ 
+  ## evaluate N, U and MF for each variable specified in which.factor
+  # plyr::rbind.fill(lapply(which.factor, FUN = function(x){
+
+    ## get the design matrix
     # Y <- as.data.frame(Y)
     # X <- sapply(as.character(unique(Y[, x])), FUN = function(a){
     #   as.numeric(Y[, x] == a)
@@ -255,42 +291,32 @@ MFnest <- function(Y, which.factor = NULL) {
     # out$U <- t(X) %*% Y$u
     # R <- out$U/out$N
     # out$MF <- 2 * R - 1
-    if(exists('input')){
-      comparex <- input$compare[1]
-      comparey <- input$compare[2]
-      if(x == 'All'){
-        out$medianx <- median(input$data[input$data$tgroup == comparex, 'resp'],
-                              na.rm = TRUE)
-        out$mediany <- median(input$data[input$data$tgroup == comparey, 'resp'],
-                              na.rm = TRUE)
-      } else{
-        thisdata <- as_tibble(input$data)
-        out <- thisdata %>%
-          group_by(!!thisx, tgroup) %>%
-          summarize(med = median(resp, na.rm = TRUE)) %>%
-          spread(tgroup, med) %>%
-          rename_at(vars(-!!thisx), funs(paste0("median_resp:",.))) %>%
-          full_join(out, .) %>%
-          rename_at(vars(!!thisx), funs(paste0("level")))
-          
-        
-        # thismedians <- plyr::ddply(input$data, x, .fun = function(y){
-        #   return(data.frame(medianx = median(y[y$tgroup == comparex, 'resp'], na.rm = TRUE),
-        #                     mediany = median(y[y$tgroup == comparey, 'resp'], na.rm = TRUE)))})
-        # names(thismedians)[1] <- 'level'
-        # thismedians$variable <- x
-        # out <- merge(out, thismedians, by = c('variable', 'level'))
-      }
-      out <- select(out, variable, everything())
-      # names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
-      # names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
-      
-    }
-
-    if(1.0 %in% round(out$MF, digits = 1) ){
-      message("Complete separation for variable ", x, " observed.")
-    }
+    # if(exists('input')){
+    #   comparex <- input$compare[1]
+    #   comparey <- input$compare[2]
+    #   if(x == 'All'){
+    #     out$medianx <- median(input$data[input$data$tgroup == comparex, 'resp'],
+    #                           na.rm = TRUE)
+    #     out$mediany <- median(input$data[input$data$tgroup == comparey, 'resp'],
+    #                           na.rm = TRUE)
+    #   } else{
+    #     # thismedians <- plyr::ddply(input$data, x, .fun = function(y){
+    #     #   return(data.frame(medianx = median(y[y$tgroup == comparex, 'resp'], na.rm = TRUE),
+    #     #                     mediany = median(y[y$tgroup == comparey, 'resp'], na.rm = TRUE)))})
+    #     # names(thismedians)[1] <- 'level'
+    #     # thismedians$variable <- x
+    #     # out <- merge(out, thismedians, by = c('variable', 'level'))
+    #   }
+    # 
+    #   # names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
+    #   # names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
+    #   
+    # }
+# 
+    # if(1.0 %in% round(out$MF, digits = 1) ){
+    #   message("Complete separation for variable ", x, " observed.")
+    # }
     return(out)
-  }))
+#   }))
 
 }
