@@ -57,38 +57,38 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   ##    nest variables in original data form (not necessarily unique), same order as formula
   ##    compare variable 
   ##    response variable in last position
-  newdat <- data[, nests]
-  nestID <- paste(nests, "ID", sep = "")
-  names(newdat) <- nestID
-  for (i in ncol(newdat):2) {
-    newdat[, i] <- apply(newdat[, 1:i], 1, paste, collapse = " ")
-  }
-  newdat <- cbind(newdat, data[, nests])
-  newdat$tgroup <- data[, tgroup]
-  newdat$resp <- data[, resp]
+  # newdat <- data[, nests]
+  # nestID <- paste(nests, "ID", sep = "")
+  # names(newdat) <- nestID
+  # for (i in ncol(newdat):2) {
+  #   newdat[, i] <- apply(newdat[, 1:i], 1, paste, collapse = " ")
+  # }
+  # newdat <- cbind(newdat, data[, nests])
+  # newdat$tgroup <- data[, tgroup]
+  # newdat$resp <- data[, resp]
   
   ## for navigating core variable
-  coreID <- newdat[, length(nests)]
-  coreLevels <- unique(coreID)
-  coreIDname <- names(newdat)[length(nests)]
+  # coreID <- newdat[, length(nests)]
+  # coreLevels <- unique(coreID)
+  # coreIDname <- names(newdat)[length(nests)]
   
+    
   ## remove clusters missing a treatment
-  excluded.clusters <- unlist(sapply(coreLevels, FUN = function(x){
-    if(length(unique(newdat[newdat[, coreIDname] == x, "tgroup"])) == 1){
-      return(x)
-    }}))
+  # excluded.clusters <- unlist(sapply(coreLevels, FUN = function(x){
+  #   if(length(unique(newdat[newdat[, coreIDname] == x, "tgroup"])) == 1){
+  #     return(x)
+  #   }}))
   
-  if(length(excluded.clusters > 0)){
-    message(paste("Excluded clusters:", paste(excluded.clusters, collapse = ',')))
-    newdat <- newdat[newdat[, coreIDname] != excluded.clusters,]
-  }
+  # if(length(excluded.clusters > 0)){
+  #   message(paste("Excluded clusters:", paste(excluded.clusters, collapse = ',')))
+  #   newdat <- newdat[newdat[, coreIDname] != excluded.clusters,]
+  # }
   
   ## rank response for each unique core level
-  for (cID in coreLevels) {
-    newdat[newdat[, coreIDname] == cID, "rank"] <- 
-      rank(newdat[newdat[, coreIDname] == cID, "resp"])
-  }
-  
+  # for (cID in coreLevels) {
+  #   newdat[newdat[, coreIDname] == cID, "rank"] <- 
+  #     rank(newdat[newdat[, coreIDname] == cID, "resp"])
+  # }
   ## sum ranks for MF for each unique coreID for internal summaries
   
   # coreTbl <- ddply(newdat, coreIDname, .fun = function(x) {
@@ -101,34 +101,40 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   #                        paste("median_resp:", yname, sep = ''))
   #   out
   # })
-  
-  this_coreIDname <- sym(coreIDname)
-  nx <- sym(str_c(xname, "n", sep = "_"))
-  ny <- sym(str_c(yname, "n", sep = '_'))
-  thiscoreTbl <- newdat %>%
-    group_by(!!this_coreIDname, tgroup) %>%
-    summarize(., n = length(rank),
-              medResp = median(resp, na.rm = TRUE)) %>%
-    gather(variable, value, -c(tgroup:!!this_coreIDname)) %>%
-    unite(temp, tgroup, variable) %>%
-    spread(temp, value) %>%
-    left_join(., 
-              filter(newdat, tgroup == xname) %>%
-                group_by(!!this_coreIDname) %>%
-                summarize(.,w = sum(rank))) %>%
-    mutate(., 
-           N = !!nx * !!ny,
-           u = w - (!!nx * (!!nx + 1))/2) %>%
-    left_join(.,
-              distinct(select(newdat, c(nests, coreIDname))), by = "litterID") %>%
-    ungroup(.)
-    
-  names(thiscoreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
+  # 
   # coreTbl$N <- coreTbl$nx * coreTbl$ny
   # coreTbl$u <- coreTbl$w - (coreTbl$nx * (coreTbl$nx + 1))/2
   # 
   # coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
   # names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
+  nx <- sym(str_c(xname, "n", sep = "_"))
+  ny <- sym(str_c(yname, "n", sep = '_'))
+  wy <- sym(str_c(yname, "w", sep = "_"))
+  wx <- sym(str_c(xname, "w", sep = "_"))
+  
+  newdat <- as_tibble(data) %>%
+    select(everything(), tgroup = tgroup, resp = resp) 
+  
+  thiscoreTbl <- newdat %>%
+    group_by_at(nests) %>%
+    add_count(tgroup) %>%
+    filter(n > 1) %>%
+    select(-n) %>%
+    mutate(rank = rank(resp)) %>%
+    group_by_at(vars(nests, tgroup)) %>%
+    summarize(n = length(resp),
+              medResp = median(resp, na.rm = TRUE),
+              w = sum(rank)) %>%
+    gather(variable, value, -c(tgroup, nests)) %>%
+    unite(temp, tgroup, variable) %>%
+    spread(temp, value) %>%    
+    select(-!!wy) %>%
+    rename(w = !!wx) %>%
+    mutate(N = !!nx * !!ny,
+           u = w - (!!nx * (!!nx + 1))/2) %>%
+    
+    ungroup(.)
+
   return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat, compare = compare))
 }
 
