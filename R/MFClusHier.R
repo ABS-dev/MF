@@ -260,7 +260,7 @@ MFnest <- function(Y, which.factor = 'All') {
   } else{
     thisdata <- input$data
     compare <- input$compare
-    names(input$compare) <- paste0("median_resp:", input$compare, sep = '')
+    names(compare) <- paste0("median_resp:", input$compare, sep = '')
 
     out <- thisdata %>%
       gather(variable, level, -c(tgroup, resp)) %>%
@@ -270,12 +270,16 @@ MFnest <- function(Y, which.factor = 'All') {
       group_by(variable, level, tgroup) %>%
       summarize(median_resp = median(resp, na.rm = TRUE)) %>%
       spread(tgroup, median_resp) %>%
+      ungroup() %>%
       rename(!!compare) %>%
       filter(tolower(variable) %in% tolower(which.factor)) %>%
-      left_join(out,.) %>%
-      ungroup()
+      left_join(out,.) 
+      
   }    
- 
+  
+  out <- out %>%
+    mutate(variable = fct_relevel(variable, which.factor)) %>%
+    arrange(variable)
   ## evaluate N, U and MF for each variable specified in which.factor
   # plyr::rbind.fill(lapply(which.factor, FUN = function(x){
 
