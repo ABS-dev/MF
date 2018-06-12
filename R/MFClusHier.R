@@ -4,12 +4,15 @@
 #' response, x is a factor with two levels of treatment, and a/b/c are variables 
 #' corresponding to the clusters. It is expected that levels of "c" are nested within 
 #' levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
-#' @param data a data.frame with the variables specified in formula. Additional variables will
-#' be ignored.
+#' @param data a data.frame or tibble with the variables specified in formula. 
+#' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control or 
 #' reference group to which compare[2] is compared.
-#' @return a list of three items. \emph{coreTbl} is a data.frame with one row for each unique core level showing values for
-#' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations.
+#' @return A list of three items. \cr
+#' \emph{coreTbl} is a tibble with one row for each unique 
+#' core level showing values for
+#' \code{_n} & \code{_n} (counts of observations for each treatment in a nested group), 
+#' \code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations (tibble).
 #' \emph{compare} is the compare variable as input by user.
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core.
@@ -28,7 +31,21 @@
 #' 
 #' aCore <- MFh(lung ~ tx + room/pen/litter,a)
 #' aCore
-# function - now it just returns the core table - all it needs are the ranks
+#' # A tibble: 12 x 10
+#' #     room   pen   litter    con_medResp con_n     w vac_medResp vac_n     N     u
+#' #     <fct>  <fct> <fct>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl> <dbl>
+#' #   1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4     4
+#' #   2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4     2
+#' #   3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4     4
+#' #   4 Room W Pen B Litter 14        8.11     2     7        5.59     2     4     4
+#' #   5 Room W Pen C Litter 15        8.09     2     7        5.26     2     4     4
+#' #   6 Room W Pen C Litter 16        6.77     2     7        4.50     2     4     4
+#' #   7 Room Z Pen D Litter 17        5.58     2     7        4.26     2     4     4
+#' #   8 Room Z Pen D Litter 18        7.44     2     6        6.33     2     4     3
+#' #   9 Room Z Pen E Litter 19        7.98     2     7        4.58     2     4     4
+#' #  10 Room Z Pen E Litter 20        6.78     2     7        4.86     2     4     4
+#' #  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4     4
+#' #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
 #' @export
 MFh <- function(formula, data, compare = c("con", "vac")){
   ## get all variables from formula & identify role
@@ -45,74 +62,13 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   xname <- compare[1]
   yname <- compare[2]
   
-  ## create new data.frame with all nest variables to be unique across entire dataset.
-  ##    these are ID forms for the nest variables.
-  ##
-  ## combine with orig data.frame excluding response
-  ## row order is preserved.
-  ##
-  ## left-to-right variable order of final data.frame (newdat):
-  ##    nest variables in ID form (unique), same order as formula
-  ##    nest variables in original data form (not necessarily unique), same order as formula
-  ##    compare variable 
-  ##    response variable in last position
-  # newdat <- data[, nests]
-  # nestID <- paste(nests, "ID", sep = "")
-  # names(newdat) <- nestID
-  # for (i in ncol(newdat):2) {
-  #   newdat[, i] <- apply(newdat[, 1:i], 1, paste, collapse = " ")
-  # }
-  # newdat <- cbind(newdat, data[, nests])
-  # newdat$tgroup <- data[, tgroup]
-  # newdat$resp <- data[, resp]
-  
-  ## for navigating core variable
-  # coreID <- newdat[, length(nests)]
-  # coreLevels <- unique(coreID)
-  # coreIDname <- names(newdat)[length(nests)]
-  
-    
-  ## remove clusters missing a treatment
-  # excluded.clusters <- unlist(sapply(coreLevels, FUN = function(x){
-  #   if(length(unique(newdat[newdat[, coreIDname] == x, "tgroup"])) == 1){
-  #     return(x)
-  #   }}))
-  
-  # if(length(excluded.clusters > 0)){
-  #   message(paste("Excluded clusters:", paste(excluded.clusters, collapse = ',')))
-  #   newdat <- newdat[newdat[, coreIDname] != excluded.clusters,]
-  # }
-  
-  ## rank response for each unique core level
-  # for (cID in coreLevels) {
-  #   newdat[newdat[, coreIDname] == cID, "rank"] <- 
-  #     rank(newdat[newdat[, coreIDname] == cID, "resp"])
-  # }
-  ## sum ranks for MF for each unique coreID for internal summaries
-  
-  # coreTbl <- ddply(newdat, coreIDname, .fun = function(x) {
-  #   out <- data.frame(nx = length(x[x$tgroup == xname, "rank"]),
-  #                     ny = length(x[x$tgroup == yname, "rank"]),
-  #                     w = sum(x[x$tgroup == xname, "rank"]),
-  #                     median(x[x$tgroup == xname, 'resp'], na.rm = TRUE),
-  #                     median(x[x$tgroup == yname, 'resp'], na.rm = TRUE))
-  #   names(out)[4:5] <- c(paste("median_resp:", xname, sep = ''),
-  #                        paste("median_resp:", yname, sep = ''))
-  #   out
-  # })
-  # 
-  # coreTbl$N <- coreTbl$nx * coreTbl$ny
-  # coreTbl$u <- coreTbl$w - (coreTbl$nx * (coreTbl$nx + 1))/2
-  # 
-  # coreTbl <- merge(unique(newdat[, c(nests, coreIDname)]), coreTbl, by = coreIDname)
-  # names(coreTbl)[1] <- paste("Core:", nests[length(nests)], sep = "")
   nx <- sym(str_c(xname, "n", sep = "_"))
   ny <- sym(str_c(yname, "n", sep = '_'))
   wy <- sym(str_c(yname, "w", sep = "_"))
   wx <- sym(str_c(xname, "w", sep = "_"))
   
   newdat <- as_tibble(data) %>%
-    select(everything(), tgroup = tgroup, resp = resp) 
+    select(nests, tgroup = tgroup, resp = resp) 
   
   thiscoreTbl <- newdat %>%
     group_by_at(nests) %>%
@@ -139,98 +95,125 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
-#' @param Y rank table, structured as \code{$coreTbl} output from \code{\link{MFh}} or
-#'  output list from MFh
+#' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl} output from \code{\link{MFh}} or
+#'  output list from MFh.
 #' @param which.factor one or more variable(s) of interest. This can be any of the core or nest variables
 #' from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
 #' tree.
-#' @return data.frame with each unique level of a variable as a row. Values \code{N}, 
+#' @return tibble with each unique level of a variable as a row. Values \code{N}, 
 #' \code{U}, \code{MF} and median of responses returned.
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core. All refers to a summary of the entire tree.
 #' @seealso \code{\link{MFh}}
 #' @examples
 #' MFnest(aCore)
-#' #   variable level  N  U    MF median_resp:con median_resp:vac
-#' # 1      All   All 48 45 0.875        7.244466        4.909263
+#' #   # A tibble: 1 x 7
+#' #     variable level     N     U    MF `median_resp:con` `median_resp:vac`
+#' #     <fct>    <chr> <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#' #   1 All      All      48    45 0.875              7.24              4.91
 #' 
 #' MFnest(aCore$coreTbl)
 #' # Skipping median summary, no response data provided.
-#' #   variable level  N  U    MF
-#' # 1      All   All 48 45 0.875
+#' # # A tibble: 1 x 5
+#' #   variable level     N     U    MF
+#' #   <fct>    <chr> <dbl> <dbl> <dbl>
+#' # 1 All      All      48    45 0.875
 #' 
 #' MFnest(aCore, 'room')
-#' #  variable  level  N  U        MF median_resp:con median_resp:vac
-#' # 1     room Room W 24 22 0.8333333        7.792846        4.846574
-#' # 2     room Room Z 24 23 0.9166667        6.708765        4.978941
+#' # # A tibble: 2 x 7
+#' #   variable level      N     U    MF `median_resp:con` `median_resp:vac`
+#' #   <fct>    <chr>  <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#' # 1 room     Room W    24    22 0.833              7.79              4.85
+#' # 2 room     Room Z    24    23 0.917              6.71              4.98
 #' 
 #' MFnest(aCore, 'pen')
-#' #   variable level N U   MF median_resp:con median_resp:vac
-#' # 1      pen Pen A 8 6 0.50        6.792419        4.237541
-#' # 2      pen Pen B 8 8 1.00        8.113648        5.594649
-#' # 3      pen Pen C 8 8 1.00        7.688790        4.846574
-#' # 4      pen Pen D 8 7 0.75        6.097081        4.978941
-#' # 5      pen Pen E 8 8 1.00        6.858526        4.858916
-#' # 6      pen Pen F 8 8 1.00        6.884332        5.134238
-#'  
+#' # Complete separation observed for variable(s): pen
+#' # # A tibble: 6 x 7
+#' #   variable level     N     U    MF `median_resp:con` `median_resp:vac`
+#' #   <fct>    <chr> <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#' # 1 pen      Pen A     8     6  0.5               6.79              4.24
+#' # 2 pen      Pen B     8     8  1                 8.11              5.59
+#' # 3 pen      Pen C     8     8  1                 7.69              4.85
+#' # 4 pen      Pen D     8     7  0.75              6.10              4.98
+#' # 5 pen      Pen E     8     8  1                 6.86              4.86
+#' # 6 pen      Pen F     8     8  1                 6.88              5.13
+#' 
+#' MFnest(aCore, c('All', 'litter'))
+#' # Complete separation observed for variable(s): litter
+#' # # A tibble: 13 x 7
+#' #  variable level         N     U    MF `median_resp:con` `median_resp:vac`
+#' #  <fct>    <chr>     <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#' #  1 All      All          48    45 0.875              7.24              4.91
+#' #  2 litter   Litter 11     4     4 1                  8.24              5.13
+#' #  3 litter   Litter 12     4     2 0                  4.91              3.81
+#' #  4 litter   Litter 13     4     4 1                  8.10              5.23
+#' #  5 litter   Litter 14     4     4 1                  8.11              5.59
+#' #  6 litter   Litter 15     4     4 1                  8.09              5.26
+#' #  7 litter   Litter 16     4     4 1                  6.77              4.50
+#' #  8 litter   Litter 17     4     4 1                  5.58              4.26
+#' #  9 litter   Litter 18     4     3 0.5                7.44              6.33
+#' # 10 litter   Litter 19     4     4 1                  7.98              4.58
+#' # 11 litter   Litter 20     4     4 1                  6.78              4.86
+#' # 12 litter   Litter 21     4     4 1                  6.82              5.36
+#' # 13 litter   Litter 22     4     4 1                  7.27              5.13
+#'
 #' MFnest(aCore, 'litter')
-#' #    variable     level N U  MF median_resp:con median_resp:vac
-#' # 1    litter Litter 11 4 4 1.0        8.237194        5.125583
-#' # 2    litter Litter 12 4 2 0.0        4.914294        3.808685
-#' # 3    litter Litter 13 4 4 1.0        8.103441        5.227177
-#' # 4    litter Litter 14 4 4 1.0        8.113648        5.594649
-#' # 5    litter Litter 15 4 4 1.0        8.087914        5.256611
-#' # 6    litter Litter 16 4 4 1.0        6.770457        4.503342
-#' # 7    litter Litter 17 4 4 1.0        5.575649        4.258613
-#' # 8    litter Litter 18 4 3 0.5        7.442926        6.329360
-#' # 9    litter Litter 19 4 4 1.0        7.980120        4.584041
-#' # 10   litter Litter 20 4 4 1.0        6.781480        4.858916
-#' # 11   litter Litter 21 4 4 1.0        6.819483        5.363069
-#' # 12   litter Litter 22 4 4 1.0        7.272879        5.134238
+#' # Complete separation observed for variable(s): litter
+#' # # A tibble: 12 x 7
+#' #    variable level         N     U    MF `median_resp:con` `median_resp:vac`
+#' #    <fct>    <chr>     <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#' #  1 litter   Litter 11     4     4   1                8.24              5.13
+#' #  2 litter   Litter 12     4     2   0                4.91              3.81
+#' #  3 litter   Litter 13     4     4   1                8.10              5.23
+#' #  4 litter   Litter 14     4     4   1                8.11              5.59
+#' #  5 litter   Litter 15     4     4   1                8.09              5.26
+#' #  6 litter   Litter 16     4     4   1                6.77              4.50
+#' #  7 litter   Litter 17     4     4   1                5.58              4.26
+#' #  8 litter   Litter 18     4     3   0.5              7.44              6.33
+#' #  9 litter   Litter 19     4     4   1                7.98              4.58
+#' # 10 litter   Litter 20     4     4   1                6.78              4.86
+#' # 11 litter   Litter 21     4     4   1                6.82              5.36
+#' # 12 litter   Litter 22     4     4   1                7.27              5.13
 #' 
 #' MFnest(aCore, c('room', 'pen', 'litter'))
-#' #    variable     level  N  U        MF median_resp:con median_resp:vac
-#' # 1      room    Room W 24 22 0.8333333        7.792846        4.846574
-#' # 2      room    Room Z 24 23 0.9166667        6.708765        4.978941
-#' # 3       pen     Pen A  8  6 0.5000000        6.792419        4.237541
-#' # 4       pen     Pen B  8  8 1.0000000        8.113648        5.594649
-#' # 5       pen     Pen C  8  8 1.0000000        7.688790        4.846574
-#' # 6       pen     Pen D  8  7 0.7500000        6.097081        4.978941
-#' # 7       pen     Pen E  8  8 1.0000000        6.858526        4.858916
-#' # 8       pen     Pen F  8  8 1.0000000        6.884332        5.134238
-#' # 9    litter Litter 11  4  4 1.0000000        8.237194        5.125583
-#' # 10   litter Litter 12  4  2 0.0000000        4.914294        3.808685
-#' # 11   litter Litter 13  4  4 1.0000000        8.103441        5.227177
-#' # 12   litter Litter 14  4  4 1.0000000        8.113648        5.594649
-#' # 13   litter Litter 15  4  4 1.0000000        8.087914        5.256611
-#' # 14   litter Litter 16  4  4 1.0000000        6.770457        4.503342
-#' # 15   litter Litter 17  4  4 1.0000000        5.575649        4.258613
-#' # 16   litter Litter 18  4  3 0.5000000        7.442926        6.329360
-#' # 17   litter Litter 19  4  4 1.0000000        7.980120        4.584041
-#' # 18   litter Litter 20  4  4 1.0000000        6.781480        4.858916
-#' # 19   litter Litter 21  4  4 1.0000000        6.819483        5.363069
-#' # 20   litter Litter 22  4  4 1.0000000        7.272879        5.134238
+#' # Complete separation observed for variable(s): litter, pen
+#' # # A tibble: 20 x 7
+#' #    variable level         N     U    MF `median_resp:con` `median_resp:vac`
+#' #    <fct>    <chr>     <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#' #  1 room     Room W       24    22 0.833              7.79              4.85
+#' #  2 room     Room Z       24    23 0.917              6.71              4.98
+#' #  3 pen      Pen A         8     6 0.5                6.79              4.24
+#' #  4 pen      Pen B         8     8 1                  8.11              5.59
+#' #  5 pen      Pen C         8     8 1                  7.69              4.85
+#' #  6 pen      Pen D         8     7 0.75               6.10              4.98
+#' #  7 pen      Pen E         8     8 1                  6.86              4.86
+#' #  8 pen      Pen F         8     8 1                  6.88              5.13
+#' #  9 litter   Litter 11     4     4 1                  8.24              5.13
+#' # 10 litter   Litter 12     4     2 0                  4.91              3.81
+#' # 11 litter   Litter 13     4     4 1                  8.10              5.23
+#' # 12 litter   Litter 14     4     4 1                  8.11              5.59
+#' # 13 litter   Litter 15     4     4 1                  8.09              5.26
+#' # 14 litter   Litter 16     4     4 1                  6.77              4.50
+#' # 15 litter   Litter 17     4     4 1                  5.58              4.26
+#' # 16 litter   Litter 18     4     3 0.5                7.44              6.33
+#' # 17 litter   Litter 19     4     4 1                  7.98              4.58
+#' # 18 litter   Litter 20     4     4 1                  6.78              4.86
+#' # 19 litter   Litter 21     4     4 1                  6.82              5.36
+#' # 20 litter   Litter 22     4     4 1                  7.27              5.13
 #' @export
 MFnest <- function(Y, which.factor = 'All') {
   ## restructure if using output from MFh
-  if(class(Y) == 'mfhierdata'){
+  if(class(Y)[1] == 'mfhierdata'){
     input <- Y
     Y <- input$coreTbl
-  } else if(class(Y) != 'tbl'){
+  } else if(class(Y)[1] != 'tbl_df'){
     Y <- as_tibble(Y)
   }
   
-  ## if no factor specified, look at "All"
-  # if(is.null(which.factor)){
-  #   which.factor <- 'All'
-  # }
-  ## create the All variable if it is a variable to be calculated
-  # if ("all" %in% tolower(which.factor)) {
-  #   Y <- cbind(All = rep("All", nrow(Y)), Y)
-  # }
   stat.names <- c(str_subset(names(Y), "_medResp"), 
                   str_subset(names(Y), "_n"), 'N', 'u', 'w')
   out <- Y %>%
+    mutate_if(is.factor, as.character) %>%
     gather(variable, level, -stat.names) %>%
     bind_rows(., 
               select(Y, stat.names) %>%
@@ -263,64 +246,25 @@ MFnest <- function(Y, which.factor = 'All') {
     names(compare) <- paste0("median_resp:", input$compare, sep = '')
 
     out <- thisdata %>%
+      mutate_if(is.factor, as.character) %>%
       gather(variable, level, -c(tgroup, resp)) %>%
       bind_rows(.,
                 select(thisdata, c(tgroup, resp)) %>%
-                mutate(variable = "All", level = "All")) %>%
+                mutate(variable = "All", level = "All") %>%
+                mutate_if(is.factor, as.character)) %>%
       group_by(variable, level, tgroup) %>%
       summarize(median_resp = median(resp, na.rm = TRUE)) %>%
       spread(tgroup, median_resp) %>%
       ungroup() %>%
       rename(!!compare) %>%
       filter(tolower(variable) %in% tolower(which.factor)) %>%
-      left_join(out,.) 
+      left_join(out, ., by = c('variable', 'level')) 
       
   }    
   
   out <- out %>%
     mutate(variable = fct_relevel(variable, which.factor)) %>%
     arrange(variable)
-  ## evaluate N, U and MF for each variable specified in which.factor
-  # plyr::rbind.fill(lapply(which.factor, FUN = function(x){
-
-    ## get the design matrix
-    # Y <- as.data.frame(Y)
-    # X <- sapply(as.character(unique(Y[, x])), FUN = function(a){
-    #   as.numeric(Y[, x] == a)
-    # })
-    
-    ## calculations for MF, N, U
-    # out <- data.frame(variable = x, level = unique(Y[, x]))
-    # out$N <- t(X) %*% Y$N
-    # out$U <- t(X) %*% Y$u
-    # R <- out$U/out$N
-    # out$MF <- 2 * R - 1
-    # if(exists('input')){
-    #   comparex <- input$compare[1]
-    #   comparey <- input$compare[2]
-    #   if(x == 'All'){
-    #     out$medianx <- median(input$data[input$data$tgroup == comparex, 'resp'],
-    #                           na.rm = TRUE)
-    #     out$mediany <- median(input$data[input$data$tgroup == comparey, 'resp'],
-    #                           na.rm = TRUE)
-    #   } else{
-    #     # thismedians <- plyr::ddply(input$data, x, .fun = function(y){
-    #     #   return(data.frame(medianx = median(y[y$tgroup == comparex, 'resp'], na.rm = TRUE),
-    #     #                     mediany = median(y[y$tgroup == comparey, 'resp'], na.rm = TRUE)))})
-    #     # names(thismedians)[1] <- 'level'
-    #     # thismedians$variable <- x
-    #     # out <- merge(out, thismedians, by = c('variable', 'level'))
-    #   }
-    # 
-    #   # names(out)[6] <- paste("median_resp:", as.character(comparex), sep = '')
-    #   # names(out)[7] <- paste("median_resp:", as.character(comparey), sep = '')
-    #   
-    # }
-# 
-    # if(1.0 %in% round(out$MF, digits = 1) ){
-    #   message("Complete separation for variable ", x, " observed.")
-    # }
-    return(out)
-#   }))
-
+ 
+  return(out)
 }
