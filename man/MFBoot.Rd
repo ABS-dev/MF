@@ -50,9 +50,6 @@ MFBoot(lesion~group, calflung)
 # Equal Tailed        0.44 0.4464 0.1360 0.7056
 # Highest Density     0.44 0.4464 0.1456 0.7088
 }
-\author{
-David Siev \email{david.siev@aphis.usda.gov}
-}
 \references{
 Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508} \cr \cr
 Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
@@ -60,4 +57,6 @@ Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hal
 \seealso{
 \code{\link{mfboot-class}}
 }
-
+\author{
+David Siev \email{david.siev@aphis.usda.gov}
+}

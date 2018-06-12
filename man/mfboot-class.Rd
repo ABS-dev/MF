@@ -2,8 +2,8 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mfboot-class}
-\alias{mfboot}
 \alias{mfboot-class}
+\alias{mfboot}
 \title{Class mfboot}
 \usage{
 mfboot$new(nboot, alpha, seed, compare, rng, sample, stat, stuff)
@@ -12,6 +12,7 @@ mfboot$new(nboot, alpha, seed, compare, rng, sample, stat, stuff)
 class for data objects produced by MFBoot, contains class mf with 
 the two additional fields \emph{stat} and \emph{stuff}.
 }
+
 \section{Fields}{
 
 \itemize{
@@ -29,9 +30,7 @@ the two additional fields \emph{stat} and \emph{stuff}.
 
 \code{\link{mf-class}}
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 \code{\link{MFBoot}}
 
@@ -39,5 +38,7 @@ Other mf: \code{\link{mf-class}},
   \code{\link{mfbootcluster-class}},
   \code{\link{mfhlboot-class}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-

@@ -74,9 +74,6 @@ HLBoot(lesion~group,calflung)
 #  Q50 -0.112525 -0.111175 -0.2811688  0.023200
 #  Q75 -0.168000 -0.168000 -0.3858500  0.023975
 }
-\author{
-David Siev \email{david.siev@aphis.usda.gov}
-}
 \references{
 Hodges JL, Lehmann EL, (1963). Estimates of location based on rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}. \cr \cr
  Siev D, (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}. \cr \cr
@@ -85,4 +82,6 @@ Hodges JL, Lehmann EL, (1963). Estimates of location based on rank tests. \emph{
 \seealso{
 \code{\link{mfhlboot-class}}
 }
-
+\author{
+David Siev \email{david.siev@aphis.usda.gov}
+}

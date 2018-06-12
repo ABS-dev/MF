@@ -66,13 +66,12 @@ MFClus(lesion ~ group + cluster(litter), piglung)
 #  [1] M, Q, R, B, O, V, I, C
 }
 }
-\author{
-David Siev \email{david.siev@aphis.usda.gov}
-}
 \references{
 Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
 }
 \seealso{
 \code{\link{mfcluster-class}}
 }
-
+\author{
+David Siev \email{david.siev@aphis.usda.gov}
+}

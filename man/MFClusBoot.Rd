@@ -84,11 +84,10 @@ MFClusBoot(lesion ~ group + cluster(litter), piglung, boot.unit = T, b = 12, B =
 #  [1] M, Q, R, B, O, V, I, C
 }
 }
-\author{
-David Siev \email{david.siev@aphis.usda.gov}
-}
 \references{
 Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}\cr \cr
 Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
 }
-
+\author{
+David Siev \email{david.siev@aphis.usda.gov}
+}

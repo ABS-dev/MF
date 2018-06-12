@@ -4,18 +4,18 @@
 \alias{MFnest}
 \title{Summations to calculate the MF for nested data from a rank table.}
 \usage{
-MFnest(Y, which.factor = NULL)
+MFnest(Y, which.factor = "All")
 }
 \arguments{
-\item{Y}{rank table, structured as \code{$coreTbl} output from \code{\link{MFh}} or
-output list from MFh}
+\item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl} output from \code{\link{MFh}} or
+output list from MFh.}
 
 \item{which.factor}{one or more variable(s) of interest. This can be any of the core or nest variables
 from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
 tree.}
 }
 \value{
-data.frame with each unique level of a variable as a row. Values \code{N}, 
+tibble with each unique level of a variable as a row. Values \code{N}, 
 \code{U}, \code{MF} and median of responses returned.
 }
 \note{
@@ -24,67 +24,100 @@ tree. Nest variables are those above the core. All refers to a summary of the en
 }
 \examples{
 MFnest(aCore)
-#   variable level  N  U    MF median_resp:con median_resp:vac
-# 1      All   All 48 45 0.875        7.244466        4.909263
+#   # A tibble: 1 x 7
+#     variable level     N     U    MF `median_resp:con` `median_resp:vac`
+#     <fct>    <chr> <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#   1 All      All      48    45 0.875              7.24              4.91
 
 MFnest(aCore$coreTbl)
 # Skipping median summary, no response data provided.
-#   variable level  N  U    MF
-# 1      All   All 48 45 0.875
+# # A tibble: 1 x 5
+#   variable level     N     U    MF
+#   <fct>    <chr> <dbl> <dbl> <dbl>
+# 1 All      All      48    45 0.875
 
 MFnest(aCore, 'room')
-#  variable  level  N  U        MF median_resp:con median_resp:vac
-# 1     room Room W 24 22 0.8333333        7.792846        4.846574
-# 2     room Room Z 24 23 0.9166667        6.708765        4.978941
+# # A tibble: 2 x 7
+#   variable level      N     U    MF `median_resp:con` `median_resp:vac`
+#   <fct>    <chr>  <dbl> <dbl> <dbl>             <dbl>             <dbl>
+# 1 room     Room W    24    22 0.833              7.79              4.85
+# 2 room     Room Z    24    23 0.917              6.71              4.98
 
 MFnest(aCore, 'pen')
-#   variable level N U   MF median_resp:con median_resp:vac
-# 1      pen Pen A 8 6 0.50        6.792419        4.237541
-# 2      pen Pen B 8 8 1.00        8.113648        5.594649
-# 3      pen Pen C 8 8 1.00        7.688790        4.846574
-# 4      pen Pen D 8 7 0.75        6.097081        4.978941
-# 5      pen Pen E 8 8 1.00        6.858526        4.858916
-# 6      pen Pen F 8 8 1.00        6.884332        5.134238
- 
+# Complete separation observed for variable(s): pen
+# # A tibble: 6 x 7
+#   variable level     N     U    MF `median_resp:con` `median_resp:vac`
+#   <fct>    <chr> <dbl> <dbl> <dbl>             <dbl>             <dbl>
+# 1 pen      Pen A     8     6  0.5               6.79              4.24
+# 2 pen      Pen B     8     8  1                 8.11              5.59
+# 3 pen      Pen C     8     8  1                 7.69              4.85
+# 4 pen      Pen D     8     7  0.75              6.10              4.98
+# 5 pen      Pen E     8     8  1                 6.86              4.86
+# 6 pen      Pen F     8     8  1                 6.88              5.13
+
+MFnest(aCore, c('All', 'litter'))
+# Complete separation observed for variable(s): litter
+# # A tibble: 13 x 7
+#  variable level         N     U    MF `median_resp:con` `median_resp:vac`
+#  <fct>    <chr>     <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#  1 All      All          48    45 0.875              7.24              4.91
+#  2 litter   Litter 11     4     4 1                  8.24              5.13
+#  3 litter   Litter 12     4     2 0                  4.91              3.81
+#  4 litter   Litter 13     4     4 1                  8.10              5.23
+#  5 litter   Litter 14     4     4 1                  8.11              5.59
+#  6 litter   Litter 15     4     4 1                  8.09              5.26
+#  7 litter   Litter 16     4     4 1                  6.77              4.50
+#  8 litter   Litter 17     4     4 1                  5.58              4.26
+#  9 litter   Litter 18     4     3 0.5                7.44              6.33
+# 10 litter   Litter 19     4     4 1                  7.98              4.58
+# 11 litter   Litter 20     4     4 1                  6.78              4.86
+# 12 litter   Litter 21     4     4 1                  6.82              5.36
+# 13 litter   Litter 22     4     4 1                  7.27              5.13
+
 MFnest(aCore, 'litter')
-#    variable     level N U  MF median_resp:con median_resp:vac
-# 1    litter Litter 11 4 4 1.0        8.237194        5.125583
-# 2    litter Litter 12 4 2 0.0        4.914294        3.808685
-# 3    litter Litter 13 4 4 1.0        8.103441        5.227177
-# 4    litter Litter 14 4 4 1.0        8.113648        5.594649
-# 5    litter Litter 15 4 4 1.0        8.087914        5.256611
-# 6    litter Litter 16 4 4 1.0        6.770457        4.503342
-# 7    litter Litter 17 4 4 1.0        5.575649        4.258613
-# 8    litter Litter 18 4 3 0.5        7.442926        6.329360
-# 9    litter Litter 19 4 4 1.0        7.980120        4.584041
-# 10   litter Litter 20 4 4 1.0        6.781480        4.858916
-# 11   litter Litter 21 4 4 1.0        6.819483        5.363069
-# 12   litter Litter 22 4 4 1.0        7.272879        5.134238
+# Complete separation observed for variable(s): litter
+# # A tibble: 12 x 7
+#    variable level         N     U    MF `median_resp:con` `median_resp:vac`
+#    <fct>    <chr>     <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#  1 litter   Litter 11     4     4   1                8.24              5.13
+#  2 litter   Litter 12     4     2   0                4.91              3.81
+#  3 litter   Litter 13     4     4   1                8.10              5.23
+#  4 litter   Litter 14     4     4   1                8.11              5.59
+#  5 litter   Litter 15     4     4   1                8.09              5.26
+#  6 litter   Litter 16     4     4   1                6.77              4.50
+#  7 litter   Litter 17     4     4   1                5.58              4.26
+#  8 litter   Litter 18     4     3   0.5              7.44              6.33
+#  9 litter   Litter 19     4     4   1                7.98              4.58
+# 10 litter   Litter 20     4     4   1                6.78              4.86
+# 11 litter   Litter 21     4     4   1                6.82              5.36
+# 12 litter   Litter 22     4     4   1                7.27              5.13
 
 MFnest(aCore, c('room', 'pen', 'litter'))
-#    variable     level  N  U        MF median_resp:con median_resp:vac
-# 1      room    Room W 24 22 0.8333333        7.792846        4.846574
-# 2      room    Room Z 24 23 0.9166667        6.708765        4.978941
-# 3       pen     Pen A  8  6 0.5000000        6.792419        4.237541
-# 4       pen     Pen B  8  8 1.0000000        8.113648        5.594649
-# 5       pen     Pen C  8  8 1.0000000        7.688790        4.846574
-# 6       pen     Pen D  8  7 0.7500000        6.097081        4.978941
-# 7       pen     Pen E  8  8 1.0000000        6.858526        4.858916
-# 8       pen     Pen F  8  8 1.0000000        6.884332        5.134238
-# 9    litter Litter 11  4  4 1.0000000        8.237194        5.125583
-# 10   litter Litter 12  4  2 0.0000000        4.914294        3.808685
-# 11   litter Litter 13  4  4 1.0000000        8.103441        5.227177
-# 12   litter Litter 14  4  4 1.0000000        8.113648        5.594649
-# 13   litter Litter 15  4  4 1.0000000        8.087914        5.256611
-# 14   litter Litter 16  4  4 1.0000000        6.770457        4.503342
-# 15   litter Litter 17  4  4 1.0000000        5.575649        4.258613
-# 16   litter Litter 18  4  3 0.5000000        7.442926        6.329360
-# 17   litter Litter 19  4  4 1.0000000        7.980120        4.584041
-# 18   litter Litter 20  4  4 1.0000000        6.781480        4.858916
-# 19   litter Litter 21  4  4 1.0000000        6.819483        5.363069
-# 20   litter Litter 22  4  4 1.0000000        7.272879        5.134238
+# Complete separation observed for variable(s): litter, pen
+# # A tibble: 20 x 7
+#    variable level         N     U    MF `median_resp:con` `median_resp:vac`
+#    <fct>    <chr>     <dbl> <dbl> <dbl>             <dbl>             <dbl>
+#  1 room     Room W       24    22 0.833              7.79              4.85
+#  2 room     Room Z       24    23 0.917              6.71              4.98
+#  3 pen      Pen A         8     6 0.5                6.79              4.24
+#  4 pen      Pen B         8     8 1                  8.11              5.59
+#  5 pen      Pen C         8     8 1                  7.69              4.85
+#  6 pen      Pen D         8     7 0.75               6.10              4.98
+#  7 pen      Pen E         8     8 1                  6.86              4.86
+#  8 pen      Pen F         8     8 1                  6.88              5.13
+#  9 litter   Litter 11     4     4 1                  8.24              5.13
+# 10 litter   Litter 12     4     2 0                  4.91              3.81
+# 11 litter   Litter 13     4     4 1                  8.10              5.23
+# 12 litter   Litter 14     4     4 1                  8.11              5.59
+# 13 litter   Litter 15     4     4 1                  8.09              5.26
+# 14 litter   Litter 16     4     4 1                  6.77              4.50
+# 15 litter   Litter 17     4     4 1                  5.58              4.26
+# 16 litter   Litter 18     4     3 0.5                7.44              6.33
+# 17 litter   Litter 19     4     4 1                  7.98              4.58
+# 18 litter   Litter 20     4     4 1                  6.78              4.86
+# 19 litter   Litter 21     4     4 1                  6.82              5.36
+# 20 litter   Litter 22     4     4 1                  7.27              5.13
 }
 \seealso{
 \code{\link{MFh}}
 }
-

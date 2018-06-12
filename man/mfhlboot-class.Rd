@@ -2,8 +2,8 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mfhlboot-class}
-\alias{mfhlboot}
 \alias{mfhlboot-class}
+\alias{mfhlboot}
 \title{Class mfhlboot}
 \usage{
 mfhlboot$new(nboot, alpha, seed, compare, rng, sample, MFstat, HLstat,
@@ -13,6 +13,7 @@ QDIFstat, QXstat, QYstat)
 class for data objects produced by HLBoot, contains class mf with
 addtional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
 }
+
 \section{Fields}{
 
 \itemize{
@@ -40,9 +41,7 @@ quartiles of responses}
 
 \code{\link{mf-class}}
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 \code{\link{HLBoot}}
 
@@ -50,5 +49,7 @@ Other mf: \code{\link{mf-class}},
   \code{\link{mfboot-class}},
   \code{\link{mfbootcluster-class}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-

@@ -2,8 +2,8 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mf-class}
-\alias{mf}
 \alias{mf-class}
+\alias{mf}
 \title{Class mf}
 \usage{
 mf$new(nboot, alpha, seed, compare, rng)
@@ -11,6 +11,7 @@ mf$new(nboot, alpha, seed, compare, rng)
 \description{
 Parent class for package MF data objects.
 }
+
 \section{Fields}{
  
 \itemize{
@@ -21,13 +22,13 @@ Parent class for package MF data objects.
 \item{\code{rng: }}{character string naming type of random number generator}
 }
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 Other mf: \code{\link{mfboot-class}},
   \code{\link{mfbootcluster-class}},
   \code{\link{mfhlboot-class}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-

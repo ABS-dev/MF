@@ -2,8 +2,8 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mfhierdata-class}
-\alias{mfhierdata}
 \alias{mfhierdata-class}
+\alias{mfhierdata}
 \title{Class mfhierdata}
 \usage{
 mfhierdata$new(coreTbl, data)
@@ -11,6 +11,7 @@ mfhierdata$new(coreTbl, data)
 \description{
 Class mfhierdata is created from output of function MFh
 }
+
 \section{Fields}{
 
 \itemize{
@@ -20,11 +21,11 @@ Class mfhierdata is created from output of function MFh
 \item{\code{compare: }}{character vector naming groups being compared.}
 }
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 \code{\link{MFh}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-

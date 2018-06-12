@@ -12,15 +12,18 @@ response, x is a factor with two levels of treatment, and a/b/c are variables
 corresponding to the clusters. It is expected that levels of "c" are nested within 
 levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.}
 
-\item{data}{a data.frame with the variables specified in formula. Additional variables will
-be ignored.}
+\item{data}{a data.frame or tibble with the variables specified in formula. 
+Additional variables will be ignored.}
 
 \item{compare}{Text vector stating the factor levels - compare[1] is the control or 
 reference group to which compare[2] is compared.}
 }
 \value{
-a list of three items. \emph{coreTbl} is a data.frame with one row for each unique core level showing values for
-\code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations.
+A list of three items. \cr
+\emph{coreTbl} is a tibble with one row for each unique 
+core level showing values for
+\code{_n} & \code{_n} (counts of observations for each treatment in a nested group), 
+\code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations (tibble).
 \emph{compare} is the compare variable as input by user.
 }
 \note{
@@ -32,29 +35,31 @@ a <- data.frame(
  room = paste('Room',rep(c('W','Z'),each=24)),
  pen = paste('Pen',rep(LETTERS[1:6],each=8)),
  litter = paste('Litter',rep(11:22,each=4)),
- tx = rep(rep(c('vac','con'),each=2),12)
+ tx = rep(rep(c('vac','con'),each=2),12),
+ stringsAsFactors = FALSE
  )
 set.seed(76153)
 a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 
 aCore <- MFh(lung ~ tx + room/pen/litter,a)
-# aCore
-# Core:litter   room   pen    litter nx ny w median_resp:con median_resp:vac N u
-# 1  Room W Pen A Litter 11 Room W Pen A Litter 11  2  2 7        8.237194        5.125583 4 4
-# 2  Room W Pen A Litter 12 Room W Pen A Litter 12  2  2 5        4.914294        3.808685 4 2
-# 3  Room W Pen B Litter 13 Room W Pen B Litter 13  2  2 7        8.103441        5.227177 4 4
-# 4  Room W Pen B Litter 14 Room W Pen B Litter 14  2  2 7        8.113648        5.594649 4 4
-# 5  Room W Pen C Litter 15 Room W Pen C Litter 15  2  2 7        8.087914        5.256611 4 4
-# 6  Room W Pen C Litter 16 Room W Pen C Litter 16  2  2 7        6.770457        4.503342 4 4
-# 7  Room Z Pen D Litter 17 Room Z Pen D Litter 17  2  2 7        5.575649        4.258613 4 4
-# 8  Room Z Pen D Litter 18 Room Z Pen D Litter 18  2  2 6        7.442926        6.329360 4 3
-# 9  Room Z Pen E Litter 19 Room Z Pen E Litter 19  2  2 7        7.980120        4.584041 4 4
-# 10 Room Z Pen E Litter 20 Room Z Pen E Litter 20  2  2 7        6.781480        4.858916 4 4
-# 11 Room Z Pen F Litter 21 Room Z Pen F Litter 21  2  2 7        6.819483        5.363069 4 4
-# 12 Room Z Pen F Litter 22 Room Z Pen F Litter 22  2  2 7        7.272879        5.134238 4 4
+aCore
+# A tibble: 12 x 10
+#     room   pen   litter    con_medResp con_n     w vac_medResp vac_n     N     u
+#     <fct>  <fct> <fct>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl> <dbl>
+#   1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4     4
+#   2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4     2
+#   3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4     4
+#   4 Room W Pen B Litter 14        8.11     2     7        5.59     2     4     4
+#   5 Room W Pen C Litter 15        8.09     2     7        5.26     2     4     4
+#   6 Room W Pen C Litter 16        6.77     2     7        4.50     2     4     4
+#   7 Room Z Pen D Litter 17        5.58     2     7        4.26     2     4     4
+#   8 Room Z Pen D Litter 18        7.44     2     6        6.33     2     4     3
+#   9 Room Z Pen E Litter 19        7.98     2     7        4.58     2     4     4
+#  10 Room Z Pen E Litter 20        6.78     2     7        4.86     2     4     4
+#  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4     4
+#  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
 }
 \seealso{
 \code{\link{MFnest}} for calculation of MF for nest, core and all variables.
 }
-
