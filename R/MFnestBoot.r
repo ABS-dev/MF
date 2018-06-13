@@ -1,5 +1,27 @@
+#' @title MFnestBoot 
+#' @description Bootstrapping MF estimate for nested heirarchy
+#' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous 
+#' response, x is a factor with two levels of treatment, and a/b/c are variables 
+#' corresponding to the clusters. It is expected that levels of "c" are nested within 
+#' levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
+#' @param data a data.frame or tibble with the variables specified in formula. 
+#' Additional variables will be ignored.
+#' @param compare Text vector stating the factor levels - \code{compare[1]} is the control 
+#' or reference group to which \code{compare[2]} is compared.
+#' @param boot.cluster Boolean whether to resample the clusters
+#' @param boot.unit Boolean whether to resample the units within each cluster
+#' @param b Number of bootstrap samples to take with each cycle
+#' @param B Number of cycles, giving the total number of samples = B * b
+#' @param compare Text vector stating the factor levels - compare[1] is the control or 
+#' reference group to which compare[2] is compared.
+#' @param alpha complement of the confidence level
+#' @param hpd boolean whether to estimate highest density intervals
+#' @note B * b notation is used for consistency with MFClus
+#' @author CVB Statistics \email{CVB.Data.Help@@aphis.usda.gov}
+#' @seealso \code{\link{MFClus}}
+#' @export
 #' @examples 
-#' a <- data.frame(
+#' a <- as_tibble(
 #'  room = paste('Room',rep(c('W','Z'),each=24)),
 #'  pen = paste('Pen',rep(LETTERS[1:6],each=8)),
 #'  litter = paste('Litter',rep(11:22,each=4)),
