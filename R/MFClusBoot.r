@@ -67,6 +67,11 @@
 ##--------------------------------------------------------------------
 MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = TRUE, b = 100, 
 	B = 100, alpha = 0.05, hpd=TRUE, return.boot = FALSE,trace.it= FALSE){
+  
+  ## short circuit if no bootstrapping!
+  if(!boot.cluster & !boot.unit){
+    stop("No bootstrapping specified")
+  }
     # takes b bootstrap samples B times, so nboot = B * b
     # 3/19/01 initial coding
     # revised 6/30/05 to allow bootstrapping clusters, units, or both
