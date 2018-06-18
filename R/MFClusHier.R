@@ -68,13 +68,14 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   wx <- sym(str_c(xname, "w", sep = "_"))
   
   newdat <- as_tibble(data) %>%
+    ungroup() %>%
     select(nests, tgroup = tgroup, resp = resp) 
   
   thiscoreTbl <- newdat %>%
     group_by_at(nests) %>%
-    add_count(tgroup) %>%
-    filter(n > 1) %>%
-    select(-n) %>%
+    mutate(ntgroups = length(unique(tgroup))) %>%
+    filter(ntgroups > 1) %>%
+    select(-ntgroups) %>%
     mutate(rank = rank(resp)) %>%
     group_by_at(vars(nests, tgroup)) %>%
     summarize(n = length(resp),
@@ -241,6 +242,8 @@ MFnest <- function(Y, which.factor = 'All') {
   if(!exists('input')){
     message('Skipping median summary, no response data provided.') 
   } else{
+    
+  ## TODO: this needs to go in a helper function
     thisdata <- input$data
     compare <- input$compare
     names(compare) <- paste0("median_resp:", input$compare, sep = '')
@@ -268,3 +271,5 @@ MFnest <- function(Y, which.factor = 'All') {
  
   return(out)
 }
+
+
