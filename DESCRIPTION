@@ -15,7 +15,8 @@ Depends:
     dplyr (>= 0.7.1),
     stringr,
     tidyr,
-    forcats
+    forcats,
+    purrr
 Collate:
     'aaa.r'
     'classes.r'
