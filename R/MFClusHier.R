@@ -8,15 +8,25 @@
 #' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control or 
 #' reference group to which compare[2] is compared.
-#' @return A list of three items. \cr
-#' \emph{coreTbl} is a tibble with one row for each unique 
-#' core level showing values for
-#' \code{_n} & \code{_n} (counts of observations for each treatment in a nested group), 
-#' \code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations (tibble).
-#' \emph{compare} is the compare variable as input by user.
+#' @return A \code{\link{mfhierdata}} object, which is a list of three items. \cr
+#' \describe{
+#' 
+#' \item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique core level showing values for:
+#' \itemize{
+#'   \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations for each treatment 
+#' level in the core level.
+#'   \item \code{N} - total number of observations across all treatement levels at that core level.
+#'   \item \code{w} - Wilcoxon statistic
+#'   \item \code{u} - Mann-Whitney statistic
+#' }
+#' }
+#' \item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data used for calculations.}
+#' \item{compare}{The compare variables as input by user.}
+#' \item{formula}{The formula as input by user.}
+#' }
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 #' tree. Nest variables are those above the core.
-#' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all variables.
+#' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all variables. \code{\link{mfhierdata}} for returned object.
 #' @examples 
 #' a <- data.frame(
 #'  room = paste('Room',rep(c('W','Z'),each=24)),
@@ -91,7 +101,8 @@ MFh <- function(formula, data, compare = c("con", "vac")){
     select(everything(), w, N, u) %>%
     ungroup()
 
-  return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat, compare = compare))
+  return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat, 
+                        compare = compare, formula = formula))
 }
 
 #' @name MFnest
