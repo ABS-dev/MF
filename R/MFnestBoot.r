@@ -1,5 +1,26 @@
 #' @title  MFhBoot
+#' @name MFhBoot
 #' @description MFh using bootstrapping
+#' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous response, 
+#' x is a factor with two levels of treatment, and a/b/c are variables corresponding 
+#' to the clusters. It is expected that levels of "c" are nested within levels of "b". 
+#' Nesting is assumed to be in order, left to right, highest to lowest.
+#' @param data a data.frame or tibble with the variables specified in formula. 
+#' Additional variables will be ignored.
+#' @param compare Text vector stating the factor levels - compare[1] is the control 
+#' or reference group to which compare[2] is compared.
+#' @param nboot number of bootstrapping events
+#' @param boot.unit Boolean whether to sample observations from within those of the same core.
+#' @param boot.cluster Boolean whether to sample which cores are present. If TRUE, 
+#' some trees have all the cores while others only have a subset. 
+#' @return A list with the following elements: \cr \cr
+#' \describe{
+#'   \item{bootmfh}{Rank table for the bootstrapped values. Includes a new \code{bootID} variable to distinguish 
+#'   each bootstrapped incidence.}
+#'   \item{clusters}{Table of unique nodes with an ID.}
+#'   \item{compare}{Compare vector as specified by user.}
+#'   \item{mfh}{MFh run on original data input.}
+#' }
 #' @export
 #' @examples 
 #' set.seed(76153)
@@ -20,10 +41,10 @@
 #' system.time(test1 <- MFhBoot(formula, a, 
 #'                             nboot = 10000,
 #'                              boot.cluster = TRUE, boot.unit = TRUE))
-#' test1$bootdat
+#' test1$bootmfh
 MFhBoot <- function(formula, data,
                     compare = c("con", "vac"),
-                    nboot = 10000, alpha = 0.05, 
+                    nboot = 10000,
                     boot.unit = TRUE, boot.cluster = TRUE){
   
   termlab <- attr(terms(formula), "term.labels")
@@ -31,7 +52,7 @@ MFhBoot <- function(formula, data,
   tgroup <- termlab[1]
   resp <- all.vars(formula)[1]
 
-  
+  ## create symbols for later access
   symresp <- sym(resp)
   symtgroup <- sym(tgroup)
   wx <- sym(paste0(c(compare[1], "w"), collapse = '_'))
@@ -77,7 +98,7 @@ MFhBoot <- function(formula, data,
   ## w is the sum of the rankings of observations from the control 
   ##    or reference group where observations are ranked within the entire node. This will
   ##    change with the sampling that a occurs when isTRUE(boot.unit), although the interval of possible values does not change.
-  ##    Note that depending on which bootstrap incidence, this maynot be a complete w for a unique core node.
+  ##    Note that depending on which bootstrap incidence, this may not be a complete w for a unique core node.
   ##    
   ## u = w - nx(nx + 1)/2. The value on the rhs of minus is constant regardless of boot.unit. As the 
   ##    value of "w" changes due to sampling when isTRUE(boot.unit), so will "u" by the same amount.
@@ -171,11 +192,26 @@ MFhBoot <- function(formula, data,
       ungroup() %>%
       select(-clusterID)
   }
-  return(list(bootdat = budat, clusters = indivclus, compare = compare, mfh = MFh(formula, data, compare)))
+  return(list(bootmfh = budat, clusters = indivclus, compare = compare, mfh = MFh(formula, data, compare)))
 }
 
 #' @title MFnestBoot
+#' @name MFnestBoot
 #' @description MFnest using bootstrapping
+#' @param x output from \code{\link{MFhBoot}}
+#' @param which.factor Which variables to include in the mitigated fraction summation.
+#' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
+#' of mitigated fraction
+#' @return a table with one row for each level of the variable specified in \code{which.factor} and including
+#' the following variables: \cr
+#' \describe{
+#' \item{median}{median mitigated fraction across all bootstrapping instances.}
+#' \item{etlower}{equal tailed lower of the mitigated fraction across all bootstrapping instances.}
+#' \item{etupper}{equal tailed upper of the mitigated fraction across all bootstrapping instances.}
+#' \item{htlower}{high tailed lower of the mitigated fraction across all bootstratpping instances.}
+#' \item{htupper}{high tailed upper of the mitigated fraction across all bootstrapping instances.}
+#' \item{mf.obs}{mitigated fraction using \code{MFnest(x$mfh, which.factor)}, no bootstrapping.}
+#' }
 #' @export
 #' @examples 
 #' set.seed(76153)
@@ -216,7 +252,7 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
   
   quant <- c(.5, alpha / 2, 1 - alpha / 2)
   
-  tmpall <- x$bootdat %>%
+  tmpall <- x$bootmfh %>%
     select(-ends_with('_medResp'))
 
   mfnest <- bind_rows(tmpall %>%
@@ -230,7 +266,7 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
               N = sum(n1n2),
               MF = 2 * (U/N) - 1) %>%
     group_by(variable, level) %>%
-    summarize(etmedian = quantile(MF, prob = quant[1]),
+    summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),
               htlower = MF:::emp.hpd(MF, alpha = alpha)[1],
