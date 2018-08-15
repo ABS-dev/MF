@@ -10,7 +10,8 @@ License: MIT + file LICENSE
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.4.4),
+    R (>= 3.4.4)
+Imports:
     methods,
     dplyr (>= 0.7.1),
     stringr,
@@ -31,4 +32,5 @@ Collate:
     'MFnestBoot.r'
     'MFr.r'
     'MFSubj.r'
+    'MFHier-wrappers.r'
 RoxygenNote: 6.0.1
