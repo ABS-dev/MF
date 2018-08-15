@@ -9,3 +9,7 @@ export(MFh)
 export(MFnest)
 export(MFhBoot)
 export(MFnestBoot)
+export(MFClusHier)
+export(MFClusBootHier)
+import(dplyr)
+
