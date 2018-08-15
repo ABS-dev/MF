@@ -5,7 +5,36 @@
 \title{MFhBoot}
 \usage{
 MFhBoot(formula, data, compare = c("con", "vac"), nboot = 10000,
-  alpha = 0.05, boot.unit = TRUE, boot.cluster = TRUE)
+  boot.unit = TRUE, boot.cluster = TRUE)
+}
+\arguments{
+\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous response, 
+x is a factor with two levels of treatment, and a/b/c are variables corresponding 
+to the clusters. It is expected that levels of "c" are nested within levels of "b". 
+Nesting is assumed to be in order, left to right, highest to lowest.}
+
+\item{data}{a data.frame or tibble with the variables specified in formula. 
+Additional variables will be ignored.}
+
+\item{compare}{Text vector stating the factor levels - compare[1] is the control 
+or reference group to which compare[2] is compared.}
+
+\item{nboot}{number of bootstrapping events}
+
+\item{boot.unit}{Boolean whether to sample observations from within those of the same core.}
+
+\item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE, 
+some trees have all the cores while others only have a subset.}
+}
+\value{
+A list with the following elements: \cr \cr
+\describe{
+  \item{bootmfh}{Rank table for the bootstrapped values. Includes a new \code{bootID} variable to distinguish 
+  each bootstrapped incidence.}
+  \item{clusters}{Table of unique nodes with an ID.}
+  \item{compare}{Compare vector as specified by user.}
+  \item{mfh}{MFh run on original data input.}
+}
 }
 \description{
 MFh using bootstrapping
@@ -29,5 +58,5 @@ set.seed(12345)
 system.time(test1 <- MFhBoot(formula, a, 
                             nboot = 10000,
                              boot.cluster = TRUE, boot.unit = TRUE))
-test1$bootdat
+test1$bootmfh
 }

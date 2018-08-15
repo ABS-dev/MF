@@ -19,12 +19,22 @@ Additional variables will be ignored.}
 reference group to which compare[2] is compared.}
 }
 \value{
-A list of three items. \cr
-\emph{coreTbl} is a tibble with one row for each unique 
-core level showing values for
-\code{_n} & \code{_n} (counts of observations for each treatment in a nested group), 
-\code{N}, \code{w}, \code{u}, and median observed response. \emph{data} is the restructured input data used for calculations (tibble).
-\emph{compare} is the compare variable as input by user.
+A \code{\link{mfhierdata}} object, which is a list of three items. \cr
+\describe{
+
+\item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique core level showing values for:
+\itemize{
+  \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations for each treatment 
+level in the core level.
+  \item \code{N} - total number of observations across all treatement levels at that core level.
+  \item \code{w} - Wilcoxon statistic
+  \item \code{u} - Mann-Whitney statistic
+}
+}
+\item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data used for calculations.}
+\item{compare}{The compare variables as input by user.}
+\item{formula}{The formula as input by user.}
+}
 }
 \note{
 Core variable is the variable corresponding to the lowest nodes of the hierarchial 
@@ -61,5 +71,5 @@ aCore
 #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
 }
 \seealso{
-\code{\link{MFnest}} for calculation of MF for nest, core and all variables.
+\code{\link{MFnest}} for calculation of MF for nest, core and all variables. \code{\link{mfhierdata}} for returned object.
 }
