@@ -46,12 +46,12 @@ NULL
 #' @title mlesions dataset
 #' @aliases mlesions-data
 #' @docType data
-#' @description something here
-#' @format a data frame with 52 observations of the following 3 variables, no NAs
+#' @description Post-mortem examination of the lungs of dogs housed in cages by pairs. 
+#' @format A data frame with 52 observations of the following 3 variables, no NAs.
 #' \describe{
-#' \item{cage}{Cage ID. 1 - 26}
-#' \item{tx}{Treatment. One of 'con' or 'vac'}
-#' \item{les}{Percent lung lesion}
+#' \item{cage}{Cage ID. 1 - 26.}
+#' \item{tx}{Treatment. One of 'con' or 'vac'.}
+#' \item{les}{Percent gross lung lesions.}
 #' }
 #' @keywords datasets
 NULL
@@ -60,12 +60,12 @@ NULL
 #' @title piglung dataset
 #' @aliases piglung-data
 #' @docType data
-#' @description something here
-#' @format a data frame with 102 observations of the following 3 variables, no NAs
+#' @description Post-mortem examination of the lungs of pigs in litters.
+#' @format A data frame with 102 observations of the following 3 variables, no NAs.
 #' \describe{
-#' \item{lesion}{Percent lung lesion}
-#' \item{group}{Treatment group. One of 'con' or 'vac'}
-#' \item{litter}{Litter ID}
+#' \item{lesion}{Percent gross lung lesions.}
+#' \item{group}{Treatment group. One of 'con' or 'vac'.}
+#' \item{litter}{Litter ID.}
 #' }
 #' @keywords datasets
 NULL

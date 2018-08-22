@@ -39,9 +39,13 @@ a \code{\link{mfhlboot-class}} data object
 Estimates bootstrap confidence intervals for MF, HL, and Qdif.
 }
 \details{
-Estimates bootstrap confidence intervals for the mitigated fraction (MF), Hodge-Lehmann estimator (HL), and the difference of medians and quartiles (Qdif). 
-The Hodges-Lehmann estimator is the median difference; it assumes that the two distributions have the same shape and differ by a constant shift. Assumes data is
-single pool (no nesting).
+Estimates bootstrap confidence intervals for the mitigated fraction 
+(MF), Hodge-Lehmann estimator (HL), and the difference of medians and 
+quartiles (Qdif). Equal tailed intervals are provided for all three, highest 
+density intervals are optionally provided for MF and HL, and BCa intervals 
+are optionally provided for MF.  The Hodges-Lehmann estimator is the median 
+difference; it assumes that the two distributions have the same shape and 
+differ by a constant shift. Assumes data is single pool (no nesting).
 }
 \examples{
 HLBoot(lesion~group,calflung)
