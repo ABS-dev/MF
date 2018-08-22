@@ -24,15 +24,17 @@
 #' Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
 #' @author David Siev \email{david.siev@@aphis.usda.gov}
 #' @examples 
+#' set.seed(12345)
 #' MFBoot(lesion~group, calflung)
 #'
 #' # 10000 bootstrap samples
 #' # 95% confidence interval
-#' #
+#' # 
+#' # 
 #' # Comparing vac to con 
-#' #                 observed median  lower  upper
-#' # Equal Tailed        0.44 0.4464 0.1360 0.7056
-#' # Highest Density     0.44 0.4464 0.1456 0.7088
+#' # observed median lower  upper
+#' # Equal Tailed        0.44 0.4496 0.152 0.7088
+#' # Highest Density     0.44 0.4496 0.152 0.7088
 ##
 ##--------------------------------------------------------------------
 ## Bootstrap simple MF
