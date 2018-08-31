@@ -1,7 +1,7 @@
 ---
-title: "MF for hierarchial data"
+title: "DRAFT - MF for hierarchial data"
 author: "Center for Veterinary Biologics - Statistics Section"
-date: "August 14, 2018"
+date: "August 29, 2018"
 output: pdf_document
 numbersections: yes
 number_sections: yes
@@ -14,18 +14,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-\begin{LARGE}DRAFT\end{LARGE}
 
-
-### Calculating mitigated fractions for hierarchial data
+# INTRODUCTION {-}
 
 In the specific instance of experimental data that has been organized into a hierarchial structure, that is, with two levels of treatment (e.g. control and vaccinate) and nested grouping levels (e.g. multiple litters within a single pen, multiple pens within a single room), it is not appropriate to use functions `MFClus` or `MFClusBoot` to calculate the mitigated fraction without advanced knowledge of how to filter and reshape the input data.
 
-The new functions of `MFh`, `MFnest`, `MFhBoot`, and `MFnestBoot` allow for evaluation of the mitigated fraction dataset without the need to manipulate the input data.
+The new functions of `MFh`, `MFnest`, `MFClusHier`, `MFhBoot`, `MFnestBoot`, and `MFClusBootHier` allow for evaluation of the mitigated fraction dataset without the need to manipulate the input data.
 
-### Examples
+**Examples**
 
-This tutorial uses an example dataset of experimental observations of percent lung leisions with  housing conditions information. Example calculations include how to calculate the mitigated fraction at different variable levels, with and without bootstrapping and how to access returned values for reproducibility.
+This tutorial uses an example dataset of experimental values of the fraction of lungs with gross leisions and additional housing condition information. Example calculations include how to calculate the mitigated fraction at different variable levels, with and without bootstrapping and how to access returned values for reproducibility.
 
 Throughout this document, we use the term *core variable* to indicate the variable corresponding to the lowest node of the hierarchial tree. *Nest variables* are those variables above the core. *All* refers to the entire tree structure.
 
@@ -44,101 +42,246 @@ a <- data.frame(
 set.seed(76153)
 a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
+a <- a[-48,]
 a
 ```
 
-### Building up from rank table
+# Quick Start 
 
-**Calculating the rank table.** Mitigated fractions can be calculated from a rank table that includes the number of observations and Mann-Whitney statistic. While it is possible for a user to calculate these values directly, the `MF` package provides a function `MFh` that will also reshape the data in a structure as expected by other functions in this package. 
+The two functions `MFClusHier` and `MFClusBootHier` are wrapper functions that allow calculation of MF and bootstrapped MF, respectively, as a single step.
 
-`MFh` has three required inputs: 
+## Calculated MF. {-}
 
-- The formula in form `y ~ x + a/b/c` where `y` is a continuous response, `x` is a factor with two levels of treatment, and `a/b/c` are variables corresponding to the clusters. It is expected that levels of "c" are nested within levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
-- The data table (`data.frame` or `tibble`) with variables as identified in formula. If there are extra variables, they will be ignored.
-- A text vector of length two. The first position [1] is treated as the control or reference group two which members of the second position [2] are compared. If no value for the compare vector is supplied, it is assumed that the comparisons are between the `con` and `vac` treatment groups.
+`MFClusHier` requires four inputs:
 
+- `formula`: The formula in form `y ~ x + a/b/c` where `y` is a continuous response, `x` is a factor with two levels of treatment, and `a/b/c` are variables corresponding to the clusters. It is expected that levels of "c" are nested within levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
+- `data`: The data table (`data.frame` or `tibble`) with variables as identified in formula. If there are extra variables, they will be ignored.
+- `compare`: A text vector of length two. The first position [1] is treated as the control or reference group two which members of the second position [2] are compared. If no value for the compare vector is supplied, it is assumed that the comparisons are between the `con` and `vac` treatment groups.
+- `which.factor`: One or more variable(s) of interest. This can be any of the core or nest variables from the data set. If none or NULL is specified, MF will be calculated for the whole tree.
 
-```{r}
-aCore <- MFh(lung ~ tx + room/pen/litter, a)
-aCore
+**Common Usage**
+
+Default case, looking only at whole tree:
+```{r, results = 'hide'}
+mf_all <- MFClusHier(formula = lung ~ tx + room/pen/litter, data = a)
 ```
 
-Although it is just the rank table element that is displayed when running `MFh`, the output includes the data subsetted by variables specified by the formula argument, as well as the user specifications of formula and compare variables. This allows for user verification that the rank table output included use of assumptions that match user expectations. In the example above, those values can be accessed from the `aCore` output.
-
-```{r}
-aCore$data
-aCore$compare
-aCore$formula
+Selecting a specific nest variable:
+```{r, results = 'hide'}
+mf_room <- MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+                      which.factor = 'room')
 ```
 
-**Using the rank table to calculate mitigated fraction.** Depending on the analysis, it may be of interest to explore the mitigated fraction associated with the *core variable*, selected *nest variables* or the entire tree (*All*). The function `MFnest` performs the necessary summations for the complete set of factors as specified by user in a single step. Output will include the median of observations if the `$data` value as described above is included, but will skip this summarization if only the rank table is provided.
-
-
-```{r}
-MFnest(aCore)
-MFnest(aCore$coreTbl)
+Selecting multiple variables, including the entire tree:
+```{r, results = 'hide', message=FALSE}
+mf_multiple <- MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+                      which.factor = c('room', 'litter', 'All'))
 ```
 
-By default, `MFnest` calculates the mitigated fraction for the summary case of looking at the entire tree. It is also possible to select multiple variables - the output will be in order specified by user.
+**Output**
+
+Output object is a list of `MFh` and `MFnest`. The first item is a rank table that can be used to reproduce MF calculations or update selection of choice for 
+`which.factor`. The second item is a table that shows the MF for each unique 
+level of the variable(s) specified in `which.factor`.
 
 ```{r}
-MFnest(aCore, 'room')
-MFnest(aCore, c('room', 'pen', 'litter'))
-MFnest(aCore, c('All', 'litter'))
+mf_all
 ```
 
-**Generating rank table and calculating mitigated fraction as a single step.** The function `MFClusHier` allows for the generation of the rank table and calculation of mitigated fraction as a single line of code. The defaults to `compare` and `which.factor` are the same as above.
+Within the `MFh` table the variables are:
+
+- One row per unique core variable. The input data structure will determine 
+how many variables and rows it takes to fully enumerate this.
+- `con_n` & `vac_n`: Counts of observations for each treatment level in the 
+particular instance of core or nest variable. Note that the left hand side of the underscore will match values passed by user to `compare`.
+- `n1n2`: Product of counts, `con_n` * `vac_n`.
+- `w`: Wilcoxon statistic.
+- `u`: Mann-Whitney statistic.
+- `con_medResp` & `vac_medResp`: Median observation for for each treatment level
+in the particular instance of core or nest variable. Note that the left hand side of the underscore will match values passed by user to `compare`.
+
+Within the `MFnest` table, the variables are:
+
+- `variable`: Which core or nest variable is of interest for the row.
+- `level`: A unique case of the variable. Input data determines how many rows it
+takes to enumarate a particular variable.
+- `MF`: Mitigated fraction calculated for the particular level.
+- `N1N2`: Sum of the `n1n2` values from table `MFh` matching the particular 
+level of interest in the row.
+- `U`: Sum of the `u` values from table `MFh` matching the particular 
+level of interest in the row.
+- `con_N` & `vac_N`: Sum of the `_n` values from table `MFh` matching the particular level of interest in the row. Note that the left hand side of the underscore will match values passed by user to `compare`.
+- `median_resp:con` & `median_resp:vac`: Median of responses for each comparison
+group matching the particular level of interest in the row. Note that the right hand side of the colon will match values passed by user to `compare`.
+
+## Bootstrapped MF. {-}
+
+`MFClusBootHier` uses all of the inputs as above plus the additional four values:
+
+- `nboot`: Number of bootstrapping events.
+- `boot.unit`: Boolean whether to sample observations from within those of the
+same core.
+- `boot.cluster`: Boolean whether to sample which cores are present. If TRUE,
+some trees have all the cores represented in the original data while others only 
+have a subset.
+- `alpha`: Used to calculate empirical hpd by shortest length interval.
+
+**Common Usage**
+
+Default case, looking only at whole tree and bootstrapping both at the cluster
+and unit levels:
+```{r, results='hide'}
+mfboot_all <- MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                             data = a)
+```
+
+Specifying what bootstrapping sampling to occur:
+```{r, results = 'hide'}
+mfboot_room <- MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                              data = a, boot.unit = TRUE, 
+                              boot.cluster = FALSE, which.factor = 'room')
+```
+
+Adjusting the number of bootstrapping events and alpha:
+```{r, results = 'hide', message=FALSE}
+mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                                  data = a, boot.unit = FALSE, 
+                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  which.factor = c('room', 'litter', 'All'))
+```
+
+**Output**
+
+Output object is a list of `MFhBoot` and `MFnestBoot`. The former is a list
+of elements that includes:
+
+- `clusters`: The unique clusters from the original data. 
+- `bootmfh`: A rank table for all the bootstrapping events. For each 
+bootstrapping event, there are the number of clusters equivalent to the number of unique clusters in the original data. If boot.cluster == TRUE, a random sampling with replacment 
+will be represented in each bootstrapping event. Each cluster retains 
+characteristics from the original cluster, such as number of observations and 
+the calculated statistics, which will be pooled when calculating the MF.
+- `compare`: The values passed to compare by user.
+- `mfh`: The rank table calculated from the original data.
+
+The latter is a list of tables including:
+
+- `mfnest_summary`: The MF for each unique level of the variable(s) specified 
+in `which.factor`, including summary statistics of distribution observed by
+bootstrapping.
+- `mfnest_details`: The MF for each bootstrapping event for the variable(s) 
+specified in `which.factor`.
 
 ```{r}
-thismf <- MFClusHier(lung ~ tx + room/pen/litter, a)
-thisCore <- thismf$MFh
-thisCore
-thisCore$data
-thisCore$formula
-thisCore$compare
+mfboot_all
 ```
 
-**Re-calculating mitigated fraction from previous code.** It is possible to calculate mitigated fraction for a different set of variables subsequent to the initial coding event. 
+# Reproducibility from rank tables 
+
+It is possible to refer to the rank table to reproduce calculations of MF or to
+update the choice of `which.factor`.
+
+## Calculated MF. {-}
+
+The function `MFnest` allows us to calculate the MF of designated nest variables 
+given a rank table. If `MFClusHier` was previously called on the data, this 
+information is captured in the `MFh` value:
 
 ```{r}
-MFnest(thismf$MFh, which.factor = c('All', 'litter'))
-MFnest(aCore, which.factor = c('pen', 'litter'))
+mf_all$MFh
 ```
 
-### Bootstrapping
+The only other value needed is the selection passed to `which.factor`.
 
-**Calculating the rank table.** `MFhBoot` generates the rank tables for some number `nboot` bootstrapped trees. The rank table is stored as `$bootmfh` where each bootstrapping event is identified by a unique `bootID`. A user can choose to specify whether to sample whether cores are sampled (`boot.cluster == TRUE`) and/or bootstrapping of observations (`boot.unit == TRUE`).
+**Common Usage**
+
+By default, MF for the whole tree is calculated:
 
 ```{r}
-set.seed(12345)
-test1 <- MFhBoot(formula = lung ~ tx + room/pen/litter, a, 
-                             nboot = 10000,
-                              boot.cluster = TRUE, boot.unit = TRUE)
-test1$bootmfh
+MFnest(mf_all$MFh)
 ```
 
-**Using the rank table to calculate mitigated fraction.** To calculate the distribution of mitigated fraction values over all the bootstrapping cases, use the function `MFnestBoot`
+But the user can specify one or more variables for which to evaluate MF.
 
 ```{r}
-MFnestBoot(test1, c('All', 'litter'))
+MFnest(mf_all$MFh, which.factor = 'room')
+MFnest(mf_all$MFh, which.factor = c('room', 'litter', 'All'))
 ```
 
-**Generating rank table and calculating mitigated fraction as a single step.** The function `MFClusBootHier` allows for generation of the rank table and calculation of mitigated fraction as a single line of code. The arguments and defaults are as for when code is run in stages.
+## Bootstrapped MF. {-}
+
+The function `MFnestBoot` allows to calculate the MF of designated nest variables
+given rank tables from bootstrapped and original data. If `MFClusBootHier` was 
+previously called on the data, this information is captured in the `MFhBoot` value:
 
 ```{r}
-set.seed(12345)
-thismf1 <- MFClusBootHier(lung ~ tx + room/pen/litter, a, nboot = 10000, boot.cluster = TRUE, boot.unit = TRUE, which.factor = c('All', 'litter'))
-thismfhboot <- thismf1$MFhBoot
-thismfhboot$bootmfh
-thismf1$MFnestBoot 
+mfboot_all$MFhBoot
 ```
 
-**Re-calculating mitigated fraction from previous code.** It is possible to calculate mitigated fraction for a different set of variables subsequent to the initial coding event. 
+The other values needed are the selection passed to `which.factor` and `alpha`.
+
+**Common Usage**
+
+By default, MF for the whole tree is calculated using an *alpha = 0.05*:
 
 ```{r}
-MFnestBoot(thismfhboot, c('pen', 'litter', 'All'))
+MFnestBoot(mfboot_all$MFhBoot)
 ```
 
+But the user can specify one or more variables for which to evaluate MF.
+
+```{r}
+MFnestBoot(mfboot_all$MFh, which.factor = 'room')
+MFnestBoot(mfboot_all$MFh, which.factor = c('room', 'litter', 'All'), 
+           alpha = 0.1)
+```
+
+Note that there is no sampling performed in this step. All sampling is performed
+during calculation of the rank tables.
+
+# Calculating the rank table directly 
+
+It is also possible to calculate the rank tables independently. This might be 
+useful if the rank table is needed for other calculations separate from the 
+activity of calculating MF.
+
+## Calculated {-}
+
+The function `MFh` can be used to calculate the rank table. The usage is very 
+similar to the wrapper function:
+
+```{r}
+MFh(formula = lung ~ tx + room/pen/litter, data = a)
+```
+
+To manually calculate the MF without use of wrapper function, string together 
+calls to both `MFh` and `MFnest`:
+
+```{r}
+thismf <- MFh(formula = lung ~ tx + room/pen/litter, data = a)
+MFnest(thismf)
+```
+
+##Bootstrapped {-}
+
+The function `MFhBoot` can be used to calculate bootstrapped rank table. 
+Usage is similar to the wrapper function:
+
+```{r}
+MFhBoot(formula = lung ~ tx + room/pen/litter, data = a, nboot = 10000,
+  boot.unit = TRUE, boot.cluster = TRUE)
+```
+
+To manually calculate the MF without use of wrapper function, string together 
+calls to both `MFhBoot` and `MFnestBoot`:
+
+```{r}
+thismfboot <- MFhBoot(formula = lung ~ tx + room/pen/litter, data = a)
+MFnestBoot(thismfboot)
+```
+
+
+# Appendix
 ```{r}
 sessionInfo()
 ```
