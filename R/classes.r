@@ -2,6 +2,7 @@ setClassUnion('characterORNULL', c('character', 'NULL'))
 setClassUnion('listORNULL', c('list', 'NULL'))
 setClassUnion('numericORNULL', c('numeric', 'NULL'))
 setClassUnion('numericORarray', c('numeric', 'array'))
+setClassUnion('numericORarrayORtable', c('numeric', 'array', 'table'))
 
 
 #' @name mf-class
@@ -105,7 +106,7 @@ mfhlboot <- setRefClass('mfhlboot', contains = 'mf', fields = list(MFstat = 'mat
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 #' @seealso \code{\link{MFmp}}
 mfmp <- setRefClass('mfmp', 
-		fields = list(ci = 'numeric', x = 'numericORarray', what = 'character', alpha = 
+		fields = list(ci = 'numeric', x = 'numericORarrayORtable', what = 'character', alpha = 
 		'numeric', tdist = 'logical', df = 'numeric'))
 
 #' @name mfbootcluster-class
