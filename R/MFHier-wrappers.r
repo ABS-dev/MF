@@ -98,6 +98,6 @@ MFClusBootHier <- function(formula, data, compare = c('con', 'vac'),
                            which.factor = 'All', alpha = 0.05){
   thisbootmfh <- MFhBoot(formula, data, compare, nboot, boot.unit, boot.cluster)
   out <- list(MFhBoot = thisbootmfh, MFnestBoot = MFnestBoot(thisbootmfh, which.factor, alpha))
-  print(out$MFnestBoot)
+  print(out$MFnestBoot$mfnest_summary)
   invisible(out)
 }
