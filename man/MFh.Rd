@@ -26,7 +26,7 @@ A \code{\link{mfhierdata}} object, which is a list of three items. \cr
 \itemize{
   \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations for each treatment 
 level in the core level.
-  \item \code{N} - total number of observations across all treatement levels at that core level.
+  \item \code{n1n2} - product of the counts, \emph{con}\code{_n} * \emph{vac}\code{_n}.
   \item \code{w} - Wilcoxon statistic
   \item \code{u} - Mann-Whitney statistic
 }
@@ -54,9 +54,9 @@ a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 
 aCore <- MFh(lung ~ tx + room/pen/litter,a)
 aCore
-# A tibble: 12 x 10
-#     room   pen   litter    con_medResp con_n     w vac_medResp vac_n     N     u
-#     <fct>  <fct> <fct>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl> <dbl>
+#  A tibble: 12 x 10
+#     room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2     u
+#     <chr>  <chr> <chr>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl> <dbl>
 #   1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4     4
 #   2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4     2
 #   3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4     4
@@ -71,5 +71,7 @@ aCore
 #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
 }
 \seealso{
-\code{\link{MFnest}} for calculation of MF for nest, core and all variables. \code{\link{mfhierdata}} for returned object.
+\code{\link{MFnest}} for calculation of MF for nest, core and all 
+variables. \code{\link{mfhierdata}} for returned object.\code{\link{MFClusHier}}
+for a wrapper.
 }

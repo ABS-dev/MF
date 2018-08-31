@@ -29,7 +29,8 @@ some trees have all the cores while others only have a subset.}
 \value{
 A list with the following elements: \cr \cr
 \describe{
-  \item{bootmfh}{Rank table for the bootstrapped values. Includes a new \code{bootID} variable to distinguish 
+  \item{bootmfh}{Rank table for the bootstrapped values as output from 
+  \code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish 
   each bootstrapped incidence.}
   \item{clusters}{Table of unique nodes with an ID.}
   \item{compare}{Compare vector as specified by user.}
@@ -37,7 +38,7 @@ A list with the following elements: \cr \cr
 }
 }
 \description{
-MFh using bootstrapping
+Calculate rank tables for MF using bootstrapping.
 }
 \examples{
 set.seed(76153)
@@ -59,4 +60,7 @@ system.time(test1 <- MFhBoot(formula, a,
                             nboot = 10000,
                              boot.cluster = TRUE, boot.unit = TRUE))
 test1$bootmfh
+}
+\seealso{
+\code{\link{MFClusBootHier}}, \code{\link{MFnestBoot}}
 }

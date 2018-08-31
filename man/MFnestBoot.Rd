@@ -11,20 +11,9 @@ MFnestBoot(x, which.factor = "All", alpha = 0.05)
 
 \item{which.factor}{Which variables to include in the mitigated fraction summation.}
 
-\item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
+\item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper 
+and high tailed lower 
 of mitigated fraction}
-}
-\value{
-a table with one row for each level of the variable specified in \code{which.factor} and including
-the following variables: \cr
-\describe{
-\item{median}{median mitigated fraction across all bootstrapping instances.}
-\item{etlower}{equal tailed lower of the mitigated fraction across all bootstrapping instances.}
-\item{etupper}{equal tailed upper of the mitigated fraction across all bootstrapping instances.}
-\item{htlower}{high tailed lower of the mitigated fraction across all bootstratpping instances.}
-\item{htupper}{high tailed upper of the mitigated fraction across all bootstrapping instances.}
-\item{mf.obs}{mitigated fraction using \code{MFnest(x$mfh, which.factor)}, no bootstrapping.}
-}
 }
 \description{
 MFnest using bootstrapping
@@ -64,4 +53,7 @@ test5
 system.time(test6 <- MFnestBoot(test1, which.factors[2:4]))
 test6
 }
+}
+\seealso{
+\code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
 }
