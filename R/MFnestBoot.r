@@ -1,6 +1,6 @@
 #' @title  MFhBoot
 #' @name MFhBoot
-#' @description MFh using bootstrapping
+#' @description Calculate rank tables for MF using bootstrapping.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous response, 
 #' x is a factor with two levels of treatment, and a/b/c are variables corresponding 
 #' to the clusters. It is expected that levels of "c" are nested within levels of "b". 
@@ -15,12 +15,14 @@
 #' some trees have all the cores while others only have a subset. 
 #' @return A list with the following elements: \cr \cr
 #' \describe{
-#'   \item{bootmfh}{Rank table for the bootstrapped values. Includes a new \code{bootID} variable to distinguish 
+#'   \item{bootmfh}{Rank table for the bootstrapped values as output from 
+#'   \code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish 
 #'   each bootstrapped incidence.}
 #'   \item{clusters}{Table of unique nodes with an ID.}
 #'   \item{compare}{Compare vector as specified by user.}
 #'   \item{mfh}{MFh run on original data input.}
 #' }
+#' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFnestBoot}}
 #' @export
 #' @examples 
 #' set.seed(76153)
@@ -109,7 +111,8 @@ MFhBoot <- function(formula, data,
   ## 
   if(boot.unit){
     strat.b <- matrix(newdf$newClus, nboot)
-    w <- u <- n1n2 <- medResp1 <- medResp2 <- matrix(NA, nboot, nclus)
+    w <- u <- n1n2 <- medResp1 <- medResp2 <- con_n <- vac_n <- 
+      matrix(NA, nboot, nclus)
     n.each <- rep(NA, nclus)
     names(n.each) <- indivclus$clusterID
     w.boot <- function(x, y, n.b){
@@ -148,18 +151,23 @@ MFhBoot <- function(formula, data,
       w[strat.b == a] <<- thiswboot[[1]]
       u[strat.b == a] <<- w[strat.b == a] - (n.x * (n.x + 1))/2
       n1n2[strat.b == a] <<- n.x * n.y
+      con_n[strat.b == a] <<- n.x
+      vac_n[strat.b == a] <<- n.y
       medResp1[strat.b == a] <<- median(x, na.rm = TRUE)
       medResp2[strat.b == a] <<- median(y, na.rm = TRUE)
       return(NULL)
     
     })
     
-    newnames <- c('medResp1', 'medResp2')
-    names(newnames) <- paste(compare, 'medResp', sep = '_')
+    newnames <- c('medResp1', 'medResp2', 'n1', 'n2')
+    names(newnames) <- c(paste(compare, 'medResp', sep = '_'), 
+                         paste(compare, 'n', sep ='_'))
     budat <- newdf %>% 
       mutate(w = as.vector(t(w)),
              u = as.vector(t(u)),
              n1n2 = as.vector((t(n1n2))),
+             n1 = as.vector((t(con_n))),
+             n2 = as.vector((t(vac_n))),
              medResp1 = as.vector(t(medResp1)),
              medResp2 = as.vector(t(medResp2))) %>%
       rename(!!newnames) %>%
@@ -183,7 +191,9 @@ MFhBoot <- function(formula, data,
       spread(tmp, value) %>%
       rename(w = !!wx) %>%
       mutate(u = w - (!!nx * (!!nx + 1))/2,
-             n1n2 = !!nx * !!ny) %>%
+             n1n2 = !!nx * !!ny,
+             !!quo_name(nx) := !!nx,
+             !!quo_name(ny) := !!ny) %>%
       select(-!!wy) %>%
       full_join(newdf, by = c('clusterID' = 'newClus')) %>%
       arrange(bootID) %>%
@@ -200,9 +210,30 @@ MFhBoot <- function(formula, data,
 #' @description MFnest using bootstrapping
 #' @param x output from \code{\link{MFhBoot}}
 #' @param which.factor Which variables to include in the mitigated fraction summation.
-#' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
+#' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper 
+#' and high tailed lower 
 #' of mitigated fraction
-#' @return a table with one row for each level of the variable specified in \code{which.factor} and including
+#' @return A list with the following elements: \cr
+#' \describe{
+#' 
+#' \item{mfnest_details}{The MF and summary statistics as calculated for each 
+#' bootstrap event. Variables as in \code{\link{MFnest}} output.}
+#' \item{mfnest_summary}{Statistical summary of bootstrapped MF with each unique
+#' level of a core or nest variable passed to \code{which.factor} as a row. 
+#' Other variables include: \cr
+#' \itemize{
+#' \item \code{median} Median of MFs from all of the bootstrap events.
+#' \item \code{etlower} Lower value of equal tailed range.
+#' \item \code{etupper} Upper value of equal tailed range.
+#' \item \code{htlower} Lower value of the high tailed range.
+#' \item \code{htupper} Upper value of the high tailed range.
+#' \item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
+#' }}
+#' }
+#'  
+#' following variables for each }
+#' 
+#' a table with one row for each level of the variable specified in \code{which.factor} and including
 #' the following variables: \cr
 #' \describe{
 #' \item{median}{median mitigated fraction across all bootstrapping instances.}
@@ -212,6 +243,7 @@ MFhBoot <- function(formula, data,
 #' \item{htupper}{high tailed upper of the mitigated fraction across all bootstrapping instances.}
 #' \item{mf.obs}{mitigated fraction using \code{MFnest(x$mfh, which.factor)}, no bootstrapping.}
 #' }
+#' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
 #' @export
 #' @examples 
 #' set.seed(76153)
@@ -254,17 +286,29 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
   
   tmpall <- x$bootmfh %>%
     select(-ends_with('_medResp'))
-
-  mfnest <- bind_rows(tmpall %>%
-                        gather(variable, level, -c('bootID', 'w', 'u', 'n1n2')) ,
+  
+  stat.names <- paste(x$compare, "n", sep = "_")
+  comp1 <- sym(stat.names[1])
+  comp2 <- sym(stat.names[2])
+  
+  comp3 <- sym(gsub(stat.names[1], pattern = "_n", replacement = "_N"))
+  comp4 <- sym(gsub(stat.names[2], pattern = "_n", replacement = "_N"))
+  
+  mfnest_all <- bind_rows(tmpall %>%
+                        gather(variable, level, -c('bootID', 'w', 'u', 'n1n2', 
+                                                   stat.names)) ,
                       tmpall %>%
-                        select(bootID, w, u, n1n2) %>%
+                        select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
                         mutate(variable = 'All', level = 'All')) %>%
     filter(variable %in% which.factor) %>%
     group_by(variable, level, bootID) %>%
     summarize(U = sum(u),
-              N = sum(n1n2),
-              MF = 2 * (U/N) - 1) %>%
+              N1N2 = sum(n1n2),
+              !!quo_name(comp3) := sum(!!comp1),
+              !!quo_name(comp4) := sum(!!comp2),
+              MF = 2 * (U/N1N2) - 1) 
+  
+   mfnest_summary <- mfnest_all %>%
     group_by(variable, level) %>%
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
@@ -279,5 +323,5 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
     mutate(variable = fct_relevel(variable, which.factor)) %>%
     arrange(variable)
 
-  mfnest
+  return(list(mfnest_details = mfnest_all, mfnest_summary = mfnest_summary))
 }
