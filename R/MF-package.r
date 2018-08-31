@@ -32,11 +32,11 @@ NULL
 #' @title calflung dataset
 #' @aliases calflung-data
 #' @docType data
-#' @description something here
+#' @description Post-mortem examination of the lungs of groups of calves.
 #' @format a data frame with 50 observations of the following 2 variables, no NAs
 #' \describe{
 #' \item{group}{Treatment group. One of con = control or vac = vaccinate }
-#' \item{lesion}{Percent lung lesion, in decimal form}
+#' \item{lesion}{Fraction of lungs with gross lesions.}
 #' }
 #' @keywords datasets
 NULL
