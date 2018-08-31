@@ -63,7 +63,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 		what <- paste(100 * (1 - alpha), "% gaussian interval\n", sep = "")
 	}
 
-	ci <- B + q * sqrt(VB) 
+	ci <- as.numeric(B) + q * as.numeric(sqrt(VB))
 	names(ci) <- c("point", "lower", "upper")
 	
 	if(round(ci[["point"]], digits = 1) == 1.0){
