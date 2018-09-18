@@ -14,9 +14,9 @@ require(devtools)
 install_github("ABS-dev/MF", ref = "4.3.4")
 ```
 
-2. Installing work-in-progress towards v4.3.5
+2. Installing work-in-progress on this branch (nested-bootstrap)
 
 ```
 require(devtools)
-install_github("ABS-dev/MF")
+install_github("ABS-dev/MF", ref = 'nested-bootstrap')
 ```

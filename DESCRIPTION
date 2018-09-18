@@ -10,8 +10,14 @@ License: MIT + file LICENSE
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.2.0),
-    methods
+    R (>= 3.4.4)
+Imports:
+    methods,
+    dplyr (>= 0.7.1),
+    stringr,
+    tidyr,
+    forcats,
+    purrr
 Collate:
     'aaa.r'
     'classes.r'
@@ -21,7 +27,10 @@ Collate:
     'MFBoot.r'
     'MFClus.r'
     'MFClusBoot.r'
+    'MFClusHier.R'
     'MFmp.r'
+    'MFnestBoot.r'
     'MFr.r'
     'MFSubj.r'
-RoxygenNote: 5.0.1
+    'MFHier-wrappers.r'
+RoxygenNote: 6.0.1

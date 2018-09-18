@@ -26,40 +26,23 @@
 #' @author David Siev \email{david.siev@@aphis.usda.gov}
 #' @examples
 #' \dontrun{
+#' set.seed(12345)
 #' MFClusBoot(lesion ~ group + cluster(litter), piglung)
-#'   
-#' #  Bootstrapping clusters. . . . . 
-#' #  
-#' #  10000 bootstrap samples of clusters
-#' #  Comparing vac to con 
-#' #  
-#' #   95% confidence interval
-#' #  
-#' #                   observed    median      lower     upper
-#' #  Equal Tailed    0.3533835 0.3630573 0.07382550 0.6567271
-#' #  Highest Density 0.3533835 0.3630573 0.07262462 0.6551724
-#' #  
-#' #  Excluded Clusters
-#' #  [1] M, Q, R, B, O, V, I, C
-#'   
-#' MFClusBoot(lesion ~ group + cluster(litter), piglung, boot.unit = T, b = 12, B = 12)
-#'   
-#' #### 144 resamples to save time
-#' #  
-#' #  Bootstrapping clusters. . . . . . . . . . . . . . . . 
-#' #  Bootstrapping units. . . . . . . . . . . . . . . . .  
-#' #  
-#' #  10000 bootstrap samples of clusters and units in treatment in cluster
-#' #  Comparing vac to con 
-#' #  
-#' #   95% confidence interval
-#' #  
-#' #                   observed    median         lower     upper
-#' #  Equal Tailed    0.3533835 0.3714286 -0.0138888889 0.7162213
-#' #  Highest Density 0.3533835 0.3714286 -0.0001472081 0.7297387
-#' #  
-#' #  Excluded Clusters
-#' #  [1] M, Q, R, B, O, V, I, C
+#' Bootstrapping clusters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+#' 
+#' Bootstrapping units. . . . . . . . . . . . . . . . . . 
+#' 
+#' 10000 bootstrap samples of clusters and units in treatment in cluster
+#' Comparing vac to con 
+#' 
+#' 95% confidence interval
+#' 
+#' observed    median       lower     upper
+#' Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
+#' Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
+#' 
+#' Excluded Clusters
+#' M, Q, R, B, O, V, I, C 
 #' }
 ##
 ##--------------------------------------------------------------------
@@ -67,6 +50,11 @@
 ##--------------------------------------------------------------------
 MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = TRUE, b = 100, 
 	B = 100, alpha = 0.05, hpd=TRUE, return.boot = FALSE,trace.it= FALSE){
+  
+  ## short circuit if no bootstrapping!
+  if(!boot.cluster & !boot.unit){
+    stop("No bootstrapping specified")
+  }
     # takes b bootstrap samples B times, so nboot = B * b
     # 3/19/01 initial coding
     # revised 6/30/05 to allow bootstrapping clusters, units, or both

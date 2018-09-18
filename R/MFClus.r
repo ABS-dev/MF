@@ -73,10 +73,10 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
 	strat <- NULL
 	reshapeCluster(data = data, formula = formula, compare = compare, envir = environment()) 
 	id <- compare
-    out <- matrix(NA, length(strat), 6, dimnames = list(strat, c("w", "u", "r", 
+  out <- matrix(NA, length(strat), 6, dimnames = list(strat, c("w", "u", "r", 
 		"n1", "n2", "mf")))
-    excluded.clusters <- NULL
-    for(stratum in strat) {     
+  excluded.clusters <- NULL
+  for(stratum in strat) {     
         x <- dat[group == id[1] & as.character(clusters) == stratum]
         y <- dat[group == id[2] & as.character(clusters) == stratum]
         n.x <- length(x)

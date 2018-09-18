@@ -2,8 +2,8 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mfbootcluster-class}
-\alias{mfbootcluster}
 \alias{mfbootcluster-class}
+\alias{mfbootcluster}
 \title{Class mfbootcluster}
 \usage{
 mfbootcluster$new(nboot, alpha, seed, compare, rng, stat, what, excludedClusters,
@@ -12,6 +12,7 @@ call, sample)
 \description{
 Class mfbootcluster is created from output of function MFClusBoot
 }
+
 \section{Fields}{
 
 \itemize{
@@ -34,14 +35,14 @@ estimates}
 
 \code{\link{mf-class}}
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 \code{\link{MFClusBoot}}
 
 Other mf: \code{\link{mf-class}},
   \code{\link{mfboot-class}}, \code{\link{mfhlboot-class}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-

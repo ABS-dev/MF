@@ -38,13 +38,12 @@ Point estimate of 1.0 indicates complete separation.
 MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
 MFmp(x = c(12, 12, 2))
 }
-\author{
-David Siev \email{david.siev@aphis.usda.gov}
-}
 \references{
 Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
 }
 \seealso{
 \code{\link{mfmp-class}}
 }
-
+\author{
+David Siev \email{david.siev@aphis.usda.gov}
+}

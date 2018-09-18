@@ -5,14 +5,13 @@
 \alias{piglung}
 \alias{piglung-data}
 \title{piglung dataset}
-\format{a data frame with 102 observations of the following 3 variables, no NAs
+\format{A data frame with 102 observations of the following 3 variables, no NAs.
 \describe{
-\item{lesion}{Percent lung lesion}
-\item{group}{Treatment group. One of 'con' or 'vac'}
-\item{litter}{Litter ID}
+\item{lesion}{Percent gross lung lesions.}
+\item{group}{Treatment group. One of 'con' or 'vac'.}
+\item{litter}{Litter ID.}
 }}
 \description{
-something here
+Post-mortem examination of the lungs of pigs in litters.
 }
 \keyword{datasets}
-

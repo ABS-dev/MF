@@ -2,8 +2,8 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mfmp-class}
-\alias{mfmp}
 \alias{mfmp-class}
+\alias{mfmp}
 \title{Class mfmp}
 \usage{
 mfmp$new(ci, x, what, alpha, tdist, df)
@@ -11,6 +11,7 @@ mfmp$new(ci, x, what, alpha, tdist, df)
 \description{
 Class mfmp is created from output of funtion MFmp
 }
+
 \section{Fields}{
 
 \itemize{
@@ -22,11 +23,11 @@ Class mfmp is created from output of funtion MFmp
 \item{\code{df: }}{numeric value indicating degrees freedom}
 }
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 \code{\link{MFmp}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-

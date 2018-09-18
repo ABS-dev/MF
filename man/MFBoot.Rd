@@ -40,18 +40,17 @@ percentile method. Highest density intervals are estimated by selecting the shor
 For BCa intervals, see Efron and Tibshirani section 14.3.
 }
 \examples{
+set.seed(12345)
 MFBoot(lesion~group, calflung)
 
 # 10000 bootstrap samples
 # 95\% confidence interval
-#
+# 
+# 
 # Comparing vac to con 
-#                 observed median  lower  upper
-# Equal Tailed        0.44 0.4464 0.1360 0.7056
-# Highest Density     0.44 0.4464 0.1456 0.7088
-}
-\author{
-David Siev \email{david.siev@aphis.usda.gov}
+# observed median lower  upper
+# Equal Tailed        0.44 0.4496 0.152 0.7088
+# Highest Density     0.44 0.4496 0.152 0.7088
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508} \cr \cr
@@ -60,4 +59,6 @@ Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hal
 \seealso{
 \code{\link{mfboot-class}}
 }
-
+\author{
+David Siev \email{david.siev@aphis.usda.gov}
+}
