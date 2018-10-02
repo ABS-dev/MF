@@ -41,14 +41,17 @@
 ## Bootstrap simple MF
 ##--------------------------------------------------------------------
 MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000,1)){
+	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000, 1)){
     # bootstrap confidence intervals for MF
     # 11/17/99 initial coding
     # 2/24/04 added BC.a interval
     # 5/25/10 added empirical HPD interval
     # takes b bootstrap samples B times, so nboot = B * b
     # 10/1/2018 add seed utility
-   
+    
+    ##set seed
+    seed <- as.integer(seed)
+    set.seed(seed) 
 
     A <- data.frame(model.frame(formula = formula, data = data))
     resp <- A[, 1]
@@ -70,7 +73,12 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
       return()
     }
 
-    set.seed(seed)
+    rng <- 'Mersenne-Twister' 
+    RNGkind(rng)
+   
+
+
+    nboot <-b*B
     n.x <- length(x)
     n.y <- length(y)
     w <- function(xy, n.x){sum(rank(xy)[1:n.x])}
@@ -116,7 +124,7 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         qmf <- quantile(MF, prob = qprob)
         stat <- rbind(stat, 'BC.a'= c(mf, qmf))
     }
-   
+   print(paste('Seed =', seed))
     out <- mfboot$new(stat = stat, nboot = nboot, alpha = alpha, seed = seed, 
 			rng = rng, compare = compare, sample = MF)
 
