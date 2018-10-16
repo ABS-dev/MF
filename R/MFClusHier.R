@@ -112,7 +112,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl} output from \code{\link{MFh}} or
 #'  output list from MFh.
 #' @param which.factor one or more variable(s) of interest. This can be any of the core or nest variables
-#' from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
+#' from the data set. If none or \code{All} is specified, MF will be calculated for the whole 
 #' tree.
 #' @return A tibble with each unique level of a variable as a row. Other values 
 #' include: \cr
