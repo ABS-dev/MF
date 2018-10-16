@@ -11,7 +11,7 @@
 #' @param compare Text vector stating the factor levels - compare[1] is the control 
 #' or reference group to which compare[2] is compared.
 #' @param which.factor one or more variable(s) of interest. This can be any of the 
-#' core or nest variables from the data set. If none or NULL is specified, MF will be 
+#' core or nest variables from the data set. If none or ALL is specified, MF will be 
 #' calculated for the whole tree.
 #' @return A list with the following elements: \cr \cr
 #' \itemize{
@@ -65,6 +65,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' @param boot.cluster Boolean whether to sample which cores are present. If TRUE, 
 #' some trees have all the cores while others only have a subset. 
 #' @param which.factor Which variables to include in the mitigated fraction summation.
+#' Default is 'All', to sum over entire tree.
 #' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
 #' of mitigated fraction.
 #' @return A list with the following elements: \cr \cr

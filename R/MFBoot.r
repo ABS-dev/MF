@@ -6,7 +6,7 @@
 #' 
 #' @title Bootstrap MF CI
 #' @usage MFBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-#'    alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE)
+#'    alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000, 1))
 #' @param formula Formula of the form \code{y ~ x}, where y is a continuous response and x is a factor with two levels
 #' @param data Data frame
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared
@@ -17,6 +17,7 @@
 #' @param bca Estimate BCa intervals? Default FALSE.
 #' @param return.boot Save the bootstrap sample of the MF statistic? Default FALSE.
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
+#' @param seed Used for set.seed.  Default is sample(1:100000, 1)
 #' @return a \code{\link{mfboot-class}} data object
 #' @seealso \code{\link{mfboot-class}} 
 #' @export
@@ -40,13 +41,13 @@
 ## Bootstrap simple MF
 ##--------------------------------------------------------------------
 MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE){
+	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000,1)){
     # bootstrap confidence intervals for MF
     # 11/17/99 initial coding
     # 2/24/04 added BC.a interval
     # 5/25/10 added empirical HPD interval
     # takes b bootstrap samples B times, so nboot = B * b
-
+    # 10/1/2018 add seed utility
    
 
     A <- data.frame(model.frame(formula = formula, data = data))
@@ -69,10 +70,7 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
       return()
     }
 
-    rng <- 'Mersenne-Twister'
-    RNGkind(rng)
-    seed <- .Random.seed
-    nboot <- b * B
+    set.seed(seed)
     n.x <- length(x)
     n.y <- length(y)
     w <- function(xy, n.x){sum(rank(xy)[1:n.x])}
