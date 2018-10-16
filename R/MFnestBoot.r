@@ -210,6 +210,7 @@ MFhBoot <- function(formula, data,
 #' @description MFnest using bootstrapping
 #' @param x output from \code{\link{MFhBoot}}
 #' @param which.factor Which variables to include in the mitigated fraction summation.
+#' Default is ’All’, to sum over entire tree.
 #' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper 
 #' and high tailed lower 
 #' of mitigated fraction
