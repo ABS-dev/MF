@@ -11,7 +11,7 @@ MFnest(Y, which.factor = "All")
 output list from MFh.}
 
 \item{which.factor}{one or more variable(s) of interest. This can be any of the core or nest variables
-from the data set. If none or \code{NULL} is specified, MF will be calculated for the whole 
+from the data set. If none or \code{All} is specified, MF will be calculated for the whole 
 tree.}
 }
 \value{

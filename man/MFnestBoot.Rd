@@ -9,7 +9,8 @@ MFnestBoot(x, which.factor = "All", alpha = 0.05)
 \arguments{
 \item{x}{output from \code{\link{MFhBoot}}}
 
-\item{which.factor}{Which variables to include in the mitigated fraction summation.}
+\item{which.factor}{Which variables to include in the mitigated fraction summation.
+Default is ’All’, to sum over entire tree.}
 
 \item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper 
 and high tailed lower 

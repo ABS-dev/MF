@@ -28,7 +28,8 @@ or reference group to which compare[2] is compared.}
 \item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE, 
 some trees have all the cores while others only have a subset.}
 
-\item{which.factor}{Which variables to include in the mitigated fraction summation.}
+\item{which.factor}{Which variables to include in the mitigated fraction summation.
+Default is ’All’, to sum over entire tree.}
 
 \item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
 of mitigated fraction.}
