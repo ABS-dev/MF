@@ -48,10 +48,11 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     # 5/25/10 added empirical HPD interval
     # takes b bootstrap samples B times, so nboot = B * b
     # 10/1/2018 add seed utility
-    
+
     ##set seed
     seed <- as.integer(seed)
-    set.seed(seed) 
+    set.seed(seed)     
+ 
 
     A <- data.frame(model.frame(formula = formula, data = data))
     resp <- A[, 1]
@@ -73,9 +74,10 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
       return()
     }
 
+    
     rng <- 'Mersenne-Twister' 
     RNGkind(rng)
-   
+  
 
 
     nboot <-b*B
@@ -124,10 +126,8 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         qmf <- quantile(MF, prob = qprob)
         stat <- rbind(stat, 'BC.a'= c(mf, qmf))
     }
-   print(paste('Seed =', seed))
     out <- mfboot$new(stat = stat, nboot = nboot, alpha = alpha, seed = seed, 
 			rng = rng, compare = compare, sample = MF)
-
 
     return(out)
 }
