@@ -232,7 +232,7 @@ MFhBoot <- function(formula, data,
 #' }}
 #' }
 #'  
-#' following variables for each }
+#' following variables for each 
 #' 
 #' a table with one row for each level of the variable specified in \code{which.factor} and including
 #' the following variables: \cr
