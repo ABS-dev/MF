@@ -16,6 +16,38 @@ Default is ’All’, to sum over entire tree.}
 and high tailed lower 
 of mitigated fraction}
 }
+\value{
+A list with the following elements: \cr
+\describe{
+
+\item{mfnest_details}{The MF and summary statistics as calculated for each 
+bootstrap event. Variables as in \code{\link{MFnest}} output.}
+\item{mfnest_summary}{Statistical summary of bootstrapped MF with each unique
+level of a core or nest variable passed to \code{which.factor} as a row. 
+Other variables include: \cr
+\itemize{
+\item \code{median} Median of MFs from all of the bootstrap events.
+\item \code{etlower} Lower value of equal tailed range.
+\item \code{etupper} Upper value of equal tailed range.
+\item \code{htlower} Lower value of the high tailed range.
+\item \code{htupper} Upper value of the high tailed range.
+\item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
+}}
+}
+ 
+following variables for each 
+
+a table with one row for each level of the variable specified in \code{which.factor} and including
+the following variables: \cr
+\describe{
+\item{median}{median mitigated fraction across all bootstrapping instances.}
+\item{etlower}{equal tailed lower of the mitigated fraction across all bootstrapping instances.}
+\item{etupper}{equal tailed upper of the mitigated fraction across all bootstrapping instances.}
+\item{htlower}{high tailed lower of the mitigated fraction across all bootstratpping instances.}
+\item{htupper}{high tailed upper of the mitigated fraction across all bootstrapping instances.}
+\item{mf.obs}{mitigated fraction using \code{MFnest(x$mfh, which.factor)}, no bootstrapping.}
+}
+}
 \description{
 MFnest using bootstrapping
 }
