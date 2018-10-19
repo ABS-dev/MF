@@ -1,7 +1,7 @@
 ---
 title: "DRAFT - MF for hierarchial data"
 author: "Center for Veterinary Biologics - Statistics Section"
-date: "August 29, 2018"
+date: "October 18, 2018"
 output: pdf_document
 numbersections: yes
 number_sections: yes
@@ -111,8 +111,8 @@ level of interest in the row.
 - `U`: Sum of the `u` values from table `MFh` matching the particular 
 level of interest in the row.
 - `con_N` & `vac_N`: Sum of the `_n` values from table `MFh` matching the particular level of interest in the row. Note that the left hand side of the underscore will match values passed by user to `compare`.
-- `median_resp:con` & `median_resp:vac`: Median of responses for each comparison
-group matching the particular level of interest in the row. Note that the right hand side of the colon will match values passed by user to `compare`.
+- `con_medResp` & `vac_medResp`: Median of responses for each comparison
+group matching the particular level of interest in the row. Note that the left hand side of the underscore will match values passed by user to `compare`.
 
 ## Bootstrapped MF. {-}
 
