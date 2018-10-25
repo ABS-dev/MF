@@ -18,7 +18,7 @@
 #' @param bca Boolean whether to estimate BCa intervals for MF.
 #' @param return.boot Boolean whether to save the bootstrap samples of the statistics.
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
-#' @param seed initial seed value. Ignored.
+#' @param seed Used for set.seed.
 #' @return a \code{\link{mfhlboot-class}} data object
 #' @seealso \code{\link{mfhlboot-class}} 
 #' @export
@@ -27,8 +27,7 @@
 #'  Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
 #' @author David Siev \email{david.siev@@aphis.usda.gov}
 #' @examples
-#' set.seed(12345)
-#' HLBoot(lesion~group, calflung)
+#' HLBoot(lesion~group, calflung, seed = 12345)
 #'   
 #' # Bootstrapping
 #' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -81,7 +80,10 @@
 ##
 HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
 	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, 
-	seed = NULL){
+	seed = sample(1:100000, 1)){
+  ## set seed
+  set.seed(seed) 
+  
     # takes b bootstrap samples B times, so nboot = B * b
 
 
@@ -123,10 +125,7 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     
     rng <- 'Mersenne-Twister'
     RNGkind(rng)
-    # if(!is.null(seed))
-        # set.seed(seed=seed,kind=rng)
-    seed <- .Random.seed
-    
+
     nboot <- b * B
     n.x <- length(x)
     n.y <- length(y)

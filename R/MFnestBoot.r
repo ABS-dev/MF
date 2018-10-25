@@ -13,6 +13,7 @@
 #' @param boot.unit Boolean whether to sample observations from within those of the same core.
 #' @param boot.cluster Boolean whether to sample which cores are present. If TRUE, 
 #' some trees have all the cores while others only have a subset. 
+#' @param seed Used for set.seed.
 #' @return A list with the following elements: \cr \cr
 #' \describe{
 #'   \item{bootmfh}{Rank table for the bootstrapped values as output from 
@@ -42,14 +43,16 @@
 #'
 #' system.time(test1 <- MFhBoot(formula, a, 
 #'                             nboot = 10000,
-#'                              boot.cluster = TRUE, boot.unit = TRUE))
+#'                              boot.cluster = TRUE, boot.unit = TRUE, seed = 12345))
 #' test1$bootmfh
 MFhBoot <- function(formula, data,
                     compare = c("con", "vac"),
                     nboot = 10000,
-                    boot.unit = TRUE, boot.cluster = TRUE){
-  
-  termlab <- attr(terms(formula), "term.labels")
+                    boot.unit = TRUE, boot.cluster = TRUE, seed = sample(1:100000, 1)){
+  ## set seed
+  set.seed(seed)  
+ 
+   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
   tgroup <- termlab[1]
   resp <- all.vars(formula)[1]
@@ -261,11 +264,10 @@ MFhBoot <- function(formula, data,
 #' which.factors <- c('All', 'room', 'pen', 'litter')
 #' 
 #' #################
-#' set.seed(12345)
 #' 
 #' test1 <- MFhBoot(formula, a, 
 #'                  nboot = 10000,
-#'                  boot.cluster = TRUE, boot.unit = TRUE)
+#'                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 #' MFnestBoot(test1, c('All', 'litter'))
 #' 
 #' \dontrun{
