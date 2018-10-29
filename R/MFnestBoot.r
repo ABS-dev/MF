@@ -39,7 +39,6 @@
 #' boot.cluster <- TRUE
 #' boot.unit <- TRUE
 #' which.factors <- c('All', 'room', 'pen', 'litter')
-#' set.seed(12345)
 #'
 #' system.time(test1 <- MFhBoot(formula, a, 
 #'                             nboot = 10000,
