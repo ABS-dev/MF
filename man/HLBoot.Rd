@@ -6,7 +6,7 @@
 \usage{
 HLBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
-  trace.it = FALSE, seed = NULL)
+  trace.it = FALSE, seed = sample(1:1e+05, 1))
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, 
@@ -30,7 +30,7 @@ and w is a factor indicating the clusters.}
 
 \item{trace.it}{Boolean whether to display verbose tracking of the cycles.}
 
-\item{seed}{initial seed value. Ignored.}
+\item{seed}{Used for set.seed.}
 }
 \value{
 a \code{\link{mfhlboot-class}} data object
@@ -48,8 +48,7 @@ difference; it assumes that the two distributions have the same shape and
 differ by a constant shift. Assumes data is single pool (no nesting).
 }
 \examples{
-set.seed(12345)
-HLBoot(lesion~group, calflung)
+HLBoot(lesion~group, calflung, seed = 12345)
   
 # Bootstrapping
 # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .

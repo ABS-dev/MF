@@ -4,7 +4,8 @@
 \alias{MFClus}
 \title{Clustered mitigated fraction}
 \usage{
-MFClus(formula, data, compare = c("con", "vac"), trace.it = FALSE)
+MFClus(formula, data, compare = c("con", "vac"), trace.it = FALSE,
+  seed = sample(1:1e+05, 1))
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.}
@@ -14,6 +15,8 @@ MFClus(formula, data, compare = c("con", "vac"), trace.it = FALSE)
 \item{compare}{Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared}
 
 \item{trace.it}{Verbose tracking of the cycles? Default FALSE.}
+
+\item{seed}{Used for set.seed.}
 }
 \value{
 a \code{\link{mfcluster-class}} data object

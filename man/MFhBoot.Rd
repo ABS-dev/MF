@@ -5,7 +5,7 @@
 \title{MFhBoot}
 \usage{
 MFhBoot(formula, data, compare = c("con", "vac"), nboot = 10000,
-  boot.unit = TRUE, boot.cluster = TRUE)
+  boot.unit = TRUE, boot.cluster = TRUE, seed = sample(1:1e+05, 1))
 }
 \arguments{
 \item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous response, 
@@ -25,6 +25,8 @@ or reference group to which compare[2] is compared.}
 
 \item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE, 
 some trees have all the cores while others only have a subset.}
+
+\item{seed}{Used for set.seed.}
 }
 \value{
 A list with the following elements: \cr \cr
@@ -54,11 +56,10 @@ nboot <- 10000
 boot.cluster <- TRUE
 boot.unit <- TRUE
 which.factors <- c('All', 'room', 'pen', 'litter')
-set.seed(12345)
 
 system.time(test1 <- MFhBoot(formula, a, 
                             nboot = 10000,
-                             boot.cluster = TRUE, boot.unit = TRUE))
+                             boot.cluster = TRUE, boot.unit = TRUE, seed = 12345))
 test1$bootmfh
 }
 \seealso{
