@@ -22,7 +22,7 @@
 #' @param bca Estimate BCa intervals? 
 #' @param return.boot Save the bootstrap sample of the MF statistic? 
 #' @param trace.it Verbose tracking of the cycles? 
-#' @param seed Used for set.seed.  
+#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return a \code{\link{mfboot-class}} data object
 #' @seealso \code{\link{mfboot-class}} 
 #' @export

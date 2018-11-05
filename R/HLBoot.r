@@ -18,7 +18,7 @@
 #' @param bca Boolean whether to estimate BCa intervals for MF.
 #' @param return.boot Boolean whether to save the bootstrap samples of the statistics.
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
-#' @param seed Used for set.seed.
+#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return a \code{\link{mfhlboot-class}} data object
 #' @seealso \code{\link{mfhlboot-class}} 
 #' @export

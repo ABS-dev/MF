@@ -13,7 +13,7 @@
 #' @param boot.unit Boolean whether to sample observations from within those of the same core.
 #' @param boot.cluster Boolean whether to sample which cores are present. If TRUE, 
 #' some trees have all the cores while others only have a subset. 
-#' @param seed Used for set.seed.
+#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return A list with the following elements: \cr \cr
 #' \describe{
 #'   \item{bootmfh}{Rank table for the bootstrapped values as output from 

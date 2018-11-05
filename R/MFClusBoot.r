@@ -15,7 +15,7 @@
 #' @param hpd Boolean whether to estimate highest density intervals.
 #' @param return.boot Boolean whether to save the bootstrap sample of the MF statistic.
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
-#' @param seed Used for set.seed.
+#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return a \code{\link{mfbootcluster-class}} data object
 #' @note
 #' If input data contains more than two levels of treatment, rows associated with unused treatment levels will be removed. \cr

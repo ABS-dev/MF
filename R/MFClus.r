@@ -8,7 +8,6 @@
 #' @param data Data frame.  See \code{Note} for handling of input data with more than two levels.
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
-#' @param seed Used for set.seed.
 #' @return a \code{\link{mfcluster-class}} data object
 #' @note
 #' If input data contains more than two levels of treatment, rows associated with unused treatment levels will be removed. \cr
@@ -68,8 +67,7 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE, s
 	# revised 8/27/13 - remove group levels if no observations from that level are present in original data 
 	# revised 9/03/13 - subset initial data by comparison group levels
 	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to external function 
-  ## set seed
-  set.seed(seed)  
+
   
   dat <- NULL
 	group <- NULL
