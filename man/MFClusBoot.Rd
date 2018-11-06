@@ -31,7 +31,7 @@ MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
 
 \item{trace.it}{Boolean whether to display verbose tracking of the cycles.}
 
-\item{seed}{Used for set.seed.}
+\item{seed}{to initialize random number generator for reproducibility. Passed to \code{set.seed}.}
 }
 \value{
 a \code{\link{mfbootcluster-class}} data object
@@ -50,8 +50,7 @@ Clusters with missing treatments will be excluded. See \code{\link{mfbootcluster
 }
 \examples{
 \dontrun{
-set.seed(12345)
-MFClusBoot(lesion ~ group + cluster(litter), piglung)
+MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
 Bootstrapping clusters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Bootstrapping units. . . . . . . . . . . . . . . . . . 

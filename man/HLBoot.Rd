@@ -30,7 +30,7 @@ and w is a factor indicating the clusters.}
 
 \item{trace.it}{Boolean whether to display verbose tracking of the cycles.}
 
-\item{seed}{Used for set.seed.}
+\item{seed}{to initialize random number generator for reproducibility. Passed to \code{set.seed}.}
 }
 \value{
 a \code{\link{mfhlboot-class}} data object

@@ -26,7 +26,7 @@ or reference group to which compare[2] is compared.}
 \item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE, 
 some trees have all the cores while others only have a subset.}
 
-\item{seed}{Used for set.seed.}
+\item{seed}{to initialize random number generator for reproducibility. Passed to \code{set.seed}.}
 }
 \value{
 A list with the following elements: \cr \cr

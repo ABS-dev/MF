@@ -31,7 +31,7 @@ the control or reference group to which \code{compare[2]} is compared}
 
 \item{trace.it}{Verbose tracking of the cycles?}
 
-\item{seed}{Used for set.seed.}
+\item{seed}{to initialize random number generator for reproducibility. Passed to \code{set.seed}.}
 }
 \value{
 a \code{\link{mfboot-class}} data object
