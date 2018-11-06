@@ -1,7 +1,8 @@
 
 setMethod('print', 'mfboot', function(x, ...){
 	cat(x$nboot, "bootstrap samples")
-    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""), "confidence interval\n\n")
+    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""), 
+        "confidence interval\n\n")
     cat('\nComparing', x$compare[2], 'to', x$compare[1], '\n')
     print(x$stat)
     cat('\n')
@@ -14,13 +15,15 @@ setMethod('show', 'mfboot', function(object){print(object)})
 
 setMethod('print', 'mfhlboot', function(x, ...){
     cat("\n", x$nboot, " bootstrap samples", sep='')
-    cat("\n", paste(100 * (1-x$alpha), "%", sep = ""), " confidence intervals", sep='')
-    cat('\nComparing',x$compare[2],'to',x$compare[1],'\n\n')
+    cat("\n", paste(100 * (1-x$alpha), "%", sep = ""), " confidence intervals", 
+        sep = '')
+    cat('\nComparing',x$compare[2], 'to', x$compare[1], '\n\n')
     cat("\nMitigated Fraction\n\n")
     print(x$MFstat)
     cat("\n\nHodges-Lehmann\n\n")
     print(x$HLstat)
-    cat('\n\nQuartile Differences (quartiles of ',x$compare[2],' - quartiles of ',x$compare[1],')\n\n',sep='')
+    cat('\n\nQuartile Differences (quartiles of ', x$compare[2],
+        ' - quartiles of ', x$compare[1],')\n\n', sep = '')
     print(x$QDIFstat)
     cat("\n\nQuartiles of", x$compare[1], "\n")
     print(x$QXstat)
@@ -45,7 +48,8 @@ setMethod('show', 'mfmp', function(object){print(object)})
 setMethod('print', 'mfbootcluster', function(x, ...){
     cat('\n\n', x$what, sep = '')
     cat('\nComparing', x$compare[2], 'to', x$compare[1], '\n')
-    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""), "confidence interval\n\n")
+    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
+        "confidence interval\n\n")
     print(x$stat)
 	if(!is.null(x$excludedClusters)){
 		exc <- paste(x$excludedClusters, collapse = ', ')
@@ -97,7 +101,7 @@ setMethod('print', 'mfcomponents', function(x, ...){
         subtab$max.y[i] <- max(ys)
     }
     cat('\nMF Subject Components\n\n')
-    print(subtab, row.names = F)
+    print(subtab, row.names = FALSE)
     cat('\n')
 	})
 

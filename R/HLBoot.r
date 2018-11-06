@@ -143,8 +143,8 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     qdif <- qy - qx
     
     W <- H <- rep(NA, b * B)
-    Qx <- Qy <- matrix(rep(NA, b * B * 3), b*B, 3, dimnames = list(NULL, c('Q25', 
-		'Q50', 'Q75')))
+    Qx <- Qy <- matrix(rep(NA, b * B * 3), b*B, 3, dimnames = list(NULL,
+                                                  c('Q25', 'Q50', 'Q75')))
     cat('\nBootstrapping\n')
     for(i in 1:B) {
         x.b <- matrix(sample(x, size = b * n.x, replace = T), b, n.x)
@@ -176,12 +176,12 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 		"lower", "upper"))
     qqx <- t(apply(Qx, 2, quantile, prob = qprob))    
     qxstat <- cbind(qx, qqx)
-    dimnames(qxstat) <- list(dimnames(Qx)[[2]], c("observed", "median", "lower", 
-		"upper"))
+    dimnames(qxstat) <- list(dimnames(Qx)[[2]], c("observed", "median", 
+                                                  "lower", "upper"))
     qqy <- t(apply(Qy, 2, quantile, prob = qprob))    
     qystat <- cbind(qy, qqy)
-    dimnames(qystat) <- list(dimnames(Qx)[[2]], c("observed", "median", "lower", 
-		"upper"))
+    dimnames(qystat) <- list(dimnames(Qx)[[2]], c("observed", "median", 
+                                                  "lower", "upper"))
     
     if(hpd){
         hpdmf <- emp.hpd(MF, alpha = alpha)
@@ -197,7 +197,8 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         ny.i <- rep(n.y - (0:1), c(n.x, n.y))
         theta <- rep(NA, n.x + n.y)
         for(i in 1:(n.x + n.y)){
-            theta[i] <- ((2 * w(xy[ - i], nx.i[i]) - nx.i[i] * (1 + nx.i[i] + ny.i[i]))/(nx.i[i] * ny.i[i]))
+            theta[i] <- ((2 * w(xy[ - i], nx.i[i]) - nx.i[i] * 
+                            (1 + nx.i[i] + ny.i[i]))/(nx.i[i] * ny.i[i]))
 		}
         theta.hat <- mean(theta)
         acc <- sum((theta.hat - theta)^3)/(6 * sum((theta.hat - theta)^2)^(3/2))

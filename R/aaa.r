@@ -12,7 +12,8 @@ reshapeCluster <- function(data, formula, compare, envir){
 	A <- A[A[,attr(Terms, "term.labels")[1]] %in% compare, ]
   dat <- A[, 1]
   group <- A[, 2]
-## remove any group levels that aren't present; don't want to evaluate for empty groups - mcv 08/27/13
+## remove any group levels that aren't present; don't want to evaluate for 
+##     empty groups - mcv 08/27/13
 	group <- factor(group)
   clusters <- A[, 3]
   strat <- unique(as.character(clusters))

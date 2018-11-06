@@ -81,14 +81,16 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         x.b <- matrix(sample(x, size = b * n.x, replace = T), b, n.x)
         y.b <- matrix(sample(y, size = b * n.y, replace = T), b, n.y)
         W[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, w, n.x)
-        if(trace.it){ cat("bootstrap samples", (i - 1) * b + 1, "to", (i - 1) * b + b, "\n")}
+        if(trace.it){ cat("bootstrap samples", (i - 1) * b + 1, "to", 
+                          (i - 1) * b + b, "\n")}
     }
     MF <- ((2 * W - n.x * (1 + n.x + n.y))/(n.x * n.y))
     mf <- ((2 * w(c(x, y), n.x) - n.x * (1 + n.x + n.y))/(n.x * n.y))
     
     qprob <- c(0.5, alpha/2, 1 - alpha/2)
     qmf <- quantile(MF, prob = qprob)
-    stat <- matrix(c(mf, qmf), 1, 4, dimnames = list(c('Equal Tailed'), c("observed", "median", "lower", "upper")))
+    stat <- matrix(c(mf, qmf), 1, 4, dimnames = list(c('Equal Tailed'), 
+                                  c("observed", "median", "lower", "upper")))
     if(hpd){
         hpdmf <- emp.hpd(MF, alpha=alpha)
         stat <- rbind(stat, 'Highest Density' = c(mf, median(MF), hpdmf))
@@ -100,7 +102,8 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         ny.i <- rep(n.y - (0:1), c(n.x, n.y))
         theta <- rep(NA, n.x + n.y)
         for(i in 1:(n.x + n.y)){
-			theta[i] <- ((2 * w(xy[ - i], nx.i[i]) - nx.i[i] * (1 + nx.i[i] + ny.i[i]))/(nx.i[i] * ny.i[i]))
+			theta[i] <- ((2 * w(xy[ - i], nx.i[i]) - nx.i[i] * 
+			                (1 + nx.i[i] + ny.i[i]))/(nx.i[i] * ny.i[i]))
 		}
         theta.hat <- mean(theta)
         acc <- sum((theta.hat - theta)^3)/(6 * sum((theta.hat - theta)^2)^(3/2))

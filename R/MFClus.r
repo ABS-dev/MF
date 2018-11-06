@@ -64,14 +64,17 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
     # within-cluster ranking only 
     # 3/19/01 initial coding
     # revised 10/3/06 to eliminate clusters without both treatments represented
-	# revised 8/27/13 - remove group levels if no observations from that level are present in original data 
+	# revised 8/27/13 - remove group levels if no observations from that level 
+  #     are present in original data 
 	# revised 9/03/13 - subset initial data by comparison group levels
-	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to external function 
+	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to 
+  #     external function 
 	dat <- NULL
 	group <- NULL
 	clusters <- NULL
 	strat <- NULL
-	reshapeCluster(data = data, formula = formula, compare = compare, envir = environment()) 
+	reshapeCluster(data = data, formula = formula, compare = compare, 
+	               envir = environment()) 
 	id <- compare
   out <- matrix(NA, length(strat), 6, dimnames = list(strat, c("w", "u", "r", 
 		"n1", "n2", "mf")))
@@ -107,6 +110,7 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
     if(round(All$mf, digits = 1) == 1.0){
       message("Complete separation observed.")
     }
-	return(mfcluster$new(All = All, byCluster = out, excludedClusters = excluded.clusters,
-		call = match.call(), compare = compare))
+	return(mfcluster$new(All = All, byCluster = out, 
+	       excludedClusters = excluded.clusters, call = match.call(), 
+	       compare = compare))
 }

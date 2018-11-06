@@ -85,30 +85,35 @@ MFhBoot <- function(formula, data,
   ##     of unique cores.     
   newdf <- tibble(bootID = rep(1:nboot, each = nclus),
                   newClus = case_when(isTRUE(boot.cluster) ~ 
-                                        sample(indivclus$clusterID,
-                                               nboot * nclus, replace = TRUE),
-                                      !isTRUE(boot.cluster) ~ rep(indivclus$clusterID,
-                                                               nboot))) %>%
+                    sample(indivclus$clusterID, nboot * nclus, replace = TRUE),
+                    !isTRUE(boot.cluster) ~ rep(indivclus$clusterID,
+                                                       nboot))) %>%
     arrange(bootID)
   
   ## ** use new tree structure to calculate summary statistics **
-  ## For each possible possible node figure out the set of w, u, & n1n2 statistics.
+  ## For each possible possible node figure out the set of w, u, & n1n2 
+  ##    statistics.
   ## 
-  ## nx is the number of observations in the control or reference group for a  node. 
+  ## nx is the number of observations in the control or reference group for a  
+  ##     node. 
   ## ny is the number of observations in the comparison group for a node.
   ##
   ## w is the sum of the rankings of observations from the control 
-  ##    or reference group where observations are ranked within the entire node. This will
-  ##    change with the sampling that a occurs when isTRUE(boot.unit), although the interval of possible values does not change.
-  ##    Note that depending on which bootstrap incidence, this may not be a complete w for a unique core node.
+  ##    or reference group where observations are ranked within the entire node.
+  ##    This will change with the sampling that a occurs when 
+  ##    isTRUE(boot.unit), although the interval of possible values does not
+  ##    change.
   ##    
-  ## u = w - nx(nx + 1)/2. The value on the rhs of minus is constant regardless of boot.unit. As the 
-  ##    value of "w" changes due to sampling when isTRUE(boot.unit), so will "u" by the same amount.
-  ##    Note that for bootstrap cases where a unique core node is included > 1x, the value
-  ##    of u is being calculated for each instance, separately (as above for w). 
-  ## 
-  ## 
-  ## 
+  ##    Note that depending on which bootstrap incidence, this may not be a
+  ##    complete w for a unique core node.
+  ##    
+  ## u = w - nx(nx + 1)/2. The value on the rhs of minus is constant regardless 
+  ##    of boot.unit. As the value of "w" changes due to sampling when 
+  ##    isTRUE(boot.unit), so will "u" by the same amount. Note that for 
+  ##    bootstrap cases where a unique core node is included > 1x, the value
+  ##    of u is being calculated for each instance, separately 
+  ##    (as above for w). 
+  
   if(boot.unit){
     strat.b <- matrix(newdf$newClus, nboot)
     w <- u <- n1n2 <- medResp1 <- medResp2 <- con_n <- vac_n <- 
@@ -121,10 +126,14 @@ MFhBoot <- function(formula, data,
       out <- rep(NA, n.b)
       x.b <- matrix(switch(as.character(n.x == 1),
                            'TRUE' = rep(x, n.b),
-                           'FALSE' = sample(x, size = n.b * n.x, replace = T)), n.b, n.x)
+                           'FALSE' = sample(x, size = n.b * n.x, 
+                                            replace = TRUE)), 
+                    n.b, n.x)
       y.b <- matrix(switch(as.character(n.y == 1),
                            'TRUE' = rep(y, n.b),
-                           'FALSE' = sample(y, size = n.b * n.y, replace = T)), n.b, n.y)
+                           'FALSE' = sample(y, size = n.b * n.y, 
+                                            replace = TRUE)),
+                    n.b, n.y)
       w <- apply(cbind(x.b, y.b), 1, function(x, n.x)
         sum(rank(x)[1:n.x]), n.x)
       return(list(w, x.b, y.b))
@@ -202,7 +211,8 @@ MFhBoot <- function(formula, data,
       ungroup() %>%
       select(-clusterID)
   }
-  return(list(bootmfh = budat, clusters = indivclus, compare = compare, mfh = MFh(formula, data, compare)))
+  return(list(bootmfh = budat, clusters = indivclus, compare = compare, 
+              mfh = MFh(formula, data, compare)))
 }
 
 #' @title MFnestBoot
@@ -319,7 +329,8 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
     full_join(MFnest(x$mfh, which.factor = which.factor) %>%
                 select(variable, level, MF) %>%
                 rename(mf.obs = 'MF') %>%
-                mutate_if(is.factor, as.character), by = c('variable', 'level')) %>%
+                mutate_if(is.factor, as.character), 
+              by = c('variable', 'level')) %>%
     ungroup() %>%
     mutate(variable = fct_relevel(variable, which.factor)) %>%
     arrange(variable)
