@@ -24,8 +24,8 @@ A \code{\link{mfhierdata}} object, which is a list of three items. \cr
 
 \item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique core level showing values for:
 \itemize{
-  \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations for each treatment 
-level in the core level.
+  \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations for each treatment level in the core level.
+  \item \emph{con}\code{_medResp} & \emph{vac}\code{_medResp} - median of the y continuous response for each treatment level.
   \item \code{n1n2} - product of the counts, \emph{con}\code{_n} * \emph{vac}\code{_n}.
   \item \code{w} - Wilcoxon statistic
   \item \code{u} - Mann-Whitney statistic
