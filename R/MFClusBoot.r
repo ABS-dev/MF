@@ -27,8 +27,7 @@
 #' @author David Siev \email{david.siev@@aphis.usda.gov}
 #' @examples
 #' \dontrun{
-#' set.seed(12345)
-#' MFClusBoot(lesion ~ group + cluster(litter), piglung)
+#' MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
 #' Bootstrapping clusters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 #' 
 #' Bootstrapping units. . . . . . . . . . . . . . . . . . 
