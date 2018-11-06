@@ -3,7 +3,7 @@
 #' Resamples the data and produces bootstrap confidence intervals. Equal tailed intervals are estimated by the 
 #' percentile method. Highest density intervals are estimated by selecting the shortest of all possible intervals.
 #' 
-#' @title Boostrap MF CI from clustered data
+#' @title Bootstrap MF CI from clustered data
 #' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.
 #' @param data Data frame. See \code{Note} for handling of input data with more than two levels.
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared

@@ -34,7 +34,7 @@ A list with the following elements: \cr \cr
 Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 }
 \examples{

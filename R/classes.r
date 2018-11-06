@@ -56,7 +56,7 @@ mfboot <- setRefClass('mfboot', contains = 'mf', fields = list(stat = 'matrix',
 #' @usage mfhlboot$new(nboot, alpha, seed, compare, rng, sample, MFstat, HLstat,
 #' QDIFstat, QXstat, QYstat)
 #' @description class for data objects produced by HLBoot, contains class mf with
-#' addtional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
+#' additional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
 #' @docType class
 #' @section Fields:
 #' \itemize{
@@ -90,7 +90,7 @@ mfhlboot <- setRefClass('mfhlboot', contains = 'mf', fields = list(MFstat = 'mat
 #' @name mfmp-class
 #' @title Class mfmp
 #' @usage mfmp$new(ci, x, what, alpha, tdist, df)
-#' @description Class mfmp is created from output of funtion MFmp
+#' @description Class mfmp is created from output of function MFmp
 #' @docType class
 #' @section Fields:
 #' \itemize{

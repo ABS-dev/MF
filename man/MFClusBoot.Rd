@@ -2,7 +2,7 @@
 % Please edit documentation in R/MFClusBoot.r
 \name{MFClusBoot}
 \alias{MFClusBoot}
-\title{Boostrap MF CI from clustered data}
+\title{Bootstrap MF CI from clustered data}
 \usage{
 MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
   boot.unit = TRUE, b = 100, B = 100, alpha = 0.05, hpd = TRUE,

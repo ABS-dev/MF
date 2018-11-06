@@ -18,7 +18,7 @@
 #' \item \strong{MFh} as output from \code{\link{MFh}}.
 #' \item \strong{MFnest} as output from \code{\link{MFnest}}.
 #' }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 #' tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 #' @export
 #' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
@@ -73,7 +73,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' \item \strong{MFhBoot} as output from \code{\link{MFhBoot}}.
 #' \item \strong{MFnestBoot} as output from \code{\link{MFnestBoot}}.
 #' }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 #' tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 #' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}.
 #' @export
