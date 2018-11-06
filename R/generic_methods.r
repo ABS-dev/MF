@@ -94,7 +94,7 @@ setMethod('print', 'mfcomponents', function(x, ...){
     subtab <- data.frame(mf.j = mfju, freq = rep(NA, nu), min.y = rep(NA, nu),
 		max.y = rep(NA, nu))
     subtab <- subtab[rev(order(subtab$mf.j)), ]
-    for(i in 1:nrow(subtab)){
+    for(i in seq_len(nrow(subtab))){
         ys <- subj$y[subj$mf.j == subtab$mf.j[i]]
         subtab$freq[i] <- length(ys)
         subtab$min.y[i] <- min(ys)
