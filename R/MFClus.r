@@ -99,7 +99,7 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
             excluded.clusters <- c(excluded.clusters, stratum)
         }
     }
-    All <- apply(out, 2, sum, na.rm = T)
+    All <- apply(out, 2, sum, na.rm = TRUE)
     R <- All["u"]/sum(out[, "n1"] * out[, "n2"])
     MF <- 2 * R - 1
     All["r"] <- R

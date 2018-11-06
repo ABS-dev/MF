@@ -50,8 +50,8 @@
 ##--------------------------------------------------------------------
 MFClusBoot <- function(formula, data, compare = c("con", "vac"), 
                        boot.cluster = TRUE, boot.unit = TRUE, b = 100, 
-	                     B = 100, alpha = 0.05, hpd=TRUE, return.boot = FALSE,
-                       trace.it= FALSE){
+	                     B = 100, alpha = 0.05, hpd = TRUE, return.boot = FALSE,
+                       trace.it = FALSE){
   
   ## short circuit if no bootstrapping!
   if(!boot.cluster & !boot.unit){
@@ -109,7 +109,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
         for(i in 1:B){
 			
 			strat.b[((i - 1) * b + 1):((i - 1) * b + b),  ] <- sample(strat, 
-				size = b * n.strat, replace = T)
+				size = b * n.strat, replace = TRUE)
 			if(trace.it){
 				cat("bootstrap clusters, samples", (i - 1) * b + 1, "to", (i - 1) * 
 					b + b, "\n")
@@ -122,7 +122,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
 		
         cat('\n')
     }
-    else strat.b <- matrix(strat, b * B, n.strat, byrow = T)
+    else strat.b <- matrix(strat, b * B, n.strat, byrow = TRUE)
 
     if(!boot.unit) {
         # sum of ranks in each cluster
@@ -157,10 +157,10 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
             out <- rep(NA, n.b)
             x.b <- matrix(switch(as.character(n.x == 1),
                 'TRUE' = rep(x, n.b),
-                'FALSE' = sample(x, size = n.b * n.x, replace = T)), n.b, n.x)
+                'FALSE' = sample(x, size = n.b * n.x, replace = TRUE)), n.b, n.x)
             y.b <- matrix(switch(as.character(n.y == 1),
                 'TRUE' = rep(y, n.b),
-                'FALSE' = sample(y, size = n.b * n.y, replace = T)), n.b, n.y)
+                'FALSE' = sample(y, size = n.b * n.y, replace = TRUE)), n.b, n.y)
             w <- apply(cbind(x.b, y.b), 1, function(x, n.x)
                 sum(rank(x)[1:n.x]), n.x)
                 return(w)

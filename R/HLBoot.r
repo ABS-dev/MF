@@ -95,8 +95,8 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         x <- xy[1:n.x]
         y <- xy[(n.x+1):length(xy)]
         n.y <- length(xy) - n.x
-        X <- matrix(x, n.x, n.y, byrow = F)
-        Y <- matrix(y, n.x, n.y, byrow = T)
+        X <- matrix(x, n.x, n.y, byrow = FALSE)
+        Y <- matrix(y, n.x, n.y, byrow = TRUE)
         med.dif <- median(Y - X)
         return(med.dif)         
     }
@@ -147,8 +147,8 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
                                                   c('Q25', 'Q50', 'Q75')))
     cat('\nBootstrapping\n')
     for(i in 1:B) {
-        x.b <- matrix(sample(x, size = b * n.x, replace = T), b, n.x)
-        y.b <- matrix(sample(y, size = b * n.y, replace = T), b, n.y)
+        x.b <- matrix(sample(x, size = b * n.x, replace = TRUE), b, n.x)
+        y.b <- matrix(sample(y, size = b * n.y, replace = TRUE), b, n.y)
         Qx[(i - 1) * b + (1:b),] <- t(apply(x.b, 1, quantile, probs = c(1:3)/4))
         Qy[(i - 1) * b + (1:b),] <- t(apply(y.b, 1, quantile, probs = c(1:3)/4))
         W[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, w, n.x)

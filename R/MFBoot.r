@@ -78,8 +78,8 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     w <- function(xy, n.x){sum(rank(xy)[1:n.x])}
     W <- rep(NA, b * B)
     for(i in 1:B) {
-        x.b <- matrix(sample(x, size = b * n.x, replace = T), b, n.x)
-        y.b <- matrix(sample(y, size = b * n.y, replace = T), b, n.y)
+        x.b <- matrix(sample(x, size = b * n.x, replace = TRUE), b, n.x)
+        y.b <- matrix(sample(y, size = b * n.y, replace = TRUE), b, n.y)
         W[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, w, n.x)
         if(trace.it){ cat("bootstrap samples", (i - 1) * b + 1, "to", 
                           (i - 1) * b + b, "\n")}
