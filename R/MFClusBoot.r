@@ -15,6 +15,7 @@
 #' @param hpd Boolean whether to estimate highest density intervals.
 #' @param return.boot Boolean whether to save the bootstrap sample of the MF statistic.
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
+#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return a \code{\link{mfbootcluster-class}} data object
 #' @note
 #' If input data contains more than two levels of treatment, rows associated with unused treatment levels will be removed. \cr
@@ -26,8 +27,7 @@
 #' @author David Siev \email{david.siev@@aphis.usda.gov}
 #' @examples
 #' \dontrun{
-#' set.seed(12345)
-#' MFClusBoot(lesion ~ group + cluster(litter), piglung)
+#' MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
 #' Bootstrapping clusters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 #' 
 #' Bootstrapping units. . . . . . . . . . . . . . . . . . 
@@ -49,7 +49,9 @@
 ## Bootstrap stratified or clustered MF
 ##--------------------------------------------------------------------
 MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = TRUE, b = 100, 
-	B = 100, alpha = 0.05, hpd=TRUE, return.boot = FALSE,trace.it= FALSE){
+	B = 100, alpha = 0.05, hpd=TRUE, return.boot = FALSE,trace.it= FALSE, seed = sample(1:100000, 1)){
+  ## set seed
+  set.seed(seed)  
   
   ## short circuit if no bootstrapping!
   if(!boot.cluster & !boot.unit){
@@ -74,8 +76,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = 
 	
     rng <- 'Mersenne-Twister'
     RNGkind(rng)
-    seed <- .Random.seed
-	
+
 	dat <- NULL
 	group <- NULL
 	clusters <- NULL

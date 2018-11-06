@@ -1,10 +1,13 @@
 
 setMethod('print', 'mfboot', function(x, ...){
 	cat(x$nboot, "bootstrap samples")
-    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""), "confidence interval\n\n")
+    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""), "confidence interval\n")
+    cat(paste('Seed =', x$seed))
+    cat('\n')
     cat('\nComparing', x$compare[2], 'to', x$compare[1], '\n')
     print(x$stat)
     cat('\n')
+
 	})
 	
 	

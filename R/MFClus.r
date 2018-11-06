@@ -67,7 +67,9 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
 	# revised 8/27/13 - remove group levels if no observations from that level are present in original data 
 	# revised 9/03/13 - subset initial data by comparison group levels
 	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to external function 
-	dat <- NULL
+
+  
+  dat <- NULL
 	group <- NULL
 	clusters <- NULL
 	strat <- NULL
