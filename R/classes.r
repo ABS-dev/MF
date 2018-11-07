@@ -1,9 +1,8 @@
-setClassUnion('characterORNULL', c('character', 'NULL'))
-setClassUnion('listORNULL', c('list', 'NULL'))
-setClassUnion('numericORNULL', c('numeric', 'NULL'))
-setClassUnion('numericORarray', c('numeric', 'array'))
-setClassUnion('numericORarrayORtable', c('numeric', 'array', 'table'))
-
+setClassUnion("characterORNULL", c("character", "NULL"))
+setClassUnion("listORNULL", c("list", "NULL"))
+setClassUnion("numericORNULL", c("numeric", "NULL"))
+setClassUnion("numericORarray", c("numeric", "array"))
+setClassUnion("numericORarrayORtable", c("numeric", "array", "table"))
 
 #' @name mf-class
 #' @title Class mf
@@ -21,10 +20,8 @@ setClassUnion('numericORarrayORtable', c('numeric', 'array', 'table'))
 #' @keywords documentation
 #' @family mf
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mf <- setRefClass('mf', 
-		fields = list(nboot = 'numeric', alpha = 'numeric', seed = 
-		'integer', compare = 'character', rng = 'character'))
-
+mf <- setRefClass("mf", fields = list(nboot = "numeric", alpha = "numeric",
+  seed = "integer", compare = "character", rng = "character"))
 
 #' @name mfboot-class
 #' @title Class mfboot
@@ -48,8 +45,9 @@ mf <- setRefClass('mf',
 #' @family mf
 #' @seealso \code{\link{MFBoot}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}	
-mfboot <- setRefClass('mfboot', contains = 'mf', fields = list(stat = 'matrix',
-	sample = 'numericORNULL'))
+mfboot <- setRefClass("mfboot", contains = "mf",
+  fields = list(stat = "matrix",
+  sample = "numericORNULL"))
 
 #' @name mfhlboot-class
 #' @title Class mfhlboot
@@ -83,9 +81,9 @@ mfboot <- setRefClass('mfboot', contains = 'mf', fields = list(stat = 'matrix',
 #' @family mf
 #' @seealso \code{\link{HLBoot}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}	
-mfhlboot <- setRefClass('mfhlboot', contains = 'mf', fields = 
-  list(MFstat = 'matrix',	HLstat = 'matrix', QDIFstat = 'matrix',
-       QXstat = 'matrix', QYstat = 'matrix', sample = 'listORNULL'))
+mfhlboot <- setRefClass("mfhlboot", contains = "mf",
+  fields = list(MFstat = "matrix", HLstat = "matrix", QDIFstat = "matrix",
+       QXstat = "matrix", QYstat = "matrix", sample = "listORNULL"))
 	
 #' @name mfmp-class
 #' @title Class mfmp
@@ -105,10 +103,9 @@ mfhlboot <- setRefClass('mfhlboot', contains = 'mf', fields =
 #' @family mfmp
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 #' @seealso \code{\link{MFmp}}
-mfmp <- setRefClass('mfmp', 
-		fields = list(ci = 'numeric', x = 'numericORarrayORtable', 
-		              what = 'character', alpha = 'numeric', tdist = 'logical', 
-		              df = 'numeric'))
+mfmp <- setRefClass("mfmp",
+  fields = list(ci = "numeric", x = "numericORarrayORtable", what = "character",
+  alpha = "numeric", tdist = "logical", df = "numeric"))
 
 #' @name mfbootcluster-class
 #' @title Class mfbootcluster
@@ -137,9 +134,10 @@ mfmp <- setRefClass('mfmp',
 #' @family mf
 #' @seealso \code{\link{MFClusBoot}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfbootcluster <- setRefClass('mfbootcluster', contains = 'mf', fields = list(
-	stat = 'matrix', what = 'character', excludedClusters = 'character', 
-	call = 'call', sample = 'numericORNULL', All = 'data.frame'))
+mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
+  fields = list(stat = "matrix", what = "character",
+    excludedClusters = "character", call = "call", sample = "numericORNULL",
+    All = "data.frame"))
 	
 #' @name mfcluster-class
 #' @title Class mfcluster
@@ -166,9 +164,9 @@ mfbootcluster <- setRefClass('mfbootcluster', contains = 'mf', fields = list(
 #' @family mfcluster
 #' @seealso \code{\link{MFClus}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfcluster <- setRefClass('mfcluster', fields = list(All = 'data.frame', 
-  byCluster = 'matrix', excludedClusters = 'characterORNULL', call = 'call', 
-  compare = 'character'))
+mfcluster <- setRefClass("mfcluster", fields = list(All = "data.frame",
+  byCluster = "matrix", "excludedClusters" = "characterORNULL", call = "call",
+  compare = "character"))
 	
 #' @name mfcomponents-class
 #' @title Class mfcomponents
@@ -187,8 +185,8 @@ mfcluster <- setRefClass('mfcluster', fields = list(All = 'data.frame',
 #' @family mfcomponents
 #' @seealso \code{\link{MFSubj}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfcomponents <- setRefClass('mfcomponents', fields = list(mf = 'numeric', 
-  x = 'numeric', y = 'numeric', subj = 'matrix', compare = 'character'))
+mfcomponents <- setRefClass("mfcomponents", fields = list(mf = "numeric",
+  x = "numeric", y = "numeric", subj = "matrix", compare = "character"))
 
 #' @name mfhierdata-class
 #' @title Class mfhierdata
@@ -207,5 +205,5 @@ mfcomponents <- setRefClass('mfcomponents', fields = list(mf = 'numeric',
 #' @family mfhierdata
 #' @seealso \code{\link{MFh}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfhierdata <- setRefClass('mfhierdata', fields = list(coreTbl = 'tbl', 
-    data = 'tbl', compare = 'character', formula = 'formula'))
+mfhierdata <- setRefClass("mfhierdata", fields = list(coreTbl = "tbl",
+  data = "tbl", compare = "character", formula = "formula"))
