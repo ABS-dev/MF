@@ -85,7 +85,6 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
     n.x <- length(x)
     n.y <- length(y)
     if (n.x > 0 & n.y > 0) {
-       N <- n.x + n.y
        x.y <- c(x, y)
        w <- sum(rank(x.y)[1:n.x])
        u <- w - (n.x * (n.x + 1)) / 2
