@@ -6,7 +6,7 @@
 \usage{
 MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
   boot.unit = TRUE, b = 100, B = 100, alpha = 0.05, hpd = TRUE,
-  return.boot = FALSE, trace.it = FALSE)
+  return.boot = FALSE, trace.it = FALSE, seed = sample(1:1e+05, 1))
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.}
@@ -30,6 +30,8 @@ MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
 \item{return.boot}{Boolean whether to save the bootstrap sample of the MF statistic.}
 
 \item{trace.it}{Boolean whether to display verbose tracking of the cycles.}
+
+\item{seed}{to initialize random number generator for reproducibility. Passed to \code{set.seed}.}
 }
 \value{
 a \code{\link{mfbootcluster-class}} data object
@@ -48,8 +50,7 @@ Clusters with missing treatments will be excluded. See \code{\link{mfbootcluster
 }
 \examples{
 \dontrun{
-set.seed(12345)
-MFClusBoot(lesion ~ group + cluster(litter), piglung)
+MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
 Bootstrapping clusters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
 
 Bootstrapping units. . . . . . . . . . . . . . . . . . 

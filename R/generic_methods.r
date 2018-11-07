@@ -7,7 +7,7 @@ setMethod("print", "mfboot", function(x, ...){
   cat("\n")
 	}
 )
-	
+
 setMethod("show", "mfboot", function(object){
   print(object)
   }

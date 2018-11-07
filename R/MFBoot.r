@@ -1,22 +1,28 @@
 #' Estimates bootstrap confidence intervals for the mitigated fraction.
 #' 
-#' Resamples the data and produces bootstrap confidence intervals. Equal tailed intervals are estimated by the 
-#' percentile method. Highest density intervals are estimated by selecting the shortest of all possible intervals. 
+#' Resamples the data and produces bootstrap confidence intervals. Equal tailed 
+#' intervals are estimated by the 
+#' percentile method. Highest density intervals are estimated by selecting the 
+#' shortest of all possible intervals. 
 #' For BCa intervals, see Efron and Tibshirani section 14.3.
 #' 
 #' @title Bootstrap MF CI
 #' @usage MFBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-#'    alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE)
-#' @param formula Formula of the form \code{y ~ x}, where y is a continuous response and x is a factor with two levels
+#'    alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, 
+#'    seed = sample(1:100000, 1))
+#' @param formula Formula of the form \code{y ~ x}, where y is a continuous 
+#' response and x is a factor with two levels.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - \code{compare[1]} is 
+#' the control or reference group to which \code{compare[2]} is compared
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
-#' @param hpd Estimate highest density intervals? Default TRUE.
-#' @param bca Estimate BCa intervals? Default FALSE.
-#' @param return.boot Save the bootstrap sample of the MF statistic? Default FALSE.
-#' @param trace.it Verbose tracking of the cycles? Default FALSE.
+#' @param hpd Estimate highest density intervals?
+#' @param bca Estimate BCa intervals? 
+#' @param return.boot Save the bootstrap sample of the MF statistic? 
+#' @param trace.it Verbose tracking of the cycles? 
+#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return a \code{\link{mfboot-class}} data object
 #' @seealso \code{\link{mfboot-class}} 
 #' @export
@@ -24,12 +30,12 @@
 #' Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
 #' @author David Siev \email{david.siev@@aphis.usda.gov}
 #' @examples 
-#' set.seed(12345)
-#' MFBoot(lesion~group, calflung)
+#' 
+#' MFBoot(lesion~group, calflung, seed = 12345)
 #'
 #' # 10000 bootstrap samples
 #' # 95% confidence interval
-#' # 
+#' # Seed = 12345
 #' # 
 #' # Comparing vac to con 
 #' # observed median lower  upper
@@ -40,15 +46,17 @@
 ## Bootstrap simple MF
 ##--------------------------------------------------------------------
 MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE){
+	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000, 1)){
     # bootstrap confidence intervals for MF
     # 11/17/99 initial coding
     # 2/24/04 added BC.a interval
     # 5/25/10 added empirical HPD interval
     # takes b bootstrap samples B times, so nboot = B * b
+    # 10/1/2018 add seed utility
 
-   
-
+    ## set seed
+    set.seed(seed)     
+ 
     A <- data.frame(model.frame(formula = formula, data = data))
     resp <- A[, 1]
     tx <- A[, 2]
@@ -69,9 +77,8 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
       return()
     }
 
-    rng <- 'Mersenne-Twister'
+    rng <- 'Mersenne-Twister' 
     RNGkind(rng)
-    seed <- .Random.seed
     nboot <- b * B
     n.x <- length(x)
     n.y <- length(y)
@@ -121,10 +128,8 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         qmf <- quantile(MF, prob = qprob)
         stat <- rbind(stat, 'BC.a'= c(mf, qmf))
     }
-   
     out <- mfboot$new(stat = stat, nboot = nboot, alpha = alpha, seed = seed, 
 			rng = rng, compare = compare, sample = MF)
-
 
     return(out)
 }
