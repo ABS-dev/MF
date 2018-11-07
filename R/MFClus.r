@@ -60,7 +60,7 @@
 #
 MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
   # formula of the form response ~ treatment + cluster(clustername)
-  # based on prob{F(y)<F(x)}
+  # based on prob{F(y) < F(x)}
   # within-cluster ranking only
   # 3/19/01 initial coding
   # revised 10/3/06 to eliminate clusters without both treatments represented
