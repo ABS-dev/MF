@@ -37,11 +37,14 @@ MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
 a \code{\link{mfbootcluster-class}} data object
 }
 \description{
-Estimates bootstrap confidence intervals for the mitigated fraction from clustered or stratified data.
+Estimates bootstrap confidence intervals for the mitigated 
+fraction from clustered or stratified data.
 }
 \details{
-Resamples the data and produces bootstrap confidence intervals. Equal tailed intervals are estimated by the 
-percentile method. Highest density intervals are estimated by selecting the shortest of all possible intervals.
+Resamples the data and produces bootstrap confidence intervals. 
+Equal tailed intervals are estimated by the 
+percentile method. Highest density intervals are estimated by selecting the 
+shortest of all possible intervals.
 }
 \note{
 If input data contains more than two levels of treatment, rows associated with unused treatment levels will be removed. \cr

@@ -40,11 +40,10 @@ a \code{\link{mfboot-class}} data object
 Estimates bootstrap confidence intervals for the mitigated fraction.
 }
 \details{
-Resamples the data and produces bootstrap confidence intervals. Equal tailed 
-intervals are estimated by the 
-percentile method. Highest density intervals are estimated by selecting the 
-shortest of all possible intervals. 
-For BCa intervals, see Efron and Tibshirani section 14.3.
+Resamples the data and produces bootstrap confidence intervals. 
+Equal tailed intervals are estimated by the percentile method. Highest 
+density intervals are estimated by selecting the shortest of all possible 
+intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 }
 \examples{
 
