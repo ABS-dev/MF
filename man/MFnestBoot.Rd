@@ -43,7 +43,7 @@ the following variables: \cr
 \item{median}{median mitigated fraction across all bootstrapping instances.}
 \item{etlower}{equal tailed lower of the mitigated fraction across all bootstrapping instances.}
 \item{etupper}{equal tailed upper of the mitigated fraction across all bootstrapping instances.}
-\item{htlower}{high tailed lower of the mitigated fraction across all bootstratpping instances.}
+\item{htlower}{high tailed lower of the mitigated fraction across all bootstrapping instances.}
 \item{htupper}{high tailed upper of the mitigated fraction across all bootstrapping instances.}
 \item{mf.obs}{mitigated fraction using \code{MFnest(x$mfh, which.factor)}, no bootstrapping.}
 }

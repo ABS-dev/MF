@@ -72,9 +72,6 @@ MFSubj <- function(formula, data, compare = c("con", "vac")){
     mf.j <- 2 * r.j - 1
     subj <- cbind(y, rank = rank.xy[(n.x + 1):N], u.j, r.j, mf.j)
     subj <- subj[order(subj[, 'rank']), ]
-    # out <- list(mf = mf, x = sort(x), y =sort(y), subj = subj, compare = compare)
-    # class(out) <- 'mfcomponents'
-    # return(out)
 	return(mfcomponents$new(mf = mf, x = sort(x), y = sort(y), subj = subj, 
 		compare = compare))
 }

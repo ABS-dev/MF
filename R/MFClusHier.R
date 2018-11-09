@@ -273,7 +273,6 @@ MFnest <- function(Y, which.factor = 'All') {
     ungroup()
 
   ## inform user of complete separation
-  ## TODO: this message might need to go away for bootstrap calls to this function.
   if(1.0 %in% round(out$MF, digits = 1) ){
     out %>%
     filter(round(MF, digits = 1) == 1.0) %>%
@@ -284,7 +283,6 @@ MFnest <- function(Y, which.factor = 'All') {
   }
   
   ## inform user why medians are not available
-  ## TODO: this message might need to go away for bootstrap calls to this function.
   if(!exists('input')){
     message('Skipping median summary, no response data provided.') 
   } else{

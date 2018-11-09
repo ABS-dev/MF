@@ -11,7 +11,7 @@ QDIFstat, QXstat, QYstat)
 }
 \description{
 class for data objects produced by HLBoot, contains class mf with
-addtional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
+additional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
 }
 
 \section{Fields}{

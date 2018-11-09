@@ -18,5 +18,5 @@ importFrom(forcats, fct_relevel)
 importFrom(methods, "new")
 importFrom(stats, "median", "model.frame", "na.omit", "pnorm",
              "qnorm", "qt", "quantile", "terms")
-importFrom("plyr", "ddply", ".")
+importFrom("plyr", "ddply", ".", 'rbind.fill')
 importFrom('purrr', 'as_vector')

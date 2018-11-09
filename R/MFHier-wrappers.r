@@ -18,7 +18,7 @@
 #' \item \strong{MFh} as output from \code{\link{MFh}}.
 #' \item \strong{MFnest} as output from \code{\link{MFnest}}.
 #' }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 #' tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 #' @export
 #' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
@@ -40,7 +40,8 @@
 #' aCore$data
 #' aCore$formula
 #' aCore$compare
-MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 'All'){
+MFClusHier <- function(formula, data, compare = c("con", "vac"), 
+                       which.factor = 'All'){
   aCore <- MFh(formula, data, compare)
   out <- list(MFh = aCore, MFnest = MFnest(aCore, which.factor))
   print(out$MFnest)
@@ -73,7 +74,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' \item \strong{MFhBoot} as output from \code{\link{MFhBoot}}.
 #' \item \strong{MFnestBoot} as output from \code{\link{MFnestBoot}}.
 #' }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 #' tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 #' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}.
 #' @export
@@ -98,7 +99,8 @@ MFClusBootHier <- function(formula, data, compare = c('con', 'vac'),
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
                            which.factor = 'All', alpha = 0.05){
   thisbootmfh <- MFhBoot(formula, data, compare, nboot, boot.unit, boot.cluster)
-  out <- list(MFhBoot = thisbootmfh, MFnestBoot = MFnestBoot(thisbootmfh, which.factor, alpha))
+  out <- list(MFhBoot = thisbootmfh, MFnestBoot = MFnestBoot(thisbootmfh, 
+                                                      which.factor, alpha))
   print(out$MFnestBoot$mfnest_summary)
   invisible(out)
 }
