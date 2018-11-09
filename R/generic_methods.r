@@ -19,6 +19,7 @@ setMethod('print', 'mfhlboot', function(x, ...){
     cat("\n", x$nboot, " bootstrap samples", sep='')
     cat("\n", paste(100 * (1-x$alpha), "%", sep = ""), " confidence intervals", sep='')
     cat('\nComparing',x$compare[2],'to',x$compare[1],'\n\n')
+    cat(paste('Seed =', x$seed))
     cat("\nMitigated Fraction\n\n")
     print(x$MFstat)
     cat("\n\nHodges-Lehmann\n\n")
@@ -48,6 +49,7 @@ setMethod('show', 'mfmp', function(object){print(object)})
 setMethod('print', 'mfbootcluster', function(x, ...){
     cat('\n\n', x$what, sep = '')
     cat('\nComparing', x$compare[2], 'to', x$compare[1], '\n')
+    cat(paste('Seed =', x$seed))
     cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""), "confidence interval\n\n")
     print(x$stat)
 	if(!is.null(x$excludedClusters)){
@@ -65,6 +67,7 @@ setMethod('show', 'mfbootcluster', function(object){print(object)})
 
 setMethod('print', 'mfcluster', function(x, ...){
     cat('\nComparing', x$compare[2], 'to', x$compare[1],'\n')
+    cat(paste('Seed =', x$seed))
     cat('\nMF =', x$All$mf, '\n')
     cat('\nBy Cluster\n')  
     byclus <- na.omit(x$byCluster)
