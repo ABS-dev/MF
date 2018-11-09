@@ -173,7 +173,7 @@ MFhBoot <- function(formula, data,
     
     newnames <- c('medResp1', 'medResp2', 'n1', 'n2')
     names(newnames) <- c(paste(compare, 'medResp', sep = '_'), 
-                         paste(compare, 'n', sep ='_'))
+                         paste(compare, 'n', sep = '_'))
     budat <- newdf %>% 
       mutate(w = as.vector(t(w)),
              u = as.vector(t(u)),
@@ -196,8 +196,8 @@ MFhBoot <- function(formula, data,
       mutate(rank = rank(!!symresp)) %>%
       group_by_at(vars('clusterID', tgroup)) %>%
       summarize(w = sum(rank),
-                n = length(lung),
-                medResp = median(lung, na.rm = TRUE)) %>%
+                n = length(!!symresp),
+                medResp = median(!!symresp, na.rm = TRUE)) %>%
       gather(variable, value, -c(clusterID, !!symtgroup)) %>%
       unite(tmp, tgroup, variable) %>%
       spread(tmp, value) %>%
