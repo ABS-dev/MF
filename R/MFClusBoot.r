@@ -49,11 +49,12 @@
 #--------------------------------------------------------------------
 # Bootstrap stratified or clustered MF
 #--------------------------------------------------------------------
-MFClusBoot <- function(formula, data, compare = c("con", "vac"), 
-                       boot.cluster = TRUE, boot.unit = TRUE, b = 100, 
+MFClusBoot <- function(formula, data, compare = c("con", "vac"),
+                       boot.cluster = TRUE, boot.unit = TRUE, b = 100,
 	                     B = 100, alpha = 0.05, hpd = TRUE, return.boot = FALSE,
-                       trace.it = FALSE){
-
+                       trace.it = FALSE, seed = sample(1:100000, 1)){
+  ## set seed
+  set.seed(seed)
   # short circuit if no bootstrapping!
   if (!boot.cluster & !boot.unit) {
     stop("No bootstrapping specified")
@@ -61,20 +62,20 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   # takes b bootstrap samples B times, so nboot = B * b
   # 3/19/01 initial coding
   # revised 6/30/05 to allow bootstrapping clusters, units, or both
-  # revised 8/25/06 to allow possibility there may be only one unit assigned 
+  # revised 8/25/06 to allow possibility there may be only one unit assigned
   #     to one of the groups within a cluster
   # revised 10/3/06 to eliminate clusters without both treatments represented
   # revised 03/07/07 by MMR to add the compare argument in the call to MFClus
-  # revised 6/15/07 by DS - moved lines 59-60 from original location to 
+  # revised 6/15/07 by DS - moved lines 59-60 from original location to
   #    correctly identify clusters that are eliminated
   # R version 5/6/10 - added quotes in switch()
   # revised 5/25/10 - added empirical HPD interval
-	# revised 8/27/13 - remove group levels if no observations from that level 
-  #      are present in original data 
+	# revised 8/27/13 - remove group levels if no observations from that level
+  #      are present in original data
 	# revised 9/03/13 - subset initial data by comparison group levels
-	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to 
-  #      external function 
-  # revised 1/10/14 - move empirical HPD interval to external function shared 
+	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to
+  #      external function
+  # revised 1/10/14 - move empirical HPD interval to external function shared
 
   rng <- "Mersenne-Twister"
   RNGkind(rng)
@@ -82,7 +83,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
 	group <- NULL
 	clusters <- NULL
 	strat <- NULL
-	reshapeCluster(data = data, formula = formula, compare = compare, 
+	reshapeCluster(data = data, formula = formula, compare = compare,
 	               envir = environment())
   id <- compare
   keep <- apply(table(group, clusters), 2, function(x){
@@ -90,7 +91,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   })[strat]
   if (sum(!keep) > 0) {
     if (trace.it) {
-			cat("Clusters eliminated because of missing treatments:", 
+			cat("Clusters eliminated because of missing treatments:",
 			  strat[!keep], "\n")
 		}
 	}
@@ -104,10 +105,10 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
 		}
     strat.b <- matrix(NA, b * B, n.strat)
     for (i in 1:B) {
-			strat.b[((i - 1) * b + 1):((i - 1) * b + b),  ] <- sample(strat, 
+			strat.b[((i - 1) * b + 1):((i - 1) * b + b),  ] <- sample(strat,
 				size = b * n.strat, replace = TRUE)
 			if (trace.it) {
-				cat("bootstrap clusters, samples", (i - 1) * b + 1, "to", (i - 1) * 
+				cat("bootstrap clusters, samples", (i - 1) * b + 1, "to", (i - 1) *
 					b + b, "\n")
       } else {
 				cat(". ")
