@@ -243,10 +243,10 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' @export
 MFnest <- function(Y, which.factor = 'All') {
   ## restructure if using output from MFh
-  if(class(Y)[1] == 'mfhierdata'){
+  if (class(Y)[1] == 'mfhierdata') {
     input <- Y
     Y <- input$coreTbl
-  } else if(class(Y)[1] != 'tbl_df'){
+  } else if (class(Y)[1] != 'tbl_df') {
     Y <- as_tibble(Y)
   }
   
@@ -287,7 +287,6 @@ MFnest <- function(Y, which.factor = 'All') {
     message('Skipping median summary, no response data provided.') 
   } else{
     
-  ## TODO: this needs to go in a helper function
     thisdata <- input$data
     compare <- input$compare
     names(compare) <- paste0(input$compare, "_medResp", sep = '')
