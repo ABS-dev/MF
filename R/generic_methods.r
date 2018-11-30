@@ -135,3 +135,23 @@ setMethod("show", "mfhierdata", function(object){
   print(object)
   }
 )
+
+setMethod("print", "mfclushier", function(x,...){
+  print(x$MFnest)
+  }
+)
+
+setMethod("show", "mfclushier", function(object){
+  print(object)
+  }
+)
+
+setMethod("print", "mfclusboothier", function(x,...){
+  print(x$MFnestBoot$mfnest_summary)
+  }
+)
+
+setMethod("show", "mfclusboothier", function(object){
+  print(object)
+  }
+)
