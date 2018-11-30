@@ -1,0 +1,133 @@
+---
+title: "DRAFT - Quick Start for Hierarchical Data"
+author: "Center for Veterinary Biologics - Statistics Section"
+date: "November 30, 2018"
+output: pdf_document
+numbersections: yes
+number_sections: yes
+fontsize: 12pt
+toc: yes
+urlcolor: blue
+vignette: >
+  %\VignetteIndexEntry{Quick Start for Hierarchical Data} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r hiddensetup, echo = FALSE, include = FALSE}
+require(kableExtra)
+require(tidyverse)
+require(MF)
+
+## example data
+a <- data.frame(
+ room = paste('Room', rep(c('W', 'Z'), each = 24)),
+ pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
+ litter = paste('Litter', rep(11:22, each = 4)),
+ tx = rep(rep(c('vac', 'con'), each = 2), 12),
+ stringsAsFactors = FALSE
+ )
+set.seed(76153)
+a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
+a <- a[-48,]
+a
+```
+
+# INTRODUCTION {-}
+
+This document is intended to guide users through initial usage of functions in 
+the `MF` package for evaluation of mitigated fraction when data is arranged in 
+a nested hierarchical structure. Details of the algorithm are covered in a 
+separate vignette.
+
+## Data assumptions. Nested Hierarchical structure. {-}
+
+Examples in this document expect data to be structured in a *nested hierarchical 
+tree*, shown in Table 1. If there are only two variables (columns) or the 
+experimental design is not nested, then the methods described here may not apply.
+A nested design assumes that the factor of one variable co-occur with another 
+variable. For example, Pen D exists only within Room Z. If the experimental 
+design of the data set is crossed (all factors of a variable co-occur with 
+all factors of another variable), it is not appropriate to use this guide as 
+written.
+
+```{r, expdesign, echo = FALSE}
+kable(a, align = "c", row.names = FALSE, 
+  caption = "Nested hierarchical data structure.") %>%
+  kable_styling('bordered', full_width = FALSE, font_size = 8) %>%  
+  collapse_rows(columns = 1:4, valign = "middle")
+```
+
+## Mitigated Fraction. Bootstrapped and Calculated. {-}
+
+Users have the option of directly calculating the mitigated fraction or 
+bootstrapping the mitigated fraction value. Examples of both options are shown
+in this document.
+
+## MF package basics. {-}
+
+Examples in this document make use of CVB-authored package `MF`, which can
+be found online at: https://github.com/ABS-dev/MF/blob/master/README.md, including
+installation instructions. It is expected that users have passing familiarty 
+with R code and usage, as CVB does not have resources to address training or IT
+issues that may occur at external organizations.
+
+Bug reports can be submitted online at: https://github.com/ABS-dev/MF/issues. 
+To expedite resolution, please include a minimal working example and refrain 
+from using confidential data. Incomplete issues may be closed without 
+further investigation. Questions specific to a submission should be directed
+to the appropriate Reviewer.
+
+# CALCULATED MF {-}
+
+To calculate mitigated fraction directly from data, use the function `MFClusHier`.
+This function requires four inputs:
+
+- `formula`: The formula in form `y ~ x + a/b/c` where `y` is a continuous response, `x` is a factor with two levels of treatment, and `a/b/c` are variables corresponding to the clusters. It is expected that levels of "c" are nested within levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
+- `data`: The data table (`data.frame` or `tibble`) with variables as identified in formula. If there are extra variables, they will be ignored.
+- `compare`: A text vector of length two. The first position [1] is treated as the control or reference group two which members of the second position [2] are compared. If no value for the compare vector is supplied, it is assumed that the comparisons are between the `con` and `vac` treatment groups.
+- `which.factor`: One or more variable(s) of interest. This can be any of the variables from the data set. If none or NULL is specified, MF will be calculated for the whole tree.
+
+## Looking at MF for factors of a variable. {-}
+
+The `which.factor` argument allows users the option of selecting if mitigated 
+fraction should be calculated for factors of a particular variable. In the data
+from Table 1, it may be of interest to calculate the mitigated fraction for each
+factor of variable "room". It is possible to consider factors from multiple 
+variables simultaneously, and the designator `All` can be used to evaluate for
+the entire tree, without breaking out by any variable. Evaluating the value of
+mitigated fraction for the entire tree is the default behavior, should the user
+not specify anything to the `which.factor` argument.
+
+## Common coding examples. {-}
+
+Default case, looking only at whole tree:
+```{r, results = 'hide'}
+MFClusHier(formula = lung ~ tx + room/pen/litter, data = a)
+```
+
+Selecting a single variable to evaluate for each factor:
+```{r, results = 'hide'}
+MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+                      which.factor = 'room')
+```
+
+Selecting multiple variables, including the entire tree:
+```{r, results = 'hide', message=FALSE}
+MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+                      which.factor = c('room', 'litter', 'All'))
+```
+
+## Output. {-}
+
+When the function `MFClusHier` is first run, it will display a table with one row
+for each unique mitigated fraction calculated. A unique mitigated fraction value
+will be calculated for each factor of the variables identified by the user in the 
+argument `which.factor` (see previous discussion).
+
+```{r, message = FALSE}
+mf_multiple <- MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+                      which.factor = c('room', 'litter', 'All'))
+```
