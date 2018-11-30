@@ -1,5 +1,5 @@
 ---
-title: "DRAFT - MF for hierarchial data"
+title: "DRAFT - MF for hierarchical data"
 author: "Center for Veterinary Biologics - Statistics Section"
 date: "November 9, 2018"
 output: pdf_document
@@ -9,7 +9,7 @@ fontsize: 12pt
 toc: yes
 urlcolor: blue
 vignette: >
-  %\VignetteIndexEntry{MF for hierarchial data} 
+  %\VignetteIndexEntry{MF for hierarchical data} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
 ---
