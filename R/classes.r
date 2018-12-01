@@ -207,3 +207,39 @@ mfcomponents <- setRefClass("mfcomponents", fields = list(mf = "numeric",
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 mfhierdata <- setRefClass("mfhierdata", fields = list(coreTbl = "tbl",
   data = "tbl", compare = "character", formula = "formula"))
+
+
+#' @name mfclushier-class
+#' @title Class mfclushier
+#' @usage mfclushier$new(MFh, MFnest)
+#' @description Class mfclushier is created from output of function MFClusHier
+#' @docType class
+#' @section Fields:
+#' \itemize{
+#' \item{\code{MFh: }}{output from MFh. A \code{\link{mfhierdata}} object.}
+#' \item{\code{MFnest: }}{output from MFnest. A tibble.}
+#' }
+#' @keywords documentation
+#' @family mfclushier
+#' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
+#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
+  MFnest = "tbl"))
+
+#' @name mfclusboothier-class
+#' @title Class mfclusboothier
+#' @usage mfclusboothier$new(MFhBoot, MFnestBoot)
+#' @description Class mfclusboothier is created from output of function 
+#' MFClusBootHier.
+#' @docType class
+#' @section Fields:
+#' \itemize{
+#' \item{\code{MFhBoot: }}{output from MFhBoot. A list.}
+#' \item{\code{MFnestBoot: }}{output from MFnestBoot. A list.}
+#' @keywords documentation
+#' @family mfclusboothier
+#' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
+#' }
+#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+mfclusboothier <- setRefClass("mfclusboothier", fields = list(MFhBoot = "list",
+  MFnestBoot = "list"))
