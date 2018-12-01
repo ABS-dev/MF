@@ -62,9 +62,7 @@ a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 set.seed(12345)
 thismf1 <- MFClusBootHier(lung ~ tx + room/pen/litter, a, nboot = 10000,
                  boot.cluster = TRUE, boot.unit = TRUE)
-thismfhboot <- thismf1$MFhBoot
-thismfhboot$bootmfh
-thismf1$MFnestBoot                 
+thismf1            
 }
 \seealso{
 \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}.
