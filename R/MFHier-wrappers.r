@@ -91,9 +91,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #' set.seed(12345)
 #' thismf1 <- MFClusBootHier(lung ~ tx + room/pen/litter, a, nboot = 10000,
 #'                  boot.cluster = TRUE, boot.unit = TRUE)
-#' thismfhboot <- thismf1$MFhBoot
-#' thismfhboot$bootmfh
-#' thismf1$MFnestBoot                 
+#' thismf1            
 MFClusBootHier <- function(formula, data, compare = c('con', 'vac'), 
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
                            which.factor = 'All', alpha = 0.05){
