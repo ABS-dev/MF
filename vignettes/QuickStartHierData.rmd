@@ -35,6 +35,8 @@ a <- a[-48,]
 a
 ```
 
+\clearpage
+
 # INTRODUCTION {-}
 
 This document is intended to guide users through initial usage of functions in 
@@ -70,7 +72,7 @@ in this document.
 
 Examples in this document make use of CVB-authored package `MF`, which can
 be found online at: https://github.com/ABS-dev/MF/blob/master/README.md, including
-installation instructions. It is expected that users have passing familiarty 
+installation instructions. It is expected that users have passing familiarity 
 with R code and usage, as CVB does not have resources to address training or IT
 issues that may occur at external organizations.
 
@@ -80,8 +82,16 @@ from using confidential data. Incomplete issues may be closed without
 further investigation. Questions specific to a submission should be directed
 to the appropriate Reviewer.
 
+## Technical requirements. {-}
+
+Examples in this manual were created using MF version `r packageVersion('MF')`, 
+`r R.version.string` on Windows. CVB has not tested code usage on other systems. 
+
+\clearpage
+
 # CALCULATED MF {-}
 
+## General use. {-}
 To calculate mitigated fraction directly from data, use the function `MFClusHier`.
 This function requires four inputs:
 
@@ -114,20 +124,271 @@ MFClusHier(formula = lung ~ tx + room/pen/litter, data = a,
                       which.factor = 'room')
 ```
 
+\clearpage
+
 Selecting multiple variables, including the entire tree:
 ```{r, results = 'hide', message=FALSE}
 MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
                       which.factor = c('room', 'litter', 'All'))
 ```
 
-## Output. {-}
+## Basic Output. {-}
 
-When the function `MFClusHier` is first run, it will display a table with one row
+The default display of `MFClusHier` output is a table with one row
 for each unique mitigated fraction calculated. A unique mitigated fraction value
 will be calculated for each factor of the variables identified by the user in the 
-argument `which.factor` (see previous discussion).
+argument `which.factor` (see previous discussion). The total number of rows is 
+sum of the number of unique factors for each variable the user specified.
 
 ```{r, message = FALSE}
 mf_multiple <- MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
                       which.factor = c('room', 'litter', 'All'))
+mf_multiple
 ```
+
+The variable columns are:
+
+- `variable`: Which variable was considered when evaluating MF for the row.
+- `level`: A unique factor level of the variable which was considered when evaluating MF for the row.
+- `MF`: Mitigated fraction calculated value.
+- `N1N2`: Sum of the `n1n2` values from the rank table for the factor level of 
+that row.
+- `U`: Sum of the `u` values from the rank table for the factor level of 
+that row.
+- `con_N` & `vac_N`: Sum of the counts from the rank table matching the 
+particular factor level of the row. Note that the left hand side of the underscore will match values passed by user to `compare`.
+- `con_medResp` & `vac_medResp`: Median of responses for each comparison
+group matching the particular factor level of the row. Note that the left hand side of the underscore will match values passed by user to `compare`.
+
+## Advanced usage. {-}
+
+This section covers the technical description of how to access **MFh** and `MFnest()`
+function. For a full discussion of the algorithms of how **MFh**, `MFnest()` and 
+`MFClusHier` are related, see [MF algorithms for hierarchical data].
+
+### Rank table. {-}
+
+To access the rank table, use the **MFh** field of the output object. For example:
+
+```{r, message = FALSE}
+thisMFh <- mf_multiple$MFh
+thisMFh
+```
+
+This table includes the following information, used in the calculation of the
+basic output table described previously:
+
+- `con_n` & `vac_n`: Counts of observations for each treatment for a 
+particular instance of unique factor level of a variable. Note that the left 
+hand side of the underscore will match values passed by user to `compare`.
+- `n1n2`: Product of counts, `con_n` * `vac_n`.
+- `w`: Wilcoxon statistic.
+- `u`: Mann-Whitney statistic.
+- `con_medResp` & `vac_medResp`: Median observation for for each treatment level
+in a particular instance of unique factor level of a variable. Note that the 
+left hand side of the underscore will match values passed by user to `compare`.
+
+There is one row for each unique combination of variable factor levels across
+the whole data set. This table shows the initial statistics as determined by 
+the experimental design. Refer to the vignette for algorithm design
+[MF algorithms for hierarchical data] for in-depth discussion of how the 
+rank is used to evaluate mitigated fraction values.
+
+### Reproducibility. {-}
+
+The rank table can be used to re-calculate the mitigated fraction values, for 
+example if the user intends to explore a different selection to the 
+`which.variable` argument. To do this, use the function `MFnest` which takes
+the following input arguments:
+
+- `Y`: **MFh** field output as from `MFClusHier()` 
+- `which.factor`: As above.
+
+For example:
+
+```{r, message=FALSE}
+MFnest(thisMFh, which.factor = "pen")
+```
+
+This is the same output as if the user had initially selected for variable "pen":
+
+```{r, message=FALSE}
+MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+                      which.factor = "pen")
+```
+
+# BOOTSTRAPPED MF {-}
+
+## General use. {-}
+
+The function `MFClusBootHier` allows for a bootstrapping approach to calculating
+mitigated fraction values. Input arguments are:
+
+*Same as in non-bootstrapped usage*
+
+- `formula`: The formula in form `y ~ x + a/b/c` where `y` is a continuous response, `x` is a factor with two levels of treatment, and `a/b/c` are variables corresponding to the clusters. It is expected that levels of "c" are nested within levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
+- `data`: The data table (`data.frame` or `tibble`) with variables as identified in formula. If there are extra variables, they will be ignored.
+- `compare`: A text vector of length two. The first position [1] is treated as the control or reference group two which members of the second position [2] are compared. If no value for the compare vector is supplied, it is assumed that the comparisons are between the `con` and `vac` treatment groups.
+- `which.factor`: One or more variable(s) of interest. This can be any of the variables from the data set. If none or NULL is specified, MF will be calculated for the whole tree.
+
+*Additional arguments*
+
+- `nboot`: Number of bootstrapping events.
+- `boot.unit`: Boolean whether to sample observations from within those of the
+same core.
+- `boot.cluster`: Boolean whether to sample which cores are present. If TRUE,
+some trees have all the cores represented in the original data while others only 
+have a subset.
+- `alpha`: Used to calculate empirical hpd by shortest length interval.
+- `seed`: Used to initialize random number generator for reproducibility.
+
+A "core" is the unique combination of variable factors from the data, including
+the `compare` designation. In the example used in this document one core would 
+be Room W/Pen A/Litter 11/vac and another would be Room Z/Pen F/Litter 22/con.
+Further discussion about the bootstrapping algorithm can be found in 
+[MF algorithms for hierarchical data]. 
+
+## Common coding examples. {-}
+
+Default case, looking only at whole tree and bootstrapping both at the cluster
+and unit levels:
+
+```{r, results='hide'}
+MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                             data = a)
+```
+
+Specifying what bootstrapping sampling to occur:
+```{r, results = 'hide'}
+MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                              data = a, boot.unit = TRUE, 
+                              boot.cluster = FALSE, which.factor = 'room')
+```
+
+Adjusting the number of bootstrapping events and alpha:
+```{r, results = 'hide', message=FALSE}
+MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                                  data = a, boot.unit = FALSE, 
+                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  which.factor = c('room', 'litter', 'All'))
+```
+
+## Basic output. {-}
+
+The default display of `MFClusBootHier` is a table with one row for each unique
+mitigated fraction calculated, just like in the non-bootstrapped approach. 
+However, instead of summary statistics about the calculated mitigated fraction,
+there are values summarizing the mitigated fraction from a bootstrapped
+population.
+
+```{r, message = FALSE}
+mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                                  data = a, boot.unit = FALSE, 
+                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  which.factor = c('room', 'litter', 'All'))
+mfboot_multiple
+```
+
+\clearpage
+
+The variable columns are:
+
+- `variable`: Which variable was considered when evaluating MF for the row.
+- `level`: A unique factor level of the variable which was considered when 
+evaluating MF for the row.
+- `median`: Median of mitigated fractions calculated from the bootstrapped 
+population.
+- `etlower`: Lower value of equal tailed range of mitigated fractions calculated 
+from the bootstrapped population.
+- `etupper`: Upper value of equal tailed range of mitigated fractions calculated 
+from the bootstrapped population.
+- `htlower`: Lower value of the high tailed range of mitigated fractions calculated 
+from the bootstrapped population.
+- `htupper`: Upper value of the high tailed range of mitigated fractions calculated 
+from the bootstrapped population.
+- `mf.obs`: Mitigated fraction value calculated from data input, without 
+bootstrapping.
+
+## Advanced usage. {-}
+
+This section covers the technical description of how to access **MFhBoot** and 
+`MFnestBoot()` function. For a full discussion of the algorithms of how **MFhBoot**, 
+`MFnestBoot()` and `MFClusBootHier` are related, or details of the bootstrapping
+algorithm, see [MF algorithms for hierarchical data].
+
+### Bootstrapping step output. {-}
+
+The bootstrapping stage is the most computationally intensive, so a user may
+wish to bypass this step subsequently if the only change is what values are 
+being passed to the `which.factor` argument. Access bootstrapping step outputs
+using the **MFhBoot** field of the output object. For example:
+
+```{r, message=FALSE}
+thisBootMFh <- mfboot_multiple$MFhBoot
+thisBootMFh
+```
+
+This output is a list of four objects:
+
+- `bootmfh`: The rank table for each of the bootstrapped data sets. Formatted
+as the rank table for non-bootstrapped data with designation of bootstrapping 
+instance.
+- `clusters`: Unique cores in the data.
+- `compare`: User-supplied value passed to compare argument.
+- `mfh`: The rank table from user-supplied data. Formatted as for non-bootstrapped data.
+
+### Reproducibility. {-}
+
+To bootstrap from the same data in a reproducible manner, numerical 
+value for the **seed** argument in `MFClusBootHier`. If no value for `seed` is 
+specified, the function defaults to a value of `sample(1:1e+05, 1)` and 
+subsequent iterations may yield different summaries.
+
+```{r, results='hide'}
+MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                              data = a, seed = 150)
+```
+
+Since the bootstrapping step is the most computationally intensive, a user may
+wish to use the bootstrapped rank table to recalculate mitigated fraction for 
+factors of different variables or a different `alpha` for calculating confidence 
+intervals. This is possible using the `MFnestBoot` function,
+which takes the following input arguments:
+
+- `x`: **MFhBoot** field output as from `MFClusBootHier`.
+- `which.factor`: As above.
+- `alpha`: As above.
+
+For example:
+
+```{r}
+MFnestBoot(thisBootMFh, which.factor = c('pen', 'All'), alpha = 0.1)
+```
+
+# APPENDIX {-}
+
+## Code for example data. {-}
+
+```{r, eval=FALSE}
+a <- data.frame(
+ room = paste('Room', rep(c('W', 'Z'), each = 24)),
+ pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
+ litter = paste('Litter', rep(11:22, each = 4)),
+ tx = rep(rep(c('vac', 'con'), each = 2), 12),
+ stringsAsFactors = FALSE
+ )
+set.seed(76153)
+a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
+a <- a[-48,]
+```
+
+## Session details for this manual. {-}
+
+```{r}
+sessionInfo()
+```
+
+
+
+
