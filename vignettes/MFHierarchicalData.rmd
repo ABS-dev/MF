@@ -60,7 +60,8 @@ written.
 
 ```{r, expdesign, echo = FALSE}
 kable(a, align = "c", row.names = FALSE, 
-  caption = "Nested hierarchical data structure.") %>%
+  caption = "Nested hierarchical data structure.",
+  format = 'latex') %>%
   kable_styling('bordered', full_width = FALSE, font_size = 8) %>%  
   collapse_rows(columns = 1:4, valign = "middle")
 ```
