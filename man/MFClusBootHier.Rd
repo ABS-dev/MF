@@ -6,7 +6,7 @@
 \usage{
 MFClusBootHier(formula, data, compare = c("con", "vac"), nboot = 10000,
   boot.unit = TRUE, boot.cluster = TRUE, which.factor = "All",
-  alpha = 0.05)
+  alpha = 0.05, seed = sample(1:1e+05, 1))
 }
 \arguments{
 \item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a continuous 
@@ -33,6 +33,9 @@ Default is ’All’, to sum over entire tree.}
 
 \item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
 of mitigated fraction.}
+
+\item{seed}{Passed to \code{\link{MFhBoot}} to to initialize random number 
+generator for reproducibility.}
 }
 \value{
 A list with the following elements: \cr \cr

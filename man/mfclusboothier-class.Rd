@@ -13,6 +13,17 @@ Class mfclusboothier is created from output of function
 MFClusBootHier.
 }
 
+\section{Fields}{
+
+\itemize{
+\item{\code{MFhBoot: }}{output from MFhBoot. A list.}
+\item{\code{MFnestBoot: }}{output from MFnestBoot. A list.}
+}
+}
+
+\seealso{
+\code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
+}
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
