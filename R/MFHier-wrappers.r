@@ -68,6 +68,8 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #' Default is ’All’, to sum over entire tree.
 #' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
 #' of mitigated fraction.
+#' @param seed Passed to \code{\link{MFhBoot}} to to initialize random number 
+#' generator for reproducibility.
 #' @return A list with the following elements: \cr \cr
 #' \itemize{
 #' \item \strong{MFhBoot} as output from \code{\link{MFhBoot}}.
@@ -94,8 +96,11 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #' thismf1            
 MFClusBootHier <- function(formula, data, compare = c('con', 'vac'), 
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
-                           which.factor = 'All', alpha = 0.05){
-  thisbootmfh <- MFhBoot(formula, data, compare, nboot, boot.unit, boot.cluster)
+                           which.factor = 'All', alpha = 0.05, 
+  seed = sample(1:1e+05, 1)){
+  thisbootmfh <- MFhBoot(formula = formula, data = data, compare = compare, 
+    nboot = nboot, boot.unit = boot.unit, boot.cluster = boot.cluster,
+    seed = seed)
   out <- mfclusboothier$new(MFhBoot = thisbootmfh, MFnestBoot = MFnestBoot(thisbootmfh, 
                                                       which.factor, alpha))
   return(out)
