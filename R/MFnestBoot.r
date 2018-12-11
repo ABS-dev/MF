@@ -204,7 +204,7 @@ MFhBoot <- function(formula, data,
       ungroup() %>%
       select(-clusterID)
   }
-  return(list(bootmfh = budat, clusters = indivclus, compare = compare, mfh = MFh(formula, data, compare)))
+  return(list(bootmfh = budat, clusters = indivclus, compare = compare, mfh = MFh(formula, data, compare, seed = seed)))
 }
 
 #' @title MFnestBoot
@@ -325,5 +325,5 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
     mutate(variable = fct_relevel(variable, which.factor)) %>%
     arrange(variable)
 
-  return(list(mfnest_details = mfnest_all, mfnest_summary = mfnest_summary))
+  return(list(mfnest_details = mfnest_all, mfnest_summary = mfnest_summary, seed = seed))
 }
