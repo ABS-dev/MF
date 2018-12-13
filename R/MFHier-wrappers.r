@@ -68,6 +68,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' Default is ’All’, to sum over entire tree.
 #' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
 #' of mitigated fraction.
+#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return A list with the following elements: \cr \cr
 #' \itemize{
 #' \item \strong{MFhBoot} as output from \code{\link{MFhBoot}}.
@@ -88,17 +89,17 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' set.seed(76153)
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
-#' set.seed(12345)
 #' thismf1 <- MFClusBootHier(lung ~ tx + room/pen/litter, a, nboot = 10000,
-#'                  boot.cluster = TRUE, boot.unit = TRUE)
+#'                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 #' thismfhboot <- thismf1$MFhBoot
 #' thismfhboot$bootmfh
 #' thismf1$MFnestBoot                 
 MFClusBootHier <- function(formula, data, compare = c('con', 'vac'), 
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
-                           which.factor = 'All', alpha = 0.05){
-  thisbootmfh <- MFhBoot(formula, data, compare, nboot, boot.unit, boot.cluster)
+                           which.factor = 'All', alpha = 0.05, seed = sample(1:100000, 1)){
+  thisbootmfh <- MFhBoot(formula, data, compare, nboot, boot.unit, boot.cluster, seed)
   out <- list(MFhBoot = thisbootmfh, MFnestBoot = MFnestBoot(thisbootmfh, which.factor, alpha))
   print(out$MFnestBoot$mfnest_summary)
+  print(paste('Seed = ', seed, sep = ''))
   invisible(out)
 }
