@@ -6,14 +6,14 @@
 \usage{
 MFClusBootHier(formula, data, compare = c("con", "vac"), nboot = 10000,
   boot.unit = TRUE, boot.cluster = TRUE, which.factor = "All",
-  alpha = 0.05)
+  alpha = 0.05, seed = sample(1:1e+05, 1))
 }
 \arguments{
 \item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-response, x is a factor with two levels of treatment, and a/b/c are variables 
-corresponding to the clusters. It is expected that levels of "c" are nested 
-within levels of "b". Nesting is assumed to be in order, left to right, highest 
-to lowest.}
+response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+corresponding to the clusters. Nesting is assumed to be in order, left to right,
+highest to lowest. So a single level of "a" will contain multiple levels of 
+"b" and a single level of "b" will contain multiple levels of "c".}
 
 \item{data}{a data.frame or tibble with the variables specified in formula. 
 Additional variables will be ignored.}
@@ -33,6 +33,9 @@ Default is ’All’, to sum over entire tree.}
 
 \item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
 of mitigated fraction.}
+
+\item{seed}{Passed to \code{\link{MFhBoot}} to to initialize random number 
+generator for reproducibility.}
 }
 \value{
 A list with the following elements: \cr \cr

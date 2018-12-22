@@ -2,9 +2,10 @@
 #' @name MFhBoot
 #' @description Calculate rank tables for MF using bootstrapping.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous response, 
-#' x is a factor with two levels of treatment, and a/b/c are variables corresponding 
-#' to the clusters. It is expected that levels of "c" are nested within levels of "b". 
-#' Nesting is assumed to be in order, left to right, highest to lowest.
+#' x is a factor with two levels of treatment, and a/b/c are grouping variables 
+#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
+#' highest to lowest. So a single level of "a" will contain multiple levels of 
+#' "b" and a single level of "b" will contain multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula. 
 #' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control 
@@ -222,10 +223,11 @@ MFhBoot <- function(formula, data,
 #' @name MFnestBoot
 #' @description MFnest using bootstrapping
 #' @param x output from \code{\link{MFhBoot}}
-#' @param which.factor Which variables to include in the mitigated fraction summation.
-#' Default is ’All’, to sum over entire tree.
-#' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper 
-#' and high tailed lower 
+#' @param which.factor one or more grouping variable(s) of interest. This can be any of 
+#' the core or nest variables from the data set. A MF value will be calculated for
+#' each level of the variable(s) specified. Default is ’All’, to sum over entire tree.
+#' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate eq tailed upper 
+#' and high lower 
 #' of mitigated fraction
 #' @return A list with the following elements: \cr
 #' \describe{
@@ -239,23 +241,10 @@ MFhBoot <- function(formula, data,
 #' \item \code{median} Median of MFs from all of the bootstrap events.
 #' \item \code{etlower} Lower value of equal tailed range.
 #' \item \code{etupper} Upper value of equal tailed range.
-#' \item \code{htlower} Lower value of the high tailed range.
-#' \item \code{htupper} Upper value of the high tailed range.
+#' \item \code{hdlower} Lower value of the highest posterior density range.
+#' \item \code{hdupper} Upper value of the highest posterior density range.
 #' \item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
 #' }}
-#' }
-#'  
-#' following variables for each 
-#' 
-#' a table with one row for each level of the variable specified in \code{which.factor} and including
-#' the following variables: \cr
-#' \describe{
-#' \item{median}{median mitigated fraction across all bootstrapping instances.}
-#' \item{etlower}{equal tailed lower of the mitigated fraction across all bootstrapping instances.}
-#' \item{etupper}{equal tailed upper of the mitigated fraction across all bootstrapping instances.}
-#' \item{htlower}{high tailed lower of the mitigated fraction across all bootstrapping instances.}
-#' \item{htupper}{high tailed upper of the mitigated fraction across all bootstrapping instances.}
-#' \item{mf.obs}{mitigated fraction using \code{MFnest(x$mfh, which.factor)}, no bootstrapping.}
 #' }
 #' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
 #' @export
@@ -326,8 +315,8 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),
-              htlower = MF:::emp.hpd(MF, alpha = alpha)[1],
-              htupper = MF:::emp.hpd(MF, alpha = alpha)[2]) %>%
+              hdlower = MF:::emp.hpd(MF, alpha = alpha)[1],
+              hdupper = MF:::emp.hpd(MF, alpha = alpha)[2]) %>%
     full_join(MFnest(x$mfh, which.factor = which.factor) %>%
                 select(variable, level, MF) %>%
                 rename(mf.obs = 'MF') %>%

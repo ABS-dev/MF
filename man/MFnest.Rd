@@ -7,12 +7,12 @@
 MFnest(Y, which.factor = "All")
 }
 \arguments{
-\item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl} output from \code{\link{MFh}} or
-output list from MFh.}
+\item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl} 
+output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.}
 
-\item{which.factor}{one or more variable(s) of interest. This can be any of the core or nest variables
-from the data set. If none or \code{All} is specified, MF will be calculated for the whole 
-tree.}
+\item{which.factor}{one or more grouping variable(s) of interest. This can be any of 
+the core or nest variables from the data set. If none or \code{All} is 
+specified, a summary MF will be calculated for the whole tree.}
 }
 \value{
 A tibble with each unique level of a variable as a row. Other values 
@@ -29,7 +29,7 @@ in this row.}
 \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of 
 \code{\link{mfhierdata}} object output by \code{\link{MFh}}
                    for this particular variable-level combination.}
-\item{\code{_medResp}}{Median of responses for each comparison group for 
+\item{\code{_medResp}}{Median of observed responses for each comparison group for 
 this particular variable-level combination.}
 }
 }

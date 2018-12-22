@@ -1,11 +1,12 @@
 #' @name MFClusHier
 #' @title MFClusHier
-#' @description Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single function.
+#' @description Calculate mitigated fraction directly from hierarchial nested data. 
+#' Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single function.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-#' response, x is a factor with two levels of treatment, and a/b/c are variables 
-#' corresponding to the clusters. It is expected that levels of "c" are nested 
-#' within levels of "b". Nesting is assumed to be in order, left to right, highest 
-#' to lowest.
+#' response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
+#'  highest to lowest. So a single level of "a" will contain multiple levels of 
+#'  "b" and a single level of "b" will contain multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula. 
 #' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control 
@@ -52,10 +53,10 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #' @name MFClusBootHier
 #' @description Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into a single function.
 #' @param formula formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-#' response, x is a factor with two levels of treatment, and a/b/c are variables 
-#' corresponding to the clusters. It is expected that levels of "c" are nested 
-#' within levels of "b". Nesting is assumed to be in order, left to right, highest 
-#' to lowest.
+#' response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
+#' highest to lowest. So a single level of "a" will contain multiple levels of 
+#' "b" and a single level of "b" will contain multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula. 
 #' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control 
