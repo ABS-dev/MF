@@ -2,7 +2,7 @@
 % Please edit documentation in R/MFClusBoot.r
 \name{MFClusBoot}
 \alias{MFClusBoot}
-\title{Boostrap MF CI from clustered data}
+\title{Bootstrap MF CI from clustered data}
 \usage{
 MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
   boot.unit = TRUE, b = 100, B = 100, alpha = 0.05, hpd = TRUE,
@@ -37,11 +37,14 @@ MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE,
 a \code{\link{mfbootcluster-class}} data object
 }
 \description{
-Estimates bootstrap confidence intervals for the mitigated fraction from clustered or stratified data.
+Estimates bootstrap confidence intervals for the mitigated 
+fraction from clustered or stratified data.
 }
 \details{
-Resamples the data and produces bootstrap confidence intervals. Equal tailed intervals are estimated by the 
-percentile method. Highest density intervals are estimated by selecting the shortest of all possible intervals.
+Resamples the data and produces bootstrap confidence intervals. 
+Equal tailed intervals are estimated by the 
+percentile method. Highest density intervals are estimated by selecting the 
+shortest of all possible intervals.
 }
 \note{
 If input data contains more than two levels of treatment, rows associated with unused treatment levels will be removed. \cr

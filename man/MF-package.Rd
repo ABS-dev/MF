@@ -14,7 +14,7 @@ the USDA Center for Veterinary Biologics. \cr
 Package: \tab MF-package\cr
 Type: \tab Package\cr
 Version: \tab 4.3.5\cr
-Date: \tab XXXX-XX-XX\cr
+Date: \tab 21-Dec-2018\cr
 License: \tab MIT \cr
 LazyLoad: \tab yes\cr
 }

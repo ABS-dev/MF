@@ -8,10 +8,10 @@ MFClusHier(formula, data, compare = c("con", "vac"), which.factor = "All")
 }
 \arguments{
 \item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous 
-response, x is a factor with two levels of treatment, and a/b/c are variables 
-corresponding to the clusters. It is expected that levels of "c" are nested 
-within levels of "b". Nesting is assumed to be in order, left to right, highest 
-to lowest.}
+response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+corresponding to the clusters. Nesting is assumed to be in order, left to right,
+ highest to lowest. So a single level of "a" will contain multiple levels of 
+ "b" and a single level of "b" will contain multiple levels of "c".}
 
 \item{data}{a data.frame or tibble with the variables specified in formula. 
 Additional variables will be ignored.}
@@ -31,10 +31,11 @@ A list with the following elements: \cr \cr
 }
 }
 \description{
+Calculate mitigated fraction directly from hierarchial nested data. 
 Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 }
 \examples{

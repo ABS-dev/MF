@@ -9,7 +9,7 @@
 mfmp$new(ci, x, what, alpha, tdist, df)
 }
 \description{
-Class mfmp is created from output of funtion MFmp
+Class mfmp is created from output of function MFmp
 }
 
 \section{Fields}{

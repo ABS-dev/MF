@@ -1,11 +1,12 @@
 #' @name MFClusHier
 #' @title MFClusHier
-#' @description Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single function.
+#' @description Calculate mitigated fraction directly from hierarchial nested data. 
+#' Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single function.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-#' response, x is a factor with two levels of treatment, and a/b/c are variables 
-#' corresponding to the clusters. It is expected that levels of "c" are nested 
-#' within levels of "b". Nesting is assumed to be in order, left to right, highest 
-#' to lowest.
+#' response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
+#'  highest to lowest. So a single level of "a" will contain multiple levels of 
+#'  "b" and a single level of "b" will contain multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula. 
 #' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control 
@@ -18,7 +19,7 @@
 #' \item \strong{MFh} as output from \code{\link{MFh}}.
 #' \item \strong{MFnest} as output from \code{\link{MFnest}}.
 #' }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 #' tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 #' @export
 #' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
@@ -40,11 +41,11 @@
 #' aCore$data
 #' aCore$formula
 #' aCore$compare
-MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 'All'){
+MFClusHier <- function(formula, data, compare = c("con", "vac"), 
+                       which.factor = 'All'){
   aCore <- MFh(formula, data, compare)
-  out <- list(MFh = aCore, MFnest = MFnest(aCore, which.factor))
-  print(out$MFnest)
-  invisible(out)
+  out <- mfclushier$new(MFh = aCore, MFnest = MFnest(aCore, which.factor))
+  return(out)
 }
 
 
@@ -52,10 +53,10 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' @name MFClusBootHier
 #' @description Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into a single function.
 #' @param formula formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-#' response, x is a factor with two levels of treatment, and a/b/c are variables 
-#' corresponding to the clusters. It is expected that levels of "c" are nested 
-#' within levels of "b". Nesting is assumed to be in order, left to right, highest 
-#' to lowest.
+#' response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
+#' highest to lowest. So a single level of "a" will contain multiple levels of 
+#' "b" and a single level of "b" will contain multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula. 
 #' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control 
@@ -68,13 +69,14 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' Default is ’All’, to sum over entire tree.
 #' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
 #' of mitigated fraction.
-#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
+#' @param seed Passed to \code{\link{MFhBoot}} to to initialize random number 
+#' generator for reproducibility.
 #' @return A list with the following elements: \cr \cr
 #' \itemize{
 #' \item \strong{MFhBoot} as output from \code{\link{MFhBoot}}.
 #' \item \strong{MFnestBoot} as output from \code{\link{MFnestBoot}}.
 #' }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note \code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
 #' tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 #' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}.
 #' @export
@@ -90,16 +92,15 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 #' thismf1 <- MFClusBootHier(lung ~ tx + room/pen/litter, a, nboot = 10000,
-#'                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
-#' thismfhboot <- thismf1$MFhBoot
-#' thismfhboot$bootmfh
-#' thismf1$MFnestBoot                 
+#' thismf1            
 MFClusBootHier <- function(formula, data, compare = c('con', 'vac'), 
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
-                           which.factor = 'All', alpha = 0.05, seed = sample(1:100000, 1)){
-  thisbootmfh <- MFhBoot(formula, data, compare, nboot, boot.unit, boot.cluster, seed)
-  out <- list(MFhBoot = thisbootmfh, MFnestBoot = MFnestBoot(thisbootmfh, which.factor, alpha))
-  print(out$MFnestBoot$mfnest_summary)
-  print(paste('Seed = ', seed, sep = ''))
-  invisible(out)
+                           which.factor = 'All', alpha = 0.05, 
+  seed = sample(1:1e+05, 1)){
+  thisbootmfh <- MFhBoot(formula = formula, data = data, compare = compare, 
+    nboot = nboot, boot.unit = boot.unit, boot.cluster = boot.cluster,
+    seed = seed)
+  out <- mfclusboothier$new(MFhBoot = thisbootmfh, MFnestBoot = MFnestBoot(thisbootmfh, 
+                                                      which.factor, alpha))
+  return(out)
 }

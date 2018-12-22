@@ -9,9 +9,10 @@ MFhBoot(formula, data, compare = c("con", "vac"), nboot = 10000,
 }
 \arguments{
 \item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous response, 
-x is a factor with two levels of treatment, and a/b/c are variables corresponding 
-to the clusters. It is expected that levels of "c" are nested within levels of "b". 
-Nesting is assumed to be in order, left to right, highest to lowest.}
+x is a factor with two levels of treatment, and a/b/c are grouping variables 
+corresponding to the clusters. Nesting is assumed to be in order, left to right,
+highest to lowest. So a single level of "a" will contain multiple levels of 
+"b" and a single level of "b" will contain multiple levels of "c".}
 
 \item{data}{a data.frame or tibble with the variables specified in formula. 
 Additional variables will be ignored.}
@@ -44,11 +45,13 @@ Calculate rank tables for MF using bootstrapping.
 }
 \examples{
 set.seed(76153)
-a <- data_frame(room = paste('Room', rep(c('W','Z'), each = 24)),
+a <- data.frame(room = paste('Room', rep(c('W','Z'), each = 24)),
                 pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
                 litter = paste('Litter', rep(11:22, each = 4)),
-                tx = rep(rep(c('vac', 'con'), each = 2), 12)) \%>\%
-  mutate(lung = ifelse(tx == 'vac', rnorm(24, 5, 1.3), rnorm(24, 7, 1.3)))
+                tx = rep(rep(c('vac', 'con'), each = 2), 12), 
+                stringsAsFactors = FALSE) 
+a[a$tx == 'vac', 'lung'] <-  rnorm(24, 5, 1.3)
+a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
 a
 
 formula <- lung ~ tx + room/pen/litter

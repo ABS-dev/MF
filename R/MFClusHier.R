@@ -1,9 +1,10 @@
 #' @name MFh
 #' @title Identify ranks for use when evaluating MF for nested hierarchy.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-#' response, x is a factor with two levels of treatment, and a/b/c are variables 
-#' corresponding to the clusters. It is expected that levels of "c" are nested within 
-#' levels of "b". Nesting is assumed to be in order, left to right, highest to lowest.
+#' response, x is a factor with two levels of treatment, and a/b/c are vgrouping variables 
+#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
+#' highest to lowest. So a single level of "a" will contain multiple levels of 
+#' "b" and a single level of "b" will contain multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula. 
 #' Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - compare[1] is the control or 
@@ -109,11 +110,11 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
-#' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl} output from \code{\link{MFh}} or
-#'  output list from MFh.
-#' @param which.factor one or more variable(s) of interest. This can be any of the core or nest variables
-#' from the data set. If none or \code{All} is specified, MF will be calculated for the whole 
-#' tree.
+#' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl} 
+#' output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.
+#' @param which.factor one or more grouping variable(s) of interest. This can be any of 
+#' the core or nest variables from the data set. If none or \code{All} is 
+#' specified, a summary MF will be calculated for the whole tree.
 #' @return A tibble with each unique level of a variable as a row. Other values 
 #' include: \cr
 #' \describe{
@@ -128,7 +129,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of 
 #' \code{\link{mfhierdata}} object output by \code{\link{MFh}}
 #'                    for this particular variable-level combination.}
-#' \item{\code{_medResp}}{Median of responses for each comparison group for 
+#' \item{\code{_medResp}}{Median of observed responses for each comparison group for 
 #' this particular variable-level combination.}
 #' }
 #' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
@@ -243,10 +244,10 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' @export
 MFnest <- function(Y, which.factor = 'All') {
   ## restructure if using output from MFh
-  if(class(Y)[1] == 'mfhierdata'){
+  if (class(Y)[1] == 'mfhierdata') {
     input <- Y
     Y <- input$coreTbl
-  } else if(class(Y)[1] != 'tbl_df'){
+  } else if (class(Y)[1] != 'tbl_df') {
     Y <- as_tibble(Y)
   }
   
@@ -273,7 +274,6 @@ MFnest <- function(Y, which.factor = 'All') {
     ungroup()
 
   ## inform user of complete separation
-  ## TODO: this message might need to go away for bootstrap calls to this function.
   if(1.0 %in% round(out$MF, digits = 1) ){
     out %>%
     filter(round(MF, digits = 1) == 1.0) %>%
@@ -284,12 +284,10 @@ MFnest <- function(Y, which.factor = 'All') {
   }
   
   ## inform user why medians are not available
-  ## TODO: this message might need to go away for bootstrap calls to this function.
   if(!exists('input')){
     message('Skipping median summary, no response data provided.') 
   } else{
     
-  ## TODO: this needs to go in a helper function
     thisdata <- input$data
     compare <- input$compare
     names(compare) <- paste0(input$compare, "_medResp", sep = '')

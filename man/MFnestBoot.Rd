@@ -9,11 +9,12 @@ MFnestBoot(x, which.factor = "All", alpha = 0.05)
 \arguments{
 \item{x}{output from \code{\link{MFhBoot}}}
 
-\item{which.factor}{Which variables to include in the mitigated fraction summation.
-Default is ’All’, to sum over entire tree.}
+\item{which.factor}{one or more grouping variable(s) of interest. This can be any of 
+the core or nest variables from the data set. A MF value will be calculated for
+each level of the variable(s) specified. Default is ’All’, to sum over entire tree.}
 
-\item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper 
-and high tailed lower 
+\item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate eq tailed upper 
+and high lower 
 of mitigated fraction}
 }
 \value{
@@ -29,23 +30,10 @@ Other variables include: \cr
 \item \code{median} Median of MFs from all of the bootstrap events.
 \item \code{etlower} Lower value of equal tailed range.
 \item \code{etupper} Upper value of equal tailed range.
-\item \code{htlower} Lower value of the high tailed range.
-\item \code{htupper} Upper value of the high tailed range.
+\item \code{hdlower} Lower value of the highest posterior density range.
+\item \code{hdupper} Upper value of the highest posterior density range.
 \item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
 }}
-}
- 
-following variables for each 
-
-a table with one row for each level of the variable specified in \code{which.factor} and including
-the following variables: \cr
-\describe{
-\item{median}{median mitigated fraction across all bootstrapping instances.}
-\item{etlower}{equal tailed lower of the mitigated fraction across all bootstrapping instances.}
-\item{etupper}{equal tailed upper of the mitigated fraction across all bootstrapping instances.}
-\item{htlower}{high tailed lower of the mitigated fraction across all bootstratpping instances.}
-\item{htupper}{high tailed upper of the mitigated fraction across all bootstrapping instances.}
-\item{mf.obs}{mitigated fraction using \code{MFnest(x$mfh, which.factor)}, no bootstrapping.}
 }
 }
 \description{
