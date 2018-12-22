@@ -10,7 +10,8 @@ License: MIT + file LICENSE
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.4.4)
+    R (>= 3.4.4),
+    knitr
 Imports:
     methods,
     dplyr (>= 0.7.1),
@@ -35,3 +36,4 @@ Collate:
     'MFSubj.r'
     'MFHier-wrappers.r'
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
