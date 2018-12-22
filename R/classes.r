@@ -240,7 +240,6 @@ mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
 #' @keywords documentation
 #' @family mfclusboothier
 #' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
-#' 
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 mfclusboothier <- setRefClass("mfclusboothier", fields = list(MFhBoot = "list",
   MFnestBoot = "list"))
