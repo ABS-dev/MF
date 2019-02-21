@@ -90,8 +90,9 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #' )
 #' set.seed(76153)
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
-#' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
+#' a$lung[a$tx=='con'] <- rnorm(24,7,1.3) 
 #' thismf1 <- MFClusBootHier(lung ~ tx + room/pen/litter, a, nboot = 10000,
+#'                        boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 #' thismf1            
 MFClusBootHier <- function(formula, data, compare = c('con', 'vac'), 
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,

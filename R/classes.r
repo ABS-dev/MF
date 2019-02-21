@@ -3,6 +3,7 @@ setClassUnion("listORNULL", c("list", "NULL"))
 setClassUnion("numericORNULL", c("numeric", "NULL"))
 setClassUnion("numericORarray", c("numeric", "array"))
 setClassUnion("numericORarrayORtable", c("numeric", "array", "table"))
+setClassUnion("numericORinteger", c("numeric", "integer"))
 
 #' @name mf-class
 #' @title Class mf
@@ -21,7 +22,7 @@ setClassUnion("numericORarrayORtable", c("numeric", "array", "table"))
 #' @family mf
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 mf <- setRefClass("mf", fields = list(nboot = "numeric", alpha = "numeric",
-  seed = "integer", compare = "character", rng = "character"))
+  seed = "numericORinteger", compare = "character", rng = "character"))
 
 #' @name mfboot-class
 #' @title Class mfboot
