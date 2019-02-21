@@ -21,7 +21,9 @@ Imports:
     forcats,
     purrr
 Suggests:
-    rmarkdown
+    rmarkdown,
+    tidyverse,
+    kableExtra
 Collate:
     'aaa.r'
     'classes.r'
