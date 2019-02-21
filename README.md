@@ -17,6 +17,8 @@ install_github("ABS-dev/MF", ref = "4.3.5")
   
 2. Installing work-in-progress on the main development branch 
 
+*Travis:* [![Travis Build Status](https://travis-ci.org/ABS-dev/MF.svg?branch=master)](https://travis-ci.org/ABS-dev/MF)
+
 ```
 require(devtools)
 install_github("ABS-dev/MF")
