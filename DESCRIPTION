@@ -23,7 +23,8 @@ Imports:
 Suggests:
     rmarkdown,
     tidyverse,
-    kableExtra
+    kableExtra,
+    testthat
 Collate:
     'aaa.r'
     'classes.r'
