@@ -20,6 +20,8 @@ Imports:
     tidyr,
     forcats,
     purrr
+Suggests:
+    rmarkdown
 Collate:
     'aaa.r'
     'classes.r'
