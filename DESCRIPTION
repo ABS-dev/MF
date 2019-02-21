@@ -1,8 +1,8 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.3.5
-Date: 21 December 2018
+Version: 4.3.6
+Date: XX XXXX XX
 Author: David Siev
 Maintainer: Marie Vendettuoli <marie.c.vendettuoli@aphis.usda.gov>
 Description: Calculate MF (mitigated fraction) with clustering and bootstrap options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only
@@ -35,5 +35,5 @@ Collate:
     'MFr.r'
     'MFSubj.r'
     'MFHier-wrappers.r'
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr

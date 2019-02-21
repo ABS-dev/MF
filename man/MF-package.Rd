@@ -13,8 +13,8 @@ the USDA Center for Veterinary Biologics. \cr
 \tabular{ll}{
 Package: \tab MF-package\cr
 Type: \tab Package\cr
-Version: \tab 4.3.5\cr
-Date: \tab 21-Dec-2018\cr
+Version: \tab 4.3.6\cr
+Date: \tab XX-XXX-XXXX\cr
 License: \tab MIT \cr
 LazyLoad: \tab yes\cr
 }
