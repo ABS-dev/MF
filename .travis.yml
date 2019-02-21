@@ -1,2 +1,5 @@
-language: R
+language: r
+r: 
+  - 3.4.4
+  
 cache: packages
