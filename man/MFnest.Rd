@@ -33,6 +33,9 @@ in this row.}
 this particular variable-level combination.}
 }
 }
+\description{
+Summations to calculate the MF for nested data from a rank table.
+}
 \note{
 Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 tree. Nest variables are those above the core. All refers to a summary of the entire tree.

@@ -26,4 +26,5 @@ Class mfclushier is created from output of function MFClusHier
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
+\concept{mfclushier}
 \keyword{documentation}

@@ -30,4 +30,5 @@ Class mfmp is created from output of function MFmp
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
+\concept{mfmp}
 \keyword{documentation}

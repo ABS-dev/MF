@@ -29,4 +29,5 @@ Class mfhierdata is created from output of function MFh
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
+\concept{mfhierdata}
 \keyword{documentation}

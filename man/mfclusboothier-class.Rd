@@ -27,4 +27,5 @@ MFClusBootHier.
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
+\concept{mfclusboothier}
 \keyword{documentation}

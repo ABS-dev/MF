@@ -29,4 +29,5 @@ Class mfcomponents is created from output of function MFSubj
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
+\concept{mfcomponents}
 \keyword{documentation}

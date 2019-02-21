@@ -37,6 +37,9 @@ A \code{\link{mfhierdata}} object, which is a list of three items. \cr
 \item{formula}{The formula as input by user.}
 }
 }
+\description{
+Identify ranks for use when evaluating MF for nested hierarchy.
+}
 \note{
 Core variable is the variable corresponding to the lowest nodes of the hierarchial 
 tree. Nest variables are those above the core.

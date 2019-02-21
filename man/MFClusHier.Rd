@@ -4,7 +4,8 @@
 \alias{MFClusHier}
 \title{MFClusHier}
 \usage{
-MFClusHier(formula, data, compare = c("con", "vac"), which.factor = "All")
+MFClusHier(formula, data, compare = c("con", "vac"),
+  which.factor = "All")
 }
 \arguments{
 \item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous 

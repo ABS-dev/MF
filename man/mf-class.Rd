@@ -31,4 +31,5 @@ Other mf: \code{\link{mfboot-class}},
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
+\concept{mf}
 \keyword{documentation}

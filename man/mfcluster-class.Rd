@@ -37,4 +37,5 @@ Class mfcluster is created from output of function MFClus
 \author{
 Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
 }
+\concept{mfcluster}
 \keyword{documentation}
