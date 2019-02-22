@@ -7,7 +7,6 @@ setClassUnion("numericORinteger", c("numeric", "integer"))
 
 #' @name mf-class
 #' @title Class mf
-#' @usage mf$new(nboot, alpha, seed, compare, rng)
 #' @description Parent class for package MF data objects.
 #' @docType class
 #' @section Fields: 
@@ -26,7 +25,6 @@ mf <- setRefClass("mf", fields = list(nboot = "numeric", alpha = "numeric",
 
 #' @name mfboot-class
 #' @title Class mfboot
-#' @usage mfboot$new(nboot, alpha, seed, compare, rng, sample, stat, stuff)
 #' @description class for data objects produced by MFBoot, contains class mf with 
 #' the two additional fields \emph{stat} and \emph{stuff}.
 #' @docType class
@@ -52,8 +50,6 @@ mfboot <- setRefClass("mfboot", contains = "mf",
 
 #' @name mfhlboot-class
 #' @title Class mfhlboot
-#' @usage mfhlboot$new(nboot, alpha, seed, compare, rng, sample, MFstat, HLstat,
-#' QDIFstat, QXstat, QYstat)
 #' @description class for data objects produced by HLBoot, contains class mf with
 #' additional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
 #' @docType class
@@ -88,7 +84,6 @@ mfhlboot <- setRefClass("mfhlboot", contains = "mf",
 	
 #' @name mfmp-class
 #' @title Class mfmp
-#' @usage mfmp$new(ci, x, what, alpha, tdist, df)
 #' @description Class mfmp is created from output of function MFmp
 #' @docType class
 #' @section Fields:
@@ -110,8 +105,6 @@ mfmp <- setRefClass("mfmp",
 
 #' @name mfbootcluster-class
 #' @title Class mfbootcluster
-#' @usage mfbootcluster$new(nboot, alpha, seed, compare, rng, stat, what, excludedClusters,
-#' call, sample)
 #' @description Class mfbootcluster is created from output of function MFClusBoot
 #' @docType class
 #' @section Fields:
@@ -142,7 +135,6 @@ mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
 	
 #' @name mfcluster-class
 #' @title Class mfcluster
-#' @usage mfcluster$new(All, bycluster, excludedClusters, call, compare)
 #' @description Class mfcluster is created from output of function MFClus
 #' @docType class
 #' @section Fields:
@@ -171,7 +163,6 @@ mfcluster <- setRefClass("mfcluster", fields = list(All = "data.frame",
 	
 #' @name mfcomponents-class
 #' @title Class mfcomponents
-#' @usage mfcomponents$new(mf, x, y, subj, compare)
 #' @description Class mfcomponents is created from output of function MFSubj
 #' @docType class
 #' @section Fields:
@@ -191,7 +182,6 @@ mfcomponents <- setRefClass("mfcomponents", fields = list(mf = "numeric",
 
 #' @name mfhierdata-class
 #' @title Class mfhierdata
-#' @usage mfhierdata$new(coreTbl, data)
 #' @description Class mfhierdata is created from output of function MFh
 #' @docType class
 #' @section Fields:
@@ -212,7 +202,6 @@ mfhierdata <- setRefClass("mfhierdata", fields = list(coreTbl = "tbl",
 
 #' @name mfclushier-class
 #' @title Class mfclushier
-#' @usage mfclushier$new(MFh, MFnest)
 #' @description Class mfclushier is created from output of function MFClusHier
 #' @docType class
 #' @section Fields:
@@ -229,7 +218,6 @@ mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
 
 #' @name mfclusboothier-class
 #' @title Class mfclusboothier
-#' @usage mfclusboothier$new(MFhBoot, MFnestBoot)
 #' @description Class mfclusboothier is created from output of function 
 #' MFClusBootHier.
 #' @docType class

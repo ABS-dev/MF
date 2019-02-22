@@ -11,9 +11,9 @@ MFnestBoot(x, which.factor = "All", alpha = 0.05)
 
 \item{which.factor}{one or more grouping variable(s) of interest. This can be any of 
 the core or nest variables from the data set. A MF value will be calculated for
-each level of the variable(s) specified. Default is ’All’, to sum over entire tree.}
+each level of the variable(s) specified. Default is 'All', to sum over entire tree.}
 
-\item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate eq tailed upper 
+\item{alpha}{Passed to \code{emp.hpd} to calculate eq tailed upper 
 and high lower 
 of mitigated fraction}
 }

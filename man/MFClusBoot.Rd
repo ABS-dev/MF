@@ -55,8 +55,8 @@ Clusters with missing treatments will be excluded. See \code{\link{mfbootcluster
 \examples{
 \dontrun{
 MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
-Bootstrapping clusters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-
+Bootstrapping clusters. . . . . . . . . . . . . . . . .
+ 
 Bootstrapping units. . . . . . . . . . . . . . . . . . 
 
 10000 bootstrap samples of clusters and units in treatment in cluster

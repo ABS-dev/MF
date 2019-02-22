@@ -20,3 +20,4 @@ importFrom(stats, "median", "model.frame", "na.omit", "pnorm",
              "qnorm", "qt", "quantile", "terms")
 importFrom("plyr", "ddply", ".", 'rbind.fill')
 importFrom('purrr', 'as_vector')
+importFrom('rlang', ':=')

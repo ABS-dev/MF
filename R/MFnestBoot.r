@@ -219,15 +219,17 @@ MFhBoot <- function(formula, data,
   return(list(bootmfh = budat, clusters = indivclus, compare = compare, mfh = MFh(formula, data, compare), seed = seed))
 
 }
-
+# to keep R CMD happy
+utils::globalVariables(c('clusterID', 'newClus', 'variable', 'value', 'tmp'))
+  
 #' @title MFnestBoot
 #' @name MFnestBoot
 #' @description MFnest using bootstrapping
 #' @param x output from \code{\link{MFhBoot}}
 #' @param which.factor one or more grouping variable(s) of interest. This can be any of 
 #' the core or nest variables from the data set. A MF value will be calculated for
-#' each level of the variable(s) specified. Default is ’All’, to sum over entire tree.
-#' @param alpha Passed to \code{\link[MF]{emp.hpd}} to calculate eq tailed upper 
+#' each level of the variable(s) specified. Default is 'All', to sum over entire tree.
+#' @param alpha Passed to \code{emp.hpd} to calculate eq tailed upper 
 #' and high lower 
 #' of mitigated fraction
 #' @return A list with the following elements: \cr
@@ -318,8 +320,8 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),
-              hdlower = MF:::emp.hpd(MF, alpha = alpha)[1],
-              hdupper = MF:::emp.hpd(MF, alpha = alpha)[2]) %>%
+              hdlower = emp.hpd(MF, alpha = alpha)[1],
+              hdupper = emp.hpd(MF, alpha = alpha)[2]) %>%
     full_join(MFnest(x$mfh, which.factor = which.factor) %>%
                 select(variable, level, MF) %>%
                 rename(mf.obs = 'MF') %>%
@@ -331,3 +333,7 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
 
   return(list(mfnest_details = mfnest_all, mfnest_summary = mfnest_summary, seed = x$seed))
 }
+
+# to keep R CMD happy
+utils::globalVariables(c('variable', 'level', 'bootID', 'w', 'u', 'n1n2',
+  'U', 'N1N2', 'MF'))

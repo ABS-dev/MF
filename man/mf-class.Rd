@@ -5,9 +5,6 @@
 \alias{mf-class}
 \alias{mf}
 \title{Class mf}
-\usage{
-mf$new(nboot, alpha, seed, compare, rng)
-}
 \description{
 Parent class for package MF data objects.
 }

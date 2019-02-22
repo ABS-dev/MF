@@ -64,7 +64,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
-  if(length(nests) == 1){
+  if (length(nests) == 1){
     stop("This is not nested hierarchy. See MFClus.")
   }
   core <- nests[length(nests)]
@@ -107,6 +107,9 @@ MFh <- function(formula, data, compare = c("con", "vac")){
   return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat, 
                         compare = compare, formula = formula))
 }
+# to keep R CMD happy
+utils::globalVariables(c('u', 'bootID', 'n1n2', 'w', 'variable', 'value', 'tmp',
+  'ntgroups', 'temp'))
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
@@ -317,4 +320,6 @@ MFnest <- function(Y, which.factor = 'All') {
   return(out)
 }
 
+# to keep R CMD happy
+utils::globalVariables(c('R', 'con_N', 'vac_N', 'tgroup', 'resp', 'medResp'))
 

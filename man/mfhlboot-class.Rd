@@ -5,10 +5,6 @@
 \alias{mfhlboot-class}
 \alias{mfhlboot}
 \title{Class mfhlboot}
-\usage{
-mfhlboot$new(nboot, alpha, seed, compare, rng, sample, MFstat, HLstat,
-QDIFstat, QXstat, QYstat)
-}
 \description{
 class for data objects produced by HLBoot, contains class mf with
 additional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}

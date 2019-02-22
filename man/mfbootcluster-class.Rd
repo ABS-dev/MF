@@ -5,10 +5,6 @@
 \alias{mfbootcluster-class}
 \alias{mfbootcluster}
 \title{Class mfbootcluster}
-\usage{
-mfbootcluster$new(nboot, alpha, seed, compare, rng, stat, what, excludedClusters,
-call, sample)
-}
 \description{
 Class mfbootcluster is created from output of function MFClusBoot
 }

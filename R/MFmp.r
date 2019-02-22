@@ -2,7 +2,6 @@
 #' @description Estimates mitigated fraction from matched pairs.
 #' @details Estimates \emph{MF} from matched pairs by the difference of multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
 #' @title Mitigated fraction from matched pairs
-#' @usage MFmp(formula=NULL, data=NULL, compare = c("con", "vac"), x=NULL, alpha=0.05, df=NULL, tdist=T)
 #' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.
 #' @param data Data frame
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared

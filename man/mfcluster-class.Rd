@@ -5,9 +5,6 @@
 \alias{mfcluster-class}
 \alias{mfcluster}
 \title{Class mfcluster}
-\usage{
-mfcluster$new(All, bycluster, excludedClusters, call, compare)
-}
 \description{
 Class mfcluster is created from output of function MFClus
 }

@@ -5,9 +5,6 @@
 \alias{mfclushier-class}
 \alias{mfclushier}
 \title{Class mfclushier}
-\usage{
-mfclushier$new(MFh, MFnest)
-}
 \description{
 Class mfclushier is created from output of function MFClusHier
 }

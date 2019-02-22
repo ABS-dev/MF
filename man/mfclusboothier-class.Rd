@@ -5,9 +5,6 @@
 \alias{mfclusboothier-class}
 \alias{mfclusboothier}
 \title{Class mfclusboothier}
-\usage{
-mfclusboothier$new(MFhBoot, MFnestBoot)
-}
 \description{
 Class mfclusboothier is created from output of function 
 MFClusBootHier.

@@ -5,9 +5,6 @@
 \alias{mfhierdata-class}
 \alias{mfhierdata}
 \title{Class mfhierdata}
-\usage{
-mfhierdata$new(coreTbl, data)
-}
 \description{
 Class mfhierdata is created from output of function MFh
 }

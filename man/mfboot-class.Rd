@@ -5,9 +5,6 @@
 \alias{mfboot-class}
 \alias{mfboot}
 \title{Class mfboot}
-\usage{
-mfboot$new(nboot, alpha, seed, compare, rng, sample, stat, stuff)
-}
 \description{
 class for data objects produced by MFBoot, contains class mf with 
 the two additional fields \emph{stat} and \emph{stuff}.

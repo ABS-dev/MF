@@ -5,9 +5,6 @@
 \alias{mfcomponents-class}
 \alias{mfcomponents}
 \title{Class mfcomponents}
-\usage{
-mfcomponents$new(mf, x, y, subj, compare)
-}
 \description{
 Class mfcomponents is created from output of function MFSubj
 }
