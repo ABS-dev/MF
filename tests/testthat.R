@@ -1,4 +1,4 @@
 library(testthat)
 library(MF)
 
-# test_check("MF")
+test_check("MF")

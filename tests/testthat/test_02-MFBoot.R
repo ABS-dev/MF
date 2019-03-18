@@ -18,10 +18,10 @@ test_that("output", {
                                                             median = 0.4496,
                                                             lower = 0.1520,
                                                             upper = 0.7088), 4),
-               tolerance = 0)
+               tolerance = 0.01)
   
   # sample
   expect_is(test2$sample, 'numeric')
-  expect_equal(length(test2$sample), expected = 10000, tolerance = 0)
+  expect_equal(length(test2$sample), expected = 10000, tolerance = 0.01)
   
 })
