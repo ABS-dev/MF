@@ -25,7 +25,8 @@ Suggests:
     tidyverse,
     kableExtra,
     testthat,
-    knitr
+    knitr,
+    covr
 Collate:
     'aaa.r'
     'classes.r'
