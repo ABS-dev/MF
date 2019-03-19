@@ -13,6 +13,7 @@ install:
 # Adapt as necessary starting from here
 
 environment:
+  USE_RTOOLS: true
   global:
     WARNINGS_ARE_ERRORS: 1
     _R_CHECK_SYSTEM_CLOCK_: FALSE
