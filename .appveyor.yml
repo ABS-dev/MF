@@ -4,9 +4,8 @@ init:
         Get-Date
         $ErrorActionPreference = "Stop"
 install:
-  ps: |
-#        Import-Module '.\scripts\appveyor-tool.ps1'
-        Bootstrap
+  ps: Bootstrap
+  
 # Adapt as necessary starting from here
 
 environment:
