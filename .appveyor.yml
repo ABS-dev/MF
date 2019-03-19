@@ -13,18 +13,16 @@ install:
 # Adapt as necessary starting from here
 
 environment:
-  USE_RTOOLS: true
+  
   global:
-    WARNINGS_ARE_ERRORS: 1
     _R_CHECK_SYSTEM_CLOCK_: FALSE
+    USE_RTOOLS: true
+    NOT_CRAN: true
+    PKGTYPE: win.binary
 
   matrix:
   - R_VERSION: 3.4.4
     R_ARCH: x64
-    GCC_PATH: mingw_64
-    
-  - R_VERSION: patched
-    GCC_PATH: mingw_32
 
 matrix:
   fast_finish: true
