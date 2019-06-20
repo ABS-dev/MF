@@ -4,3 +4,4 @@
 ^Dockerfile$
 ^\.travis\.yml$
 CODEOWNERS
+^\.appveyor\.yml$
