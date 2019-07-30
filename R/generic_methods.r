@@ -79,7 +79,6 @@ setMethod("show", "mfbootcluster", function(object){
 
 setMethod("print", "mfcluster", function(x, ...){
     cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
-    cat(paste("Seed = ", x$seed))
     cat("\nMF = ", x$All$mf, "\n")
     cat("\nBy Cluster\n")
     byclus <- na.omit(x$byCluster)
