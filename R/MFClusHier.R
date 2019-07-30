@@ -265,6 +265,7 @@ MFnest <- function(Y, which.factor = 'All') {
   out <- Y %>%
     mutate_if(is.factor, as.character) %>%
     gather(variable, level, -stat.names) %>%
+    mutate(level = as.character(level)) %>%
     bind_rows(., 
               select(Y, stat.names) %>%
               mutate(variable = 'All', level = 'All')) %>%
@@ -298,6 +299,7 @@ MFnest <- function(Y, which.factor = 'All') {
     out <- thisdata %>%
       mutate_if(is.factor, as.character) %>%
       gather(variable, level, -c(tgroup, resp)) %>%
+      mutate(level = as.character(level)) %>%
       bind_rows(.,
                 select(thisdata, c(tgroup, resp)) %>%
                 mutate(variable = "All", level = "All") %>%

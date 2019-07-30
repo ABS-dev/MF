@@ -303,7 +303,8 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
   
   mfnest_all <- bind_rows(tmpall %>%
                         gather(variable, level, -c('bootID', 'w', 'u', 'n1n2',
-                                                   stat.names)),
+                                                   stat.names)) %>%
+                        mutate(level = as.character(level)),
                       tmpall %>%
                         select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
                         mutate(variable = 'All', level = 'All')) %>%

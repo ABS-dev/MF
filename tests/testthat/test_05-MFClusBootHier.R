@@ -54,3 +54,24 @@ test_that("output", {
   
   
 })
+
+test_that("level_types", {
+  thisdata <- data.frame(location = rep(1:2, each = 4),
+    group = factor(rep(c('vacc', 'con'), each = 2), 
+      levels = c('vacc', 'con'), ordered = TRUE),
+    pen = c(rep(1:2, 2), rep(3:4, 2)),
+    obs = rnorm(n = 8, mean = 23.5, sd = 0.53))
+  ex1 <- thisdata %>%
+    MFClusBootHier(formula = obs ~ group + location/pen, 
+      compare = c("con", "vacc"),
+      which.factor = c('location', 'All'), seed = 61889)
+  expect_is(ex1, "mfclusboothier")
+  
+  ex2 <- thisdata %>%
+    mutate_if(is.factor, as.character) %>%
+    MFClusBootHier(formula = obs ~ group + location/pen, 
+      compare = c("con", "vacc"),
+      which.factor = c('location', 'All'), seed = 61889)  
+  expect_is(ex2, "mfclusboothier")
+
+})
