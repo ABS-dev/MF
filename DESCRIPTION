@@ -10,7 +10,7 @@ License: MIT + file LICENSE
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.4.4)
+    R (>= 3.5)
 Imports:
     methods,
     dplyr (>= 0.7.1),
