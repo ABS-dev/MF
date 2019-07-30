@@ -6,7 +6,7 @@
 \alias{mfclusboothier}
 \title{Class mfclusboothier}
 \description{
-Class mfclusboothier is created from output of function 
+Class mfclusboothier is created from output of function
 MFClusBootHier.
 }
 
