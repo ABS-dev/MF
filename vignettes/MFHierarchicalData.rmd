@@ -20,7 +20,7 @@ vignette: >
 
 
 ```{r hiddensetup, echo = FALSE, include = FALSE}
-
+require(knitr)
 require(kableExtra)
 require(tidyverse)
 require(MF)
@@ -63,7 +63,7 @@ all factors of another variable), it is not appropriate to use this guide as
 written.
 
 ```{r, expdesign, echo = FALSE, }
-kable(a, align = "c", row.names = FALSE, 
+knitr::kable(a, align = "c", row.names = FALSE, 
   caption = "Nested hierarchical data structure.",
   format = 'latex') %>%
   kable_styling('bordered', full_width = FALSE, font_size = 8) %>%  
