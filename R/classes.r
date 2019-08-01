@@ -19,7 +19,7 @@ setClassUnion("numericORinteger", c("numeric", "integer"))
 #' }
 #' @keywords documentation
 #' @family mf
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mf <- setRefClass("mf", fields = list(nboot = "numeric", alpha = "numeric",
   seed = "numericORinteger", compare = "character", rng = "character"))
 
@@ -43,7 +43,7 @@ mf <- setRefClass("mf", fields = list(nboot = "numeric", alpha = "numeric",
 #' @keywords documentation
 #' @family mf
 #' @seealso \code{\link{MFBoot}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfboot <- setRefClass("mfboot", contains = "mf",
   fields = list(stat = "matrix",
   sample = "numericORNULL"))
@@ -77,7 +77,7 @@ mfboot <- setRefClass("mfboot", contains = "mf",
 #' @keywords documentation
 #' @family mf
 #' @seealso \code{\link{HLBoot}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfhlboot <- setRefClass("mfhlboot", contains = "mf",
   fields = list(MFstat = "matrix", HLstat = "matrix", QDIFstat = "matrix",
        QXstat = "matrix", QYstat = "matrix", sample = "listORNULL"))
@@ -97,7 +97,7 @@ mfhlboot <- setRefClass("mfhlboot", contains = "mf",
 #' }
 #' @keywords documentation
 #' @family mfmp
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 #' @seealso \code{\link{MFmp}}
 mfmp <- setRefClass("mfmp",
   fields = list(ci = "numeric", x = "numericORarrayORtable", what = "character",
@@ -127,7 +127,7 @@ mfmp <- setRefClass("mfmp",
 #' @keywords documentation
 #' @family mf
 #' @seealso \code{\link{MFClusBoot}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
   fields = list(stat = "matrix", what = "character",
     excludedClusters = "character", call = "call", sample = "numericORNULL",
@@ -156,7 +156,7 @@ mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
 #' @keywords documentation
 #' @family mfcluster
 #' @seealso \code{\link{MFClus}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfcluster <- setRefClass("mfcluster", fields = list(All = "data.frame",
   byCluster = "matrix", "excludedClusters" = "characterORNULL", call = "call",
   compare = "character"))
@@ -176,7 +176,7 @@ mfcluster <- setRefClass("mfcluster", fields = list(All = "data.frame",
 #' @keywords documentation
 #' @family mfcomponents
 #' @seealso \code{\link{MFSubj}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfcomponents <- setRefClass("mfcomponents", fields = list(mf = "numeric",
   x = "numeric", y = "numeric", subj = "matrix", compare = "character"))
 
@@ -195,7 +195,7 @@ mfcomponents <- setRefClass("mfcomponents", fields = list(mf = "numeric",
 #' @keywords documentation
 #' @family mfhierdata
 #' @seealso \code{\link{MFh}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfhierdata <- setRefClass("mfhierdata", fields = list(coreTbl = "tbl",
   data = "tbl", compare = "character", formula = "formula"))
 
@@ -212,7 +212,7 @@ mfhierdata <- setRefClass("mfhierdata", fields = list(coreTbl = "tbl",
 #' @keywords documentation
 #' @family mfclushier
 #' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
   MFnest = "tbl"))
 
@@ -229,6 +229,6 @@ mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
 #' @keywords documentation
 #' @family mfclusboothier
 #' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
-#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+#' @author \link{MF-package}
 mfclusboothier <- setRefClass("mfclusboothier", fields = list(MFhBoot = "list",
   MFnestBoot = "list"))

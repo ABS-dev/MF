@@ -1,7 +1,7 @@
 #' Estimates mitigated fraction from clustered or stratified data.
-#' 
+#'
 #' Averages the U statistic over the clusters and computes MF from it. Clusters are excluded if they do not include both treatments.
-#' 
+#'
 #' @title Clustered mitigated fraction
 # @usage MFClus(formula, data, compare = c("con", "vac"), trace.it = FALSE)
 #' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.
@@ -15,16 +15,16 @@
 #' Clusters with missing treatments will be excluded. See \code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded clusters.
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
-#' @author David Siev \email{david.siev@@aphis.usda.gov}
+##' @author \link{MF-package}
 #' @seealso \code{\link{mfcluster-class}}
 #' @examples
 #' \dontrun{
 #' MFClus(lesion ~ group + cluster(litter), piglung)
-#' 
-#' #  Comparing vac to con 
-#' #  
-#' #  MF = 0.3533835 
-#' #  
+#'
+#' #  Comparing vac to con
+#' #
+#' #  MF = 0.3533835
+#' #
 #' #  By Cluster
 #' #     w  u         r n1 n2         mf
 #' #  U 25 10 0.4000000  5  5 -0.2000000
@@ -45,11 +45,11 @@
 #' #  H 14  8 0.8888889  3  3  0.7777778
 #' #  Y  2  1 1.0000000  1  1  1.0000000
 #' #  E  2  1 1.0000000  1  1  1.0000000
-#' #  
+#' #
 #' #  All
 #' #        w  u         r n1 n2        mf
 #' #  All 181 90 0.6766917 50 52 0.3533835
-#' #  
+#' #
 #' #  Excluded Clusters
 #' #  [1] M, Q, R, B, O, V, I, C
 #' }

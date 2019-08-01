@@ -1,13 +1,13 @@
 #' @description Estimates bootstrap confidence intervals for MF, HL, and Qdif.
-#' @details Estimates bootstrap confidence intervals for the mitigated fraction 
-#' (MF), Hodge-Lehmann estimator (HL), and the difference of medians and 
-#' quartiles (Qdif). Equal tailed intervals are provided for all three, highest 
-#' density intervals are optionally provided for MF and HL, and BCa intervals 
-#' are optionally provided for MF.  The Hodges-Lehmann estimator is the median 
-#' difference; it assumes that the two distributions have the same shape and 
+#' @details Estimates bootstrap confidence intervals for the mitigated fraction
+#' (MF), Hodge-Lehmann estimator (HL), and the difference of medians and
+#' quartiles (Qdif). Equal tailed intervals are provided for all three, highest
+#' density intervals are optionally provided for MF and HL, and BCa intervals
+#' are optionally provided for MF.  The Hodges-Lehmann estimator is the median
+#' difference; it assumes that the two distributions have the same shape and
 #' differ by a constant shift. Assumes data is single pool (no nesting).
 #' @title Bootstrap CI for MF, HL, and Qdif
-#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, 
+#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment,
 #'   and w is a factor indicating the clusters.
 #' @param data Data frame
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared
@@ -20,54 +20,54 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
 #' @return a \code{\link{mfhlboot-class}} data object
-#' @seealso \code{\link{mfhlboot-class}} 
+#' @seealso \code{\link{mfhlboot-class}}
 #' @export
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}. \cr \cr
 #'  Siev D, (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}. \cr \cr
 #'  Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
-#' @author David Siev \email{david.siev@@aphis.usda.gov}
+#' @author \link{MF-package}
 #' @examples
 #' HLBoot(lesion~group, calflung, seed = 12345)
-#'   
+#'
 #' # Bootstrapping
 #' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 #' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 #' # . . . . . . . . . . . . . . . . . . . .
-#' # 
+#' #
 #' # 10000 bootstrap samples
 #' # 95% confidence intervals
 #' # Comparing vac to con
-#' # 
-#' # 
+#' #
+#' #
 #' # Mitigated Fraction
-#' # 
+#' #
 #' # observed median lower  upper
 #' # Equal Tailed        0.44 0.4496 0.152 0.7088
 #' # Highest Density     0.44 0.4496 0.152 0.7088
-#' # 
-#' # 
+#' #
+#' #
 #' # Hodges-Lehmann
-#' # 
+#' #
 #' # observed   median    lower       upper
 #' # Equal Tailed    -0.07335 -0.07615 -0.17220 -0.01565000
 #' # Highest Density -0.07335 -0.07615 -0.15635 -0.00850065
-#' # 
-#' # 
+#' #
+#' #
 #' # Quartile Differences (quartiles of vac - quartiles of con)
-#' # 
+#' #
 #' # observed    median    lower     upper
 #' # Q25 -0.041500 -0.041500 -0.10340 -0.000905
 #' # Q50 -0.112525 -0.111175 -0.28115  0.019350
 #' # Q75 -0.168000 -0.170425 -0.38890  0.005300
-#' # 
-#' # 
+#' #
+#' #
 #' # Quartiles of con
 #' # observed   median    lower   upper
 #' # Q25 0.054000 0.054000 0.021005 0.11275
 #' # Q50 0.139275 0.139275 0.061400 0.31000
 #' # Q75 0.315000 0.315000 0.173000 0.44625
-#' # 
-#' # 
+#' #
+#' #
 #' # Quartiles of vac
 #' # observed  median   lower    upper
 #' # Q25  0.01250 0.01250 0.00125 0.026000
@@ -210,14 +210,14 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     qmf <- quantile(MF, prob = qprob)
     mfstat <- rbind(mfstat, "BC.a" = c(mf, qmf))
   }
-	
+
 	if (return.boot) {
 		sample  <- list(MF = MF, HL = H, Qx = Qx, Qy = Qy)
 	} else {
 		sample <- NULL
 	}
-	
-	return(mfhlboot$new(MFstat = mfstat, HLstat = hlstat, QDIFstat = qdifstat, 
-		QXstat = qxstat, QYstat = qystat, nboot = nboot, alpha = alpha, seed = seed, 
+
+	return(mfhlboot$new(MFstat = mfstat, HLstat = hlstat, QDIFstat = qdifstat,
+		QXstat = qxstat, QYstat = qystat, nboot = nboot, alpha = alpha, seed = seed,
 		compare = compare, 	rng = rng, sample = sample))
 }

@@ -15,7 +15,7 @@
 #' @return a \code{\link{mfmp-class}} data object
 #' @seealso \code{\link{mfmp-class}}
 #' @references Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
-#' @author David Siev \email{david.siev@@aphis.usda.gov}
+#' @author \link{MF-package}
 #' @examples
 #' MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
 #' MFmp(x = c(12, 12, 2))
@@ -28,7 +28,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
 	# I(x<y) - I(x>y)
 
 	if(!is.null(formula) & !is.null(data)){
-		byCluster <- MFClus(formula = formula, data = data, 
+		byCluster <- MFClus(formula = formula, data = data,
 		                    compare = compare)$byCluster[, 'mf']
         ##
         byCluster <- factor(byCluster)
@@ -42,7 +42,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
 	N <- sum(x)
 	p <- x/N
 	V <- (diag(p) - t(t(p)) %*% t(p)) / N
-	V 
+	V
 	A <- grad <- c(1, 0, -1)
 	B <- t(A) %*% p
 	VB <- t(A) %*% V %*% A
@@ -54,7 +54,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
 	if(tdist & is.na(df)){
 		df <- N - 2
 	}
-	
+
 	if(!is.na(df)){
 		q <- qt(c(0.5, alpha/2, 1 - alpha/2), df)
 		what <- paste(100 * (1 - alpha), "% t intervals on ", df, " df\n", sep = "")
@@ -65,7 +65,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
 
 	ci <- as.numeric(B) + q * as.numeric(sqrt(VB))
 	names(ci) <- c("point", "lower", "upper")
-	
+
 	if(round(ci[["point"]], digits = 1) == 1.0){
 	  message("Complete separation observed")
 	}
@@ -77,4 +77,4 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
 	return(mfmp$new(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist,
 	                df = df))
 }
-	
+
