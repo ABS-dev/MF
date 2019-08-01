@@ -1,7 +1,7 @@
 ---
 title: "Algorithms for calculating MF from hierarchical data"
 author: "Center for Veterinary Biologics - Statistics Section"
-date: "December 21, 2018"
+date: "August 2019"
 output: pdf_document
 header-includes:
     - \usepackage{multirow}
