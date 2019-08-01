@@ -8,6 +8,14 @@
 \description{
 Calculate MF (mitigated fraction) with clustering and bootstrap options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ABS-dev/MF/blob/master/README.md}
+  \item Report bugs at \url{https://github.com/ABS-dev/MF/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: CVB Statistics \email{CVB.Data.Help@usda.gov} (starting 2014)
 

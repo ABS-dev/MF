@@ -11,6 +11,8 @@ Authors@R: c(
   person("CVB", "Statistics", , "CVB.Data.Help@usda.gov", "cre", 
     comment = "starting 2014"))
 License: CC0
+URL: https://github.com/ABS-dev/MF/blob/master/README.md
+BugReports: https://github.com/ABS-dev/MF/issues
 LazyLoad: yes
 LazyData: yes
 Depends:
