@@ -38,13 +38,13 @@ MFClusBoot(formula, data, compare = c("con", "vac"),
 a \code{\link{mfbootcluster-class}} data object
 }
 \description{
-Estimates bootstrap confidence intervals for the mitigated 
+Estimates bootstrap confidence intervals for the mitigated
 fraction from clustered or stratified data.
 }
 \details{
-Resamples the data and produces bootstrap confidence intervals. 
-Equal tailed intervals are estimated by the 
-percentile method. Highest density intervals are estimated by selecting the 
+Resamples the data and produces bootstrap confidence intervals.
+Equal tailed intervals are estimated by the
+percentile method. Highest density intervals are estimated by selecting the
 shortest of all possible intervals.
 }
 \note{
@@ -56,11 +56,11 @@ Clusters with missing treatments will be excluded. See \code{\link{mfbootcluster
 \dontrun{
 MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
 Bootstrapping clusters. . . . . . . . . . . . . . . . .
- 
-Bootstrapping units. . . . . . . . . . . . . . . . . . 
+
+Bootstrapping units. . . . . . . . . . . . . . . . . .
 
 10000 bootstrap samples of clusters and units in treatment in cluster
-Comparing vac to con 
+Comparing vac to con
 
 95\% confidence interval
 
@@ -69,7 +69,7 @@ Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
 Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
 
 Excluded Clusters
-M, Q, R, B, O, V, I, C 
+M, Q, R, B, O, V, I, C
 }
 }
 \references{
@@ -77,5 +77,5 @@ Siev D. (2005). An estimator of intervention effect on disease severity. \emph{J
 Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
 }
 \author{
-David Siev \email{david.siev@aphis.usda.gov}
+\link{MF-package}
 }

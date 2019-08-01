@@ -36,7 +36,7 @@ Other mf: \code{\link{mf-class}},
   \code{\link{mfhlboot-class}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
 \concept{mf}
 \keyword{documentation}

@@ -25,7 +25,7 @@ Class mfmp is created from output of function MFmp
 \code{\link{MFmp}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
 \concept{mfmp}
 \keyword{documentation}

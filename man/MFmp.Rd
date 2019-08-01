@@ -46,5 +46,5 @@ Siev D. (2005). An estimator of intervention effect on disease severity. \emph{J
 \code{\link{mfmp-class}}
 }
 \author{
-David Siev \email{david.siev@aphis.usda.gov}
+\link{MF-package}
 }

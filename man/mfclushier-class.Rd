@@ -21,7 +21,7 @@ Class mfclushier is created from output of function MFClusHier
 \code{\link{MFh}}, \code{\link{MFnest}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
 \concept{mfclushier}
 \keyword{documentation}

@@ -32,7 +32,7 @@ Class mfcluster is created from output of function MFClus
 \code{\link{MFClus}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
 \concept{mfcluster}
 \keyword{documentation}
