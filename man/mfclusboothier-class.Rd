@@ -6,7 +6,7 @@
 \alias{mfclusboothier}
 \title{Class mfclusboothier}
 \description{
-Class mfclusboothier is created from output of function 
+Class mfclusboothier is created from output of function
 MFClusBootHier.
 }
 
@@ -22,7 +22,7 @@ MFClusBootHier.
 \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
 \concept{mfclusboothier}
 \keyword{documentation}

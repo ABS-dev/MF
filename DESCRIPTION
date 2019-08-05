@@ -2,15 +2,19 @@ Package: MF
 Type: Package
 Title: Mitigated Fraction
 Version: 4.3.6
-Date: XX XXXX XX
-Author: David Siev
-Maintainer: Marie Vendettuoli <marie.c.vendettuoli@aphis.usda.gov>
+Date: 2019-08-15
 Description: Calculate MF (mitigated fraction) with clustering and bootstrap options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only.
-License: MIT + file LICENSE
+Authors@R: c(
+  person("CVB", "Statistics", , "CVB.Data.Help@usda.gov", "cre"),
+  person("David", "Siev", , , c("fmo", "aut"), comment = "until 2019"),
+  person("CVB", "Statistics", , , "aut", comment = "starting 2010"))
+License: CC0
+URL: https://github.com/ABS-dev/MF/blob/master/README.md
+BugReports: https://github.com/ABS-dev/MF/issues
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.4.4)
+    R (>= 3.5)
 Imports:
     methods,
     dplyr (>= 0.7.1),
@@ -31,6 +35,7 @@ Collate:
     'aaa.r'
     'classes.r'
     'generic_methods.r'
+    'MF.R'
     'MF-package.r'
     'HLBoot.r'
     'MFBoot.r'

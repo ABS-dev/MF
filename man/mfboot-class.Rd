@@ -6,7 +6,7 @@
 \alias{mfboot}
 \title{Class mfboot}
 \description{
-class for data objects produced by MFBoot, contains class mf with 
+class for data objects produced by MFBoot, contains class mf with
 the two additional fields \emph{stat} and \emph{stuff}.
 }
 
@@ -36,7 +36,7 @@ Other mf: \code{\link{mf-class}},
   \code{\link{mfhlboot-class}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
 \concept{mf}
 \keyword{documentation}

@@ -24,7 +24,7 @@ Class mfcomponents is created from output of function MFSubj
 \code{\link{MFSubj}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
 \concept{mfcomponents}
 \keyword{documentation}

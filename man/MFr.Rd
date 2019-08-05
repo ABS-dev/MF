@@ -20,8 +20,8 @@ The estimated mitigated fraction.
 Mitigated fraction comparing treatment to control.
 }
 \details{
-The mitigated fraction is an estimator that quantifies an intervention's effect on reducing the 
-severity of a condition. Since its units are on the probability scale, it is often a good idea 
+The mitigated fraction is an estimator that quantifies an intervention's effect on reducing the
+severity of a condition. Since its units are on the probability scale, it is often a good idea
 to accompany it with an estimator on the original scale of measurement.
 }
 \examples{
@@ -32,5 +32,5 @@ MFr(lesion~group,calflung)
 Siev D, 2005. An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
 }
 \author{
-David Siev
+\link{MF-package}
 }
