@@ -7,11 +7,11 @@ Mitigated Fraction. Calculate mitigated fraction with clustering and bootstrap o
 
 From **within R**
 
-1. Installing last release [v4.3.5](https://github.com/ABS-dev/MF/releases/tag/4.3.5)
+1. Installing last release [v4.3.6](https://github.com/ABS-dev/MF/releases/tag/4.3.6)
 
 ```
 require(devtools)
-install_github("ABS-dev/MF", ref = "4.3.5")
+install_github("ABS-dev/MF", ref = "4.3.6")
 ```
   *See all historical releases [here](https://github.com/ABS-dev/MF/releases)*
   
