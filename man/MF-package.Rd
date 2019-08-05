@@ -17,17 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: CVB Statistics \email{CVB.Data.Help@usda.gov} (starting 2014)
+\strong{Maintainer}: CVB Statistics \email{CVB.Data.Help@usda.gov}
 
 Authors:
 \itemize{
-  \item David Siev (1990-2019) [former owner]
-  \item Marie Vendettuoli (starting 2010)
-}
-
-Other contributors:
-\itemize{
-  \item Brian Woerth (starting 2018) [contributor]
+  \item David Siev (until 2019) [former owner]
+  \item CVB Statistics (starting 2010)
 }
 
 }
