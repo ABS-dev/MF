@@ -47,5 +47,6 @@ Collate:
     'MFr.r'
     'MFSubj.r'
     'MFHier-wrappers.r'
-RoxygenNote: 6.1.1
+Encoding: UTF-8
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr
