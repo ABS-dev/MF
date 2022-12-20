@@ -40,9 +40,10 @@ quartiles of response, equal tailed.}
 \seealso{
 \code{\link{HLBoot}}
 
-Other mf: \code{\link{mf-class}},
-  \code{\link{mfboot-class}},
-  \code{\link{mfbootcluster-class}}
+Other mf: 
+\code{\link{mf-class}},
+\code{\link{mfboot-class}},
+\code{\link{mfbootcluster-class}}
 }
 \author{
 \link{MF-package}

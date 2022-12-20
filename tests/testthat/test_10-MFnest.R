@@ -15,9 +15,10 @@ aCore <- MFh(lung ~ tx + room/pen/litter,a)
 test10 <- MFnest(aCore)
 
 test_that("output", {
-  expect_equal(as.data.frame(test10)[, 1:7], data.frame(variable = factor('All'),
-                                                 level = 'All', 
-                                                 MF = 0.875, N1N2 = 48,
-                                                 U = 45, con_N = 24, vac_N = 24, 
-                                                 stringsAsFactors = FALSE))
+  expect_equal(as.data.frame(test10)[, 1:7],
+               data.frame(variable = factor('All'),
+                          level = 'All',
+                          MF = 0.875, N1N2 = 48,
+                          U = 45, con_N = 24, vac_N = 24,
+                          stringsAsFactors = FALSE))
 })

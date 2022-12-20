@@ -4,8 +4,15 @@
 \alias{MFmp}
 \title{Mitigated fraction from matched pairs}
 \usage{
-MFmp(formula = NULL, data = NULL, compare = c("con", "vac"),
-  x = NULL, alpha = 0.05, df = NA, tdist = TRUE)
+MFmp(
+  formula = NULL,
+  data = NULL,
+  compare = c("con", "vac"),
+  x = NULL,
+  alpha = 0.05,
+  df = NA,
+  tdist = TRUE
+)
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.}

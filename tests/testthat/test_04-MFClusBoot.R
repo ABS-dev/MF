@@ -14,7 +14,7 @@ test_that("output", {
   expect_identical(all.names(test4$call), c("MFClusBoot", "~", "lesion", "+", "group",
                                             "cluster", "litter", "piglung"))
   expect_null(test4$sample)
-  
+
   ## stat
   expect_equal(test4$stat["Equal Tailed", ], c(observed = 0.35338346,
                                                    median = 0.36486486,
@@ -27,7 +27,7 @@ test_that("output", {
                                                upper = 0.7236842),
                tolerance = 0.01)
   ## All
-  all4 <- data.frame(w = 181, u = 90, r = 0.6766917, n1 = 50, n2 = 52, 
+  all4 <- data.frame(w = 181, u = 90, r = 0.6766917, n1 = 50, n2 = 52,
                      mf = 0.3533835)
   rownames(all4) <- 'All'
   expect_equal(test4$All, all4, tolerance = 0.01)

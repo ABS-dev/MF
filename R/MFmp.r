@@ -21,60 +21,59 @@
 #' MFmp(x = c(12, 12, 2))
 MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
                  x = NULL, alpha = 0.05, df = NA, tdist = TRUE){
-	# asymptotic CI for matched pairs
-	# x is a trinomial frequency vector
-	# c(x>y,x=y,x<y))
-	# difference of multinomial fractions
-	# I(x<y) - I(x>y)
+  # asymptotic CI for matched pairs
+  # x is a trinomial frequency vector
+  # c(x>y,x=y,x<y))
+  # difference of multinomial fractions
+  # I(x<y) - I(x>y)
 
-	if(!is.null(formula) & !is.null(data)){
-		byCluster <- MFClus(formula = formula, data = data,
-		                    compare = compare)$byCluster[, 'mf']
-        ##
-        byCluster <- factor(byCluster)
-        levels(byCluster) <- c('-1', '1', '0')
-        x <- table(byCluster)[c('1', '0', '-1')]
+  if(!is.null(formula) & !is.null(data)){
+    byCluster <- MFClus(formula = formula, data = data,
+                        compare = compare)$byCluster[, 'mf']
+    ##
+    byCluster <- factor(byCluster)
+    levels(byCluster) <- c('-1', '1', '0')
+    x <- table(byCluster)[c('1', '0', '-1')]
 
-	} else if(is.null(x)) {
-		stop('Need to supply either formula and data or x = vector')
-	}
+  } else if(is.null(x)) {
+    stop('Need to supply either formula and data or x = vector')
+  }
 
-	N <- sum(x)
-	p <- x/N
-	V <- (diag(p) - t(t(p)) %*% t(p)) / N
-	V
-	A <- grad <- c(1, 0, -1)
-	B <- t(A) %*% p
-	VB <- t(A) %*% V %*% A
+  N <- sum(x)
+  p <- x/N
+  V <- (diag(p) - t(t(p)) %*% t(p)) / N
+  V
+  A <- grad <- c(1, 0, -1)
+  B <- t(A) %*% p
+  VB <- t(A) %*% V %*% A
 
-	gradl <- c(1 / (p[1] - p[3]), 0, 1 / (p[1] - p[3]))
-	logB <- log(B)
-	VlogB <- t(gradl) %*% V %*% gradl
+  gradl <- c(1 / (p[1] - p[3]), 0, 1 / (p[1] - p[3]))
+  logB <- log(B)
+  VlogB <- t(gradl) %*% V %*% gradl
 
-	if(tdist & is.na(df)){
-		df <- N - 2
-	}
+  if(tdist & is.na(df)){
+    df <- N - 2
+  }
 
-	if(!is.na(df)){
-		q <- qt(c(0.5, alpha/2, 1 - alpha/2), df)
-		what <- paste(100 * (1 - alpha), "% t intervals on ", df, " df\n", sep = "")
-	} else {
-		q <- qnorm(c(0.5, alpha/2, 1 - alpha/2))
-		what <- paste(100 * (1 - alpha), "% gaussian interval\n", sep = "")
-	}
+  if(!is.na(df)){
+    q <- qt(c(0.5, alpha/2, 1 - alpha/2), df)
+    what <- paste(100 * (1 - alpha), "% t intervals on ", df, " df\n", sep = "")
+  } else {
+    q <- qnorm(c(0.5, alpha/2, 1 - alpha/2))
+    what <- paste(100 * (1 - alpha), "% gaussian interval\n", sep = "")
+  }
 
-	ci <- as.numeric(B) + q * as.numeric(sqrt(VB))
-	names(ci) <- c("point", "lower", "upper")
+  ci <- as.numeric(B) + q * as.numeric(sqrt(VB))
+  names(ci) <- c("point", "lower", "upper")
 
-	if(round(ci[["point"]], digits = 1) == 1.0){
-	  message("Complete separation observed")
-	}
-	# truncate
-	ci["upper"] <- min(ci["upper"], 1)
-	ci["lower"] <- max(ci["lower"], -1)
+  if(round(ci[["point"]], digits = 1) == 1.0){
+    message("Complete separation observed")
+  }
+  # truncate
+  ci["upper"] <- min(ci["upper"], 1)
+  ci["lower"] <- max(ci["lower"], -1)
 
 
-	return(mfmp$new(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist,
-	                df = df))
+  return(mfmp$new(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist,
+                  df = df))
 }
-

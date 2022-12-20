@@ -4,9 +4,19 @@
 \alias{HLBoot}
 \title{Bootstrap CI for MF, HL, and Qdif}
 \usage{
-HLBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-  alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
-  trace.it = FALSE, seed = sample(1:1e+05, 1))
+HLBoot(
+  formula,
+  data,
+  compare = c("con", "vac"),
+  b = 100,
+  B = 100,
+  alpha = 0.05,
+  hpd = TRUE,
+  bca = FALSE,
+  return.boot = FALSE,
+  trace.it = FALSE,
+  seed = sample(1:1e+05, 1)
+)
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment,

@@ -9,7 +9,7 @@ test_that("output", {
   expect_equal(test2$alpha, expected = 0.05, tolerance = 0)
   expect_identical(test2$compare, expected = c('con', 'vac'))
   expect_identical(test2$rng, expected = "Mersenne-Twister")
-  
+
   # stat
   expect_is(test2$stat, 'matrix')
   expect_identical(rownames(test2$stat), expected = c("Equal Tailed", "Highest Density"))
@@ -19,9 +19,9 @@ test_that("output", {
                                                             lower = 0.1520,
                                                             upper = 0.7088), 4),
                tolerance = 0.01)
-  
+
   # sample
   expect_is(test2$sample, 'numeric')
   expect_equal(length(test2$sample), expected = 10000, tolerance = 0.01)
-  
+
 })

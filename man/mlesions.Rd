@@ -5,12 +5,14 @@
 \alias{mlesions}
 \alias{mlesions-data}
 \title{mlesions dataset}
-\format{A data frame with 52 observations of the following 3 variables, no NAs.
+\format{
+A data frame with 52 observations of the following 3 variables, no NAs.
 \describe{
 \item{cage}{Cage ID. 1 - 26.}
 \item{tx}{Treatment. One of 'con' or 'vac'.}
 \item{les}{Percent gross lung lesions.}
-}}
+}
+}
 \description{
 Post-mortem examination of the lungs of dogs housed in cages by pairs.
 }

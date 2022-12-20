@@ -35,8 +35,10 @@ estimates}
 \seealso{
 \code{\link{MFClusBoot}}
 
-Other mf: \code{\link{mf-class}},
-  \code{\link{mfboot-class}}, \code{\link{mfhlboot-class}}
+Other mf: 
+\code{\link{mf-class}},
+\code{\link{mfboot-class}},
+\code{\link{mfhlboot-class}}
 }
 \author{
 \link{MF-package}

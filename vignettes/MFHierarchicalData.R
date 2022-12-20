@@ -21,10 +21,10 @@ a
 
 
 ## ---- expdesign, echo = FALSE--------------------------------------------
-knitr::kable(a, align = "c", row.names = FALSE, 
+knitr::kable(a, align = "c", row.names = FALSE,
   caption = "Nested hierarchical data structure.",
   format = 'latex') %>%
-  kable_styling('bordered', full_width = FALSE, font_size = 8) %>%  
+  kable_styling('bordered', full_width = FALSE, font_size = 8) %>%
   collapse_rows(columns = 1:4, valign = "middle")
 
 
@@ -42,12 +42,12 @@ MFnest(thismfh, which.factor = "All")
 
 
 ## ---- echo = FALSE, message = FALSE--------------------------------------
-mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
-                                  data = a, boot.unit = FALSE, 
+mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter,
+                                  data = a, boot.unit = FALSE,
                                   boot.cluster = TRUE,  alpha = 0.1,
                                   which.factor = c('room', 'litter', 'All'))
-mfboot_multiple$MFhBoot$bootmfh %>% 
-  filter(bootID == 1) %>% 
+mfboot_multiple$MFhBoot$bootmfh %>%
+  filter(bootID == 1) %>%
   select(c('bootID', 'room', 'pen', 'litter'))
 
 
@@ -63,12 +63,12 @@ mfboot_multiple$MFhBoot$bootmfh %>%
 ## a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
 ## a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
 ## a <- a[-48,]
-## 
+##
 ## # DETERMINING MITIGATED FRACTION
 ## thismfh <- MFh(formula = lung ~ tx + room/pen/litter, data = a)
 ## MFnest(thismfh, which.factor = "pen")
 ## MFnest(thismfh, which.factor = "All")
-## 
+##
 ## # BOOTSTRAPPING
 ## MFClusBootHier(formula = lung ~ tx + room/pen/litter,
 ##                                   data = a, boot.unit = FALSE,
@@ -81,4 +81,3 @@ mfboot_multiple$MFhBoot$bootmfh %>%
 
 ## ------------------------------------------------------------------------
 sessionInfo()
-

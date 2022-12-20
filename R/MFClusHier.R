@@ -110,7 +110,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 }
 # to keep R CMD happy
 utils::globalVariables(c('u', 'bootID', 'n1n2', 'w', 'variable', 'value', 'tmp',
-  'ntgroups', 'temp'))
+                         'ntgroups', 'temp'))
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
@@ -270,7 +270,7 @@ MFnest <- function(Y, which.factor = 'All') {
     mutate(level = as.character(level)) %>%
     bind_rows(.,
               select(Y, stat.names) %>%
-              mutate(variable = 'All', level = 'All')) %>%
+                mutate(variable = 'All', level = 'All')) %>%
     group_by(variable, level) %>%
     summarize(N1N2 = sum(n1n2), U = sum(u), con_N = sum(!!comp1),
               vac_N = sum(!!comp2)) %>%
@@ -282,11 +282,11 @@ MFnest <- function(Y, which.factor = 'All') {
   ## inform user of complete separation
   if(1.0 %in% round(out$MF, digits = 1) ){
     out %>%
-    filter(round(MF, digits = 1) == 1.0) %>%
-    distinct(variable) %>%
-    pull() %>%
-    paste0(collapse = ', ') %>%
-    message("Complete separation observed for variable(s): ", ., collapse = "")
+      filter(round(MF, digits = 1) == 1.0) %>%
+      distinct(variable) %>%
+      pull() %>%
+      paste0(collapse = ', ') %>%
+      message("Complete separation observed for variable(s): ", ., collapse = "")
   }
 
   ## inform user why medians are not available
@@ -304,8 +304,8 @@ MFnest <- function(Y, which.factor = 'All') {
       mutate(level = as.character(level)) %>%
       bind_rows(.,
                 select(thisdata, c(tgroup, resp)) %>%
-                mutate(variable = "All", level = "All") %>%
-                mutate_if(is.factor, as.character)) %>%
+                  mutate(variable = "All", level = "All") %>%
+                  mutate_if(is.factor, as.character)) %>%
       group_by(variable, level, tgroup) %>%
       summarize(medResp = median(resp, na.rm = TRUE)) %>%
       spread(tgroup, medResp) %>%
@@ -326,4 +326,3 @@ MFnest <- function(Y, which.factor = 'All') {
 
 # to keep R CMD happy
 utils::globalVariables(c('R', 'con_N', 'vac_N', 'tgroup', 'resp', 'medResp'))
-

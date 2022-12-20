@@ -13,18 +13,18 @@ a$lung[a$tx == 'con'] <- rnorm(24,7,1.3)
 aCore <- MFh(lung ~ tx + room/pen/litter,a)
 
 test_that("output", {
-  
+
   expect_is(aCore, 'mfhierdata')
-  
+
   ##coreTbl
   expect_equal(dim(aCore$coreTbl), c(12, 10))
-  expect_equivalent(sapply(aCore$coreTbl, class), c('character', 'character', 
-    'character', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric', 
-    'numeric', 'numeric'))
+  expect_equivalent(sapply(aCore$coreTbl, class), c('character', 'character',
+                                                    'character', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric',
+                                                    'numeric', 'numeric'))
   expect_identical(aCore$coreTbl$w, c(7, 5, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7))
-  
+
   expect_identical(aCore$compare, c('con', 'vac'))
-  
+
   expect_identical(all.vars(aCore$formula), c('lung', 'tx', 'room', 'pen', 'litter'))
-  
+
 })

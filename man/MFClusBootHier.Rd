@@ -4,9 +4,17 @@
 \alias{MFClusBootHier}
 \title{MFClusBootHier}
 \usage{
-MFClusBootHier(formula, data, compare = c("con", "vac"), nboot = 10000,
-  boot.unit = TRUE, boot.cluster = TRUE, which.factor = "All",
-  alpha = 0.05, seed = sample(1:1e+05, 1))
+MFClusBootHier(
+  formula,
+  data,
+  compare = c("con", "vac"),
+  nboot = 10000,
+  boot.unit = TRUE,
+  boot.cluster = TRUE,
+  which.factor = "All",
+  alpha = 0.05,
+  seed = sample(1:1e+05, 1)
+)
 }
 \arguments{
 \item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a continuous

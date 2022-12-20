@@ -4,8 +4,15 @@
 \alias{MFhBoot}
 \title{MFhBoot}
 \usage{
-MFhBoot(formula, data, compare = c("con", "vac"), nboot = 10000,
-  boot.unit = TRUE, boot.cluster = TRUE, seed = sample(1:1e+05, 1))
+MFhBoot(
+  formula,
+  data,
+  compare = c("con", "vac"),
+  nboot = 10000,
+  boot.unit = TRUE,
+  boot.cluster = TRUE,
+  seed = sample(1:1e+05, 1)
+)
 }
 \arguments{
 \item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous response,

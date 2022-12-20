@@ -21,9 +21,10 @@ Parent class for package MF data objects.
 }
 
 \seealso{
-Other mf: \code{\link{mfboot-class}},
-  \code{\link{mfbootcluster-class}},
-  \code{\link{mfhlboot-class}}
+Other mf: 
+\code{\link{mfboot-class}},
+\code{\link{mfbootcluster-class}},
+\code{\link{mfhlboot-class}}
 }
 \author{
 \link{MF-package}

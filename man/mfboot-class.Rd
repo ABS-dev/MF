@@ -31,9 +31,10 @@ the two additional fields \emph{stat} and \emph{stuff}.
 \seealso{
 \code{\link{MFBoot}}
 
-Other mf: \code{\link{mf-class}},
-  \code{\link{mfbootcluster-class}},
-  \code{\link{mfhlboot-class}}
+Other mf: 
+\code{\link{mf-class}},
+\code{\link{mfbootcluster-class}},
+\code{\link{mfhlboot-class}}
 }
 \author{
 \link{MF-package}
