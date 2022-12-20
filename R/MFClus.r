@@ -58,7 +58,7 @@
 # Clustered or Stratified MF
 #--------------------------------------------------------------------
 #
-MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
+MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
   # formula of the form response ~ treatment + cluster(clustername)
   # based on prob{F(y) < F(x)}
   # within-cluster ranking only

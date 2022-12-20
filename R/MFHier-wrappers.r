@@ -43,7 +43,7 @@
 #' aCore$formula
 #' aCore$compare
 MFClusHier <- function(formula, data, compare = c("con", "vac"),
-                       which.factor = 'All'){
+                       which.factor = 'All') {
   aCore <- MFh(formula, data, compare)
   out <- mfclushier$new(MFh = aCore, MFnest = MFnest(aCore, which.factor))
   return(out)
@@ -99,7 +99,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 MFClusBootHier <- function(formula, data, compare = c('con', 'vac'),
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
                            which.factor = 'All', alpha = 0.05,
-  seed = sample(1:1e+05, 1)){
+  seed = sample(1:1e+05, 1)) {
   thisbootmfh <- MFhBoot(formula = formula, data = data, compare = compare,
     nboot = nboot, boot.unit = boot.unit, boot.cluster = boot.cluster,
     seed = seed)

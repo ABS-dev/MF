@@ -79,17 +79,17 @@
 #
 HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE,
-	seed = sample(1:100000, 1)){
+	seed = sample(1:100000, 1)) {
   # set seed
   set.seed(seed)
 
   # Wilcoxon rank sum statistic
-  w <- function(xy, n.x){
+  w <- function(xy, n.x) {
     sum(rank(xy)[1:n.x])
 	}
 
   # Hodges-Lehmann estimator
-  hl.fn <- function(xy, n.x){
+  hl.fn <- function(xy, n.x) {
     x <- xy[1:n.x]
     y <- xy[(n.x + 1):length(xy)]
     n.y <- length(xy) - n.x

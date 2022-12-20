@@ -20,14 +20,14 @@
 #' MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
 #' MFmp(x = c(12, 12, 2))
 MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
-                 x = NULL, alpha = 0.05, df = NA, tdist = TRUE){
+                 x = NULL, alpha = 0.05, df = NA, tdist = TRUE) {
   # asymptotic CI for matched pairs
   # x is a trinomial frequency vector
   # c(x>y,x=y,x<y))
   # difference of multinomial fractions
   # I(x<y) - I(x>y)
 
-  if(!is.null(formula) & !is.null(data)){
+  if(!is.null(formula) & !is.null(data)) {
     byCluster <- MFClus(formula = formula, data = data,
                         compare = compare)$byCluster[, 'mf']
     ##
@@ -51,11 +51,11 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   logB <- log(B)
   VlogB <- t(gradl) %*% V %*% gradl
 
-  if(tdist & is.na(df)){
+  if(tdist & is.na(df)) {
     df <- N - 2
   }
 
-  if(!is.na(df)){
+  if(!is.na(df)) {
     q <- qt(c(0.5, alpha/2, 1 - alpha/2), df)
     what <- paste(100 * (1 - alpha), "% t intervals on ", df, " df\n", sep = "")
   } else {
@@ -66,7 +66,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   ci <- as.numeric(B) + q * as.numeric(sqrt(VB))
   names(ci) <- c("point", "lower", "upper")
 
-  if(round(ci[["point"]], digits = 1) == 1.0){
+  if(round(ci[["point"]], digits = 1) == 1.0) {
     message("Complete separation observed")
   }
   # truncate

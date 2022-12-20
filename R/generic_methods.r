@@ -1,4 +1,4 @@
-setMethod("print", "mfboot", function(x, ...){
+setMethod("print", "mfboot", function(x, ...) {
   cat(x$nboot, "bootstrap samples")
   cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
     "confidence interval\n")
@@ -10,12 +10,12 @@ setMethod("print", "mfboot", function(x, ...){
   }
 )
 	
-setMethod("show", "mfboot", function(object){
+setMethod("show", "mfboot", function(object) {
   print(object)
 }
 )
 
-setMethod("print", "mfhlboot", function(x, ...){
+setMethod("print", "mfhlboot", function(x, ...) {
     cat("\n", x$nboot, " bootstrap samples", sep = "")
     cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
       " confidence intervals", sep = "")
@@ -35,26 +35,26 @@ setMethod("print", "mfhlboot", function(x, ...){
     cat("\n")
 	})
 
-setMethod("show", "mfhlboot", function(object){
+setMethod("show", "mfhlboot", function(object) {
   print(object)
   }
 )
 
 
-setMethod("print", "mfmp", function(x, ...){
+setMethod("print", "mfmp", function(x, ...) {
 	cat(x$what, "\n")
 	print(x$ci)
 	}
 )
 
 
-setMethod("show", "mfmp", function(object){
+setMethod("show", "mfmp", function(object) {
   print(object)
   }
 )
 
 
-setMethod("print", "mfbootcluster", function(x, ...){
+setMethod("print", "mfbootcluster", function(x, ...) {
   cat("\n\n", x$what, sep = "")
   cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
   cat(paste("Seed = ", x$seed))
@@ -72,12 +72,12 @@ setMethod("print", "mfbootcluster", function(x, ...){
 )
 	
 
-setMethod("show", "mfbootcluster", function(object){
+setMethod("show", "mfbootcluster", function(object) {
   print(object)
 }
 )
 
-setMethod("print", "mfcluster", function(x, ...){
+setMethod("print", "mfcluster", function(x, ...) {
     cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
     cat("\nMF = ", x$All$mf, "\n")
     cat("\nBy Cluster\n")
@@ -95,12 +95,12 @@ setMethod("print", "mfcluster", function(x, ...){
   cat("\n")
 })
 
-setMethod("show", "mfcluster", function(object){
+setMethod("show", "mfcluster", function(object) {
   print(object)
   }
 )
 
-setMethod("print", "mfcomponents", function(x, ...){
+setMethod("print", "mfcomponents", function(x, ...) {
     cat("\nMF =", x$mf, "comparing", x$compare[2], "to", x$compare[1], "\n")
     subj <- data.frame(x$subj)
     mfju <- unique(subj$mf.j)
@@ -120,37 +120,37 @@ setMethod("print", "mfcomponents", function(x, ...){
 	})
 
 
-setMethod("show", "mfcomponents", function(object){
+setMethod("show", "mfcomponents", function(object) {
   print(object)
   }
 )
 
-setMethod("print", "mfhierdata", function(x, ...){
+setMethod("print", "mfhierdata", function(x, ...) {
   print(x$coreTbl)
   }
 )
 
-setMethod("show", "mfhierdata", function(object){
+setMethod("show", "mfhierdata", function(object) {
   print(object)
   }
 )
 
-setMethod("print", "mfclushier", function(x,...){
+setMethod("print", "mfclushier", function(x,...) {
   print(x$MFnest)
   }
 )
 
-setMethod("show", "mfclushier", function(object){
+setMethod("show", "mfclushier", function(object) {
   print(object)
   }
 )
 
-setMethod("print", "mfclusboothier", function(x,...){
+setMethod("print", "mfclusboothier", function(x,...) {
   print(x$MFnestBoot$mfnest_summary)
   }
 )
 
-setMethod("show", "mfclusboothier", function(object){
+setMethod("show", "mfclusboothier", function(object) {
   print(object)
   }
 )

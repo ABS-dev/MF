@@ -61,11 +61,11 @@
 #' #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
 #' @export
 #' @author \link{MF-package}
-MFh <- function(formula, data, compare = c("con", "vac")){
+MFh <- function(formula, data, compare = c("con", "vac")) {
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
-  if (length(nests) == 1){
+  if (length(nests) == 1) {
     stop("This is not nested hierarchy. See MFClus.")
   }
   core <- nests[length(nests)]
@@ -280,7 +280,7 @@ MFnest <- function(Y, which.factor = 'All') {
     ungroup()
 
   ## inform user of complete separation
-  if(1.0 %in% round(out$MF, digits = 1)){
+  if(1.0 %in% round(out$MF, digits = 1)) {
     out %>%
       filter(round(MF, digits = 1) == 1.0) %>%
       distinct(variable) %>%
@@ -290,7 +290,7 @@ MFnest <- function(Y, which.factor = 'All') {
   }
 
   ## inform user why medians are not available
-  if(!exists('input')){
+  if(!exists('input')) {
     message('Skipping median summary, no response data provided.')
   } else{
 

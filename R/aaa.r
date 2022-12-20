@@ -1,6 +1,6 @@
 # shared reshaping portion of MFClus and MFClusBoot
-reshapeCluster <- function(data, formula, compare, envir){
-  cluster <- function(x){
+reshapeCluster <- function(data, formula, compare, envir) {
+  cluster <- function(x) {
     return(x)
   }
   this.call <- match.call()
@@ -24,7 +24,7 @@ reshapeCluster <- function(data, formula, compare, envir){
 
 # used in the bootstrapping functions MFClusBoot  MFBoot HLBoot
 #' @export
-emp.hpd <- function(X, alpha){
+emp.hpd <- function(X, alpha) {
     # empirical hpd by shortest length interval
     X <- sort(X)
     probs <- cbind(low = seq(0, alpha, .001), high = seq(1 - alpha, 1, .001))
@@ -40,7 +40,7 @@ emp.hpd <- function(X, alpha){
 resampleHier <- function(dat, cluster) {
 
   # exit early for trivial data
-  if (nrow(dat) == 1){
+  if (nrow(dat) == 1) {
     return(dat)
   }
 
@@ -52,7 +52,7 @@ resampleHier <- function(dat, cluster) {
 
   # sample lower levels of hierarchy (if any)
   # recursive call to resample
-  if (length(cluster) > 1){
+  if (length(cluster) > 1) {
     sub <- lapply(sub, resampleHier, cluster = cluster[-1])
   }
 

@@ -52,7 +52,7 @@
 MFClusBoot <- function(formula, data, compare = c("con", "vac"),
                        boot.cluster = TRUE, boot.unit = TRUE, b = 100,
 	                     B = 100, alpha = 0.05, hpd = TRUE, return.boot = FALSE,
-                       trace.it = FALSE, seed = sample(1:100000, 1)){
+                       trace.it = FALSE, seed = sample(1:100000, 1)) {
   ## set seed
   set.seed(seed)
   # short circuit if no bootstrapping!
@@ -86,7 +86,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
 	reshapeCluster(data = data, formula = formula, compare = compare,
 	               envir = environment())
   id <- compare
-  keep <- apply(table(group, clusters), 2, function(x){
+  keep <- apply(table(group, clusters), 2, function(x) {
     all(x > 0)
   })[strat]
   if (sum(!keep) > 0) {
@@ -145,7 +145,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
 	  if (trace.it) {
 		  cat("\n")
 	  }
-    w.boot <- function(x, y, n.b){
+    w.boot <- function(x, y, n.b) {
       n.x <- length(x)
       n.y <- length(y)
       out <- rep(NA, n.b)
@@ -155,7 +155,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
       y.b <- matrix(switch(as.character(n.y == 1),
               "TRUE" = rep(y, n.b),
               "FALSE" = sample(y, size = n.b * n.y, replace = TRUE)), n.b, n.y)
-      w <- apply(cbind(x.b, y.b), 1, function(x, n.x){
+      w <- apply(cbind(x.b, y.b), 1, function(x, n.x) {
               sum(rank(x)[1:n.x])
         }, n.x)
       return(w)

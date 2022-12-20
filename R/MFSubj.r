@@ -44,7 +44,7 @@
 ## Simple MF with subject components
 ##--------------------------------------------------------------------
 ##
-MFSubj <- function(formula, data, compare = c("con", "vac")){
+MFSubj <- function(formula, data, compare = c("con", "vac")) {
     # formula of form response~treatment
     # x=response for compare[1]
     # y=response for compare[2]
@@ -64,7 +64,7 @@ MFSubj <- function(formula, data, compare = c("con", "vac")){
     mf <- ((2. * w - n.x * (1. + n.x + n.y))/(n.x * n.y))
     u <- w - (n.x * (n.x + 1))/2
     u.j <- rep(NA,n.y)
-    for(j in 1:n.y){
+    for(j in 1:n.y) {
 		u.j[j] <- mean(c(sum(y[j] < x), sum(y[j] <= x)))
 	}
     r <- u/(n.x * n.y)

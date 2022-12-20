@@ -21,7 +21,7 @@
 ## Simple MF
 ##--------------------------------------------------------------------
 ##
-MFr <- function(formula, data, compare = c("con", "vac")){
+MFr <- function(formula, data, compare = c("con", "vac")) {
     # formula of form response~treatment
     # x=response for compare[1]
     # y=response for compare[2]

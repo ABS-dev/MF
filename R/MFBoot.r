@@ -44,7 +44,7 @@
 #--------------------------------------------------------------------
 MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE,
-  seed = sample(1:100000, 1)){
+  seed = sample(1:100000, 1)) {
   # bootstrap confidence intervals for MF
   # 11/17/99 initial coding
   # 2/24/04 added BC.a interval
@@ -80,7 +80,7 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   nboot <- b * B
   n.x <- length(x)
   n.y <- length(y)
-  w <- function(xy, n.x){
+  w <- function(xy, n.x) {
     sum(rank(xy)[1:n.x])
   }
   W <- rep(NA, b * B)

@@ -52,7 +52,7 @@ MFhBoot <- function(formula, data,
                     compare = c("con", "vac"),
                     nboot = 10000,
                     boot.unit = TRUE, boot.cluster = TRUE,
-                    seed = sample(1:100000, 1)){
+                    seed = sample(1:100000, 1)) {
   ## set seed
   set.seed(seed)
 
@@ -126,7 +126,7 @@ MFhBoot <- function(formula, data,
       matrix(NA, nboot, nclus)
     n.each <- rep(NA, nclus)
     names(n.each) <- indivclus$clusterID
-    w.boot <- function(x, y, n.b){
+    w.boot <- function(x, y, n.b) {
       n.x <- length(x)
       n.y <- length(y)
       x.b <- matrix(switch(as.character(n.x == 1),
@@ -144,7 +144,7 @@ MFhBoot <- function(formula, data,
       return(list(w, x.b, y.b))
     }
 
-    lapply(1:nclus, FUN = function(a){
+    lapply(1:nclus, FUN = function(a) {
       x <- datID %>%
         filter(!!symtgroup == compare[1] & clusterID == a) %>%
         select(!!symresp) %>%
@@ -289,7 +289,7 @@ utils::globalVariables(c('clusterID', 'newClus', 'variable', 'value', 'tmp'))
 #' system.time(test6 <- MFnestBoot(test1, which.factors[2:4]))
 #' test6
 #' }
-MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05){
+MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05) {
 
   quant <- c(.5, alpha / 2, 1 - alpha / 2)
 
