@@ -280,7 +280,7 @@ MFnest <- function(Y, which.factor = 'All') {
     ungroup()
 
   ## inform user of complete separation
-  if(1.0 %in% round(out$MF, digits = 1) ){
+  if(1.0 %in% round(out$MF, digits = 1)){
     out %>%
       filter(round(MF, digits = 1) == 1.0) %>%
       distinct(variable) %>%
