@@ -6,11 +6,14 @@
 \alias{calflung-data}
 \title{calflung dataset}
 \format{
-a data frame with 50 observations of the following 2 variables, no NAs
-\describe{
-\item{group}{Treatment group. One of con = control or vac = vaccinate }
-\item{lesion}{Fraction of lungs with gross lesions.}
-}
+a data frame with 50 observations of the following 2 variables, no
+  NAs \describe{
+
+  \item{group}{Treatment group. One of con = control or vac = vaccinate }
+
+  \item{lesion}{Fraction of lungs with gross lesions.}
+
+  }
 }
 \description{
 Post-mortem examination of the lungs of groups of calves.
