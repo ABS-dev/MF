@@ -109,7 +109,7 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   if (range(x)[1] < range(y)[1]) {
    lowtx <- x
    hitx <- y
-  } else{
+  } else {
     lowtx <- y
     hitx <- x
   }

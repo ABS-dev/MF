@@ -92,9 +92,9 @@ MFhBoot <- function(formula, data,
   #     of unique cores.
   newdf <- tibble(bootID = rep(1:nboot, each = nclus),
                   newClus = case_when(isTRUE(boot.cluster) ~
-                    sample(indivclus$clusterID, nboot * nclus, replace = TRUE),
-                    !isTRUE(boot.cluster) ~ rep(indivclus$clusterID,
-                                                       nboot))) %>%
+                                        sample(indivclus$clusterID, nboot * nclus, replace = TRUE),
+                                      !isTRUE(boot.cluster) ~ rep(indivclus$clusterID,
+                                                                  nboot))) %>%
     arrange(bootID)
 
   # ** use new tree structure to calculate summary statistics **
@@ -139,8 +139,11 @@ MFhBoot <- function(formula, data,
                            'FALSE' = sample(y, size = n.b * n.y,
                                             replace = TRUE)),
                     n.b, n.y)
-      w <- apply(cbind(x.b, y.b), 1, function(x, n.x)
-        sum(rank(x)[1:n.x]), n.x)
+      w <- apply(cbind(x.b, y.b), 1,
+                 function(x, n.x) {
+                   sum(rank(x)[1:n.x])
+                 },
+                 n.x)
       return(list(w, x.b, y.b))
     }
 
@@ -304,12 +307,12 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05) {
   comp4 <- sym(gsub(stat.names[2], pattern = "_n", replacement = "_N"))
 
   mfnest_all <- bind_rows(tmpall %>%
-                        gather(variable, level, -c('bootID', 'w', 'u', 'n1n2',
-                                                   stat.names)) %>%
-                        mutate(level = as.character(level)),
-                      tmpall %>%
-                        select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
-                        mutate(variable = 'All', level = 'All')) %>%
+                            gather(variable, level, -c('bootID', 'w', 'u', 'n1n2',
+                                                       stat.names)) %>%
+                            mutate(level = as.character(level)),
+                          tmpall %>%
+                            select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
+                            mutate(variable = 'All', level = 'All')) %>%
     filter(variable %in% which.factor) %>%
     group_by(variable, level, bootID) %>%
     summarize(U = sum(u),
@@ -318,7 +321,7 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05) {
               !!quo_name(comp4) := sum(!!comp2),
               MF = 2 * (U/N1N2) - 1)
 
-   mfnest_summary <- mfnest_all %>%
+  mfnest_summary <- mfnest_all %>%
     group_by(variable, level) %>%
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
@@ -339,4 +342,4 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05) {
 
 # to keep R CMD happy
 utils::globalVariables(c('variable', 'level', 'bootID', 'w', 'u', 'n1n2',
-  'U', 'N1N2', 'MF'))
+                         'U', 'N1N2', 'MF'))

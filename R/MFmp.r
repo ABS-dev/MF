@@ -27,7 +27,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   # difference of multinomial fractions
   # I(x<y) - I(x>y)
 
-  if(!is.null(formula) & !is.null(data)) {
+ if (!is.null(formula) & !is.null(data)) {
     byCluster <- MFClus(formula = formula, data = data,
                         compare = compare)$byCluster[, 'mf']
     ##
@@ -35,7 +35,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
     levels(byCluster) <- c('-1', '1', '0')
     x <- table(byCluster)[c('1', '0', '-1')]
 
-  } else if(is.null(x)) {
+  } else if (is.null(x)) {
     stop('Need to supply either formula and data or x = vector')
   }
 
@@ -51,11 +51,11 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   logB <- log(B)
   VlogB <- t(gradl) %*% V %*% gradl
 
-  if(tdist & is.na(df)) {
+ if (tdist & is.na(df)) {
     df <- N - 2
   }
 
-  if(!is.na(df)) {
+ if (!is.na(df)) {
     q <- qt(c(0.5, alpha/2, 1 - alpha/2), df)
     what <- paste(100 * (1 - alpha), "% t intervals on ", df, " df\n", sep = "")
   } else {
@@ -66,7 +66,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   ci <- as.numeric(B) + q * as.numeric(sqrt(VB))
   names(ci) <- c("point", "lower", "upper")
 
-  if(round(ci[["point"]], digits = 1) == 1.0) {
+ if (round(ci[["point"]], digits = 1) == 1.0) {
     message("Complete separation observed")
   }
   # truncate

@@ -280,7 +280,7 @@ MFnest <- function(Y, which.factor = 'All') {
     ungroup()
 
   ## inform user of complete separation
-  if(1.0 %in% round(out$MF, digits = 1)) {
+ if (1.0 %in% round(out$MF, digits = 1)) {
     out %>%
       filter(round(MF, digits = 1) == 1.0) %>%
       distinct(variable) %>%
@@ -290,9 +290,9 @@ MFnest <- function(Y, which.factor = 'All') {
   }
 
   ## inform user why medians are not available
-  if(!exists('input')) {
+ if (!exists('input')) {
     message('Skipping median summary, no response data provided.')
-  } else{
+  } else {
 
     thisdata <- input$data
     compare <- input$compare
