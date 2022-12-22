@@ -111,11 +111,14 @@ setMethod("show", "mfcluster",
 
 setMethod("print", "mfcomponents",
           function(x, ...) {
-            cat("\nMF =", x$mf, "comparing", x$compare[2], "to", x$compare[1], "\n")
+            cat("\nMF =", x$mf, "comparing",
+                x$compare[2], "to", x$compare[1], "\n")
             subj <- data.frame(x$subj)
             mfju <- unique(subj$mf.j)
             nu <- length(mfju)
-            subtab <- data.frame(mf.j = mfju, freq = rep(NA, nu), min.y = rep(NA, nu),
+            subtab <- data.frame(mf.j = mfju,
+                                 freq = rep(NA, nu),
+                                 min.y = rep(NA, nu),
                                  max.y = rep(NA, nu))
             subtab <- subtab[rev(order(subtab$mf.j)), ]
             for (i in seq_len(nrow(subtab))) {
