@@ -15,7 +15,7 @@ a <- data.frame(
 set.seed(76153)
 a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
 a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
-a <- a[-48,]
+a <- a[-48, ]
 a$lung <- round(a$lung, 2)
 a
 
@@ -62,7 +62,7 @@ mfboot_multiple$MFhBoot$bootmfh %>%
 ## set.seed(76153)
 ## a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
 ## a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
-## a <- a[-48,]
+## a <- a[-48, ]
 ##
 ## # DETERMINING MITIGATED FRACTION
 ## thismfh <- MFh(formula = lung ~ tx + room / pen / litter, data = a)

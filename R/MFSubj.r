@@ -63,7 +63,7 @@ MFSubj <- function(formula, data, compare = c("con", "vac")) {
     w <- sum(rank.xy[1:n.x])
     mf <- ((2. * w - n.x * (1. + n.x + n.y)) / (n.x * n.y))
     u <- w - (n.x * (n.x + 1)) / 2
-    u.j <- rep(NA,n.y)
+    u.j <- rep(NA, n.y)
     for (j in 1:n.y) {
 		u.j[j] <- mean(c(sum(y[j] < x), sum(y[j] <= x)))
 	}
