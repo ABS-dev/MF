@@ -61,14 +61,14 @@ MFSubj <- function(formula, data, compare = c("con", "vac")) {
     x.y <- c(x, y)
     rank.xy <- rank(x.y)
     w <- sum(rank.xy[1:n.x])
-    mf <- ((2. * w - n.x * (1. + n.x + n.y))/(n.x * n.y))
+    mf <- ((2. * w - n.x * (1. + n.x + n.y)) / (n.x * n.y))
     u <- w - (n.x * (n.x + 1))/2
     u.j <- rep(NA,n.y)
-    for(j in 1:n.y) {
+    for (j in 1:n.y) {
 		u.j[j] <- mean(c(sum(y[j] < x), sum(y[j] <= x)))
 	}
-    r <- u/(n.x * n.y)
-    r.j <- u.j/n.x
+    r <- u / (n.x * n.y)
+    r.j <- u.j / n.x
     mf.j <- 2 * r.j - 1
     subj <- cbind(y, rank = rank.xy[(n.x + 1):N], u.j, r.j, mf.j)
     subj <- subj[order(subj[, "rank"]), ]
