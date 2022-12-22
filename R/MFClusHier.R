@@ -77,7 +77,7 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
   yname <- compare[2]
 
   nx <- sym(str_c(xname, "n", sep = "_"))
-  ny <- sym(str_c(yname, "n", sep = '_'))
+  ny <- sym(str_c(yname, "n", sep = "_"))
   wy <- sym(str_c(yname, "w", sep = "_"))
   wx <- sym(str_c(xname, "w", sep = "_"))
 
@@ -109,35 +109,43 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
                         compare = compare, formula = formula))
 }
 # to keep R CMD happy
-utils::globalVariables(c('u', 'bootID', 'n1n2', 'w', 'variable', 'value', 'tmp',
-                         'ntgroups', 'temp'))
+utils::globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
+                         "ntgroups", "temp"))
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
 #' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl}
-#' output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.
-#' @param which.factor one or more grouping variable(s) of interest. This can be any of
-#' the core or nest variables from the data set. If none or \code{All} is
-#' specified, a summary MF will be calculated for the whole tree.
+#'   output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.
+#' @param which.factor one or more grouping variable(s) of interest. This can be
+#'   any of the core or nest variables from the data set. If none or \code{All}
+#'   is specified, a summary MF will be calculated for the whole tree.
 #' @return A tibble with each unique level of a variable as a row. Other values
-#' include: \cr
-#' \describe{
-#' \item{\code{MF}}{Mitigated fraction for the particular level of the variable
-#' in this row.}
-#' \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field of
-#'                   \code{\link{mfhierdata}} object output by \code{\link{MFh}}
-#'                    for this particular variable-level combination.}
-#' \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
-#'                   \code{\link{mfhierdata}} object output by \code{\link{MFh}}
-#'                   for this particular variable-level combination.}
-#' \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
-#' \code{\link{mfhierdata}} object output by \code{\link{MFh}}
-#'                    for this particular variable-level combination.}
-#' \item{\code{_medResp}}{Median of observed responses for each comparison group for
-#' this particular variable-level combination.}
-#' }
-#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial
-#' tree. Nest variables are those above the core. All refers to a summary of the entire tree.
+#'   include: \cr
+#'
+#'   \describe{
+#'
+#'   \item{\code{MF}}{Mitigated fraction for the particular level of the
+#'   variable in this row.}
+#'
+#'   \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
+#'   of \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+#'   particular variable-level combination.}
+#'
+#'   \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
+#'   \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+#'   particular variable-level combination.}
+#'
+#'   \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
+#'   \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+#'   particular variable-level combination.}
+#'
+#'   \item{\code{_medResp}}{Median of observed responses for each comparison
+#'   group for this particular variable-level combination.}
+#'
+#'   }
+#' @note Core variable is the variable corresponding to the lowest nodes of the
+#'   hierarchial tree. Nest variables are those above the core. All refers to a
+#'   summary of the entire tree.
 #' @seealso \code{\link{MFh}}
 #' @examples
 #' a <- data.frame(
@@ -247,17 +255,17 @@ utils::globalVariables(c('u', 'bootID', 'n1n2', 'w', 'variable', 'value', 'tmp',
 #' # 20 litter   Litter 22 1         4     4     2     2        7.27        5.13
 #' @export
 #' @author \link{MF-package}
-MFnest <- function(Y, which.factor = 'All') {
+MFnest <- function(Y, which.factor = "All") {
   ## restructure if using output from MFh
-  if (class(Y)[1] == 'mfhierdata') {
+  if (class(Y)[1] == "mfhierdata") {
     input <- Y
     Y <- input$coreTbl
-  } else if (class(Y)[1] != 'tbl_df') {
+  } else if (class(Y)[1] != "tbl_df") {
     Y <- as_tibble(Y)
   }
 
   stat.names <- c(str_subset(names(Y), "_medResp"),
-                  str_subset(names(Y), "_n"), 'n1n2', 'u', 'w')
+                  str_subset(names(Y), "_n"), "n1n2", "u", "w")
   comp1 <- sym(stat.names[3])
   comp2 <- sym(stat.names[4])
 
@@ -270,7 +278,7 @@ MFnest <- function(Y, which.factor = 'All') {
     mutate(level = as.character(level)) %>%
     bind_rows(.,
               select(Y, stat.names) %>%
-                mutate(variable = 'All', level = 'All')) %>%
+                mutate(variable = "All", level = "All")) %>%
     group_by(variable, level) %>%
     summarize(N1N2 = sum(n1n2), U = sum(u), con_N = sum(!!comp1),
               vac_N = sum(!!comp2)) %>%
@@ -280,23 +288,23 @@ MFnest <- function(Y, which.factor = 'All') {
     ungroup()
 
   ## inform user of complete separation
- if (1.0 %in% round(out$MF, digits = 1)) {
+  if (1.0 %in% round(out$MF, digits = 1)) {
     out %>%
       filter(round(MF, digits = 1) == 1.0) %>%
       distinct(variable) %>%
       pull() %>%
-      paste0(collapse = ', ') %>%
+      paste0(collapse = ", ") %>%
       message("Complete separation observed for variable(s): ", ., collapse = "")
   }
 
   ## inform user why medians are not available
- if (!exists('input')) {
-    message('Skipping median summary, no response data provided.')
+  if (!exists("input")) {
+    message("Skipping median summary, no response data provided.")
   } else {
 
     thisdata <- input$data
     compare <- input$compare
-    names(compare) <- paste0(input$compare, "_medResp", sep = '')
+    names(compare) <- paste0(input$compare, "_medResp", sep = "")
 
     out <- thisdata %>%
       mutate_if(is.factor, as.character) %>%
@@ -312,7 +320,7 @@ MFnest <- function(Y, which.factor = 'All') {
       ungroup() %>%
       rename(!!compare) %>%
       filter(tolower(variable) %in% tolower(which.factor)) %>%
-      left_join(out, ., by = c('variable', 'level'))
+      left_join(out, ., by = c("variable", "level"))
 
   }
 
@@ -325,4 +333,4 @@ MFnest <- function(Y, which.factor = 'All') {
 }
 
 # to keep R CMD happy
-utils::globalVariables(c('R', 'con_N', 'vac_N', 'tgroup', 'resp', 'medResp'))
+utils::globalVariables(c("R", "con_N", "vac_N", "tgroup", "resp", "medResp"))

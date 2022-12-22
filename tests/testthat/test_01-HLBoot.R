@@ -1,4 +1,4 @@
-context('HLBoot')
+context("HLBoot")
 
 set.seed(12345)
 test1 <- HLBoot(lesion~group, calflung)
@@ -7,11 +7,11 @@ test_that("output", {
   expect_s4_class(test1, "mfhlboot")
   expect_equal(test1$nboot, expected = 10000, tolerance = 0)
   expect_equal(test1$alpha, expected = 0.05, tolerance = 0)
-  expect_identical(test1$compare,expected = c('con', 'vac'))
-  expect_identical(test1$rng, expected = 'Mersenne-Twister')
+  expect_identical(test1$compare,expected = c("con", "vac"))
+  expect_identical(test1$rng, expected = "Mersenne-Twister")
 
   #MFstat
-  expect_is(test1$MFstat, 'matrix')
+  expect_is(test1$MFstat, "matrix")
   expect_identical(colnames(test1$MFstat),
                    expected = c("observed", "median",
                                 "lower", "upper"))
@@ -32,7 +32,7 @@ test_that("output", {
                tolerance = 0.01)
 
   #HLstat
-  expect_is(test1$HLstat, 'matrix')
+  expect_is(test1$HLstat, "matrix")
   expect_identical(colnames(test1$HLstat),
                    expected = c("observed", "median",
                                 "lower", "upper"))
@@ -53,7 +53,7 @@ test_that("output", {
                tolerance = 0.01)
 
   #QDIFstat
-  expect_is(test1$QDIFstat, 'matrix')
+  expect_is(test1$QDIFstat, "matrix")
   expect_identical(colnames(test1$QDIFstat),
                    expected = c("observed", "median",
                                 "lower", "upper"))

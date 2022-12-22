@@ -1,29 +1,38 @@
 #' @title  MFhBoot
 #' @name MFhBoot
 #' @description Calculate rank tables for MF using bootstrapping.
-#' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous response,
-#' x is a factor with two levels of treatment, and a/b/c are grouping variables
-#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
-#' highest to lowest. So a single level of "a" will contain multiple levels of
-#' "b" and a single level of "b" will contain multiple levels of "c".
+#' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous
+#'   response, x is a factor with two levels of treatment, and a/b/c are
+#'   grouping variables corresponding to the clusters. Nesting is assumed to be
+#'   in order, left to right, highest to lowest. So a single level of "a" will
+#'   contain multiple levels of "b" and a single level of "b" will contain
+#'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
-#' Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels - compare[1] is the control
-#' or reference group to which compare[2] is compared.
+#'   Additional variables will be ignored.
+#' @param compare Text vector stating the factor levels - compare[1] is the
+#'   control or reference group to which compare[2] is compared.
 #' @param nboot number of bootstrapping events
-#' @param boot.unit Boolean whether to sample observations from within those of the same core.
-#' @param boot.cluster Boolean whether to sample which cores are present. If TRUE,
-#' some trees have all the cores while others only have a subset.
-#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
+#' @param boot.unit Boolean whether to sample observations from within those of
+#'   the same core.
+#' @param boot.cluster Boolean whether to sample which cores are present. If
+#'   TRUE, some trees have all the cores while others only have a subset.
+#' @param seed to initialize random number generator for reproducibility. Passed
+#'   to \code{set.seed}.
 #' @return A list with the following elements: \cr \cr
-#' \describe{
+#'
+#'   \describe{
+#'
 #'   \item{bootmfh}{Rank table for the bootstrapped values as output from
 #'   \code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish
 #'   each bootstrapped incidence.}
+#'
 #'   \item{clusters}{Table of unique nodes with an ID.}
+#'
 #'   \item{compare}{Compare vector as specified by user.}
+#'
 #'   \item{mfh}{MFh run on original data input.}
-#' }
+#'
+#'   }
 #' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFnestBoot}}
 #' @author \link{MF-package}
 #' @export
@@ -46,7 +55,9 @@
 #'
 #' system.time(test1 <- MFhBoot(formula, a,
 #'                             nboot = 10000,
-#'                              boot.cluster = TRUE, boot.unit = TRUE, seed = 12345))
+#'                              boot.cluster = TRUE,
+#'                              boot.unit = TRUE,
+#'                              seed = 12345))
 #' test1$bootmfh
 MFhBoot <- function(formula, data,
                     compare = c("con", "vac"),
@@ -130,13 +141,13 @@ MFhBoot <- function(formula, data,
       n.x <- length(x)
       n.y <- length(y)
       x.b <- matrix(switch(as.character(n.x == 1),
-                           'TRUE' = rep(x, n.b),
-                           'FALSE' = sample(x, size = n.b * n.x,
+                           "TRUE" = rep(x, n.b),
+                           "FALSE" = sample(x, size = n.b * n.x,
                                             replace = TRUE)),
                     n.b, n.x)
       y.b <- matrix(switch(as.character(n.y == 1),
-                           'TRUE' = rep(y, n.b),
-                           'FALSE' = sample(y, size = n.b * n.y,
+                           "TRUE" = rep(y, n.b),
+                           "FALSE" = sample(y, size = n.b * n.y,
                                             replace = TRUE)),
                     n.b, n.y)
       w <- apply(cbind(x.b, y.b), 1,
@@ -176,9 +187,9 @@ MFhBoot <- function(formula, data,
 
     })
 
-    newnames <- c('medResp1', 'medResp2', 'n1', 'n2')
-    names(newnames) <- c(paste(compare, 'medResp', sep = '_'),
-                         paste(compare, 'n', sep = '_'))
+    newnames <- c("medResp1", "medResp2", "n1", "n2")
+    names(newnames) <- c(paste(compare, "medResp", sep = "_"),
+                         paste(compare, "n", sep = "_"))
     budat <- newdf %>%
       mutate(w = as.vector(t(w)),
              u = as.vector(t(u)),
@@ -188,7 +199,7 @@ MFhBoot <- function(formula, data,
              medResp1 = as.vector(t(medResp1)),
              medResp2 = as.vector(t(medResp2))) %>%
       rename(!!newnames) %>%
-      full_join(indivclus, by = c('newClus' = 'clusterID')) %>%
+      full_join(indivclus, by = c("newClus" = "clusterID")) %>%
       ungroup() %>%
       select(-newClus)
 
@@ -199,7 +210,7 @@ MFhBoot <- function(formula, data,
     budat <- full_join(data, indivclus, by = nests) %>%
       group_by(clusterID) %>%
       mutate(rank = rank(!!symresp)) %>%
-      group_by_at(vars('clusterID', tgroup)) %>%
+      group_by_at(vars("clusterID", tgroup)) %>%
       summarize(w = sum(rank),
                 n = length(!!symresp),
                 medResp = median(!!symresp, na.rm = TRUE)) %>%
@@ -212,10 +223,10 @@ MFhBoot <- function(formula, data,
              !!quo_name(nx) := !!nx,
              !!quo_name(ny) := !!ny) %>%
       select(-!!wy) %>%
-      full_join(newdf, by = c('clusterID' = 'newClus')) %>%
+      full_join(newdf, by = c("clusterID" = "newClus")) %>%
       arrange(bootID) %>%
       select(bootID, everything()) %>%
-      full_join(indivclus, by = 'clusterID') %>%
+      full_join(indivclus, by = "clusterID") %>%
       ungroup() %>%
       select(-clusterID)
   }
@@ -224,35 +235,41 @@ MFhBoot <- function(formula, data,
 
 }
 # to keep R CMD happy
-utils::globalVariables(c('clusterID', 'newClus', 'variable', 'value', 'tmp'))
+utils::globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 
 #' @title MFnestBoot
 #' @name MFnestBoot
 #' @description MFnest using bootstrapping
 #' @param x output from \code{\link{MFhBoot}}
-#' @param which.factor one or more grouping variable(s) of interest. This can be any of
-#' the core or nest variables from the data set. A MF value will be calculated for
-#' each level of the variable(s) specified. Default is 'All', to sum over entire tree.
-#' @param alpha Passed to \code{emp.hpd} to calculate eq tailed upper
-#' and high lower
-#' of mitigated fraction
-#' @return A list with the following elements: \cr
-#' \describe{
+#' @param which.factor one or more grouping variable(s) of interest. This can be
+#'   any of the core or nest variables from the data set. A MF value will be
+#'   calculated for each level of the variable(s) specified. Default is 'All',
+#'   to sum over entire tree.
+#' @param alpha Passed to \code{emp.hpd} to calculate eq tailed upper and high
+#'   lower of mitigated fraction
+#' @return A list with the following elements: \cr \describe{
 #'
-#' \item{mfnest_details}{The MF and summary statistics as calculated for each
-#' bootstrap event. Variables as in \code{\link{MFnest}} output.}
-#' \item{mfnest_summary}{Statistical summary of bootstrapped MF with each unique
-#' level of a core or nest variable passed to \code{which.factor} as a row.
-#' Other variables include: \cr
-#' \itemize{
-#' \item \code{median} Median of MFs from all of the bootstrap events.
-#' \item \code{etlower} Lower value of equal tailed range.
-#' \item \code{etupper} Upper value of equal tailed range.
-#' \item \code{hdlower} Lower value of the highest posterior density range.
-#' \item \code{hdupper} Upper value of the highest posterior density range.
-#' \item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
-#' }}
-#' }
+#'   \item{mfnest_details}{The MF and summary statistics as calculated for each
+#'   bootstrap event. Variables as in \code{\link{MFnest}} output.}
+#'   \item{mfnest_summary}{Statistical summary of bootstrapped MF with each
+#'   unique level of a core or nest variable passed to \code{which.factor} as a
+#'   row. Other variables include: \cr \itemize{
+#'
+#'   \item \code{median} Median of MFs from all of the bootstrap events.
+#'
+#'   \item \code{etlower} Lower value of equal tailed range.
+#'
+#'   \item \code{etupper} Upper value of equal tailed range.
+#'
+#'   \item \code{hdlower} Lower value of the highest posterior density range.
+#'
+#'   \item \code{hdupper} Upper value of the highest posterior density range.
+#'
+#'   \item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
+#'
+#'   }}
+#'
+#'   }
 #' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
 #' @export
 #' @author \link{MF-package}
@@ -292,12 +309,12 @@ utils::globalVariables(c('clusterID', 'newClus', 'variable', 'value', 'tmp'))
 #' system.time(test6 <- MFnestBoot(test1, which.factors[2:4]))
 #' test6
 #' }
-MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05) {
+MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
 
   quant <- c(.5, alpha / 2, 1 - alpha / 2)
 
   tmpall <- x$bootmfh %>%
-    select(-ends_with('_medResp'))
+    select(-ends_with("_medResp"))
 
   stat.names <- paste(x$compare, "n", sep = "_")
   comp1 <- sym(stat.names[1])
@@ -307,12 +324,13 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05) {
   comp4 <- sym(gsub(stat.names[2], pattern = "_n", replacement = "_N"))
 
   mfnest_all <- bind_rows(tmpall %>%
-                            gather(variable, level, -c('bootID', 'w', 'u', 'n1n2',
-                                                       stat.names)) %>%
+                            gather(variable, level,
+                                   -c("bootID", "w", "u", "n1n2",
+                                      stat.names)) %>%
                             mutate(level = as.character(level)),
                           tmpall %>%
                             select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
-                            mutate(variable = 'All', level = 'All')) %>%
+                            mutate(variable = "All", level = "All")) %>%
     filter(variable %in% which.factor) %>%
     group_by(variable, level, bootID) %>%
     summarize(U = sum(u),
@@ -330,16 +348,18 @@ MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05) {
               hdupper = emp.hpd(MF, alpha = alpha)[2]) %>%
     full_join(MFnest(x$mfh, which.factor = which.factor) %>%
                 select(variable, level, MF) %>%
-                rename(mf.obs = 'MF') %>%
+                rename(mf.obs = "MF") %>%
                 mutate_if(is.factor, as.character),
-              by = c('variable', 'level')) %>%
+              by = c("variable", "level")) %>%
     ungroup() %>%
     mutate(variable = fct_relevel(variable, which.factor)) %>%
     arrange(variable)
 
-  return(list(mfnest_details = mfnest_all, mfnest_summary = mfnest_summary, seed = x$seed))
+  return(list(mfnest_details = mfnest_all,
+              mfnest_summary = mfnest_summary,
+              seed = x$seed))
 }
 
 # to keep R CMD happy
-utils::globalVariables(c('variable', 'level', 'bootID', 'w', 'u', 'n1n2',
-                         'U', 'N1N2', 'MF'))
+utils::globalVariables(c("variable", "level", "bootID", "w", "u", "n1n2",
+                         "U", "N1N2", "MF"))
