@@ -79,7 +79,7 @@ test_that("output", {
                tolerance = 0.01)
 
   #QXstat
-  expect_is(test1$QXstat, 'matrix')
+  expect_is(test1$QXstat, "matrix")
   expect_identical(colnames(test1$QXstat),
                    expected = c("observed", "median",
                                 "lower", "upper"))
@@ -105,7 +105,7 @@ test_that("output", {
                tolerance = 0.01)
 
   #QYstat
-  expect_is(test1$QYstat, 'matrix')
+  expect_is(test1$QYstat, "matrix")
   expect_identical(colnames(test1$QYstat),
                    expected = c("observed", "median",
                                 "lower", "upper"))
