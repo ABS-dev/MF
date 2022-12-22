@@ -32,7 +32,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
                  x = NULL, alpha = 0.05, df = NA, tdist = TRUE) {
   # asymptotic CI for matched pairs
   # x is a trinomial frequency vector
-  # c(x>y,x=y,x<y))
+  # c(x>y, x=y, x<y))
   # difference of multinomial fractions
   # I(x<y) - I(x>y)
 

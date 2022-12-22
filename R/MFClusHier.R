@@ -42,7 +42,7 @@
 #' a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
 #'
-#' aCore <- MFh(lung ~ tx + room / pen / litter,a)
+#' aCore <- MFh(lung ~ tx + room / pen / litter, a)
 #' aCore
 #' #  A tibble: 12 x 10
 #' #     room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2     u
@@ -159,7 +159,7 @@ utils::globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
 #'
-#' aCore <- MFh(lung ~ tx + room / pen / litter,a)
+#' aCore <- MFh(lung ~ tx + room / pen / litter, a)
 #' MFnest(aCore)
 #' # # A tibble: 1 x 9
 #' #   variable level    MF  N1N2     U con_N vac_N con_medResp vac_medResp

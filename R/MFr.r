@@ -18,7 +18,7 @@
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
 #' @author \link{MF-package}
 #' @examples
-#' MFr(lesion~group,calflung)
+#' MFr(lesion~group, calflung)
 #' # [1] 0.44
 MFr <- function(formula, data, compare = c("con", "vac")) {
   # formula of form response~treatment
