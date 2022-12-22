@@ -44,7 +44,7 @@ MFnest(thismfh, which.factor = "All")
 ## ---- echo = FALSE, message = FALSE--------------------------------------
 mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / litter,
                                   data = a, boot.unit = FALSE,
-                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
 mfboot_multiple$MFhBoot$bootmfh %>%
   filter(bootID == 1) %>%
@@ -72,7 +72,7 @@ mfboot_multiple$MFhBoot$bootmfh %>%
 ## # BOOTSTRAPPING
 ## MFClusBootHier(formula = lung ~ tx + room / pen / litter,
 ##                                   data = a, boot.unit = FALSE,
-##                                   boot.cluster = TRUE,  alpha = 0.1,
+##                                   boot.cluster = TRUE, alpha = 0.1,
 ##                                   which.factor = c("room", "litter", "All"))
 ## mfboot_multiple$MFhBoot$bootmfh %>%
 ##   filter(bootID == 1) %>%

@@ -173,7 +173,7 @@ instance from the example data.
 ```{r, echo = FALSE, message = FALSE}
 mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / letter, 
                                   data = a, boot.unit = FALSE, 
-                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
 mfboot_multiple$MFhBoot$bootmfh %>% 
   filter(bootID == 1) %>% 
@@ -230,7 +230,7 @@ MFnest(thismfh, which.factor = "All")
 # BOOTSTRAPPING   
 MFClusBootHier(formula = lung ~ tx + room / pen / letter, 
                                   data = a, boot.unit = FALSE, 
-                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
 mfboot_multiple$MFhBoot$bootmfh %>% 
   filter(bootID == 1) %>% 

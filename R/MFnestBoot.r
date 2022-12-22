@@ -234,7 +234,7 @@ MFhBoot <- function(formula, data,
   return(list(bootmfh = budat,
               clusters = indivclus,
               compare = compare,
-              mfh = MFh(formula, data,  compare), seed = seed))
+              mfh = MFh(formula, data, compare), seed = seed))
 
 }
 # to keep R CMD happy

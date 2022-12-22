@@ -332,7 +332,7 @@ Adjusting the number of bootstrapping events and alpha:
 ```{r, results = 'hide', message=FALSE}
 MFClusBootHier(formula = lung ~ tx + room / pen / litter, 
                                   data = a, boot.unit = FALSE, 
-                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
 ```
 
@@ -349,7 +349,7 @@ population.
 ```{r, message = FALSE, results='hide'}
 mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / litter, 
                                   data = a, boot.unit = FALSE, 
-                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"),
                                   seed = 150)
 mfboot_multiple
@@ -411,7 +411,7 @@ value.
 ```{r, message=FALSE, results=FALSE}
 MFhBoot(formula = lung ~ tx + room / pen / litter, 
                                     data = a, boot.unit = FALSE, 
-                                    boot.cluster = TRUE,  
+                                    boot.cluster = TRUE, 
                                     seed = 150)
 ```
 

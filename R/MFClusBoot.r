@@ -105,7 +105,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
 		}
     strat.b <- matrix(NA, b * B, n.strat)
     for (i in 1:B) {
-			strat.b[((i - 1) * b + 1):((i - 1) * b + b),  ] <- sample(strat,
+			strat.b[((i - 1) * b + 1):((i - 1) * b + b), ] <- sample(strat,
 				size = b * n.strat, replace = TRUE)
 			if (trace.it) {
 				cat("bootstrap clusters, samples", (i - 1) * b + 1, "to", (i - 1) *

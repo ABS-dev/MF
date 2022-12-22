@@ -90,12 +90,12 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
        u <- w - (n.x * (n.x + 1)) / 2
        r <- u / (n.x * n.y)
        mf <- 2 * r - 1
-       out[stratum,  ] <- c(w, u, r, n.x, n.y, mf)
+       out[stratum, ] <- c(w, u, r, n.x, n.y, mf)
     } else {
       if (trace.it) {
         cat("Cluster", stratum, "missing a treatment\n")
       }
-      out[stratum,  ] <- c(NA, NA, NA, n.x, n.y, NA)
+      out[stratum, ] <- c(NA, NA, NA, n.x, n.y, NA)
       excluded.clusters <- c(excluded.clusters, stratum)
     }
   }
