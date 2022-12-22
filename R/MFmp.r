@@ -49,7 +49,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   }
 
   N <- sum(x)
-  p <- x/N
+  p <- x / N
   V <- (diag(p) - t(t(p)) %*% t(p)) / N
   V
   A <- grad <- c(1, 0, -1)
@@ -65,10 +65,10 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   }
 
   if (!is.na(df)) {
-    q <- qt(c(0.5, alpha/2, 1 - alpha/2), df)
+    q <- qt(c(0.5, alpha / 2, 1 - alpha / 2), df)
     what <- paste(100 * (1 - alpha), "% t intervals on ", df, " df\n", sep = "")
   } else {
-    q <- qnorm(c(0.5, alpha/2, 1 - alpha/2))
+    q <- qnorm(c(0.5, alpha / 2, 1 - alpha / 2))
     what <- paste(100 * (1 - alpha), "% gaussian interval\n", sep = "")
   }
 

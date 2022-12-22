@@ -7,10 +7,10 @@ a <- data.frame(
   stringsAsFactors = FALSE
 )
 set.seed(76153)
-a$lung[a$tx == "vac"] <- rnorm(24,5,1.3)
-a$lung[a$tx == "con"] <- rnorm(24,7,1.3)
+a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 
-aCore <- MFh(lung ~ tx + room/pen/litter,a)
+aCore <- MFh(lung ~ tx + room / pen / litter, a)
 
 test_that("output", {
 

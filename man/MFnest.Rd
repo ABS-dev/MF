@@ -60,7 +60,7 @@ set.seed(76153)
 a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 
-aCore <- MFh(lung ~ tx + room/pen/litter,a)
+aCore <- MFh(lung ~ tx + room / pen / litter,a)
 MFnest(aCore)
 # # A tibble: 1 x 9
 #   variable level    MF  N1N2     U con_N vac_N con_medResp vac_medResp

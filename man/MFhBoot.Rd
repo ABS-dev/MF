@@ -70,7 +70,7 @@ a[a$tx == 'vac', 'lung'] <-  rnorm(24, 5, 1.3)
 a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
 a
 
-formula <- lung ~ tx + room/pen/litter
+formula <- lung ~ tx + room / pen / litter
 nboot <- 10000
 boot.cluster <- TRUE
 boot.unit <- TRUE

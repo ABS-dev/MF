@@ -29,7 +29,7 @@ knitr::kable(a, align = "c", row.names = FALSE,
 
 
 ## ---- echo = FALSE-------------------------------------------------------
-thismfh <- MFh(formula = lung ~ tx + room/pen/litter, data = a)
+thismfh <- MFh(formula = lung ~ tx + room / pen / litter, data = a)
 thismfh
 
 
@@ -42,7 +42,7 @@ MFnest(thismfh, which.factor = "All")
 
 
 ## ---- echo = FALSE, message = FALSE--------------------------------------
-mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter,
+mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / litter,
                                   data = a, boot.unit = FALSE,
                                   boot.cluster = TRUE,  alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
@@ -65,12 +65,12 @@ mfboot_multiple$MFhBoot$bootmfh %>%
 ## a <- a[-48,]
 ##
 ## # DETERMINING MITIGATED FRACTION
-## thismfh <- MFh(formula = lung ~ tx + room/pen/litter, data = a)
+## thismfh <- MFh(formula = lung ~ tx + room / pen / litter, data = a)
 ## MFnest(thismfh, which.factor = "pen")
 ## MFnest(thismfh, which.factor = "All")
 ##
 ## # BOOTSTRAPPING
-## MFClusBootHier(formula = lung ~ tx + room/pen/litter,
+## MFClusBootHier(formula = lung ~ tx + room / pen / litter,
 ##                                   data = a, boot.unit = FALSE,
 ##                                   boot.cluster = TRUE,  alpha = 0.1,
 ##                                   which.factor = c("room", "litter", "All"))

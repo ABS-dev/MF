@@ -1,7 +1,7 @@
 context("HLBoot")
 
 set.seed(12345)
-test1 <- HLBoot(lesion~group, calflung)
+test1 <- HLBoot(lesion ~ group, calflung)
 
 test_that("output", {
   expect_s4_class(test1, "mfhlboot")

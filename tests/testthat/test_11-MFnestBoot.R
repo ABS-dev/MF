@@ -8,7 +8,7 @@ a <- data_frame(room = paste("Room", rep(c("W","Z"), each = 24)),
   mutate(lung = ifelse(tx == "vac", rnorm(24, 5, 1.3), rnorm(24, 7, 1.3)))
 a
 
-formula <- lung ~ tx + room/pen/litter
+formula <- lung ~ tx + room / pen / litter
 nboot <- 10000
 boot.cluster <- TRUE
 boot.unit <- TRUE

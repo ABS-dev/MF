@@ -42,7 +42,7 @@
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 #'
-#' aCore <- MFh(lung ~ tx + room/pen/litter,a)
+#' aCore <- MFh(lung ~ tx + room / pen / litter,a)
 #' aCore
 #' #  A tibble: 12 x 10
 #' #     room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2     u
@@ -101,7 +101,7 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
     select(-!!wy) %>%
     rename(w = !!wx) %>%
     mutate(n1n2 = !!nx * !!ny,
-           u = w - (!!nx * (!!nx + 1))/2) %>%
+           u = w - (!!nx * (!!nx + 1)) / 2) %>%
     select(everything(), w, n1n2, u) %>%
     ungroup()
 
@@ -159,7 +159,7 @@ utils::globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
 #'
-#' aCore <- MFh(lung ~ tx + room/pen/litter,a)
+#' aCore <- MFh(lung ~ tx + room / pen / litter,a)
 #' MFnest(aCore)
 #' # # A tibble: 1 x 9
 #' #   variable level    MF  N1N2     U con_N vac_N con_medResp vac_medResp
@@ -282,7 +282,7 @@ MFnest <- function(Y, which.factor = "All") {
     group_by(variable, level) %>%
     summarize(N1N2 = sum(n1n2), U = sum(u), con_N = sum(!!comp1),
               vac_N = sum(!!comp2)) %>%
-    mutate(R = U/N1N2, MF = 2 * R - 1) %>%
+    mutate(R = U / N1N2, MF = 2 * R - 1) %>%
     select(-R, !!quo_name(comp3) := con_N, !!quo_name(comp4) := vac_N) %>%
     filter(tolower(variable) %in% tolower(which.factor)) %>%
     ungroup()

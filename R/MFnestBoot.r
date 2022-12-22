@@ -47,7 +47,7 @@
 #' a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
 #' a
 #'
-#' formula <- lung ~ tx + room/pen/litter
+#' formula <- lung ~ tx + room / pen / litter
 #' nboot <- 10000
 #' boot.cluster <- TRUE
 #' boot.unit <- TRUE
@@ -177,7 +177,7 @@ MFhBoot <- function(formula, data,
       n.each[a] <<- sum(strat.b == a)
       thiswboot <- w.boot(x, y, n.each[a])
       w[strat.b == a] <<- thiswboot[[1]]
-      u[strat.b == a] <<- w[strat.b == a] - (n.x * (n.x + 1))/2
+      u[strat.b == a] <<- w[strat.b == a] - (n.x * (n.x + 1)) / 2
       n1n2[strat.b == a] <<- n.x * n.y
       con_n[strat.b == a] <<- n.x
       vac_n[strat.b == a] <<- n.y
@@ -218,7 +218,7 @@ MFhBoot <- function(formula, data,
       unite(tmp, tgroup, variable) %>%
       spread(tmp, value) %>%
       rename(w = !!wx) %>%
-      mutate(u = w - (!!nx * (!!nx + 1))/2,
+      mutate(u = w - (!!nx * (!!nx + 1)) / 2,
              n1n2 = !!nx * !!ny,
              !!quo_name(nx) := !!nx,
              !!quo_name(ny) := !!ny) %>%
@@ -231,7 +231,10 @@ MFhBoot <- function(formula, data,
       select(-clusterID)
   }
 
-  return(list(bootmfh = budat, clusters = indivclus, compare = compare, mfh = MFh(formula, data, compare), seed = seed))
+  return(list(bootmfh = budat,
+              clusters = indivclus,
+              compare = compare,
+              mfh = MFh(formula, data,  compare), seed = seed))
 
 }
 # to keep R CMD happy
@@ -284,7 +287,7 @@ utils::globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
 #' a
 #'
-#' formula <- lung ~ tx + room/pen/litter
+#' formula <- lung ~ tx + room / pen / litter
 #' nboot <- 10000
 #' boot.cluster <- TRUE
 #' boot.unit <- TRUE
@@ -337,7 +340,7 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
               N1N2 = sum(n1n2),
               !!quo_name(comp3) := sum(!!comp1),
               !!quo_name(comp4) := sum(!!comp2),
-              MF = 2 * (U/N1N2) - 1)
+              MF = 2 * (U / N1N2) - 1)
 
   mfnest_summary <- mfnest_all %>%
     group_by(variable, level) %>%

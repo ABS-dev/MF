@@ -132,12 +132,12 @@ not specify anything to the `which.factor` argument.
 
 Default case, looking only at whole tree:
 ```{r, results = 'hide'}
-MFClusHier(formula = lung ~ tx + room/pen/litter, data = a)
+MFClusHier(formula = lung ~ tx + room / pen / litter, data = a)
 ```
 
 Selecting a single variable to evaluate for each factor:
 ```{r, results = 'hide'}
-MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+MFClusHier(formula = lung ~ tx + room / pen / litter, data = a, 
                       which.factor = "room")
 ```
 
@@ -145,7 +145,7 @@ MFClusHier(formula = lung ~ tx + room/pen/litter, data = a,
 
 Selecting multiple variables, including the entire tree:
 ```{r, results = 'hide', message=FALSE}
-MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+MFClusHier(formula = lung ~ tx + room / pen / litter, data = a, 
                       which.factor = c("room", "litter", "All"))
 ```
 
@@ -159,7 +159,7 @@ sum of the number of unique levels for each grouping variable the user specified
 The value "All" will add one row to this table.
 
 ```{r, message = FALSE, results = 'hide'}
-mf_multiple <- MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+mf_multiple <- MFClusHier(formula = lung ~ tx + room / pen / litter, data = a, 
                       which.factor = c("room", "litter", "All"))
 mf_multiple
 ```
@@ -207,10 +207,10 @@ thisMFh$coreTbl %>%
 Alternatively, calculate rank table directly by using the `MFh()` function:
 
 ```{r, message=FALSE, eval=FALSE}
-MFh(formula = lung ~ tx + room/pen/litter, data = a)
+MFh(formula = lung ~ tx + room / pen / litter, data = a)
 ```
 ```{r, message=FALSE, echo=FALSE}
-MFh(formula = lung ~ tx + room/pen/litter, data = a)$coreTbl %>% 
+MFh(formula = lung ~ tx + room / pen / litter, data = a)$coreTbl %>% 
   as.data.frame(.)
 ```
 
@@ -259,11 +259,11 @@ MFnest(thisMFh, which.factor = "pen") %>% as.data.frame
 This is the same output as if the user had initially selected for variable "pen":
 
 ```{r, message=FALSE, eval=FALSE}
-MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+MFClusHier(formula = lung ~ tx + room / pen / litter, data = a, 
                       which.factor = "pen")
 ```
 ```{r, message=FALSE, echo=FALSE}
-MFClusHier(formula = lung ~ tx + room/pen/litter, data = a, 
+MFClusHier(formula = lung ~ tx + room / pen / litter, data = a, 
                       which.factor = "pen")$MFnest %>% 
   as.data.frame
 ```
@@ -317,20 +317,20 @@ Default case, looking only at whole tree and bootstrapping both at the cluster
 and unit levels:
 
 ```{r, results='hide'}
-MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+MFClusBootHier(formula = lung ~ tx + room / pen / litter, 
                              data = a)
 ```
 
 Specifying what bootstrapping sampling to occur:
 ```{r, results = 'hide'}
-MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+MFClusBootHier(formula = lung ~ tx + room / pen / litter, 
                               data = a, boot.unit = TRUE, 
                               boot.cluster = FALSE, which.factor = "room")
 ```
 
 Adjusting the number of bootstrapping events and alpha:
 ```{r, results = 'hide', message=FALSE}
-MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+MFClusBootHier(formula = lung ~ tx + room / pen / litter, 
                                   data = a, boot.unit = FALSE, 
                                   boot.cluster = TRUE,  alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
@@ -347,7 +347,7 @@ there are values summarizing the mitigated fraction from a bootstrapped
 population.
 
 ```{r, message = FALSE, results='hide'}
-mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / litter, 
                                   data = a, boot.unit = FALSE, 
                                   boot.cluster = TRUE,  alpha = 0.1,
                                   which.factor = c("room", "litter", "All"),
@@ -409,7 +409,7 @@ get the same output with both approaches, the `seed` argument must be the same
 value.
 
 ```{r, message=FALSE, results=FALSE}
-MFhBoot(formula = lung ~ tx + room/pen/litter, 
+MFhBoot(formula = lung ~ tx + room / pen / litter, 
                                     data = a, boot.unit = FALSE, 
                                     boot.cluster = TRUE,  
                                     seed = 150)
@@ -439,7 +439,7 @@ specified, the function defaults to a value of `sample(1:1e+05, 1)` and
 subsequent iterations may yield different summaries.
 
 ```{r, results='hide'}
-MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+MFClusBootHier(formula = lung ~ tx + room / pen / litter, 
                               data = a, seed = 150)
 ```
 
