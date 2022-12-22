@@ -36,7 +36,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   # difference of multinomial fractions
   # I(x<y) - I(x>y)
 
-  if (!is.null(formula) & !is.null(data)) {
+  if (!is.null(formula) && !is.null(data)) {
     byCluster <- MFClus(formula = formula, data = data,
                         compare = compare)$byCluster[, "mf"]
     ##
@@ -60,7 +60,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   logB <- log(B)
   VlogB <- t(gradl) %*% V %*% gradl
 
-  if (tdist & is.na(df)) {
+  if (tdist && is.na(df)) {
     df <- N - 2
   }
 

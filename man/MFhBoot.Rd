@@ -15,37 +15,46 @@ MFhBoot(
 )
 }
 \arguments{
-\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous response,
-x is a factor with two levels of treatment, and a/b/c are grouping variables
-corresponding to the clusters. Nesting is assumed to be in order, left to right,
-highest to lowest. So a single level of "a" will contain multiple levels of
-"b" and a single level of "b" will contain multiple levels of "c".}
+\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous
+response, x is a factor with two levels of treatment, and a/b/c are
+grouping variables corresponding to the clusters. Nesting is assumed to be
+in order, left to right, highest to lowest. So a single level of "a" will
+contain multiple levels of "b" and a single level of "b" will contain
+multiple levels of "c".}
 
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the control
-or reference group to which compare[2] is compared.}
+\item{compare}{Text vector stating the factor levels - compare[1] is the
+control or reference group to which compare[2] is compared.}
 
 \item{nboot}{number of bootstrapping events}
 
-\item{boot.unit}{Boolean whether to sample observations from within those of the same core.}
+\item{boot.unit}{Boolean whether to sample observations from within those of
+the same core.}
 
-\item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE,
-some trees have all the cores while others only have a subset.}
+\item{boot.cluster}{Boolean whether to sample which cores are present. If
+TRUE, some trees have all the cores while others only have a subset.}
 
-\item{seed}{to initialize random number generator for reproducibility. Passed to \code{set.seed}.}
+\item{seed}{to initialize random number generator for reproducibility. Passed
+to \code{set.seed}.}
 }
 \value{
 A list with the following elements: \cr \cr
-\describe{
+
+  \describe{
+
   \item{bootmfh}{Rank table for the bootstrapped values as output from
   \code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish
   each bootstrapped incidence.}
+
   \item{clusters}{Table of unique nodes with an ID.}
+
   \item{compare}{Compare vector as specified by user.}
+
   \item{mfh}{MFh run on original data input.}
-}
+
+  }
 }
 \description{
 Calculate rank tables for MF using bootstrapping.
@@ -69,7 +78,9 @@ which.factors <- c('All', 'room', 'pen', 'litter')
 
 system.time(test1 <- MFhBoot(formula, a,
                             nboot = 10000,
-                             boot.cluster = TRUE, boot.unit = TRUE, seed = 12345))
+                             boot.cluster = TRUE,
+                             boot.unit = TRUE,
+                             seed = 12345))
 test1$bootmfh
 }
 \seealso{

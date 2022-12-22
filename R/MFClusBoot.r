@@ -56,7 +56,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   ## set seed
   set.seed(seed)
   # short circuit if no bootstrapping!
-  if (!boot.cluster & !boot.unit) {
+  if (!boot.cluster && !boot.unit) {
     stop("No bootstrapping specified")
   }
   # takes b bootstrap samples B times, so nboot = B * b
