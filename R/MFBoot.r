@@ -43,8 +43,8 @@
 #' # Equal Tailed        0.44 0.4496 0.152 0.7088
 #' # Highest Density     0.44 0.4496 0.152 0.7088
 MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-                   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE,
-                   seed = sample(1:100000, 1)) {
+                   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
+                   trace.it = FALSE, seed = sample(1:100000, 1)) {
   # bootstrap confidence intervals for MF
   # 11/17/99 initial coding
   # 2/24/04 added BC.a interval
@@ -97,8 +97,9 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   mf <- (2 * w(c(x, y), n.x) - n.x * (1 + n.x + n.y)) / (n.x * n.y)
   qprob <- c(0.5, alpha / 2, 1 - alpha / 2)
   qmf <- quantile(MF, prob = qprob)
-  stat <- matrix(c(mf, qmf), 1, 4, dimnames = list(c("Equal Tailed"),
-                                                   c("observed", "median", "lower", "upper")))
+  stat <- matrix(c(mf, qmf), 1, 4,
+                 dimnames = list(c("Equal Tailed"),
+                                 c("observed", "median", "lower", "upper")))
   if (hpd) {
     hpdmf <- emp.hpd(MF, alpha = alpha)
     stat <- rbind(stat, "Highest Density" = c(mf, median(MF), hpdmf))

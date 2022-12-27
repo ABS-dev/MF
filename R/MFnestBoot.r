@@ -101,11 +101,13 @@ MFhBoot <- function(formula, data,
   #     while others only have a subset.
   # We assume that the input data has the max possible number
   #     of unique cores.
-  newdf <- tibble(bootID = rep(1:nboot, each = nclus),
-                  newClus = case_when(isTRUE(boot.cluster) ~
-                                        sample(indivclus$clusterID, nboot * nclus, replace = TRUE),
-                                      !isTRUE(boot.cluster) ~ rep(indivclus$clusterID,
-                                                                  nboot))) %>%
+  newdf <- tibble(
+    bootID = rep(1:nboot, each = nclus),
+    newClus = case_when(isTRUE(boot.cluster) ~
+                          sample(indivclus$clusterID,
+                                 nboot * nclus, replace = TRUE),
+                        !isTRUE(boot.cluster) ~ rep(indivclus$clusterID,
+                                                    nboot))) %>%
     arrange(bootID)
 
   # ** use new tree structure to calculate summary statistics **

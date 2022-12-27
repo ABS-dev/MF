@@ -17,47 +17,49 @@ MFClusBootHier(
 )
 }
 \arguments{
-\item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a continuous
-response, x is a factor with two levels of treatment, and a/b/c are grouping variables
-corresponding to the clusters. Nesting is assumed to be in order, left to right,
-highest to lowest. So a single level of "a" will contain multiple levels of
-"b" and a single level of "b" will contain multiple levels of "c".}
+\item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a
+continuous response, x is a factor with two levels of treatment, and a/b/c
+are grouping variables corresponding to the clusters. Nesting is assumed to
+be in order, left to right, highest to lowest. So a single level of "a"
+will contain multiple levels of "b" and a single level of "b" will contain
+multiple levels of "c".}
 
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the control
-or reference group to which compare[2] is compared.}
+\item{compare}{Text vector stating the factor levels - compare[1] is the
+control or reference group to which compare[2] is compared.}
 
 \item{nboot}{number of bootstrapping events}
 
-\item{boot.unit}{Boolean whether to sample observations from within those of the same core.}
+\item{boot.unit}{Boolean whether to sample observations from within those of
+the same core.}
 
-\item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE,
-some trees have all the cores while others only have a subset.}
+\item{boot.cluster}{Boolean whether to sample which cores are present. If
+TRUE, some trees have all the cores while others only have a subset.}
 
-\item{which.factor}{Which variables to include in the mitigated fraction summation.
-Default is 'All', to sum over entire tree.}
+\item{which.factor}{Which variables to include in the mitigated fraction
+summation. Default is 'All', to sum over entire tree.}
 
-\item{alpha}{Passed to \code{emp.hpd} to calculate high tailed upper and high tailed lower
-of mitigated fraction.}
+\item{alpha}{Passed to \code{emp.hpd} to calculate high tailed upper and high
+tailed lower of mitigated fraction.}
 
 \item{seed}{Passed to \code{\link{MFhBoot}} to to initialize random number
 generator for reproducibility.}
 }
 \value{
-A list with the following elements: \cr \cr
-\itemize{
-\item \strong{MFhBoot} as output from \code{\link{MFhBoot}}.
-\item \strong{MFnestBoot} as output from \code{\link{MFnestBoot}}.
-}
+A list with the following elements: \cr \cr \itemize{ \item
+  \strong{MFhBoot} as output from \code{\link{MFhBoot}}. \item
+  \strong{MFnestBoot} as output from \code{\link{MFnestBoot}}. }
 }
 \description{
-Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into a single function.
+Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into
+  a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical
-tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
+\code{Core} variable is the variable corresponding to the lowest nodes
+  of the hierarchical tree. \code{Nest} variables are those above the core.
+  \code{All} refers to a summary of the entire tree.
 }
 \examples{
 a <- data.frame(

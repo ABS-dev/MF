@@ -84,8 +84,8 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
   reshapeCluster(data = data, formula = formula, compare = compare,
                  envir = environment())
   id <- compare
-  out <- matrix(NA, length(strat), 6, dimnames = list(strat, c("w", "u", "r",
-                                                               "n1", "n2", "mf")))
+  out <- matrix(NA, length(strat), 6,
+                dimnames = list(strat, c("w", "u", "r", "n1", "n2", "mf")))
   excluded.clusters <- NULL
   for (stratum in strat) {
     x <- dat[group == id[1] & as.character(clusters) == stratum]
@@ -119,6 +119,7 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
     message("Complete separation observed.")
   }
   return(mfcluster$new(All = All, byCluster = out,
-                       excludedClusters = excluded.clusters, call = match.call(),
+                       excludedClusters = excluded.clusters,
+                       call = match.call(),
                        compare = compare))
 }

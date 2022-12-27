@@ -39,9 +39,9 @@
 #' HLBoot(lesion~group, calflung, seed = 12345)
 #'
 #' # Bootstrapping
-#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#' # . . . . . . . . . . . . . . . . . . . .
+#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#' # . . . . . . . . . . . . . . . . . . . . . . . .
 #' #
 #' # 10000 bootstrap samples
 #' # 95% confidence intervals
@@ -88,8 +88,8 @@
 #--------------------------------------------------------------------
 #
 HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-                   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE,
-                   seed = sample(1:100000, 1)) {
+                   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
+                   trace.it = FALSE, seed = sample(1:100000, 1)) {
   # set seed
   set.seed(seed)
 
@@ -170,11 +170,13 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   MF <- (2 * W - n.x * (1 + n.x + n.y)) / (n.x * n.y)
   qprob <- c(0.5, alpha / 2, 1 - alpha / 2)
   qmf <- quantile(MF, prob = qprob)
-  mfstat <- matrix(c(mf, qmf), 1, 4, dimnames = list(c("Equal Tailed"),
-                                                     c("observed", "median", "lower", "upper")))
+  mfstat <- matrix(c(mf, qmf), 1, 4,
+                   dimnames = list(c("Equal Tailed"),
+                                   c("observed", "median", "lower", "upper")))
   qhl <- quantile(H, prob = qprob)
-  hlstat <- matrix(c(hl, qhl), 1, 4, dimnames = list(c("Equal Tailed"),
-                                                     c("observed", "median", "lower", "upper")))
+  hlstat <- matrix(c(hl, qhl), 1, 4,
+                   dimnames = list(c("Equal Tailed"),
+                                   c("observed", "median", "lower", "upper")))
   qqd <- t(apply(Qdif, 2, quantile, prob = qprob))
   qdifstat <- cbind(qdif, qqd)
   dimnames(qdifstat) <- list(dimnames(Qdif)[[2]], c("observed", "median",
@@ -228,6 +230,7 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   }
 
   return(mfhlboot$new(MFstat = mfstat, HLstat = hlstat, QDIFstat = qdifstat,
-                      QXstat = qxstat, QYstat = qystat, nboot = nboot, alpha = alpha, seed = seed,
-                      compare = compare, 	rng = rng, sample = sample))
+                      QXstat = qxstat, QYstat = qystat, nboot = nboot,
+                      alpha = alpha, seed = seed, compare = compare,
+                      rng = rng, sample = sample))
 }

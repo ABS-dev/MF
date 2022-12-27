@@ -1,35 +1,54 @@
 #' @name MFh
 #' @title Identify ranks for use when evaluating MF for nested hierarchy.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous
-#' response, x is a factor with two levels of treatment, and a/b/c are vgrouping variables
-#' corresponding to the clusters. Nesting is assumed to be in order, left to right,
-#' highest to lowest. So a single level of "a" will contain multiple levels of
-#' "b" and a single level of "b" will contain multiple levels of "c".
+#'   response, x is a factor with two levels of treatment, and a/b/c are
+#'   vgrouping variables corresponding to the clusters. Nesting is assumed to be
+#'   in order, left to right, highest to lowest. So a single level of "a" will
+#'   contain multiple levels of "b" and a single level of "b" will contain
+#'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
-#' Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels - compare[1] is the control or
-#' reference group to which compare[2] is compared.
-#' @return A \code{\link{mfhierdata}} object, which is a list of three items. \cr
-#' \describe{
+#'   Additional variables will be ignored.
+#' @param compare Text vector stating the factor levels - compare[1] is the
+#'   control or reference group to which compare[2] is compared.
+#' @return A \code{\link{mfhierdata}} object, which is a list of three items.
+#'   \cr \describe{
 #'
-#' \item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique core level showing values for:
-#' \itemize{
-#'   \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations for each treatment level in the core level.
-#'   \item \emph{con}\code{_medResp} & \emph{vac}\code{_medResp} - median of the y continuous response for each treatment level.
-#'   \item \code{n1n2} - product of the counts, \emph{con}\code{_n} * \emph{vac}\code{_n}.
+#'
+#'   \item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique
+#'   core level showing values for:
+#'
+#'   \itemize{
+#'
+#'   \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations
+#'   for each treatment level in the core level.
+#'
+#'   \item \emph{con}\code{_medResp} & \emph{vac}\code{_medResp} - median of the
+#'   y continuous response for each treatment level.
+#'
+#'   \item \code{n1n2} - product of the counts, \emph{con}\code{_n} *
+#'   \emph{vac}\code{_n}.
+#'
 #'   \item \code{w} - Wilcoxon statistic
+#'
 #'   \item \code{u} - Mann-Whitney statistic
-#' }
-#' }
-#' \item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data used for calculations.}
-#' \item{compare}{The compare variables as input by user.}
-#' \item{formula}{The formula as input by user.}
-#' }
-#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial
-#' tree. Nest variables are those above the core.
+#'
+#'   }
+#'
+#'   }
+#'
+#'   \item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data
+#'   used for calculations.}
+#'
+#'   \item{compare}{The compare variables as input by user.}
+#'
+#'   \item{formula}{The formula as input by user.}
+#'
+#'   }
+#' @note Core variable is the variable corresponding to the lowest nodes of the
+#'   hierarchial tree. Nest variables are those above the core.
 #' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all
-#' variables. \code{\link{mfhierdata}} for returned object.\code{\link{MFClusHier}}
-#' for a wrapper.
+#'   variables. \code{\link{mfhierdata}} for returned
+#'   object.\code{\link{MFClusHier}} for a wrapper.
 #' @examples
 #' a <- data.frame(
 #'  room = paste('Room', rep(c('W','Z'), each=24)),
@@ -45,20 +64,20 @@
 #' aCore <- MFh(lung ~ tx + room / pen / litter, a)
 #' aCore
 #' #  A tibble: 12 x 10
-#' #     room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2     u
-#' #     <chr>  <chr> <chr>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl> <dbl>
-#' #   1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4     4
-#' #   2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4     2
-#' #   3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4     4
-#' #   4 Room W Pen B Litter 14        8.11     2     7        5.59     2     4     4
-#' #   5 Room W Pen C Litter 15        8.09     2     7        5.26     2     4     4
-#' #   6 Room W Pen C Litter 16        6.77     2     7        4.50     2     4     4
-#' #   7 Room Z Pen D Litter 17        5.58     2     7        4.26     2     4     4
-#' #   8 Room Z Pen D Litter 18        7.44     2     6        6.33     2     4     3
-#' #   9 Room Z Pen E Litter 19        7.98     2     7        4.58     2     4     4
-#' #  10 Room Z Pen E Litter 20        6.78     2     7        4.86     2     4     4
-#' #  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4     4
-#' #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
+#' #     room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2
+#' #     <chr>  <chr> <chr>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl>
+#' #   1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4
+#' #   2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4
+#' #   3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4
+#' #   4 Room W Pen B Litter 14        8.11     2     7        5.59     2     4
+#' #   5 Room W Pen C Litter 15        8.09     2     7        5.26     2     4
+#' #   6 Room W Pen C Litter 16        6.77     2     7        4.50     2     4
+#' #   7 Room Z Pen D Litter 17        5.58     2     7        4.26     2     4
+#' #   8 Room Z Pen D Litter 18        7.44     2     6        6.33     2     4
+#' #   9 Room Z Pen E Litter 19        7.98     2     7        4.58     2     4
+#' #  10 Room Z Pen E Litter 20        6.78     2     7        4.86     2     4
+#' #  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4
+#' #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4
 #' @export
 #' @author \link{MF-package}
 MFh <- function(formula, data, compare = c("con", "vac")) {
@@ -294,7 +313,8 @@ MFnest <- function(Y, which.factor = "All") {
       distinct(variable) %>%
       pull() %>%
       paste0(collapse = ", ") %>%
-      message("Complete separation observed for variable(s): ", ., collapse = "")
+      message("Complete separation observed for variable(s): ", .,
+              collapse = "")
   }
 
   ## inform user why medians are not available

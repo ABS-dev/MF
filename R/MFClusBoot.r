@@ -115,11 +115,11 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
     }
     strat.b <- matrix(NA, b * B, n.strat)
     for (i in 1:B) {
-      strat.b[((i - 1) * b + 1):((i - 1) * b + b), ] <- sample(strat,
-                                                               size = b * n.strat, replace = TRUE)
+      strat.b[((i - 1) * b + 1):((i - 1) * b + b), ] <-
+        sample(strat, size = b * n.strat,  replace = TRUE)
       if (trace.it) {
-        cat("bootstrap clusters, samples", (i - 1) * b + 1, "to", (i - 1) *
-              b + b, "\n")
+        cat("bootstrap clusters, samples", (i - 1) * b + 1, "to",
+            (i - 1) * b + b, "\n")
       } else {
         cat(". ")
       }
@@ -161,10 +161,14 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
       out <- rep(NA, n.b)
       x.b <- matrix(switch(as.character(n.x == 1),
                            "TRUE" = rep(x, n.b),
-                           "FALSE" = sample(x, size = n.b * n.x, replace = TRUE)), n.b, n.x)
+                           "FALSE" = sample(x, size = n.b * n.x,
+                                            replace = TRUE)),
+                    n.b, n.x)
       y.b <- matrix(switch(as.character(n.y == 1),
                            "TRUE" = rep(y, n.b),
-                           "FALSE" = sample(y, size = n.b * n.y, replace = TRUE)), n.b, n.y)
+                           "FALSE" = sample(y, size = n.b * n.y,
+                                            replace = TRUE)),
+                    n.b, n.y)
       w <- apply(cbind(x.b, y.b), 1, function(x, n.x) {
         sum(rank(x)[1:n.x])
       }, n.x)
@@ -205,8 +209,9 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   the.text <- paste(nboot, " bootstrap samples of ", cluster.text, and.text,
                     unit.text, sep = "")
   stat <- c(Observed = mf.obs, quantile(MF, prob = q))
-  stat <- matrix(stat, 1, 4, dimnames = list(c("Equal Tailed"), c("observed",
-                                                                  "median", "lower", "upper")))
+  stat <- matrix(stat, 1, 4,
+                 dimnames = list(c("Equal Tailed"),
+                                 c("observed", "median", "lower", "upper")))
   if (hpd) {
     hpdmf <- emp.hpd(MF, alpha = alpha)
     stat <- rbind(stat, "Highest Density" = c(mf.obs, stat[1, "median"],
@@ -219,7 +224,8 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   }
 
   return(mfbootcluster$new(stat = stat, nboot = nboot, alpha = alpha,
-                           what = the.text, excludedClusters = excluded.clusters, seed = seed,
-                           call = match.call(), compare = compare, rng = rng, sample = sample,
-                           All =  mf.All))
+                           what = the.text,
+                           excludedClusters = excluded.clusters, seed = seed,
+                           call = match.call(), compare = compare, rng = rng,
+                           sample = sample, All =  mf.All))
 }

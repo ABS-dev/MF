@@ -67,9 +67,9 @@ Estimates bootstrap confidence intervals for the mitigated fraction
 HLBoot(lesion~group, calflung, seed = 12345)
 
 # Bootstrapping
-# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-# . . . . . . . . . . . . . . . . . . . .
+# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+# . . . . . . . . . . . . . . . . . . . . . . . .
 #
 # 10000 bootstrap samples
 # 95\% confidence intervals
