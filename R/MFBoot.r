@@ -5,9 +5,6 @@
 #'   density intervals are estimated by selecting the shortest of all possible
 #'   intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 #' @title Bootstrap MF CI
-#' @usage MFBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-#'   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it =
-#'   FALSE, seed = sample(1:100000, 1))
 #' @param formula Formula of the form \code{y ~ x}, where y is a continuous
 #'   response and x is a factor with two levels.
 #' @param data Data frame

@@ -6,7 +6,6 @@
 #' on the original scale of measurement.
 #'
 #' @title Mitigated fraction
-#' @usage MFr(formula, data, compare = c("con", "vac"))
 #' @param formula Formula of the form \code{y ~ x}, where y is a continuous
 #'   response and x is a factor with two levels
 #' @param data Data frame
