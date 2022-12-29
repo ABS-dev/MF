@@ -25,7 +25,6 @@ reshapeCluster <- function(data, formula, compare, envir) {
 
 #' @description  used in the bootstrapping functions MFClusBoot  MFBoot HLBoot
 #' @importFrom stats quantile
-#' @export
 #' @noRd
 emp.hpd <- function(X, alpha) {
     # empirical hpd by shortest length interval
