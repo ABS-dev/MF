@@ -80,6 +80,11 @@
 #' #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4
 #' @export
 #' @author \link{MF-package}
+#' @importFrom stringr str_c
+#' @importFrom tidyr gather unite spread
+#' @importFrom stats median terms
+#' @importFrom dplyr select sym "%>%" as_tibble ungroup group_by_at mutate
+#'   filter vars summarize rename everything
 MFh <- function(formula, data, compare = c("con", "vac")) {
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
@@ -274,6 +279,14 @@ utils::globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' # 20 litter   Litter 22 1         4     4     2     2        7.27        5.13
 #' @export
 #' @author \link{MF-package}
+#' @importFrom stringr str_subset
+#' @importFrom tidyr gather spread
+#' @importFrom forcats fct_relevel
+#' @importFrom stats median
+#' @importFrom dplyr select as_tibble sym "%>%" mutate_if mutate bind_rows
+#'   group_by summarize filter ungroup distinct pull rename left_join arrange
+#'   everything
+#' @importFrom rlang ":=" quo_name
 MFnest <- function(Y, which.factor = "All") {
   ## restructure if using output from MFh
   if (class(Y)[1] == "mfhierdata") {

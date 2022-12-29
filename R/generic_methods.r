@@ -84,6 +84,7 @@ setMethod("show", "mfbootcluster",
           }
 )
 
+#' @importFrom stats na.omit
 setMethod("print", "mfcluster",
           function(x, ...) {
             cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")

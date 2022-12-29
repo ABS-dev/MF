@@ -1,4 +1,5 @@
 # shared reshaping portion of MFClus and MFClusBoot
+#' @importFrom stats model.frame terms
 reshapeCluster <- function(data, formula, compare, envir) {
   cluster <- function(x) {
     return(x)
@@ -22,8 +23,10 @@ reshapeCluster <- function(data, formula, compare, envir) {
   assign("strat", strat, envir = envir)
 }
 
-# used in the bootstrapping functions MFClusBoot  MFBoot HLBoot
+#' @description  used in the bootstrapping functions MFClusBoot  MFBoot HLBoot
+#' @importFrom stats quantile
 #' @export
+#' @noRd
 emp.hpd <- function(X, alpha) {
     # empirical hpd by shortest length interval
     X <- sort(X)
@@ -37,8 +40,8 @@ emp.hpd <- function(X, alpha) {
     return(hpd)
 }
 
+#' @importFrom plyr rbind.fill
 resampleHier <- function(dat, cluster) {
-
   # exit early for trivial data
   if (nrow(dat) == 1) {
     return(dat)

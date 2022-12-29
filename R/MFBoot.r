@@ -21,7 +21,6 @@
 #'   to \code{set.seed}.
 #' @return a \code{\link{mfboot-class}} data object
 #' @seealso \code{\link{mfboot-class}}
-#' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.}
 #'   \bold{4:500--508} \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
@@ -39,6 +38,8 @@
 #' # observed median lower  upper
 #' # Equal Tailed        0.44 0.4496 0.152 0.7088
 #' # Highest Density     0.44 0.4496 0.152 0.7088
+#' @importFrom stats quantile median model.frame pnorm qnorm
+#' @export
 MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
                    alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
                    trace.it = FALSE, seed = sample(1:100000, 1)) {

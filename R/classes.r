@@ -1,3 +1,6 @@
+#' @importFrom methods new setClassUnion setRefClass
+
+
 setClassUnion("characterORNULL", c("character", "NULL"))
 setClassUnion("listORNULL", c("list", "NULL"))
 setClassUnion("numericORNULL", c("numeric", "NULL"))

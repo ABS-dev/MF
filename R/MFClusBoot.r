@@ -30,7 +30,6 @@
 #' with missing treatments will be excluded. See
 #' \code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded
 #' clusters.
-#' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.}
 #'   \bold{4:500--508}\cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
@@ -55,6 +54,8 @@
 #' Excluded Clusters
 #' M, Q, R, B, O, V, I, C
 #' }
+#' @importFrom stats quantile
+#' @export
 
 #--------------------------------------------------------------------
 # Bootstrap stratified or clustered MF

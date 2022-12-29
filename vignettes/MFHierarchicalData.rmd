@@ -87,7 +87,7 @@ vaccinate) for a particular instance of a unique factor level of a variable.
 (control or vaccinate) in a particular instance of a unique factor level of a variable.
 
 ```{r, echo = FALSE}
-thismfh <- MFh(formula = lung ~ tx + room / pen / letter, data = a)
+thismfh <- MFh(formula = lung ~ tx + room / pen / litter, data = a)
 thismfh
 ```
 
@@ -171,7 +171,7 @@ they may not be unique. The example below shows one possiblility of a bootstrap
 instance from the example data.
 
 ```{r, echo = FALSE, message = FALSE}
-mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / letter,
+mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / litter,
                                   data = a, boot.unit = FALSE,
                                   boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
@@ -223,12 +223,12 @@ a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 a <- a[-48, ]
 
 # DETERMINING MITIGATED FRACTION
-thismfh <- MFh(formula = lung ~ tx + room / pen / letter, data = a)
+thismfh <- MFh(formula = lung ~ tx + room / pen / litter, data = a)
 MFnest(thismfh, which.factor = "pen")
 MFnest(thismfh, which.factor = "All")
 
 # BOOTSTRAPPING
-MFClusBootHier(formula = lung ~ tx + room / pen / letter,
+MFClusBootHier(formula = lung ~ tx + room / pen / litter,
                                   data = a, boot.unit = FALSE,
                                   boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))

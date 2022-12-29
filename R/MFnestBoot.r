@@ -59,6 +59,14 @@
 #'                              boot.unit = TRUE,
 #'                              seed = 12345))
 #' test1$bootmfh
+#' @importFrom stringr str_c
+#' @importFrom tidyr gather unite spread
+#' @importFrom stats median terms
+#' @importFrom purrr as_vector
+#' @importFrom dplyr select sym "%>%" mutate_if distinct mutate n full_join
+#'   tibble case_when arrange "%>%" filter rename ungroup group_by group_by_at
+#'   vars summarize everything
+#' @importFrom rlang ":=" quo_name
 MFhBoot <- function(formula, data,
                     compare = c("con", "vac"),
                     nboot = 10000,
@@ -276,7 +284,6 @@ utils::globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #'
 #'   }
 #' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
-#' @export
 #' @author \link{MF-package}
 #' @examples
 #' set.seed(76153)
@@ -314,6 +321,13 @@ utils::globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' system.time(test6 <- MFnestBoot(test1, which.factors[2:4]))
 #' test6
 #' }
+#' @importFrom stats quantile
+#' @importFrom tidyr gather
+#' @importFrom forcats fct_relevel
+#' @importFrom dplyr select "%>%" ends_with sym bind_rows mutate filter group_by
+#'   summarize full_join rename mutate_if ungroup arrange
+#' @importFrom rlang ":=" quo_name
+#' @export
 MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
 
   quant <- c(.5, alpha / 2, 1 - alpha / 2)

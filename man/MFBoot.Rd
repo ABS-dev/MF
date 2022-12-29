@@ -4,9 +4,19 @@
 \alias{MFBoot}
 \title{Bootstrap MF CI}
 \usage{
-MFBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-  alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it =
-  FALSE, seed = sample(1:100000, 1))
+MFBoot(
+  formula,
+  data,
+  compare = c("con", "vac"),
+  b = 100,
+  B = 100,
+  alpha = 0.05,
+  hpd = TRUE,
+  bca = FALSE,
+  return.boot = FALSE,
+  trace.it = FALSE,
+  seed = sample(1:1e+05, 1)
+)
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x}, where y is a continuous

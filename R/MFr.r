@@ -19,6 +19,7 @@
 #' @examples
 #' MFr(lesion~group, calflung)
 #' # [1] 0.44
+#' @importFrom stats model.frame
 MFr <- function(formula, data, compare = c("con", "vac")) {
   # formula of form response~treatment
   # x=response for compare[1]

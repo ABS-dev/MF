@@ -27,7 +27,6 @@
 #'   to \code{set.seed}.
 #' @return a \code{\link{mfhlboot-class}} data object
 #' @seealso \code{\link{mfhlboot-class}}
-#' @export
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
 #'   rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}.
 #'   \cr \cr Siev D, (2005). An estimator of intervention effect on disease
@@ -82,6 +81,8 @@
 #' # Q25  0.01250 0.01250 0.00125 0.026000
 #' # Q50  0.02675 0.02675 0.01665 0.144575
 #' # Q75  0.14700 0.14700 0.02810 0.219250
+#' @importFrom stats quantile median model.frame pnorm qnorm
+#' @export
 
 #--------------------------------------------------------------------
 # Bootstrap HL, quartiles, quartile diffs
