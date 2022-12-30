@@ -5,3 +5,4 @@
 ^\.travis\.yml$
 CODEOWNERS
 ^\.appveyor\.yml$
+^LICENSE$
