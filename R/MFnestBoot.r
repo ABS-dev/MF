@@ -96,7 +96,7 @@ MFhBoot <- function(formula, data,
     mutate_if(is.factor, as.character) %>%
     select(nests) %>%
     distinct() %>%
-    mutate(clusterID = 1:n())
+    mutate(clusterID = seq_len(n()))
   nclus <- nrow(indivclus)
 
   datID <- data %>%
