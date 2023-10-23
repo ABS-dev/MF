@@ -81,7 +81,7 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
   group <- NULL
   clusters <- NULL
   strat <- NULL
-  reshapeCluster(data = data, formula = formula, compare = compare,
+  reshape_cluster(data = data, formula = formula, compare = compare,
                  envir = environment())
   id <- compare
   out <- matrix(NA, length(strat), 6,

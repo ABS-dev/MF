@@ -72,7 +72,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   TRUE, some trees have all the cores while others only have a subset.
 #' @param which.factor Which variables to include in the mitigated fraction
 #'   summation. Default is 'All', to sum over entire tree.
-#' @param alpha Passed to \code{emp.hpd} to calculate high tailed upper and high
+#' @param alpha Passed to \code{emp_hpd} to calculate high tailed upper and high
 #'   tailed lower of mitigated fraction.
 #' @param seed Passed to \code{\link{MFhBoot}} to to initialize random number
 #'   generator for reproducibility.

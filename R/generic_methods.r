@@ -1,20 +1,22 @@
-setMethod("print", "mfboot",
-          function(x, ...) {
-            cat(x$nboot, "bootstrap samples")
-            cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
-                "confidence interval\n")
-            cat(paste("Seed = ", x$seed))
-            cat("\n")
-            cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
-            print(x$stat)
-            cat("\n")
-          }
+setMethod(
+  "print", "mfboot",
+  function(x, ...) {
+    cat(x$nboot, "bootstrap samples")
+    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
+        "confidence interval\n")
+    cat(paste("Seed = ", x$seed))
+    cat("\n")
+    cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
+    print(x$stat)
+    cat("\n")
+  }
 )
 
-setMethod("show", "mfboot",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfboot",
+  function(object) {
+    print(object)
+  }
 )
 
 setMethod("print", "mfhlboot",
@@ -38,50 +40,55 @@ setMethod("print", "mfhlboot",
             cat("\n")
           })
 
-setMethod("show", "mfhlboot",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfhlboot",
+  function(object) {
+    print(object)
+  }
 )
 
 
-setMethod("print", "mfmp",
-          function(x, ...) {
-            cat(x$what, "\n")
-            print(x$ci)
-          }
+setMethod(
+  "print", "mfmp",
+  function(x, ...) {
+    cat(x$what, "\n")
+    print(x$ci)
+  }
 )
 
 
-setMethod("show", "mfmp",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfmp",
+  function(object) {
+    print(object)
+  }
 )
 
 
-setMethod("print", "mfbootcluster",
-          function(x, ...) {
-            cat("\n\n", x$what, sep = "")
-            cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
-            cat(paste("Seed = ", x$seed))
-            cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
-                "confidence interval\n\n")
-            print(x$stat)
-            if (!is.null(x$excludedClusters)) {
-              exc <- paste(x$excludedClusters, collapse = ", ")
-            } else {
-              exc <- "None"
-            }
-            cat("\nExcluded Clusters\n", exc, "\n")
-            cat("\n")
-          }
+setMethod(
+  "print", "mfbootcluster",
+  function(x, ...) {
+    cat("\n\n", x$what, sep = "")
+    cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
+    cat(paste("Seed = ", x$seed))
+    cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
+        "confidence interval\n\n")
+    print(x$stat)
+    if (!is.null(x$excludedClusters)) {
+      exc <- paste(x$excludedClusters, collapse = ", ")
+    } else {
+      exc <- "None"
+    }
+    cat("\nExcluded Clusters\n", exc, "\n")
+    cat("\n")
+  }
 )
 
-setMethod("show", "mfbootcluster",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfbootcluster",
+  function(object) {
+    print(object)
+  }
 )
 
 #' @importFrom stats na.omit
@@ -104,10 +111,11 @@ setMethod("print", "mfcluster",
             cat("\n")
           })
 
-setMethod("show", "mfcluster",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfcluster",
+  function(object) {
+    print(object)
+  }
 )
 
 setMethod("print", "mfcomponents",
@@ -134,44 +142,51 @@ setMethod("print", "mfcomponents",
           })
 
 
-setMethod("show", "mfcomponents",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfcomponents",
+  function(object) {
+    print(object)
+  }
 )
 
-setMethod("print", "mfhierdata",
-          function(x, ...) {
-            print(x$coreTbl)
-          }
+setMethod(
+  "print", "mfhierdata",
+  function(x, ...) {
+    print(x$coreTbl)
+  }
 )
 
-setMethod("show", "mfhierdata",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfhierdata",
+  function(object) {
+    print(object)
+  }
 )
 
-setMethod("print", "mfclushier",
-          function(x, ...) {
-            print(x$MFnest)
-          }
+setMethod(
+  "print", "mfclushier",
+  function(x, ...) {
+    print(x$MFnest)
+  }
 )
 
-setMethod("show", "mfclushier",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfclushier",
+  function(object) {
+    print(object)
+  }
 )
 
-setMethod("print", "mfclusboothier",
-          function(x, ...) {
-            print(x$MFnestBoot$mfnest_summary)
-          }
+setMethod(
+  "print", "mfclusboothier",
+  function(x, ...) {
+    print(x$MFnestBoot$mfnest_summary)
+  }
 )
 
-setMethod("show", "mfclusboothier",
-          function(object) {
-            print(object)
-          }
+setMethod(
+  "show", "mfclusboothier",
+  function(object) {
+    print(object)
+  }
 )

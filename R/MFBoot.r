@@ -99,7 +99,7 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
                  dimnames = list(c("Equal Tailed"),
                                  c("observed", "median", "lower", "upper")))
   if (hpd) {
-    hpdmf <- emp.hpd(MF, alpha = alpha)
+    hpdmf <- emp_hpd(MF, alpha = alpha)
     stat <- rbind(stat, "Highest Density" = c(mf, median(MF), hpdmf))
   }
   if (bca) {

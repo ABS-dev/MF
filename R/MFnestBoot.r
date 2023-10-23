@@ -258,7 +258,7 @@ utils::globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #'   any of the core or nest variables from the data set. A MF value will be
 #'   calculated for each level of the variable(s) specified. Default is 'All',
 #'   to sum over entire tree.
-#' @param alpha Passed to \code{emp.hpd} to calculate eq tailed upper and high
+#' @param alpha Passed to \code{emp_hpd} to calculate eq tailed upper and high
 #'   lower of mitigated fraction
 #' @return A list with the following elements: \cr \describe{
 #'
@@ -363,8 +363,8 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),
-              hdlower = emp.hpd(MF, alpha = alpha)[1],
-              hdupper = emp.hpd(MF, alpha = alpha)[2]) %>%
+              hdlower = emp_hpd(MF, alpha = alpha)[1],
+              hdupper = emp_hpd(MF, alpha = alpha)[2]) %>%
     full_join(
       MFnest(x$mfh, which.factor = which.factor) %>%
         select(variable, level, MF) %>%

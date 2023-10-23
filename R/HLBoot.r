@@ -191,9 +191,9 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   dimnames(qystat) <- list(dimnames(Qx)[[2]], c("observed", "median",
                                                 "lower", "upper"))
   if (hpd) {
-    hpdmf <- emp.hpd(MF, alpha = alpha)
+    hpdmf <- emp_hpd(MF, alpha = alpha)
     mfstat <- rbind(mfstat, "Highest Density" = c(mf, median(MF), hpdmf))
-    hpdhl <- emp.hpd(H, alpha = alpha)
+    hpdhl <- emp_hpd(H, alpha = alpha)
     hlstat <- rbind(hlstat, "Highest Density" = c(hl, median(H), hpdhl))
   }
 

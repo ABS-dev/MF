@@ -94,7 +94,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   group <- NULL
   clusters <- NULL
   strat <- NULL
-  reshapeCluster(data = data, formula = formula, compare = compare,
+  reshape_cluster(data = data, formula = formula, compare = compare,
                  envir = environment())
   id <- compare
   keep <- apply(table(group, clusters), 2, function(x) {
@@ -214,7 +214,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
                  dimnames = list(c("Equal Tailed"),
                                  c("observed", "median", "lower", "upper")))
   if (hpd) {
-    hpdmf <- emp.hpd(MF, alpha = alpha)
+    hpdmf <- emp_hpd(MF, alpha = alpha)
     stat <- rbind(stat, "Highest Density" = c(mf.obs, stat[1, "median"],
                                               hpdmf))
   }
