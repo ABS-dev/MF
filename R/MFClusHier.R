@@ -81,7 +81,7 @@
 #' @export
 #' @author \link{MF-package}
 #' @importFrom stringr str_c
-#' @importFrom tidyr gather unite spread
+#' @importFrom tidyr gather unite spread all_of
 #' @importFrom stats median terms
 #' @importFrom dplyr select sym "%>%" as_tibble ungroup group_by_at mutate
 #'   filter vars summarize rename everything
@@ -107,7 +107,7 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
 
   newdat <- as_tibble(data) %>%
     ungroup() %>%
-    select(nests, tgroup = tgroup, resp = resp)
+    select(all_of(nests), tgroup = all_of(tgroup), resp = all_of(resp))
 
   thiscoreTbl <- newdat %>%
     group_by_at(nests) %>%
@@ -309,7 +309,7 @@ MFnest <- function(Y, which.factor = "All") {
     gather(variable, level, -stat.names) %>%
     mutate(level = as.character(level)) %>%
     bind_rows(.,
-              select(Y, stat.names) %>%
+              select(Y, all_of(stat.names)) %>%
                 mutate(variable = "All", level = "All")) %>%
     group_by(variable, level) %>%
     summarize(N1N2 = sum(n1n2), U = sum(u), con_N = sum(!!comp1),

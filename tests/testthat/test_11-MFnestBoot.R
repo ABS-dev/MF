@@ -1,30 +1,30 @@
 context("MFnestBoot")
 
-set.seed(76153)
-a <- tibble(room = paste("Room", rep(c("W", "Z"), each = 24)),
-            pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
-            litter = paste("Litter", rep(11:22, each = 4)),
-            tx = rep(rep(c("vac", "con"), each = 2), 12)) %>%
-  mutate(lung = ifelse(tx == "vac", rnorm(24, 5, 1.3), rnorm(24, 7, 1.3)))
-a
-
-formula <- lung ~ tx + room / pen / litter
-nboot <- 10000
-boot.cluster <- TRUE
-boot.unit <- TRUE
-which.factors <- c("All", "room", "pen", "litter")
-
-#################
-set.seed(12345)
-
-thismfhboot <- MFhBoot(formula, a,
-                       nboot = 10000,
-                       boot.cluster = TRUE,
-                       boot.unit = TRUE)
-test11 <- MFnestBoot(thismfhboot,
-                     c("All", "litter"))
 
 test_that("output", {
+
+  set.seed(76153)
+  a <- tibble(room = paste("Room", rep(c("W", "Z"), each = 24)),
+              pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+              litter = paste("Litter", rep(11:22, each = 4)),
+              tx = rep(rep(c("vac", "con"), each = 2), 12)) %>%
+    mutate(lung = ifelse(tx == "vac", rnorm(24, 5, 1.3), rnorm(24, 7, 1.3)))
+
+  formula <- lung ~ tx + room / pen / litter
+  nboot <- 10000
+  boot.cluster <- TRUE
+  boot.unit <- TRUE
+  which.factors <- c("All", "room", "pen", "litter")
+
+  #################
+  set.seed(12345)
+
+  thismfhboot <- MFhBoot(formula, a,
+                         nboot = 10000,
+                         boot.cluster = TRUE,
+                         boot.unit = TRUE)
+  test11 <- MFnestBoot(thismfhboot,
+                       c("All", "litter"))
 
   expect_identical(names(test11),
                    c("mfnest_details", "mfnest_summary", "seed"))
