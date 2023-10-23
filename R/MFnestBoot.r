@@ -60,7 +60,7 @@
 #'                              seed = 12345))
 #' test1$bootmfh
 #' @importFrom stringr str_c
-#' @importFrom tidyr gather unite spread
+#' @importFrom tidyr gather unite spread all_of
 #' @importFrom stats median terms
 #' @importFrom purrr as_vector
 #' @importFrom dplyr select sym "%>%" mutate_if distinct mutate n full_join
@@ -94,7 +94,7 @@ MFhBoot <- function(formula, data,
   # assign an ID to each unique core node
   indivclus <- data %>%
     mutate_if(is.factor, as.character) %>%
-    select(nests) %>%
+    select(all_of(nests)) %>%
     distinct() %>%
     mutate(clusterID = seq_len(n()))
   nclus <- nrow(indivclus)

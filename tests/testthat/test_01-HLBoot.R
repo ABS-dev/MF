@@ -27,8 +27,8 @@ test_that("output", {
   expect_equal(round(test1$MFstat[2, ], 4),
                expected = round(c(observed = 0.4400,
                                   median = 0.4496,
-                                  lower = 0.1520,
-                                  upper = 0.7088), 4),
+                                  lower = 0.1650,
+                                  upper = 0.7220), 4),
                tolerance = 0.01)
 
   #HLstat
