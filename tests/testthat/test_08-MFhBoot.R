@@ -45,6 +45,6 @@ test_that("output", {
 
 })
 
-test_that("compareto_MFh", {
-  # expect_equal(test8$mfh$coreTbl, aCore$coreTbl)
-})
+# test_that("compareto_MFh", {
+#   expect_equal(test8$mfh$coreTbl, aCore$coreTbl)
+# })
