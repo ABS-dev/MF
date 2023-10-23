@@ -13,8 +13,8 @@ test_that("output", {
   a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
   a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 
-  aCore <- MFh(lung ~ tx + room / pen / litter, a)
-  test10 <- MFnest(aCore)
+  a_core <- MFh(lung ~ tx + room / pen / litter, a)
+  test10 <- MFnest(a_core)
 
   expect_equal(as.data.frame(test10)[, 1:7],
                data.frame(variable = factor("All"),

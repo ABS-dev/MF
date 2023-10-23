@@ -50,27 +50,27 @@ MFSubj <- function(formula, data, compare = c("con", "vac")) {
   # y=response for compare[2]
   # compare y to x
 
-  A <- data.frame(model.frame(formula = formula, data = data))
-  resp <- A[, 1]
-  tx <- A[, 2]
+  df <- data.frame(model.frame(formula = formula, data = data))
+  resp <- df[, 1]
+  tx <- df[, 2]
   x <- resp[tx == compare[1]]
   y <- resp[tx == compare[2]]
-  n.x <- length(x)
-  n.y <- length(y)
-  N <- n.x + n.y
-  x.y <- c(x, y)
-  rank.xy <- rank(x.y)
-  w <- sum(rank.xy[1:n.x])
-  mf <- ((2. * w - n.x * (1. + n.x + n.y)) / (n.x * n.y))
-  u <- w - (n.x * (n.x + 1)) / 2
-  u.j <- rep(NA, n.y)
-  for (j in 1:n.y) {
+  n_x <- length(x)
+  n_y <- length(y)
+  nn <- n_x + n_y
+  x_y <- c(x, y)
+  rank_xy <- rank(x_y)
+  w <- sum(rank_xy[1:n_x])
+  mf <- ((2. * w - n_x * (1. + n_x + n_y)) / (n_x * n_y))
+  # u <- w - (n_x * (n_x + 1)) / 2
+  u.j <- rep(NA, n_y)
+  for (j in 1:n_y) {
     u.j[j] <- mean(c(sum(y[j] < x), sum(y[j] <= x)))
   }
-  r <- u / (n.x * n.y)
-  r.j <- u.j / n.x
+  # r <- u / (n_x * n_y)
+  r.j <- u.j / n_x
   mf.j <- 2 * r.j - 1
-  subj <- cbind(y, rank = rank.xy[(n.x + 1):N], u.j, r.j, mf.j)
+  subj <- cbind(y, rank = rank_xy[(n_x + 1):nn], u.j, r.j, mf.j)
   subj <- subj[order(subj[, "rank"]), ]
   return(mfcomponents$new(mf = mf, x = sort(x), y = sort(y), subj = subj,
                           compare = compare))

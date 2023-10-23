@@ -404,8 +404,8 @@ being passed to the `which.factor` or `alpha` arguments. Access bootstrapping st
 using the **MFhBoot** field of the output object. For example:
 
 ```{r, message=FALSE}
-thisBootMFh <- mfboot_multiple$MFhBoot
-thisBootMFh
+this_boot_mfh <- mfboot_multiple$MFhBoot
+this_boot_mfh
 ```
 
 It is possible to calculate `mfboot_multiple$MFhBoot` directly by using the

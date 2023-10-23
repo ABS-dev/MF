@@ -359,7 +359,8 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
               MF = 2 * (U / N1N2) - 1)
 
   mfnest_summary <-
-    mfnest_all %>% group_by(variable, level) %>%
+    mfnest_all %>%
+    group_by(variable, level) %>%
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),

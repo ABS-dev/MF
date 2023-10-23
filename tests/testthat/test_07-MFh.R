@@ -14,22 +14,22 @@ test_that("output", {
   a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
   a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 
-  aCore <- MFh(lung ~ tx + room / pen / litter, a)
-  expect_is(aCore, "mfhierdata")
+  a_core <- MFh(lung ~ tx + room / pen / litter, a)
+  expect_is(a_core, "mfhierdata")
 
   ##coreTbl
-  expect_equal(dim(aCore$coreTbl), c(12, 10))
-  expect_equivalent(sapply(aCore$coreTbl, class),
+  expect_equal(dim(a_core$coreTbl), c(12, 10))
+  expect_equivalent(sapply(a_core$coreTbl, class),
                     c("character", "character", "character",
                       "numeric", "numeric", "numeric",
                       "numeric", "numeric", "numeric", "numeric"))
-  expect_identical(aCore$coreTbl$w,
+  expect_identical(a_core$coreTbl$w,
                    c(7, 5, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7))
 
-  expect_identical(aCore$compare,
+  expect_identical(a_core$compare,
                    c("con", "vac"))
 
-  expect_identical(all.vars(aCore$formula),
+  expect_identical(all.vars(a_core$formula),
                    c("lung", "tx", "room", "pen", "litter"))
 
 })

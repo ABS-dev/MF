@@ -13,14 +13,11 @@ test_that("output", {
   a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 
   formula <- lung ~ tx + room / pen / litter
-  nboot <- 10000
-  boot.cluster <- TRUE
-  boot.unit <- TRUE
-  which.factors <- c("All", "room", "pen", "litter")
   set.seed(12345)
   test8 <- MFhBoot(formula, a,
                    nboot = 10000,
-                   boot.cluster = TRUE, boot.unit = TRUE)
+                   boot.cluster = TRUE,
+                   boot.unit = TRUE)
 
   expect_identical(names(test8),
                    c("bootmfh", "clusters", "compare", "mfh", "seed"))
