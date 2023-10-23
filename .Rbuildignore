@@ -6,3 +6,4 @@
 CODEOWNERS
 ^\.appveyor\.yml$
 ^LICENSE$
+vignettes
