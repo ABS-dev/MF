@@ -41,7 +41,7 @@ TRUE, some trees have all the cores while others only have a subset.}
 \item{which.factor}{Which variables to include in the mitigated fraction
 summation. Default is 'All', to sum over entire tree.}
 
-\item{alpha}{Passed to \code{emp.hpd} to calculate high tailed upper and high
+\item{alpha}{Passed to \code{emp_hpd} to calculate high tailed upper and high
 tailed lower of mitigated fraction.}
 
 \item{seed}{Passed to \code{\link{MFhBoot}} to to initialize random number

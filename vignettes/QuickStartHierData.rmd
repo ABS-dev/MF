@@ -25,12 +25,12 @@ require(MF)
 
 ## example data
 a <- data.frame(
- room = paste("Room", rep(c("W", "Z"), each = 24)),
- pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
- litter = paste("Litter", rep(11:22, each = 4)),
- tx = rep(rep(c("vac", "con"), each = 2), 12),
- stringsAsFactors = FALSE
- )
+  room = paste("Room", rep(c("W", "Z"), each = 24)),
+  pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+  litter = paste("Litter", rep(11:22, each = 4)),
+  tx = rep(rep(c("vac", "con"), each = 2), 12),
+  stringsAsFactors = FALSE
+)
 set.seed(76153)
 a$lung[a$tx == "vac"] <- round(rnorm(24, 5, 1.3), 2)
 a$lung[a$tx == "con"] <- round(rnorm(24, 7, 1.3), 2)
@@ -62,11 +62,16 @@ A nested design assumes that the factor level of one variable co-occurs with
 that of another variable. For example, Pen D exists only within Room Z.
 
 ```{r, expdesign, echo = FALSE}
-kable(a, align = "c", row.names = FALSE,
-  caption = "Nested hierarchical data structure.",
-  format = "latex") %>%
-  kable_styling("bordered", full_width = FALSE, font_size = 8) %>%
-  collapse_rows(columns = 1:4, valign = "middle")
+kable(a,
+      align = "c",
+      row.names = FALSE,
+      caption = "Nested hierarchical data structure.",
+      format = "latex") %>%
+  kable_styling("bordered",
+                full_width = FALSE,
+                font_size = 8) %>%
+  collapse_rows(columns = 1:4,
+                valign = "middle")
 ```
 
 ## Mitigated Fraction. Bootstrapped and Calculated. {-}
@@ -138,7 +143,7 @@ MFClusHier(formula = lung ~ tx + room / pen / litter, data = a)
 Selecting a single variable to evaluate for each factor:
 ```{r, results = 'hide'}
 MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
-                      which.factor = "room")
+           which.factor = "room")
 ```
 
 \clearpage
@@ -146,7 +151,7 @@ MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
 Selecting multiple variables, including the entire tree:
 ```{r, results = 'hide', message=FALSE}
 MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
-                      which.factor = c("room", "litter", "All"))
+           which.factor = c("room", "litter", "All"))
 ```
 
 ## Basic Output. {-}
@@ -160,7 +165,7 @@ The value "All" will add one row to this table.
 
 ```{r, message = FALSE, results = 'hide'}
 mf_multiple <- MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
-                      which.factor = c("room", "litter", "All"))
+                          which.factor = c("room", "litter", "All"))
 mf_multiple
 ```
 ```{r, echo=FALSE}
@@ -260,11 +265,11 @@ This is the same output as if the user had initially selected for variable "pen"
 
 ```{r, message=FALSE, eval=FALSE}
 MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
-                      which.factor = "pen")
+           which.factor = "pen")
 ```
 ```{r, message=FALSE, echo=FALSE}
 MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
-                      which.factor = "pen")$MFnest %>%
+           which.factor = "pen")$MFnest %>%
   as.data.frame
 ```
 # BOOTSTRAPPED MF {-}
@@ -318,22 +323,22 @@ and unit levels:
 
 ```{r, results='hide'}
 MFClusBootHier(formula = lung ~ tx + room / pen / litter,
-                             data = a)
+               data = a)
 ```
 
 Specifying what bootstrapping sampling to occur:
 ```{r, results = 'hide'}
 MFClusBootHier(formula = lung ~ tx + room / pen / litter,
-                              data = a, boot.unit = TRUE,
-                              boot.cluster = FALSE, which.factor = "room")
+               data = a, boot.unit = TRUE,
+               boot.cluster = FALSE, which.factor = "room")
 ```
 
 Adjusting the number of bootstrapping events and alpha:
 ```{r, results = 'hide', message=FALSE}
 MFClusBootHier(formula = lung ~ tx + room / pen / litter,
-                                  data = a, boot.unit = FALSE,
-                                  boot.cluster = TRUE, alpha = 0.1,
-                                  which.factor = c("room", "litter", "All"))
+               data = a, boot.unit = FALSE,
+               boot.cluster = TRUE, alpha = 0.1,
+               which.factor = c("room", "litter", "All"))
 ```
 
 \clearpage
@@ -358,8 +363,8 @@ mfboot_multiple
 ```{r, message=FALSE, echo=FALSE}
 mfboot_multiple$MFnestBoot$mfnest_summary %>%
   mutate(median = round(median, 2),
-    etlower = round(etlower, 2),
-    mf.obs = round(mf.obs, 2)) %>%
+         etlower = round(etlower, 2),
+         mf.obs = round(mf.obs, 2)) %>%
   as.data.frame
 ```
 
@@ -410,9 +415,9 @@ value.
 
 ```{r, message=FALSE, results=FALSE}
 MFhBoot(formula = lung ~ tx + room / pen / litter,
-                                    data = a, boot.unit = FALSE,
-                                    boot.cluster = TRUE,
-                                    seed = 150)
+        data = a, boot.unit = FALSE,
+        boot.cluster = TRUE,
+        seed = 150)
 ```
 
 This output is a list of four objects:
@@ -440,7 +445,7 @@ subsequent iterations may yield different summaries.
 
 ```{r, results='hide'}
 MFClusBootHier(formula = lung ~ tx + room / pen / litter,
-                              data = a, seed = 150)
+               data = a, seed = 150)
 ```
 
 Since the bootstrapping step is the most computationally intensive, a user may
@@ -465,12 +470,12 @@ MFnestBoot(thisBootMFh, which.factor = c("pen", "All"), alpha = 0.1)
 
 ```{r, eval=FALSE}
 a <- data.frame(
- room = paste("Room", rep(c("W", "Z"), each = 24)),
- pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
- litter = paste("Litter", rep(11:22, each = 4)),
- tx = rep(rep(c("vac", "con"), each = 2), 12),
- stringsAsFactors = FALSE
- )
+  room = paste("Room", rep(c("W", "Z"), each = 24)),
+  pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+  litter = paste("Litter", rep(11:22, each = 4)),
+  tx = rep(rep(c("vac", "con"), each = 2), 12),
+  stringsAsFactors = FALSE
+)
 set.seed(76153)
 a$lung[a$tx == "vac"] <- round(rnorm(24, 5, 1.3), 2)
 a$lung[a$tx == "con"] <- round(rnorm(24, 7, 1.3), 2)

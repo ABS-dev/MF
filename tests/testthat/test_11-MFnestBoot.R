@@ -11,10 +11,6 @@ test_that("output", {
     mutate(lung = ifelse(tx == "vac", rnorm(24, 5, 1.3), rnorm(24, 7, 1.3)))
 
   formula <- lung ~ tx + room / pen / litter
-  nboot <- 10000
-  boot.cluster <- TRUE
-  boot.unit <- TRUE
-  which.factors <- c("All", "room", "pen", "litter")
 
   #################
   set.seed(12345)
@@ -30,10 +26,10 @@ test_that("output", {
                    c("mfnest_details", "mfnest_summary", "seed"))
   ##mfnest_details
 
-  # I'm not sure if this test was always wrong or if it became wrong because I
-  # changed something
-
-  # expect_equal(dim(test11$mfnest_details), c(87753, 8))
+  #' @note I'm not sure if this test was always wrong or if it became wrong
+  #because I changed something
+  #' @note expect_equal(dim(test11$mfnest_details), c(87753, 8))
+  #' @noRd
   expect_equal(dim(test11$mfnest_details), c(87977, 8))
   expect_identical(names(test11$mfnest_details),
                    c("variable", "level", "bootID", "U",
@@ -44,7 +40,7 @@ test_that("output", {
 
   expect_equal(as.numeric(test11$mfnest_summary$median),
                c(0.83333, rep(1, 12)),
-    tolerance = 0.1)
+               tolerance = 0.1)
 
 
   #' @note Previous c(0.5, -.5, rep(-1, 6), -0.308333, -0.5, -1, -0.5, -1),

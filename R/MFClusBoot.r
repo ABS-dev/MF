@@ -95,7 +95,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   clusters <- NULL
   strat <- NULL
   reshape_cluster(data = data, formula = formula, compare = compare,
-                 envir = environment())
+                  envir = environment())
   id <- compare
   keep <- apply(table(group, clusters), 2, function(x) {
     all(x > 0)

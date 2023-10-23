@@ -345,7 +345,7 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
   mfnest_all <- bind_rows(tmpall %>%
                             gather(variable, level,
                                    -all_of(c("bootID", "w", "u", "n1n2",
-                                      stat.names))) %>%
+                                             stat.names))) %>%
                             mutate(level = as.character(level)),
                           tmpall %>%
                             select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
@@ -359,7 +359,7 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
               MF = 2 * (U / N1N2) - 1)
 
   mfnest_summary <-
-  mfnest_all %>% group_by(variable, level) %>%
+    mfnest_all %>% group_by(variable, level) %>%
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),

@@ -14,7 +14,7 @@ any of the core or nest variables from the data set. A MF value will be
 calculated for each level of the variable(s) specified. Default is 'All',
 to sum over entire tree.}
 
-\item{alpha}{Passed to \code{emp.hpd} to calculate eq tailed upper and high
+\item{alpha}{Passed to \code{emp_hpd} to calculate eq tailed upper and high
 lower of mitigated fraction}
 }
 \value{

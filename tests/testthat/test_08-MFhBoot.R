@@ -11,7 +11,6 @@ test_that("output", {
   set.seed(76153)
   a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
   a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
-  a
 
   formula <- lung ~ tx + room / pen / litter
   nboot <- 10000
@@ -43,8 +42,8 @@ test_that("output", {
                    c("con", "vac"))
 
   #' @note aCore table not found?
+  #' @note expect_equal(test8$mfh$coreTbl, aCore$coreTbl)
   #' @noRd
 
-  # expect_equal(test8$mfh$coreTbl, aCore$coreTbl)
 
 })
