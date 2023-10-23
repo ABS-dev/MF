@@ -143,7 +143,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
       u[stratum] <- w[stratum] - (n.x * (n.x + 1)) / 2
       n1n2[stratum] <- n.x * n.y
     }
-    W <- apply(matrix(w[strat.b], b * B, n.strat), 1, sum)
+    # unused? W <- apply(matrix(w[strat.b], b * B, n.strat), 1, sum)
     U <- apply(matrix(u[strat.b], b * B, n.strat), 1, sum)
     N1N2 <- apply(matrix(n1n2[strat.b], b * B, n.strat), 1, sum)
     R <- U / N1N2
@@ -159,7 +159,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
     w.boot <- function(x, y, n.b) {
       n.x <- length(x)
       n.y <- length(y)
-      out <- rep(NA, n.b)
+      # unused? out <- rep(NA, n.b)
       x.b <- matrix(switch(as.character(n.x == 1),
                            "TRUE" = rep(x, n.b),
                            "FALSE" = sample(x, size = n.b * n.x,
@@ -194,7 +194,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
       u[strat.b == stratum] <- w[strat.b == stratum] - (n.x * (n.x + 1)) / 2
       n1n2[strat.b == stratum] <- n.x * n.y
     }
-    W <- apply(w, 1, sum)
+    # unused? W <- apply(w, 1, sum)
     U <- apply(u, 1, sum)
     N1N2 <- apply(n1n2, 1, sum)
     R <- U / N1N2

@@ -92,7 +92,7 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
   if (length(nests) == 1) {
     stop("This is not nested hierarchy. See MFClus.")
   }
-  core <- nests[length(nests)]
+  # unused? core <- nests[length(nests)]
   tgroup <- termlab[1]
   resp <- all.vars(formula)[1]
 

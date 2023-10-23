@@ -90,7 +90,6 @@ MFhBoot <- function(formula, data,
   mednm <- compare
   names(mednm) <- paste0("median_resp:", compare, sep = "")
 
-
   # assign an ID to each unique core node
   indivclus <- data %>%
     mutate_if(is.factor, as.character) %>%
@@ -101,7 +100,6 @@ MFhBoot <- function(formula, data,
 
   datID <- data %>%
     full_join(indivclus, by = nests)
-
 
   # **Sample to create the new trees**
   #
@@ -194,7 +192,6 @@ MFhBoot <- function(formula, data,
       medResp1[strat.b == a] <<- median(x, na.rm = TRUE)
       medResp2[strat.b == a] <<- median(y, na.rm = TRUE)
       return(NULL)
-
     })
 
     newnames <- c("medResp1", "medResp2", "n1", "n2")
@@ -212,11 +209,7 @@ MFhBoot <- function(formula, data,
       full_join(indivclus, by = c("newClus" = "clusterID")) %>%
       ungroup() %>%
       select(-newClus)
-
-
-
   } else {
-
     budat <- full_join(data, indivclus, by = nests) %>%
       group_by(clusterID) %>%
       mutate(rank = rank(!!symresp)) %>%
@@ -335,17 +328,17 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
   tmpall <- x$bootmfh %>%
     select(-ends_with("_medResp"))
 
-  stat.names <- paste(x$compare, "n", sep = "_")
-  comp1 <- sym(stat.names[1])
-  comp2 <- sym(stat.names[2])
+  stat_names <- paste(x$compare, "n", sep = "_")
+  comp1 <- sym(stat_names[1])
+  comp2 <- sym(stat_names[2])
 
-  comp3 <- sym(gsub(stat.names[1], pattern = "_n", replacement = "_N"))
-  comp4 <- sym(gsub(stat.names[2], pattern = "_n", replacement = "_N"))
+  comp3 <- sym(gsub(stat_names[1], pattern = "_n", replacement = "_N"))
+  comp4 <- sym(gsub(stat_names[2], pattern = "_n", replacement = "_N"))
 
   mfnest_all <- bind_rows(tmpall %>%
                             gather(variable, level,
                                    -all_of(c("bootID", "w", "u", "n1n2",
-                                             stat.names))) %>%
+                                             stat_names))) %>%
                             mutate(level = as.character(level)),
                           tmpall %>%
                             select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%

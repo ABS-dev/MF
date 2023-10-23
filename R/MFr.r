@@ -25,14 +25,14 @@ MFr <- function(formula, data, compare = c("con", "vac")) {
   # x=response for compare[1]
   # y=response for compare[2]
   # compare y to x
-  A <- data.frame(model.frame(formula = formula, data = data))
-  resp <- A[, 1]
-  tx <- A[, 2]
+  df <- data.frame(model.frame(formula = formula, data = data))
+  resp <- df[, 1]
+  tx <- df[, 2]
   x <- resp[tx == compare[1]]
   y <- resp[tx == compare[2]]
   n_x <- length(x)
   n_y <- length(y)
-  # N <- n_x + n_y
+  # unused? N <- n_x + n_y
   x_y <- c(x, y)
   w <- sum(rank(x_y)[seq_len(n_x)])
   return(((2. * w - n_x * (1. + n_x + n_y)) / (n_x * n_y)))
