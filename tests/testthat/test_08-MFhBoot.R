@@ -42,6 +42,9 @@ test_that("output", {
   expect_identical(test8$compare,
                    c("con", "vac"))
 
+  #' @note aCore table not found?
+  #' @noRd
+
   # expect_equal(test8$mfh$coreTbl, aCore$coreTbl)
 
 })
