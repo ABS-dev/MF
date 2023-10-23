@@ -1,9 +1,9 @@
 context("MFBoot")
 
-set.seed(12345)
-test2 <- MFBoot(lesion ~ group, calflung)
-
 test_that("output", {
+  set.seed(12345)
+  test2 <- MFBoot(lesion ~ group, calflung)
+
   expect_s4_class(test2, "mfboot")
   expect_equal(test2$nboot, expected = 10000, tolerance = 0)
   expect_equal(test2$alpha, expected = 0.05, tolerance = 0)

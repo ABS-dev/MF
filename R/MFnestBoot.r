@@ -344,8 +344,8 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
 
   mfnest_all <- bind_rows(tmpall %>%
                             gather(variable, level,
-                                   -c("bootID", "w", "u", "n1n2",
-                                      stat.names)) %>%
+                                   -all_of(c("bootID", "w", "u", "n1n2",
+                                      stat.names))) %>%
                             mutate(level = as.character(level)),
                           tmpall %>%
                             select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
@@ -358,18 +358,19 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
               !!quo_name(comp4) := sum(!!comp2),
               MF = 2 * (U / N1N2) - 1)
 
-  mfnest_summary <- mfnest_all %>%
-    group_by(variable, level) %>%
+  mfnest_summary <-
+  mfnest_all %>% group_by(variable, level) %>%
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),
               hdlower = emp.hpd(MF, alpha = alpha)[1],
               hdupper = emp.hpd(MF, alpha = alpha)[2]) %>%
-    full_join(MFnest(x$mfh, which.factor = which.factor) %>%
-                select(variable, level, MF) %>%
-                rename(mf.obs = "MF") %>%
-                mutate_if(is.factor, as.character),
-              by = c("variable", "level")) %>%
+    full_join(
+      MFnest(x$mfh, which.factor = which.factor) %>%
+        select(variable, level, MF) %>%
+        rename(mf.obs = "MF") %>%
+        mutate_if(is.factor, as.character),
+      by = c("variable", "level")) %>%
     ungroup() %>%
     mutate(variable = fct_relevel(variable, which.factor)) %>%
     arrange(variable)

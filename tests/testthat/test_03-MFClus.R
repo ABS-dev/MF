@@ -2,10 +2,10 @@ context("MFClus")
 
 require(tidyverse)
 
-test3 <- MFClus(lesion ~ group + cluster(litter), piglung)
-
 
 test_that("output", {
+  test3 <- MFClus(lesion ~ group + cluster(litter), piglung)
+
   expect_s4_class(test3, "mfcluster")
   ## All
   expect_is(test3$All, "data.frame")

@@ -1,9 +1,9 @@
 context("HLBoot")
 
-set.seed(12345)
-test1 <- HLBoot(lesion ~ group, calflung)
-
 test_that("output", {
+  set.seed(12345)
+  test1 <- HLBoot(lesion ~ group, calflung)
+
   expect_s4_class(test1, "mfhlboot")
   expect_equal(test1$nboot, expected = 10000, tolerance = 0)
   expect_equal(test1$alpha, expected = 0.05, tolerance = 0)

@@ -1,9 +1,9 @@
 context("MFmp")
 
-mfmp1 <- MFmp(les ~ tx + cluster(cage), mlesions, compare = c("con", "vac"))
-mfmp2 <- MFmp(x = c(12, 12, 2))
 
 test_that("output", {
+  mfmp1 <- MFmp(les ~ tx + cluster(cage), mlesions, compare = c("con", "vac"))
+  mfmp2 <- MFmp(x = c(12, 12, 2))
 
   ## mfmp1
   expect_is(mfmp1, "mfmp")

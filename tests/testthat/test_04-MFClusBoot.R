@@ -1,9 +1,10 @@
 context("MFClusBoot")
 
-set.seed(12345)
-test4 <- MFClusBoot(lesion ~ group + cluster(litter), piglung)
 
 test_that("output", {
+  set.seed(12345)
+  test4 <- MFClusBoot(lesion ~ group + cluster(litter), piglung)
+
   expect_s4_class(test4, "mfbootcluster")
   expect_equal(test4$nboot, 10000)
   expect_equal(test4$alpha, 0.05)

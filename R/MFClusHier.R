@@ -115,11 +115,11 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
     filter(ntgroups > 1) %>%
     select(-ntgroups) %>%
     mutate(rank = rank(resp)) %>%
-    group_by_at(vars(nests, tgroup)) %>%
+    group_by_at(vars(all_of(nests), tgroup)) %>%
     summarize(n = length(resp),
               medResp = median(resp, na.rm = TRUE),
               w = sum(rank)) %>%
-    gather(variable, value, -c(tgroup, nests)) %>%
+    gather(variable, value, -c(tgroup, all_of(nests))) %>%
     unite(temp, tgroup, variable) %>%
     spread(temp, value) %>%
     select(-!!wy) %>%
@@ -306,7 +306,7 @@ MFnest <- function(Y, which.factor = "All") {
 
   out <- Y %>%
     mutate_if(is.factor, as.character) %>%
-    gather(variable, level, -stat.names) %>%
+    gather(variable, level, -all_of(stat.names)) %>%
     mutate(level = as.character(level)) %>%
     bind_rows(.,
               select(Y, all_of(stat.names)) %>%
