@@ -76,8 +76,8 @@ MFClus(lesion ~ group + cluster(litter), piglung)
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
-  severity. \emph{Journal of Modern Applied Statistical Methods.}
-  \bold{4:500--508}
+severity. \emph{Journal of Modern Applied Statistical Methods.}
+\bold{4:500--508}
 }
 \seealso{
 \code{\link{mfcluster-class}}

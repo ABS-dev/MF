@@ -16,37 +16,37 @@ is specified, a summary MF will be calculated for the whole tree.}
 }
 \value{
 A tibble with each unique level of a variable as a row. Other values
-  include: \cr
+include: \cr
 
-  \describe{
+\describe{
 
-  \item{\code{MF}}{Mitigated fraction for the particular level of the
-  variable in this row.}
+\item{\code{MF}}{Mitigated fraction for the particular level of the
+variable in this row.}
 
-  \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
-  of \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
-  particular variable-level combination.}
+\item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
+of \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+particular variable-level combination.}
 
-  \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
-  \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
-  particular variable-level combination.}
+\item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
+\code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+particular variable-level combination.}
 
-  \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
-  \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
-  particular variable-level combination.}
+\item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
+\code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+particular variable-level combination.}
 
-  \item{\code{_medResp}}{Median of observed responses for each comparison
-  group for this particular variable-level combination.}
+\item{\code{_medResp}}{Median of observed responses for each comparison
+group for this particular variable-level combination.}
 
-  }
+}
 }
 \description{
 Summations to calculate the MF for nested data from a rank table.
 }
 \note{
 Core variable is the variable corresponding to the lowest nodes of the
-  hierarchial tree. Nest variables are those above the core. All refers to a
-  summary of the entire tree.
+hierarchial tree. Nest variables are those above the core. All refers to a
+summary of the entire tree.
 }
 \examples{
 a <- data.frame(

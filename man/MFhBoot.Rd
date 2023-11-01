@@ -25,8 +25,8 @@ multiple levels of "c".}
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the
-control or reference group to which compare[2] is compared.}
+\item{compare}{Text vector stating the factor levels - compare\link{1} is the
+control or reference group to which compare\link{2} is compared.}
 
 \item{nboot}{number of bootstrapping events}
 
@@ -42,19 +42,19 @@ to \code{set.seed}.}
 \value{
 A list with the following elements: \cr \cr
 
-  \describe{
+\describe{
 
-  \item{bootmfh}{Rank table for the bootstrapped values as output from
-  \code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish
-  each bootstrapped incidence.}
+\item{bootmfh}{Rank table for the bootstrapped values as output from
+\code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish
+each bootstrapped incidence.}
 
-  \item{clusters}{Table of unique nodes with an ID.}
+\item{clusters}{Table of unique nodes with an ID.}
 
-  \item{compare}{Compare vector as specified by user.}
+\item{compare}{Compare vector as specified by user.}
 
-  \item{mfh}{MFh run on original data input.}
+\item{mfh}{MFh run on original data input.}
 
-  }
+}
 }
 \description{
 Calculate rank tables for MF using bootstrapping.

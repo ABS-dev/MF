@@ -27,8 +27,8 @@ multiple levels of "c".}
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the
-control or reference group to which compare[2] is compared.}
+\item{compare}{Text vector stating the factor levels - compare\link{1} is the
+control or reference group to which compare\link{2} is compared.}
 
 \item{nboot}{number of bootstrapping events}
 
@@ -49,17 +49,17 @@ generator for reproducibility.}
 }
 \value{
 A list with the following elements: \cr \cr \itemize{ \item
-  \strong{MFhBoot} as output from \code{\link{MFhBoot}}. \item
-  \strong{MFnestBoot} as output from \code{\link{MFnestBoot}}. }
+\strong{MFhBoot} as output from \code{\link{MFhBoot}}. \item
+\strong{MFnestBoot} as output from \code{\link{MFnestBoot}}. }
 }
 \description{
 Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into
-  a single function.
+a single function.
 }
 \note{
 \code{Core} variable is the variable corresponding to the lowest nodes
-  of the hierarchical tree. \code{Nest} variables are those above the core.
-  \code{All} refers to a summary of the entire tree.
+of the hierarchical tree. \code{Nest} variables are those above the core.
+\code{All} refers to a summary of the entire tree.
 }
 \examples{
 a <- data.frame(

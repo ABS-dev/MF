@@ -1,8 +1,8 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.4.1
-Date: 2023-10-24
+Version: 4.4.3
+Date: 2023-11-1
 Authors@R: c(
   person(given   = "CVB Statistics", email = "CVB.Data.Help@usda.gov", role = c("cre", "fmo")),
   person(given   = "David",  family  = "Siev",        role = "aut", comment = "until 2019"),

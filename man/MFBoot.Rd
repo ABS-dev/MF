@@ -49,13 +49,13 @@ a \code{\link{mfboot-class}} data object
 }
 \description{
 Estimates bootstrap confidence intervals for the mitigated
-  fraction.
+fraction.
 }
 \details{
 Resamples the data and produces bootstrap confidence intervals.
-  Equal tailed intervals are estimated by the percentile method. Highest
-  density intervals are estimated by selecting the shortest of all possible
-  intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
+Equal tailed intervals are estimated by the percentile method. Highest
+density intervals are estimated by selecting the shortest of all possible
+intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 }
 \examples{
 
@@ -72,9 +72,9 @@ MFBoot(lesion~group, calflung, seed = 12345)
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
-  severity. \emph{Journal of Modern Applied Statistical Methods.}
-  \bold{4:500--508} \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
-  the Bootstrap.} Chapman and Hall, New York, 1993.
+severity. \emph{Journal of Modern Applied Statistical Methods.}
+\bold{4:500--508} \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
+the Bootstrap.} Chapman and Hall, New York, 1993.
 }
 \seealso{
 \code{\link{mfboot-class}}
