@@ -113,10 +113,10 @@ HLBoot(lesion~group, calflung, seed = 12345)
 }
 \references{
 Hodges JL, Lehmann EL, (1963). Estimates of location based on
-rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}.
+rank tests. \strong{Annals of Mathematical Statistics.} \emph{34:598--611}.
 \cr \cr Siev D, (2005). An estimator of intervention effect on disease
-severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
+severity. \strong{Journal of Modern Applied Statistical Methods.}
+\bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. \strong{An Introduction to
 the Bootstrap.} Chapman and Hall, New York, 1993.
 }
 \seealso{

@@ -8,12 +8,12 @@
 #'   shape and differ by a constant shift. Assumes data is single pool (no
 #'   nesting).
 #' @title Bootstrap CI for MF, HL, and Qdif
-#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a
+#' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is
-#'   the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - `compare[1]` is
+#'   the control or reference group to which `compare[2]` is compared
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
@@ -28,11 +28,11 @@
 #' @return a \code{\link{mfhlboot-class}} data object
 #' @seealso \code{\link{mfhlboot-class}}
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
-#'   rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}.
+#'   rank tests. **Annals of Mathematical Statistics.** *34:598--611*.
 #'   \cr \cr Siev D, (2005). An estimator of intervention effect on disease
-#'   severity. \emph{Journal of Modern Applied Statistical Methods.}
-#'   \bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
-#'   the Bootstrap.} Chapman and Hall, New York, 1993.
+#'   severity. **Journal of Modern Applied Statistical Methods.**
+#'   \bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. **An Introduction to
+#'   the Bootstrap.** Chapman and Hall, New York, 1993.
 #' @author \link{MF-package}
 #' @examples
 #' HLBoot(lesion~group, calflung, seed = 12345)
