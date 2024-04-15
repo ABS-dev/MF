@@ -60,4 +60,9 @@ manual <- dir(path_0, pattern = pat_pdf)
 file.copy(file.path(path_0, manual),
           file.path(path_2, manual))
 
+pdf <- c(file.path(path_0, dir(path_0, pattern = "*.pdf$")),
+         file.path(path_2, dir(path_2, pattern = "*.pdf$")))
 
+for (fp in pdf) {
+  tools::compactPDF(pdf)
+}
