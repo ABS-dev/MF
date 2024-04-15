@@ -14,7 +14,7 @@ if (!dir.exists(path_0)) dir.create(path_0)
 if (!dir.exists(path_1)) dir.create(path_1)
 if (!dir.exists(path_2)) dir.create(path_2)
 
-files <- dir(path_0, pattern = "rmd")
+files <- dir(path_0, pattern = "(rmd|rnw)$", ignore.case = TRUE)
 
 for (ff in files) {
   print(ff)
@@ -41,7 +41,7 @@ file.remove(manuals)
 asis <- paste0(project, "_", ver, ".pdf.asis")
 asis
 
-text <- 
+text <-
   "%%\\VignetteIndexEntry{Package '%s'}
 %%\\VignetteEngine{R.rsp::asis}"
 text <- sprintf(text, project)
