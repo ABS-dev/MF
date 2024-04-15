@@ -11,17 +11,44 @@ path <- getwd()
 linter <- N <- NULL
 
 # Variables that don't follow stylistic guidelines, which we are not changing.
-okay_vars <- c("SnR", "SpR", "Prev", "SnE", "SpE",
-               "X", "Xpos", "Xsus", "Xneg", "cellP",
-               "cellN", "cloppearSnSp", "est.Sn",
-               "H", "estimateSnSp", "Sn.ref", "Sp.ref", "prev.pop",
-               "n.states", "N", "detailOut", "calcVal",
-               "Sn.distn", "Sn.spread", "Sp.distn", "Sp.spread", "prev.distn",
-               "prev.spread", "step.size", "rep.iter", "test.names",
-               "pop.names", "prev.current", "current.fit",
-               "current.ests", "current.con", "message.current",
-               "sus.perc", "updateAlpha", "newAlpha",
-               "blood2_a_SnSp", "Sn.fig", "Sp.fig")
+okay_vars <- c("UA",
+               "RP",
+               "plateID",
+               "3PL",
+               "checkSerialTest",
+               "serialID",
+               "HTML",
+               "displayPlateLayout",
+               "flattened2Stacked",
+               "stacked2Stacked",
+               "getComparisons",
+               "Nminus1",
+               "getMinus1comparisons",
+               "expandComparisons",
+               "importELISA",
+               "_idx",
+               "_tmp",
+               "RelPot",
+               "setLinearValidity",
+               "setLinearBestComp",
+               "setLayDilutionFactor",
+               "setLayReference",
+               "setLayPositiveControl",
+               "setLayNegativeControl",
+               "setLayBlank",
+               "setLaySerial",
+               "setLayNPS",
+               "setLayNA",
+               "setLayRole",
+               "resetLayRoles",
+               "countLayRoles",
+               "ID",
+               "initLogis_USP",
+               "SSlogis_USP",
+               "mCall",
+               "tieBreaker",
+               ".plateID",
+               "\\._.*")
 
 ## Change This Value ##
 # Determine whose files should be linted.  Change the number in the [.]
@@ -44,7 +71,11 @@ tmp <- codeDiagnostics::lint_package_extended(
   excluded_linters = excluded_linters)
 
 # Send results to Markers screen
-tmp
+if (length(tmp) == 0) {
+  message("Sucess!  No lintr issues!")  
+} else {
+  tmp
+}
 
 ## Run to this point to see lint results.
 # CTRL-SHIFT-B
