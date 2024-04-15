@@ -21,7 +21,14 @@ okay_vars <- c("SnR", "SpR", "Prev", "SnE", "SpE",
                "pop.names", "prev.current", "current.fit",
                "current.ests", "current.con", "message.current",
                "sus.perc", "updateAlpha", "newAlpha",
-               "blood2_a_SnSp", "Sn.fig", "Sp.fig")
+               "blood2_a_SnSp", "Sn.fig", "Sp.fig",
+               "return.boot", "trace.it", "n.x", "hl.fn", "n.y", "Y",
+               "A", "x.b", "y.b", "Qx", "Qy", "W", "H", "Qdif", "MF",
+               "nx.i", "ny.i", "theta.hat", "boot.cluster", "boot.unit",
+               "excluded.clusters", "n.strat", "strat.b", "x.y", "U",
+               "n.each", "strat.b", "cluster.text", "and.text", "unit.text",
+               "the.text", "exluded.clusters", "thiscoreTbl", "byCluster",
+               "byCluster", "datID", "medResp1", "medResp2", "u.j", "mf.j")
 
 ## Change This Value ##
 # Determine whose files should be linted.  Change the number in the [.]
@@ -45,7 +52,7 @@ tmp <- codeDiagnostics::lint_package_extended(
 
 # Send results to Markers screen
 if (length(tmp) == 0) {
-  message("Sucess!  No lintr issues!")  
+  message("Sucess!  No lintr issues!")
 } else {
   tmp
 }

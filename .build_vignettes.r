@@ -1,6 +1,6 @@
 # 1. DESCRIPTION should contain this line: `Config/build/clean-inst-doc: FALSE`
 # 2. Should be run from within root directory of project.
-# 3. Most recent version of package should be installed.
+# 3. Roll version forward, install, but do not push
 # 4. Install
 # 5. Run this script
 # 6. Update tags and push
