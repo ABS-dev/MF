@@ -1,7 +1,7 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.4.4
+Version: 4.4.5
 Date: 2024-04-15
 Authors@R: c(
   person(given   = "CVB Statistics", email = "CVB.Data.Help@usda.gov", role = c("cre", "fmo")),
@@ -34,7 +34,9 @@ Suggests:
   kableExtra,
   testthat,
   knitr,
-  covr
+  covr,
+  R.rsp,
+  knitr
 Collate:
   'aaa.r'
   'classes.r'
