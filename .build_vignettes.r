@@ -16,9 +16,11 @@ create_rsp_contents <- function(entry) {
 
 path_0 <- "vignettes"
 path_1 <- "inst"
+path_2 <- "inst/doc"
 
 if (!dir.exists(path_0)) dir.create(path_0)
 if (!dir.exists(path_1)) dir.create(path_1)
+if (!dir.exists(path_2)) dir.create(path_2)
 
 # remove old documentation
 
@@ -26,6 +28,7 @@ project <- basename(rstudioapi::getActiveProject())
 ver <- packageVersion(project)
 pat <- paste0("^", project, "_[0-9]+\\.[0-9]+.*|asis$")
 file.remove(file.path(path_0, dir(path_0, pat)))
+file.remove(file.path(path_2, dir(path_2)))
 
 # Render vignettes
 
@@ -71,3 +74,8 @@ pdf <- c(file.path(path_0, dir(path_0, pattern = "pdf$")))
 for (fp in pdf) {
   tools::compactPDF(pdf)
 }
+
+# Copy files
+
+files <- dir(path_0, pattern = "pdf$")
+file.copy(file.path(path_0, files), file.path(path_2, files))
