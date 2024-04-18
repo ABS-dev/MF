@@ -35,22 +35,26 @@ file.remove(file.path(path_2, dir(path_2)))
 files <- dir(path_0, pattern = "(rmd|rnw)$", ignore.case = TRUE)
 
 for (ff in files) {
-  print(ff)
+  V1 <- NULL
+  cat(ff, "\n")
   fp <- file.path(path_0, ff)
   rmarkdown::render(fp,
                     "all",
                     output_dir = path_0)
   dt <- fread(fp, sep = NULL, header = FALSE)
-  entry <- dt[str_detect(V1, "VignetteIndexEntry")]
+  entry <- dt[str_detect(V1, "\\%\\\\VignetteIndexEntry"), V1]
   entry <- str_replace(entry, "^[^\\{]*\\{", "")
   entry <- str_replace(entry, "\\}[^\\}]*$", "")
   text  <- create_rsp_contents(entry)
-  asis <- str_replace(fp, "...$", "pdf\\.asis")
+  head <- str_replace(ff, "\\.[^\\.]*$", "")
+  new_file <- setdiff(dir(path_0, head), ff)
+  asis <- file.path(path_0, paste0(new_file, ".asis"))
   fwrite(data.table(text),
          file = asis,
          quote = FALSE,
          col.names = FALSE)
 }
+
 
 # Render manual
 
@@ -77,5 +81,5 @@ for (fp in pdf) {
 
 # Copy files
 
-files <- dir(path_0, pattern = "pdf$")
+files <- dir(path_0, pattern = "(html|pdf)$")
 file.copy(file.path(path_0, files), file.path(path_2, files))
