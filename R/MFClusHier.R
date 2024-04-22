@@ -83,7 +83,7 @@
 #' @importFrom stringr str_c
 #' @importFrom tidyr gather unite spread all_of
 #' @importFrom stats median terms
-#' @importFrom dplyr select sym "%>%" as_tibble ungroup group_by_at mutate
+#' @importFrom dplyr select sym as_tibble ungroup group_by_at mutate
 #'   filter vars summarize rename everything
 MFh <- function(formula, data, compare = c("con", "vac")) {
   ## get all variables from formula & identify role
@@ -105,28 +105,28 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
   wy <- sym(str_c(yname, "w", sep = "_"))
   wx <- sym(str_c(xname, "w", sep = "_"))
 
-  newdat <- as_tibble(data) %>%
-    ungroup() %>%
+  newdat <- as_tibble(data) |>
+    ungroup() |>
     select(all_of(nests), tgroup = all_of(tgroup), resp = all_of(resp))
 
-  thiscoreTbl <- newdat %>%
-    group_by_at(nests) %>%
-    mutate(ntgroups = length(unique(tgroup))) %>%
-    filter(ntgroups > 1) %>%
-    select(-ntgroups) %>%
-    mutate(rank = rank(resp)) %>%
-    group_by_at(vars(all_of(nests), tgroup)) %>%
+  thiscoreTbl <- newdat |>
+    group_by_at(nests) |>
+    mutate(ntgroups = length(unique(tgroup))) |>
+    filter(ntgroups > 1) |>
+    select(-ntgroups) |>
+    mutate(rank = rank(resp)) |>
+    group_by_at(vars(all_of(nests), tgroup)) |>
     summarize(n = length(resp),
               medResp = median(resp, na.rm = TRUE),
-              w = sum(rank)) %>%
-    gather(variable, value, -c(tgroup, all_of(nests))) %>%
-    unite(temp, tgroup, variable) %>%
-    spread(temp, value) %>%
-    select(-!!wy) %>%
-    rename(w = !!wx) %>%
+              w = sum(rank)) |>
+    gather(variable, value, -c(tgroup, all_of(nests))) |>
+    unite(temp, tgroup, variable) |>
+    spread(temp, value) |>
+    select(-!!wy) |>
+    rename(w = !!wx) |>
     mutate(n1n2 = !!nx * !!ny,
-           u = w - (!!nx * (!!nx + 1)) / 2) %>%
-    select(everything(), w, n1n2, u) %>%
+           u = w - (!!nx * (!!nx + 1)) / 2) |>
+    select(everything(), w, n1n2, u) |>
     ungroup()
 
   return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat,
@@ -283,7 +283,7 @@ utils::globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' @importFrom tidyr gather spread
 #' @importFrom forcats fct_relevel
 #' @importFrom stats median
-#' @importFrom dplyr select as_tibble sym "%>%" mutate_if mutate bind_rows
+#' @importFrom dplyr select as_tibble sym mutate_if mutate bind_rows
 #'   group_by summarize filter ungroup distinct pull rename left_join arrange
 #'   everything
 #' @importFrom rlang ":=" quo_name
@@ -304,29 +304,28 @@ MFnest <- function(Y, which.factor = "All") {
   comp3 <- sym(gsub(stat.names[3], pattern = "_n", replacement = "_N"))
   comp4 <- sym(gsub(stat.names[4], pattern = "_n", replacement = "_N"))
 
-  out <- Y %>%
-    mutate_if(is.factor, as.character) %>%
-    gather(variable, level, -all_of(stat.names)) %>%
-    mutate(level = as.character(level)) %>%
-    bind_rows(.,
-              select(Y, all_of(stat.names)) %>%
-                mutate(variable = "All", level = "All")) %>%
-    group_by(variable, level) %>%
+  out <- Y |>
+    mutate_if(is.factor, as.character) |>
+    gather(variable, level, -all_of(stat.names)) |>
+    mutate(level = as.character(level)) |>
+    bind_rows(select(Y, all_of(stat.names)) |>
+                mutate(variable = "All", level = "All")) |>
+    group_by(variable, level) |>
     summarize(N1N2 = sum(n1n2), U = sum(u), con_N = sum(!!comp1),
-              vac_N = sum(!!comp2)) %>%
-    mutate(R = U / N1N2, MF = 2 * R - 1) %>%
-    select(-R, !!quo_name(comp3) := con_N, !!quo_name(comp4) := vac_N) %>%
-    filter(tolower(variable) %in% tolower(which.factor)) %>%
+              vac_N = sum(!!comp2)) |>
+    mutate(R = U / N1N2, MF = 2 * R - 1) |>
+    select(-R, !!quo_name(comp3) := con_N, !!quo_name(comp4) := vac_N) |>
+    filter(tolower(variable) %in% tolower(which.factor)) |>
     ungroup()
 
   ## inform user of complete separation
   if (1.0 %in% round(out$MF, digits = 1)) {
-    out %>%
-      filter(round(MF, digits = 1) == 1.0) %>%
-      distinct(variable) %>%
-      pull() %>%
-      paste0(collapse = ", ") %>%
-      message("Complete separation observed for variable(s): ", .,
+    out |>
+      filter(round(MF, digits = 1) == 1.0) |>
+      distinct(variable) |>
+      pull() |>
+      paste0(collapse = ", ") |>
+      message("Complete separation observed for variable(s): ", x = _,
               collapse = "")
   }
 
@@ -339,27 +338,25 @@ MFnest <- function(Y, which.factor = "All") {
     compare <- input$compare
     names(compare) <- paste0(input$compare, "_medResp", sep = "")
 
-    out <- thisdata %>%
-      mutate_if(is.factor, as.character) %>%
-      gather(variable, level, -c(tgroup, resp)) %>%
-      mutate(level = as.character(level)) %>%
-      bind_rows(.,
-                select(thisdata, c(tgroup, resp)) %>%
-                  mutate(variable = "All", level = "All") %>%
-                  mutate_if(is.factor, as.character)) %>%
-      group_by(variable, level, tgroup) %>%
-      summarize(medResp = median(resp, na.rm = TRUE)) %>%
-      spread(tgroup, medResp) %>%
-      ungroup() %>%
-      rename(!!compare) %>%
-      filter(tolower(variable) %in% tolower(which.factor)) %>%
-      left_join(out, ., by = c("variable", "level"))
-
+    out <- thisdata |>
+      mutate_if(is.factor, as.character) |>
+      gather(variable, level, -c(tgroup, resp)) |>
+      mutate(level = as.character(level)) |>
+      bind_rows(select(thisdata, c(tgroup, resp)) |>
+                  mutate(variable = "All", level = "All") |>
+                  mutate_if(is.factor, as.character)) |>
+      group_by(variable, level, tgroup) |>
+      summarize(medResp = median(resp, na.rm = TRUE)) |>
+      spread(tgroup, medResp) |>
+      ungroup() |>
+      rename(!!compare) |>
+      filter(tolower(variable) %in% tolower(which.factor)) |>
+      left_join(out, y = _, by = c("variable", "level"))
   }
 
-  out <- out %>%
-    mutate(variable = fct_relevel(variable, which.factor)) %>%
-    arrange(variable) %>%
+  out <- out |>
+    mutate(variable = fct_relevel(variable, which.factor)) |>
+    arrange(variable) |>
     select(variable, level, MF, everything())
 
   return(out)

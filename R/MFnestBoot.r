@@ -63,8 +63,8 @@
 #' @importFrom tidyr gather unite spread all_of
 #' @importFrom stats median terms
 #' @importFrom purrr as_vector
-#' @importFrom dplyr select sym "%>%" mutate_if distinct mutate n full_join
-#'   tibble case_when arrange "%>%" filter rename ungroup group_by group_by_at
+#' @importFrom dplyr select sym mutate_if distinct mutate n full_join
+#'   tibble case_when arrange filter rename ungroup group_by group_by_at
 #'   vars summarize everything
 #' @importFrom rlang ":=" quo_name
 MFhBoot <- function(formula, data,
@@ -91,14 +91,14 @@ MFhBoot <- function(formula, data,
   names(mednm) <- paste0("median_resp:", compare, sep = "")
 
   # assign an ID to each unique core node
-  indivclus <- data %>%
-    mutate_if(is.factor, as.character) %>%
-    select(all_of(nests)) %>%
-    distinct() %>%
+  indivclus <- data |>
+    mutate_if(is.factor, as.character) |>
+    select(all_of(nests)) |>
+    distinct() |>
     mutate(clusterID = seq_len(n()))
   nclus <- nrow(indivclus)
 
-  datID <- data %>%
+  datID <- data |>
     full_join(indivclus, by = nests)
 
   # **Sample to create the new trees**
@@ -113,7 +113,7 @@ MFhBoot <- function(formula, data,
                           sample(indivclus$clusterID,
                                  nboot * nclus, replace = TRUE),
                         !isTRUE(boot.cluster) ~ rep(indivclus$clusterID,
-                                                    nboot))) %>%
+                                                    nboot))) |>
     arrange(bootID)
 
   # ** use new tree structure to calculate summary statistics **
@@ -167,16 +167,16 @@ MFhBoot <- function(formula, data,
     }
 
     lapply(1:nclus, FUN = function(a) {
-      x <- datID %>%
-        filter(!!symtgroup == compare[1] & clusterID == a) %>%
-        select(!!symresp) %>%
-        as_vector() %>%
+      x <- datID |>
+        filter(!!symtgroup == compare[1] & clusterID == a) |>
+        select(!!symresp) |>
+        as_vector() |>
         unname()
 
-      y <- datID %>%
-        filter(!!symtgroup == compare[2] & clusterID == a) %>%
-        select(!!symresp) %>%
-        as_vector() %>%
+      y <- datID |>
+        filter(!!symtgroup == compare[2] & clusterID == a) |>
+        select(!!symresp) |>
+        as_vector() |>
         unname()
 
       n.x <- length(x)
@@ -197,40 +197,40 @@ MFhBoot <- function(formula, data,
     newnames <- c("medResp1", "medResp2", "n1", "n2")
     names(newnames) <- c(paste(compare, "medResp", sep = "_"),
                          paste(compare, "n", sep = "_"))
-    budat <- newdf %>%
+    budat <- newdf |>
       mutate(w = as.vector(t(w)),
              u = as.vector(t(u)),
              n1n2 = as.vector((t(n1n2))),
              n1 = as.vector((t(con_n))),
              n2 = as.vector((t(vac_n))),
              medResp1 = as.vector(t(medResp1)),
-             medResp2 = as.vector(t(medResp2))) %>%
-      rename(!!newnames) %>%
-      full_join(indivclus, by = c("newClus" = "clusterID")) %>%
-      ungroup() %>%
+             medResp2 = as.vector(t(medResp2))) |>
+      rename(!!newnames) |>
+      full_join(indivclus, by = c("newClus" = "clusterID")) |>
+      ungroup() |>
       select(-newClus)
   } else {
-    budat <- full_join(data, indivclus, by = nests) %>%
-      group_by(clusterID) %>%
-      mutate(rank = rank(!!symresp)) %>%
-      group_by_at(vars("clusterID", tgroup)) %>%
+    budat <- full_join(data, indivclus, by = nests) |>
+      group_by(clusterID) |>
+      mutate(rank = rank(!!symresp)) |>
+      group_by_at(vars("clusterID", tgroup)) |>
       summarize(w = sum(rank),
                 n = length(!!symresp),
-                medResp = median(!!symresp, na.rm = TRUE)) %>%
-      gather(variable, value, -c(clusterID, !!symtgroup)) %>%
-      unite(tmp, tgroup, variable) %>%
-      spread(tmp, value) %>%
-      rename(w = !!wx) %>%
+                medResp = median(!!symresp, na.rm = TRUE)) |>
+      gather(variable, value, -c(clusterID, !!symtgroup)) |>
+      unite(tmp, tgroup, variable) |>
+      spread(tmp, value) |>
+      rename(w = !!wx) |>
       mutate(u = w - (!!nx * (!!nx + 1)) / 2,
              n1n2 = !!nx * !!ny,
              !!quo_name(nx) := !!nx,
-             !!quo_name(ny) := !!ny) %>%
-      select(-!!wy) %>%
-      full_join(newdf, by = c("clusterID" = "newClus")) %>%
-      arrange(bootID) %>%
-      select(bootID, everything()) %>%
-      full_join(indivclus, by = "clusterID") %>%
-      ungroup() %>%
+             !!quo_name(ny) := !!ny) |>
+      select(-!!wy) |>
+      full_join(newdf, by = c("clusterID" = "newClus")) |>
+      arrange(bootID) |>
+      select(bootID, everything()) |>
+      full_join(indivclus, by = "clusterID") |>
+      ungroup() |>
       select(-clusterID)
   }
 
@@ -317,7 +317,7 @@ utils::globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' @importFrom stats quantile
 #' @importFrom tidyr gather
 #' @importFrom forcats fct_relevel
-#' @importFrom dplyr select "%>%" ends_with sym bind_rows mutate filter group_by
+#' @importFrom dplyr select ends_with sym bind_rows mutate filter group_by
 #'   summarize full_join rename mutate_if ungroup arrange
 #' @importFrom rlang ":=" quo_name
 #' @export
@@ -325,7 +325,7 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
 
   quant <- c(.5, alpha / 2, 1 - alpha / 2)
 
-  tmpall <- x$bootmfh %>%
+  tmpall <- x$bootmfh |>
     select(-ends_with("_medResp"))
 
   stat_names <- paste(x$compare, "n", sep = "_")
@@ -335,16 +335,16 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
   comp3 <- sym(gsub(stat_names[1], pattern = "_n", replacement = "_N"))
   comp4 <- sym(gsub(stat_names[2], pattern = "_n", replacement = "_N"))
 
-  mfnest_all <- bind_rows(tmpall %>%
+  mfnest_all <- bind_rows(tmpall |>
                             gather(variable, level,
                                    -all_of(c("bootID", "w", "u", "n1n2",
-                                             stat_names))) %>%
+                                             stat_names))) |>
                             mutate(level = as.character(level)),
-                          tmpall %>%
-                            select(bootID, w, u, n1n2, !!comp1, !!comp2) %>%
-                            mutate(variable = "All", level = "All")) %>%
-    filter(variable %in% which.factor) %>%
-    group_by(variable, level, bootID) %>%
+                          tmpall |>
+                            select(bootID, w, u, n1n2, !!comp1, !!comp2) |>
+                            mutate(variable = "All", level = "All")) |>
+    filter(variable %in% which.factor) |>
+    group_by(variable, level, bootID) |>
     summarize(U = sum(u),
               N1N2 = sum(n1n2),
               !!quo_name(comp3) := sum(!!comp1),
@@ -352,21 +352,21 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
               MF = 2 * (U / N1N2) - 1)
 
   mfnest_summary <-
-    mfnest_all %>%
-    group_by(variable, level) %>%
+    mfnest_all |>
+    group_by(variable, level) |>
     summarize(median = quantile(MF, prob = quant[1]),
               etlower = quantile(MF, prob = quant[2]),
               etupper = quantile(MF, prob = quant[3]),
               hdlower = emp_hpd(MF, alpha = alpha)[1],
-              hdupper = emp_hpd(MF, alpha = alpha)[2]) %>%
+              hdupper = emp_hpd(MF, alpha = alpha)[2]) |>
     full_join(
-      MFnest(x$mfh, which.factor = which.factor) %>%
-        select(variable, level, MF) %>%
-        rename(mf.obs = "MF") %>%
+      MFnest(x$mfh, which.factor = which.factor) |>
+        select(variable, level, MF) |>
+        rename(mf.obs = "MF") |>
         mutate_if(is.factor, as.character),
-      by = c("variable", "level")) %>%
-    ungroup() %>%
-    mutate(variable = fct_relevel(variable, which.factor)) %>%
+      by = c("variable", "level")) |>
+    ungroup() |>
+    mutate(variable = fct_relevel(variable, which.factor)) |>
     arrange(variable)
 
   return(list(mfnest_details = mfnest_all,

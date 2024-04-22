@@ -69,14 +69,14 @@ test_that("level_types", {
                                         ordered = TRUE),
                          pen = c(rep(1:2, 2), rep(3:4, 2)),
                          obs = rnorm(n = 8, mean = 23.5, sd = 0.53))
-  ex1 <- thisdata %>%
+  ex1 <- thisdata |>
     MFClusBootHier(formula = obs ~ group + location / pen,
                    compare = c("con", "vacc"),
                    which.factor = c("location", "All"), seed = 61889)
   expect_is(ex1, "mfclusboothier")
 
-  ex2 <- thisdata %>%
-    mutate_if(is.factor, as.character) %>%
+  ex2 <- thisdata |>
+    mutate_if(is.factor, as.character) |>
     MFClusBootHier(formula = obs ~ group + location / pen,
                    compare = c("con", "vacc"),
                    which.factor = c("location", "All"), seed = 61889)

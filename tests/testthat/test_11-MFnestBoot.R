@@ -7,7 +7,7 @@ test_that("output", {
   a <- tibble(room = paste("Room", rep(c("W", "Z"), each = 24)),
               pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
               litter = paste("Litter", rep(11:22, each = 4)),
-              tx = rep(rep(c("vac", "con"), each = 2), 12)) %>%
+              tx = rep(rep(c("vac", "con"), each = 2), 12)) |>
     mutate(lung = ifelse(tx == "vac", rnorm(24, 5, 1.3), rnorm(24, 7, 1.3)))
 
   formula <- lung ~ tx + room / pen / litter
