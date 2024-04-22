@@ -6,8 +6,7 @@ test_that("output", {
     room = paste("Room", rep(c("W", "Z"), each = 24)),
     pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
     litter = paste("Litter", rep(11:22, each = 4)),
-    tx = rep(rep(c("vac", "con"), each = 2), 12),
-    stringsAsFactors = FALSE
+    tx = rep(rep(c("vac", "con"), each = 2), 12)
   )
   set.seed(76153)
   a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
@@ -57,8 +56,7 @@ test_that("output", {
                           etupper = 1,
                           hdlower = 0.667,
                           hdupper = 1,
-                          mf.obs = 0.875,
-                          stringsAsFactors = FALSE),
+                          mf.obs = 0.875),
                tolerance = 0.001)
 })
 
