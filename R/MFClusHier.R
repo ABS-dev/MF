@@ -131,8 +131,8 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
                         compare = compare, formula = formula))
 }
 # to keep R CMD happy
-utils::globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
-                         "ntgroups", "temp"))
+globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
+                  "ntgroups", "temp"))
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
@@ -359,4 +359,4 @@ MFnest <- function(Y, which.factor = "All") {
 }
 
 # to keep R CMD happy
-utils::globalVariables(c("R", "con_N", "vac_N", "tgroup", "resp", "medResp"))
+globalVariables(c("R", "con_N", "vac_N", "tgroup", "resp", "medResp"))

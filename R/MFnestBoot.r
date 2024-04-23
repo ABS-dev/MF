@@ -240,7 +240,7 @@ MFhBoot <- function(formula, data,
 
 }
 # to keep R CMD happy
-utils::globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
+globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 
 #' @title MFnestBoot
 #' @name MFnestBoot
@@ -373,5 +373,5 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
 }
 
 # to keep R CMD happy
-utils::globalVariables(c("variable", "level", "bootID", "w", "u", "n1n2",
+globalVariables(c("variable", "level", "bootID", "w", "u", "n1n2",
                          "U", "N1N2", "MF"))
