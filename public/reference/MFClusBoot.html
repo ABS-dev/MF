@@ -173,7 +173,25 @@ the Bootstrap.</em> Chapman and Hall, New York, 1993.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">MFClusBoot</span><span class="op">(</span><span class="va">lesion</span> <span class="op">~</span> <span class="va">group</span> <span class="op">+</span> <span class="fu">cluster</span><span class="op">(</span><span class="va">litter</span><span class="op">)</span>, <span class="va">piglung</span>, seed <span class="op">=</span> <span class="fl">12345</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Bootstrapping clusters. . . . . . . . . . . . . . . . .</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># Bootstrapping units. . . . . . . . . . . . . . . . . .</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># 10000 bootstrap samples of clusters and units in treatment in cluster</span></span></span>
+<span class="r-in"><span><span class="co"># Comparing vac to con</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># 95% confidence interval</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># observed    median       lower     upper</span></span></span>
+<span class="r-in"><span><span class="co"># Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966</span></span></span>
+<span class="r-in"><span><span class="co"># Highest Density 0.3533835 0.3648649  0.00000000 0.7236842</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># Excluded Clusters</span></span></span>
+<span class="r-in"><span><span class="co"># M, Q, R, B, O, V, I, C</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

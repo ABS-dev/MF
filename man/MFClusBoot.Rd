@@ -74,21 +74,21 @@ clusters.
 \examples{
 \dontrun{
 MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
-Bootstrapping clusters. . . . . . . . . . . . . . . . .
-
-Bootstrapping units. . . . . . . . . . . . . . . . . .
-
-10000 bootstrap samples of clusters and units in treatment in cluster
-Comparing vac to con
-
-95\% confidence interval
-
-observed    median       lower     upper
-Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
-Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
-
-Excluded Clusters
-M, Q, R, B, O, V, I, C
+# Bootstrapping clusters. . . . . . . . . . . . . . . . .
+#
+# Bootstrapping units. . . . . . . . . . . . . . . . . .
+#
+# 10000 bootstrap samples of clusters and units in treatment in cluster
+# Comparing vac to con
+#
+# 95\% confidence interval
+#
+# observed    median       lower     upper
+# Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
+# Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
+#
+# Excluded Clusters
+# M, Q, R, B, O, V, I, C
 }
 }
 \references{
