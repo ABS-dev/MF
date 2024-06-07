@@ -1,5 +1,5 @@
-MF
-==
+# MF - Mitigated Fraction <img src="man/figures/logo.png" align="right" />
+
 
 Mitigated Fraction. Calculate mitigated fraction with clustering and bootstrap options. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only.
 
