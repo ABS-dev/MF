@@ -25,15 +25,15 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to \code{set.seed}.
-#' @return a \code{\link{mfhlboot-class}} data object
-#' @seealso \code{\link{mfhlboot-class}}
+#' @return a [mfhlboot-class] data object
+#' @seealso [mfhlboot-class]
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
 #'   rank tests. **Annals of Mathematical Statistics.** *34:598--611*.
 #'   \cr \cr Siev D, (2005). An estimator of intervention effect on disease
 #'   severity. **Journal of Modern Applied Statistical Methods.**
 #'   \bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. **An Introduction to
 #'   the Bootstrap.** Chapman and Hall, New York, 1993.
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @examples
 #' HLBoot(lesion~group, calflung, seed = 12345)
 #'

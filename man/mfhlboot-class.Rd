@@ -52,11 +52,11 @@ upper} for quartiles of response, equal tailed.}
 }
 
 \section{Contains}{
- \code{\link{mf-class}}
+ \linkS4class{mf}
 }
 
 \seealso{
-\code{\link{HLBoot}}
+\link{HLBoot}
 
 Other mf: 
 \code{\link{mf-class}},

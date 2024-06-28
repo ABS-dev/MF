@@ -45,7 +45,7 @@ the control or reference group to which \code{compare[2]} is compared}
 to \code{set.seed}.}
 }
 \value{
-a \code{\link{mfboot-class}} data object
+a \linkS4class{mfboot} data object
 }
 \description{
 Estimates bootstrap confidence intervals for the mitigated
@@ -77,7 +77,7 @@ severity. \emph{Journal of Modern Applied Statistical Methods.}
 the Bootstrap.} Chapman and Hall, New York, 1993.
 }
 \seealso{
-\code{\link{mfboot-class}}
+\linkS4class{mfboot}
 }
 \author{
 \link{MF-package}

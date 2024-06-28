@@ -1,7 +1,7 @@
 #' @name MFClusHier
 #' @title MFClusHier
 #' @description Calculate mitigated fraction directly from hierarchial nested
-#'   data. Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single
+#'   data. Combines [MFh] and [MFnest] into a single
 #'   function.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous
 #'   response, x is a factor with two levels of treatment, and a/b/c are
@@ -17,14 +17,14 @@
 #'   the core or nest variables from the data set. If none or NULL is specified,
 #'   MF will be calculated for the whole tree.
 #' @return A list with the following elements: \cr \cr \itemize{ \item
-#'   \strong{MFh} as output from \code{\link{MFh}}. \item \strong{MFnest} as
-#'   output from \code{\link{MFnest}}. }
+#'   \strong{MFh} as output from [MFh]. \item \strong{MFnest} as
+#'   output from [MFnest]. }
 #' @note \code{Core} variable is the variable corresponding to the lowest nodes
 #'   of the hierarchical tree. \code{Nest} variables are those above the core.
 #'   \code{All} refers to a summary of the entire tree.
 #' @export
-#' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
-#' @author \link{MF-package}
+#' @seealso [MFh], [MFnest]
+#' @author [MF-package]
 #' @examples
 #' a <- data.frame(
 #' room = paste('Room', rep(c('W','Z'), each=24)),
@@ -51,7 +51,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 
 #' @title MFClusBootHier
 #' @name MFClusBootHier
-#' @description Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into
+#' @description Combines [MFhBoot] and [MFnestBoot] into
 #'   a single function.
 #' @param formula formula Formula of the form y ~ x + a/b/c, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and a/b/c
@@ -72,16 +72,16 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   summation. Default is 'All', to sum over entire tree.
 #' @param alpha Passed to \code{emp_hpd} to calculate high tailed upper and high
 #'   tailed lower of mitigated fraction.
-#' @param seed Passed to \code{\link{MFhBoot}} to to initialize random number
+#' @param seed Passed to [MFhBoot] to to initialize random number
 #'   generator for reproducibility.
 #' @return A list with the following elements: \cr \cr \itemize{ \item
-#'   \strong{MFhBoot} as output from \code{\link{MFhBoot}}. \item
-#'   \strong{MFnestBoot} as output from \code{\link{MFnestBoot}}. }
+#'   \strong{MFhBoot} as output from [MFhBoot]. \item
+#'   \strong{MFnestBoot} as output from [MFnestBoot]. }
 #' @note \code{Core} variable is the variable corresponding to the lowest nodes
 #'   of the hierarchical tree. \code{Nest} variables are those above the core.
 #'   \code{All} refers to a summary of the entire tree.
-#' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}.
-#' @author \link{MF-package}
+#' @seealso [MFhBoot], [MFnestBoot].
+#' @author [MF-package]
 #' @export
 #' @examples
 #' a <- data.frame(

@@ -19,13 +19,13 @@
 #' @param trace.it Verbose tracking of the cycles?
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to \code{set.seed}.
-#' @return a \code{\link{mfboot-class}} data object
-#' @seealso \code{\link{mfboot-class}}
+#' @return a [mfboot-class] data object
+#' @seealso [mfboot-class]
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.}
 #'   \bold{4:500--508} \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
 #'   the Bootstrap.} Chapman and Hall, New York, 1993.
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @examples
 #'
 #' MFBoot(lesion~group, calflung, seed = 12345)

@@ -51,7 +51,7 @@ statistic.}
 to \code{set.seed}.}
 }
 \value{
-a \code{\link{mfbootcluster-class}} data object
+a \linkS4class{mfbootcluster} data object
 }
 \description{
 Estimates bootstrap confidence intervals for the mitigated
@@ -68,7 +68,7 @@ If input data contains more than two levels of treatment, rows
 associated with unused treatment levels will be removed. \cr Factor levels
 for treatments not present in the input data will be ignored. \cr Clusters
 with missing treatments will be excluded. See
-\code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded
+\linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded
 clusters.
 }
 \examples{

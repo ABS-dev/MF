@@ -26,12 +26,12 @@ MF will be calculated for the whole tree.}
 }
 \value{
 A list with the following elements: \cr \cr \itemize{ \item
-\strong{MFh} as output from \code{\link{MFh}}. \item \strong{MFnest} as
-output from \code{\link{MFnest}}. }
+\strong{MFh} as output from \link{MFh}. \item \strong{MFnest} as
+output from \link{MFnest}. }
 }
 \description{
 Calculate mitigated fraction directly from hierarchial nested
-data. Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single
+data. Combines \link{MFh} and \link{MFnest} into a single
 function.
 }
 \note{
@@ -57,7 +57,7 @@ aCore$formula
 aCore$compare
 }
 \seealso{
-\code{\link{MFh}}, \code{\link{MFnest}}
+\link{MFh}, \link{MFnest}
 }
 \author{
 \link{MF-package}

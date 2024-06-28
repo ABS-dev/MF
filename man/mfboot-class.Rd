@@ -36,11 +36,11 @@ generator}
 }
 
 \section{Contains}{
- \code{\link{mf-class}}
+ \linkS4class{mf}
 }
 
 \seealso{
-\code{\link{MFBoot}}
+\link{MFBoot}
 
 Other mf: 
 \code{\link{mf-class}},

@@ -35,7 +35,7 @@ I(x>y)\}}}
 interval? Default t distribution.}
 }
 \value{
-a \code{\link{mfmp-class}} data object
+a \linkS4class{mfmp} data object
 }
 \description{
 Estimates mitigated fraction from matched pairs.
@@ -59,7 +59,7 @@ severity. \emph{Journal of Modern Applied Statistical Methods.}
 \bold{4:500--508}
 }
 \seealso{
-\code{\link{mfmp-class}}
+\linkS4class{mfmp}
 }
 \author{
 \link{MF-package}

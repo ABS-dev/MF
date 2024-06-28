@@ -21,7 +21,7 @@ Class mfcomponents is created from output of function MFSubj
 }
 
 \seealso{
-\code{\link{MFSubj}}
+\link{MFSubj}
 }
 \author{
 \link{MF-package}

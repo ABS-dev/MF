@@ -47,11 +47,11 @@ because of missing treatment(s)}
 }
 
 \section{Contains}{
- \code{\link{mf-class}}
+ \linkS4class{mf}
 }
 
 \seealso{
-\code{\link{MFClusBoot}}
+\link{MFClusBoot}
 
 Other mf: 
 \code{\link{mf-class}},

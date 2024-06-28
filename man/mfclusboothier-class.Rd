@@ -19,7 +19,7 @@ MFClusBootHier.
 }
 
 \seealso{
-\code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
+\link{MFhBoot}, \link{MFnestBoot}
 }
 \author{
 \link{MF-package}

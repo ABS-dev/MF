@@ -7,7 +7,7 @@
 MFnestBoot(x, which.factor = "All", alpha = 0.05)
 }
 \arguments{
-\item{x}{output from \code{\link{MFhBoot}}}
+\item{x}{output from \link{MFhBoot}}
 
 \item{which.factor}{one or more grouping variable(s) of interest. This can be
 any of the core or nest variables from the data set. A MF value will be
@@ -21,7 +21,7 @@ lower of mitigated fraction}
 A list with the following elements: \cr \describe{
 
 \item{mfnest_details}{The MF and summary statistics as calculated for each
-bootstrap event. Variables as in \code{\link{MFnest}} output.}
+bootstrap event. Variables as in \link{MFnest} output.}
 \item{mfnest_summary}{Statistical summary of bootstrapped MF with each
 unique level of a core or nest variable passed to \code{which.factor} as a
 row. Other variables include: \cr \itemize{
@@ -36,7 +36,7 @@ row. Other variables include: \cr \itemize{
 
 \item \code{hdupper} Upper value of the highest posterior density range.
 
-\item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
+\item \code{mf.obs} MF calculated from data using \link{MFh}.
 
 }}
 
@@ -82,7 +82,7 @@ test6
 }
 }
 \seealso{
-\code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
+\link{MFClusBootHier}, \link{MFhBoot}
 }
 \author{
 \link{MF-package}

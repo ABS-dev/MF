@@ -15,7 +15,7 @@
 #' @export
 #' @references Siev D, 2005. An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @examples
 #' MFr(lesion~group, calflung)
 #' # [1] 0.44

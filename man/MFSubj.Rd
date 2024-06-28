@@ -16,7 +16,7 @@ response and x is a factor with two levels}
 the control or reference group to which \code{compare[2]} is compared}
 }
 \value{
-a \code{\link{mfcomponents-class}} data object
+a \linkS4class{mfcomponents} data object
 }
 \description{
 Estimates the subject components of the mitigated fraction.

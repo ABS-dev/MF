@@ -21,10 +21,10 @@ Additional variables will be ignored.}
 control or reference group to which \code{compare[2]} is compared.}
 }
 \value{
-A \code{\link{mfhierdata}} object, which is a list of three items.
+A \link{mfhierdata} object, which is a list of three items.
 \cr \describe{
 
-\item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique
+\item{coreTbl}{A \link[dplyr:reexports]{dplyr::tibble} with one row for each unique
 core level showing values for:
 
 \itemize{
@@ -91,9 +91,8 @@ aCore
 #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4
 }
 \seealso{
-\code{\link{MFnest}} for calculation of MF for nest, core and all
-variables. \code{\link{mfhierdata}} for returned
-object.\code{\link{MFClusHier}} for a wrapper.
+\link{MFnest} for calculation of MF for nest, core and all variables.
+\link{mfhierdata} for returned object. \link{MFClusHier} for a wrapper.
 }
 \author{
 \link{MF-package}

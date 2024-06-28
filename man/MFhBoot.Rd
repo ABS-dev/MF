@@ -45,7 +45,7 @@ A list with the following elements: \cr \cr
 \describe{
 
 \item{bootmfh}{Rank table for the bootstrapped values as output from
-\code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish
+\link{MFh}. Includes a new \code{bootID} variable to distinguish
 each bootstrapped incidence.}
 
 \item{clusters}{Table of unique nodes with an ID.}
@@ -83,7 +83,7 @@ system.time(test1 <- MFhBoot(formula, a,
 test1$bootmfh
 }
 \seealso{
-\code{\link{MFClusBootHier}}, \code{\link{MFnestBoot}}
+\link{MFClusBootHier}, \link{MFnestBoot}
 }
 \author{
 \link{MF-package}

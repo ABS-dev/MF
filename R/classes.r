@@ -32,7 +32,7 @@ setClassUnion("numericORinteger", c("numeric", "integer"))
 #'   }
 #' @keywords documentation
 #' @family mf
-#' @author \link{MF-package}
+#' @author [MF-package]
 mf <- setRefClass("mf", fields = list(nboot = "numeric",
                                       alpha = "numeric",
                                       seed = "numericORinteger",
@@ -66,11 +66,11 @@ mf <- setRefClass("mf", fields = list(nboot = "numeric",
 #'   \item{\code{stat:} }{matrix of estimates}
 #'
 #'   }
-#' @section Contains: \code{\link{mf-class}}
+#' @section Contains: [mf-class]
 #' @keywords documentation
 #' @family mf
-#' @seealso \code{\link{MFBoot}}
-#' @author \link{MF-package}
+#' @seealso [MFBoot]
+#' @author [MF-package]
 mfboot <- setRefClass("mfboot", contains = "mf",
                       fields = list(stat = "matrix",
                                     sample = "numericORNULL"))
@@ -118,11 +118,11 @@ mfboot <- setRefClass("mfboot", contains = "mf",
 #'   upper} for quartiles of response, equal tailed.}
 #'
 #'   }
-#' @section Contains: \code{\link{mf-class}}
+#' @section Contains: [mf-class]
 #' @keywords documentation
 #' @family mf
-#' @seealso \code{\link{HLBoot}}
-#' @author \link{MF-package}
+#' @seealso [HLBoot]
+#' @author [MF-package]
 mfhlboot <- setRefClass("mfhlboot", contains = "mf",
                         fields = list(MFstat = "matrix",
                                       HLstat = "matrix",
@@ -156,8 +156,8 @@ mfhlboot <- setRefClass("mfhlboot", contains = "mf",
 #'   }
 #' @keywords documentation
 #' @family mfmp
-#' @author \link{MF-package}
-#' @seealso \code{\link{MFmp}}
+#' @author [MF-package]
+#' @seealso [MFmp]
 mfmp <- setRefClass("mfmp",
                     fields = list(ci = "numeric",
                                   x = "numericORarrayORtable",
@@ -204,11 +204,11 @@ mfmp <- setRefClass("mfmp",
 #'   \item{\code{All: }}{Field "All" from MFClus call.}
 #'
 #'   }
-#' @section Contains: \code{\link{mf-class}}
+#' @section Contains: [mf-class]
 #' @keywords documentation
 #' @family mf
-#' @seealso \code{\link{MFClusBoot}}
-#' @author \link{MF-package}
+#' @seealso [MFClusBoot]
+#' @author [MF-package]
 mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
                              fields = list(stat = "matrix",
                                            what = "character",
@@ -256,8 +256,8 @@ mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
 #'
 #' @keywords documentation
 #' @family mfcluster
-#' @seealso \code{\link{MFClus}}
-#' @author \link{MF-package}
+#' @seealso [MFClus]
+#' @author [MF-package]
 mfcluster <- setRefClass("mfcluster",
                          fields = list(All = "data.frame",
                                        byCluster = "matrix",
@@ -279,8 +279,8 @@ mfcluster <- setRefClass("mfcluster",
 #' }
 #' @keywords documentation
 #' @family mfcomponents
-#' @seealso \code{\link{MFSubj}}
-#' @author \link{MF-package}
+#' @seealso [MFSubj]
+#' @author [MF-package]
 mfcomponents <- setRefClass("mfcomponents",
                             fields = list(mf = "numeric",
                                           x = "numeric",
@@ -310,8 +310,8 @@ mfcomponents <- setRefClass("mfcomponents",
 #'   }
 #' @keywords documentation
 #' @family mfhierdata
-#' @seealso \code{\link{MFh}}
-#' @author \link{MF-package}
+#' @seealso [MFh]
+#' @author [MF-package]
 mfhierdata <- setRefClass("mfhierdata",
                           fields = list(coreTbl = "tbl",
                                         data = "tbl",
@@ -325,13 +325,13 @@ mfhierdata <- setRefClass("mfhierdata",
 #' @docType class
 #' @section Fields:
 #' \itemize{
-#' \item{\code{MFh: }}{output from MFh. A \code{\link{mfhierdata}} object.}
+#' \item{\code{MFh: }}{output from MFh. A [mfhierdata] object.}
 #' \item{\code{MFnest: }}{output from MFnest. A tibble.}
 #' }
 #' @keywords documentation
 #' @family mfclushier
-#' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
-#' @author \link{MF-package}
+#' @seealso [MFh], [MFnest]
+#' @author [MF-package]
 mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
                                                       MFnest = "tbl"))
 
@@ -347,8 +347,8 @@ mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
 #' }
 #' @keywords documentation
 #' @family mfclusboothier
-#' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
-#' @author \link{MF-package}
+#' @seealso [MFhBoot], [MFnestBoot]
+#' @author [MF-package]
 mfclusboothier <- setRefClass("mfclusboothier",
                               fields = list(MFhBoot = "list",
                                             MFnestBoot = "list"))

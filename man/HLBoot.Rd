@@ -48,7 +48,7 @@ statistics.}
 to \code{set.seed}.}
 }
 \value{
-a \code{\link{mfhlboot-class}} data object
+a \linkS4class{mfhlboot} data object
 }
 \description{
 Estimates bootstrap confidence intervals for MF, HL, and Qdif.
@@ -120,7 +120,7 @@ severity. \strong{Journal of Modern Applied Statistical Methods.}
 the Bootstrap.} Chapman and Hall, New York, 1993.
 }
 \seealso{
-\code{\link{mfhlboot-class}}
+\linkS4class{mfhlboot}
 }
 \author{
 \link{MF-package}

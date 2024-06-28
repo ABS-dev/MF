@@ -23,18 +23,18 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to \code{set.seed}.
-#' @return a \code{\link{mfbootcluster-class}} data object
+#' @return a [mfbootcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
 #' associated with unused treatment levels will be removed. \cr Factor levels
 #' for treatments not present in the input data will be ignored. \cr Clusters
 #' with missing treatments will be excluded. See
-#' \code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded
+#' [mfbootcluster-class] or use \code{trace.it} to identify excluded
 #' clusters.
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.}
 #'   \bold{4:500--508}\cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
 #'   the Bootstrap.} Chapman and Hall, New York, 1993.
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @examples
 #' \dontrun{
 #' MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)

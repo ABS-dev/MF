@@ -23,7 +23,7 @@
 #'   \describe{
 #'
 #'   \item{bootmfh}{Rank table for the bootstrapped values as output from
-#'   \code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish
+#'   [MFh]. Includes a new \code{bootID} variable to distinguish
 #'   each bootstrapped incidence.}
 #'
 #'   \item{clusters}{Table of unique nodes with an ID.}
@@ -33,8 +33,8 @@
 #'   \item{mfh}{MFh run on original data input.}
 #'
 #'   }
-#' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFnestBoot}}
-#' @author \link{MF-package}
+#' @seealso [MFClusBootHier], [MFnestBoot]
+#' @author [MF-package]
 #' @export
 #' @examples
 #' set.seed(76153)
@@ -245,7 +245,7 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' @title MFnestBoot
 #' @name MFnestBoot
 #' @description MFnest using bootstrapping
-#' @param x output from \code{\link{MFhBoot}}
+#' @param x output from [MFhBoot]
 #' @param which.factor one or more grouping variable(s) of interest. This can be
 #'   any of the core or nest variables from the data set. A MF value will be
 #'   calculated for each level of the variable(s) specified. Default is 'All',
@@ -255,7 +255,7 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' @return A list with the following elements: \cr \describe{
 #'
 #'   \item{mfnest_details}{The MF and summary statistics as calculated for each
-#'   bootstrap event. Variables as in \code{\link{MFnest}} output.}
+#'   bootstrap event. Variables as in [MFnest] output.}
 #'   \item{mfnest_summary}{Statistical summary of bootstrapped MF with each
 #'   unique level of a core or nest variable passed to \code{which.factor} as a
 #'   row. Other variables include: \cr \itemize{
@@ -270,13 +270,13 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #'
 #'   \item \code{hdupper} Upper value of the highest posterior density range.
 #'
-#'   \item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
+#'   \item \code{mf.obs} MF calculated from data using [MFh].
 #'
 #'   }}
 #'
 #'   }
-#' @seealso \code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
-#' @author \link{MF-package}
+#' @seealso [MFClusBootHier], [MFhBoot]
+#' @author [MF-package]
 #' @examples
 #' set.seed(76153)
 #' a <- data.frame(room = paste('Room', rep(c('W','Z'), each = 24)),

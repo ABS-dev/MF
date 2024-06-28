@@ -32,7 +32,7 @@ gaussian (FALSE)}
 }
 
 \seealso{
-\code{\link{MFmp}}
+\link{MFmp}
 }
 \author{
 \link{MF-package}

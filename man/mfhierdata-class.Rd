@@ -29,7 +29,7 @@ calculations in MFh and MFnest.}
 }
 
 \seealso{
-\code{\link{MFh}}
+\link{MFh}
 }
 \author{
 \link{MF-package}

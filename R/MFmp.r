@@ -19,12 +19,12 @@
 #' @export
 #' @note upper confidence interval is truncated to 1; lower confidence interval
 #'   is truncated to -1. Point estimate of 1.0 indicates complete separation.
-#' @return a \code{\link{mfmp-class}} data object
-#' @seealso \code{\link{mfmp-class}}
+#' @return a [mfmp-class] data object
+#' @seealso [mfmp-class]
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.}
 #'   \bold{4:500--508}
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @examples
 #' MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
 #' MFmp(x = c(12, 12, 2))

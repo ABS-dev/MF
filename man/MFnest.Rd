@@ -8,7 +8,7 @@ MFnest(Y, which.factor = "All")
 }
 \arguments{
 \item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl}
-output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.}
+output from \link{MFh} or returned object from \url{MFh}.}
 
 \item{which.factor}{one or more grouping variable(s) of interest. This can be
 any of the core or nest variables from the data set. If none or \code{All}
@@ -24,15 +24,15 @@ include: \cr
 variable in this row.}
 
 \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
-of \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+of \link{mfhierdata} object output by \link{MFh} for this
 particular variable-level combination.}
 
 \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
-\code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+\link{mfhierdata} object output by \link{MFh} for this
 particular variable-level combination.}
 
 \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
-\code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+\link{mfhierdata} object output by \link{MFh} for this
 particular variable-level combination.}
 
 \item{\code{_medResp}}{Median of observed responses for each comparison
@@ -154,7 +154,7 @@ MFnest(aCore, c('room', 'pen', 'litter'))
 # 20 litter   Litter 22 1         4     4     2     2        7.27        5.13
 }
 \seealso{
-\code{\link{MFh}}
+\link{MFh}
 }
 \author{
 \link{MF-package}

@@ -12,19 +12,19 @@
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is
 #'   the control or reference group to which \code{compare[2]} is compared
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
-#' @return a \code{\link{mfcluster-class}} data object
+#' @return a [mfcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
 #' associated with unused treatment levels will be removed. \cr Factor levels
 #' for treatments not present in the input data will be ignored. \cr Clusters
 #' with missing treatments will be excluded. See
-#' \code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded
+#' [mfbootcluster-class] or use \code{trace.it} to identify excluded
 #' clusters.
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.}
 #'   \bold{4:500--508}
-#' @author \link{MF-package}
-#' @seealso \code{\link{mfcluster-class}}
+#' @author [MF-package]
+#' @seealso [mfcluster-class]
 #' @examples
 #' \dontrun{
 #' MFClus(lesion ~ group + cluster(litter), piglung)

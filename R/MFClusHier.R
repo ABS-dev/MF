@@ -10,11 +10,11 @@
 #'   Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - `compare[1]` is the
 #'   control or reference group to which `compare[2]` is compared.
-#' @return A \code{\link{mfhierdata}} object, which is a list of three items.
+#' @return A [mfhierdata] object, which is a list of three items.
 #'   \cr \describe{
 #'
 #'
-#'   \item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique
+#'   \item{coreTbl}{A [dplyr::tibble] with one row for each unique
 #'   core level showing values for:
 #'
 #'   \itemize{
@@ -46,9 +46,8 @@
 #'   }
 #' @note Core variable is the variable corresponding to the lowest nodes of the
 #'   hierarchial tree. Nest variables are those above the core.
-#' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all
-#'   variables. \code{\link{mfhierdata}} for returned
-#'   object.\code{\link{MFClusHier}} for a wrapper.
+#' @seealso [MFnest] for calculation of MF for nest, core and all variables.
+#'   [mfhierdata] for returned object. [MFClusHier] for a wrapper.
 #' @examples
 #' a <- data.frame(
 #'  room = paste('Room', rep(c('W','Z'), each=24)),
@@ -77,12 +76,12 @@
 #' #  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4
 #' #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4
 #' @export
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @importFrom stringr str_c
 #' @importFrom tidyr gather unite spread all_of
 #' @importFrom stats median terms
-#' @importFrom dplyr select sym as_tibble ungroup group_by_at mutate
-#'   filter vars summarize rename everything
+#' @importFrom dplyr select sym as_tibble ungroup group_by_at mutate filter vars
+#'   summarize rename everything
 MFh <- function(formula, data, compare = c("con", "vac")) {
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
@@ -137,7 +136,7 @@ globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
 #' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl}
-#'   output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.
+#'   output from [MFh] or returned object from [MFh]().
 #' @param which.factor one or more grouping variable(s) of interest. This can be
 #'   any of the core or nest variables from the data set. If none or \code{All}
 #'   is specified, a summary MF will be calculated for the whole tree.
@@ -150,15 +149,15 @@ globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #'   variable in this row.}
 #'
 #'   \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
-#'   of \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+#'   of [mfhierdata] object output by [MFh] for this
 #'   particular variable-level combination.}
 #'
 #'   \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
-#'   \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+#'   [mfhierdata] object output by [MFh] for this
 #'   particular variable-level combination.}
 #'
 #'   \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
-#'   \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+#'   [mfhierdata] object output by [MFh] for this
 #'   particular variable-level combination.}
 #'
 #'   \item{\code{_medResp}}{Median of observed responses for each comparison
@@ -168,7 +167,7 @@ globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' @note Core variable is the variable corresponding to the lowest nodes of the
 #'   hierarchial tree. Nest variables are those above the core. All refers to a
 #'   summary of the entire tree.
-#' @seealso \code{\link{MFh}}
+#' @seealso [MFh]
 #' @examples
 #' a <- data.frame(
 #'  room = paste('Room', rep(c('W','Z'), each=24)),
@@ -274,7 +273,7 @@ globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' # 19 litter   Litter 21 1         4     4     2     2        6.82        5.36
 #' # 20 litter   Litter 22 1         4     4     2     2        7.27        5.13
 #' @export
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @importFrom stringr str_subset
 #' @importFrom tidyr gather spread
 #' @importFrom forcats fct_relevel

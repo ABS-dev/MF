@@ -44,16 +44,16 @@ summation. Default is 'All', to sum over entire tree.}
 \item{alpha}{Passed to \code{emp_hpd} to calculate high tailed upper and high
 tailed lower of mitigated fraction.}
 
-\item{seed}{Passed to \code{\link{MFhBoot}} to to initialize random number
+\item{seed}{Passed to \link{MFhBoot} to to initialize random number
 generator for reproducibility.}
 }
 \value{
 A list with the following elements: \cr \cr \itemize{ \item
-\strong{MFhBoot} as output from \code{\link{MFhBoot}}. \item
-\strong{MFnestBoot} as output from \code{\link{MFnestBoot}}. }
+\strong{MFhBoot} as output from \link{MFhBoot}. \item
+\strong{MFnestBoot} as output from \link{MFnestBoot}. }
 }
 \description{
-Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into
+Combines \link{MFhBoot} and \link{MFnestBoot} into
 a single function.
 }
 \note{
@@ -75,7 +75,7 @@ thismf1 <- MFClusBootHier(lung ~ tx + room / pen / litter, a, nboot = 10000,
 thismf1
 }
 \seealso{
-\code{\link{MFhBoot}}, \code{\link{MFnestBoot}}.
+\link{MFhBoot}, \link{MFnestBoot}.
 }
 \author{
 \link{MF-package}

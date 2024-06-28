@@ -20,7 +20,7 @@ the control or reference group to which \code{compare[2]} is compared}
 \item{trace.it}{Verbose tracking of the cycles? Default FALSE.}
 }
 \value{
-a \code{\link{mfcluster-class}} data object
+a \linkS4class{mfcluster} data object
 }
 \description{
 Estimates mitigated fraction from clustered or stratified data.
@@ -34,7 +34,7 @@ If input data contains more than two levels of treatment, rows
 associated with unused treatment levels will be removed. \cr Factor levels
 for treatments not present in the input data will be ignored. \cr Clusters
 with missing treatments will be excluded. See
-\code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded
+\linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded
 clusters.
 }
 \examples{
@@ -80,7 +80,7 @@ severity. \emph{Journal of Modern Applied Statistical Methods.}
 \bold{4:500--508}
 }
 \seealso{
-\code{\link{mfcluster-class}}
+\linkS4class{mfcluster}
 }
 \author{
 \link{MF-package}

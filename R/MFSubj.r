@@ -13,12 +13,12 @@
 #' @param data Data frame
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is
 #'   the control or reference group to which \code{compare[2]} is compared
-#' @return a \code{\link{mfcomponents-class}} data object
+#' @return a [mfcomponents-class] data object
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. \emph{Journal of Modern Applied Statistical Methods.}
 #'   \bold{4:500--508}
-#' @author \link{MF-package}
+#' @author [MF-package]
 #' @examples
 #' x <- MFSubj(lesion ~ group, calflung)
 #' x

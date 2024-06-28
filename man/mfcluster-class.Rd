@@ -45,7 +45,7 @@ because of missing treatment}
 }
 
 \seealso{
-\code{\link{MFClus}}
+\link{MFClus}
 }
 \author{
 \link{MF-package}
