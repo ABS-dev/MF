@@ -33,9 +33,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
                  x = NULL, alpha = 0.05, df = NA, tdist = TRUE) {
   # asymptotic CI for matched pairs
   # x is a trinomial frequency vector
-  # unused? c(x > y, x = y, x < y))
   # difference of multinomial fractions
-  # unused? I(x < y) - I(x > y)
 
   if (!is.null(formula) && !is.null(data)) {
     byCluster <- MFClus(formula = formula, data = data,
@@ -56,10 +54,6 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
   A <- c(1, 0, -1)
   B <- t(A) %*% p
   VB <- t(A) %*% V %*% A
-
-  # unused? gradl <- c(1 / (p[1] - p[3]), 0, 1 / (p[1] - p[3]))
-  # unused? logB <- log(B)
-  # unused? VlogB <- t(gradl) %*% V %*% gradl
 
   if (tdist && is.na(df)) {
     df <- N - 2

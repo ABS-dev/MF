@@ -99,17 +99,17 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   set.seed(seed)
 
   # Wilcoxon rank sum statistic
-  w <- function(xy, n.x) {
-    sum(rank(xy)[1:n.x])
+  w <- function(xy, n_x) {
+    sum(rank(xy)[1:n_x])
   }
 
   # Hodges-Lehmann estimator
-  hl.fn <- function(xy, n.x) {
-    x <- xy[1:n.x]
-    y <- xy[(n.x + 1):length(xy)]
-    n.y <- length(xy) - n.x
-    X <- matrix(x, n.x, n.y, byrow = FALSE)
-    Y <- matrix(y, n.x, n.y, byrow = TRUE)
+  hl_fn <- function(xy, n_x) {
+    x <- xy[1:n_x]
+    y <- xy[(n_x + 1):length(xy)]
+    n_y <- length(xy) - n_x
+    X <- matrix(x, n_x, n_y, byrow = FALSE)
+    Y <- matrix(y, n_x, n_y, byrow = TRUE)
     med.dif <- median(Y - X)
     return(med.dif)
   }
@@ -139,16 +139,16 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 
   # takes b bootstrap samples B times, so nboot = B * b
   nboot <- b * B
-  n.x <- length(x)
-  n.y <- length(y)
+  n_x <- length(x)
+  n_y <- length(y)
 
   # observed stats
-  mf <- (2 * w(c(x, y), n.x) - n.x * (1 + n.x + n.y)) / (n.x * n.y)
+  mf <- (2 * w(c(x, y), n_x) - n_x * (1 + n_x + n_y)) / (n_x * n_y)
 
   if (round(mf, 1) == 1.0) {
     message("Complete separation observed.")
   }
-  hl <- hl.fn(c(x, y), n.x)
+  hl <- hl_fn(c(x, y), n_x)
   qx <- quantile(x, probs = c(1:3) / 4)
   qy <- quantile(y, probs = c(1:3) / 4)
   qdif <- qy - qx
@@ -158,12 +158,12 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
                      dimnames = list(NULL, c("Q25", "Q50", "Q75")))
   cat("\nBootstrapping\n")
   for (i in 1:B) {
-    x.b <- matrix(sample(x, size = b * n.x, replace = TRUE), b, n.x)
-    y.b <- matrix(sample(y, size = b * n.y, replace = TRUE), b, n.y)
-    Qx[(i - 1) * b + (1:b), ] <- t(apply(x.b, 1, quantile, probs = c(1:3) / 4))
-    Qy[(i - 1) * b + (1:b), ] <- t(apply(y.b, 1, quantile, probs = c(1:3) / 4))
-    W[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, w, n.x)
-    H[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, hl.fn, n.x)
+    x_b <- matrix(sample(x, size = b * n_x, replace = TRUE), b, n_x)
+    y_b <- matrix(sample(y, size = b * n_y, replace = TRUE), b, n_y)
+    Qx[(i - 1) * b + (1:b), ] <- t(apply(x_b, 1, quantile, probs = c(1:3) / 4))
+    Qy[(i - 1) * b + (1:b), ] <- t(apply(y_b, 1, quantile, probs = c(1:3) / 4))
+    W[(i - 1) * b + (1:b)] <- apply(cbind(x_b, y_b), 1, w, n_x)
+    H[(i - 1) * b + (1:b)] <- apply(cbind(x_b, y_b), 1, hl_fn, n_x)
     if (trace.it) {
       cat("bootstrap samples", (i - 1) * b + 1, "to", (i - 1) * b + b, "\n")
     } else {
@@ -172,7 +172,7 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   }
   cat("\n")
   Qdif <- Qy - Qx
-  MF <- (2 * W - n.x * (1 + n.x + n.y)) / (n.x * n.y)
+  MF <- (2 * W - n_x * (1 + n_x + n_y)) / (n_x * n_y)
   qprob <- c(0.5, alpha / 2, 1 - alpha / 2)
   qmf <- quantile(MF, prob = qprob)
   mfstat <- matrix(c(mf, qmf), 1, 4,
@@ -204,15 +204,15 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   if (bca) {
     z0 <- qnorm(sum(MF < mf) / (b * B))
     xy <- c(x, y)
-    nx.i <- rep(n.x - (1:0), c(n.x, n.y))
-    ny.i <- rep(n.y - (0:1), c(n.x, n.y))
-    theta <- rep(NA, n.x + n.y)
-    for (i in 1:(n.x + n.y)) {
+    nx.i <- rep(n_x - (1:0), c(n_x, n_y))
+    ny.i <- rep(n_y - (0:1), c(n_x, n_y))
+    theta <- rep(NA, n_x + n_y)
+    for (i in 1:(n_x + n_y)) {
       theta[i] <- (2 * w(xy[-i], nx.i[i]) - nx.i[i] *
                      (1 + nx.i[i] + ny.i[i])) / (nx.i[i] * ny.i[i])
     }
-    theta.hat <- mean(theta)
-    acc <- sum((theta.hat - theta)^3) / (6 * sum((theta.hat - theta)^2)^(3 / 2))
+    theta_hat <- mean(theta)
+    acc <- sum((theta_hat - theta)^3) / (6 * sum((theta_hat - theta)^2)^(3 / 2))
     z1 <- qnorm(alpha / 2)
     z2 <- qnorm(1 - alpha / 2)
     a1 <- pnorm(z0 + (z0 + z1) / (1 - acc * (z0 + z1)))

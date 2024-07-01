@@ -78,23 +78,23 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   rng <- "Mersenne-Twister"
   RNGkind(rng)
   nboot <- b * B
-  n.x <- length(x)
-  n.y <- length(y)
-  w <- function(xy, n.x) {
-    sum(rank(xy)[1:n.x])
+  n_x <- length(x)
+  n_y <- length(y)
+  w <- function(xy, n_x) {
+    sum(rank(xy)[1:n_x])
   }
   W <- rep(NA, b * B)
   for (i in 1:B) {
-    x.b <- matrix(sample(x, size = b * n.x, replace = TRUE), b, n.x)
-    y.b <- matrix(sample(y, size = b * n.y, replace = TRUE), b, n.y)
-    W[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, w, n.x)
+    x_b <- matrix(sample(x, size = b * n_x, replace = TRUE), b, n_x)
+    y_b <- matrix(sample(y, size = b * n_y, replace = TRUE), b, n_y)
+    W[(i - 1) * b + (1:b)] <- apply(cbind(x_b, y_b), 1, w, n_x)
     if (trace.it) {
       cat("bootstrap samples", (i - 1) * b + 1, "to",
           (i - 1) * b + b, "\n")
     }
   }
-  MF <- (2 * W - n.x * (1 + n.x + n.y)) / (n.x * n.y)
-  mf <- (2 * w(c(x, y), n.x) - n.x * (1 + n.x + n.y)) / (n.x * n.y)
+  MF <- (2 * W - n_x * (1 + n_x + n_y)) / (n_x * n_y)
+  mf <- (2 * w(c(x, y), n_x) - n_x * (1 + n_x + n_y)) / (n_x * n_y)
   qprob <- c(0.5, alpha / 2, 1 - alpha / 2)
   qmf <- quantile(MF, prob = qprob)
   stat <- matrix(c(mf, qmf), 1, 4,
@@ -107,15 +107,15 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   if (bca) {
     z0 <- qnorm(sum(MF < mf) / (b * B))
     xy <- c(x, y)
-    nx.i <- rep(n.x - (1:0), c(n.x, n.y))
-    ny.i <- rep(n.y - (0:1), c(n.x, n.y))
-    theta <- rep(NA, n.x + n.y)
-    for (i in 1:(n.x + n.y)) {
+    nx.i <- rep(n_x - (1:0), c(n_x, n_y))
+    ny.i <- rep(n_y - (0:1), c(n_x, n_y))
+    theta <- rep(NA, n_x + n_y)
+    for (i in 1:(n_x + n_y)) {
       theta[i] <- (2 * w(xy[-i], nx.i[i]) - nx.i[i] *
                      (1 + nx.i[i] + ny.i[i])) / (nx.i[i] * ny.i[i])
     }
-    theta.hat <- mean(theta)
-    acc <- sum((theta.hat - theta)^3) / (6 * sum((theta.hat - theta)^2)^(3 / 2))
+    theta_hat <- mean(theta)
+    acc <- sum((theta_hat - theta)^3) / (6 * sum((theta_hat - theta)^2)^(3 / 2))
     z1 <- qnorm(alpha / 2)
     z2 <- qnorm(1 - alpha / 2)
     a1 <- pnorm(z0 + (z0 + z1) / (1 - acc * (z0 + z1)))

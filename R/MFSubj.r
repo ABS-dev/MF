@@ -28,7 +28,7 @@
 #' #
 #' #  MF Subject Components
 #' #
-#' #    mf.j freq    min.y   max.y
+#' #    mf_j freq    min_y   max_y
 #' #    1.00    6 0.000030 0.00970
 #' #    0.84    1 0.012500 0.01250
 #' #    0.76    3 0.016650 0.02030
@@ -41,7 +41,7 @@
 #' #   -0.84    1 0.461500 0.46150
 #'
 #'
-#' mean(x$subj[, "mf.j"])
+#' mean(x$subj[, "mf_j"])
 #'
 #' # [1] 0.44
 #' @importFrom stats model.frame
@@ -63,15 +63,13 @@ MFSubj <- function(formula, data, compare = c("con", "vac")) {
   rank_xy <- rank(x_y)
   w <- sum(rank_xy[1:n_x])
   mf <- ((2. * w - n_x * (1. + n_x + n_y)) / (n_x * n_y))
-  # unused? u <- w - (n_x * (n_x + 1)) / 2
-  u.j <- rep(NA, n_y)
+  u_j <- rep(NA, n_y)
   for (j in 1:n_y) {
-    u.j[j] <- mean(c(sum(y[j] < x), sum(y[j] <= x)))
+    u_j[j] <- mean(c(sum(y[j] < x), sum(y[j] <= x)))
   }
-  # unused? r <- u / (n_x * n_y)
-  r.j <- u.j / n_x
-  mf.j <- 2 * r.j - 1
-  subj <- cbind(y, rank = rank_xy[(n_x + 1):nn], u.j, r.j, mf.j)
+  r_j <- u_j / n_x
+  mf_j <- 2 * r_j - 1
+  subj <- cbind(y, rank = rank_xy[(n_x + 1):nn], u_j, r_j, mf_j)
   subj <- subj[order(subj[, "rank"]), ]
   return(mfcomponents$new(mf = mf, x = sort(x), y = sort(y), subj = subj,
                           compare = compare))

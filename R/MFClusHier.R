@@ -78,7 +78,6 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
   if (length(nests) == 1) {
     stop("This is not nested hierarchy. See MFClus.")
   }
-  # unused? core <- nests[length(nests)]
   tgroup <- termlab[1]
   resp <- all.vars(formula)[1]
 
@@ -95,7 +94,7 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
     ungroup() |>
     select(all_of(nests), tgroup = all_of(tgroup), resp = all_of(resp))
 
-  thiscoreTbl <- newdat |>
+  this_core_tbl <- newdat |>
     group_by_at(nests) |>
     mutate(ntgroups = length(unique(tgroup))) |>
     filter(ntgroups > 1) |>
@@ -115,7 +114,7 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
     select(everything(), w, n1n2, u) |>
     ungroup()
 
-  return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat,
+  return(mfhierdata$new(coreTbl = this_core_tbl, data = newdat,
                         compare = compare, formula = formula))
 }
 # to keep R CMD happy

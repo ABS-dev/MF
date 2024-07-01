@@ -38,7 +38,7 @@ x
 #
 #  MF Subject Components
 #
-#    mf.j freq    min.y   max.y
+#    mf_j freq    min_y   max_y
 #    1.00    6 0.000030 0.00970
 #    0.84    1 0.012500 0.01250
 #    0.76    3 0.016650 0.02030
@@ -51,7 +51,7 @@ x
 #   -0.84    1 0.461500 0.46150
 
 
-mean(x$subj[, "mf.j"])
+mean(x$subj[, "mf_j"])
 
 # [1] 0.44
 }

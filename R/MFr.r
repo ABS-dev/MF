@@ -32,7 +32,6 @@ MFr <- function(formula, data, compare = c("con", "vac")) {
   y <- resp[tx == compare[2]]
   n_x <- length(x)
   n_y <- length(y)
-  # unused? N <- n_x + n_y
   x_y <- c(x, y)
   w <- sum(rank(x_y)[seq_len(n_x)])
   return(((2. * w - n_x * (1. + n_x + n_y)) / (n_x * n_y)))

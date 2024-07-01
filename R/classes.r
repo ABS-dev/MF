@@ -198,7 +198,7 @@ mfcluster <- setRefClass("mfcluster",
 #' \item{`mf`}{numeric estimator for mitigated fraction}
 #' \item{`x`}{numeric vector containing responses of group 1}
 #' \item{`y`}{numeric vector containing responses of group 2}
-#' \item{`subj`}{matrix where `mf.j`re the subject components}
+#' \item{`subj`}{matrix where `mf_j`re the subject components}
 #' \item{`compare`}{character vector naming groups being compared}
 #' }
 #' @keywords documentation

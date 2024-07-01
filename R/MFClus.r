@@ -91,20 +91,20 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
   for (stratum in strat) {
     x <- dat[group == id[1] & as.character(clusters) == stratum]
     y <- dat[group == id[2] & as.character(clusters) == stratum]
-    n.x <- length(x)
-    n.y <- length(y)
-    if (n.x > 0 && n.y > 0) {
-      x.y <- c(x, y)
-      w <- sum(rank(x.y)[1:n.x])
-      u <- w - (n.x * (n.x + 1)) / 2
-      r <- u / (n.x * n.y)
+    n_x <- length(x)
+    n_y <- length(y)
+    if (n_x > 0 && n_y > 0) {
+      x_y <- c(x, y)
+      w <- sum(rank(x_y)[1:n_x])
+      u <- w - (n_x * (n_x + 1)) / 2
+      r <- u / (n_x * n_y)
       mf <- 2 * r - 1
-      out[stratum, ] <- c(w, u, r, n.x, n.y, mf)
+      out[stratum, ] <- c(w, u, r, n_x, n_y, mf)
     } else {
       if (trace.it) {
         cat("Cluster", stratum, "missing a treatment\n")
       }
-      out[stratum, ] <- c(NA, NA, NA, n.x, n.y, NA)
+      out[stratum, ] <- c(NA, NA, NA, n_x, n_y, NA)
       excluded.clusters <- c(excluded.clusters, stratum)
     }
   }

@@ -133,30 +133,30 @@ MFhBoot <- function(formula, data,
   #    of u is being calculated for each instance, separately
   #    (as above for w).
   if (boot.unit) {
-    strat.b <- matrix(newdf$newClus, nboot)
-    w <- u <- n1n2 <- medResp1 <- medResp2 <- con_n <- vac_n <-
+    strat_b <- matrix(newdf$newClus, nboot)
+    w <- u <- n1n2 <- med_resp1 <- med_resp2 <- con_n <- vac_n <-
       matrix(NA, nboot, nclus)
     n.each <- rep(NA, nclus)
     names(n.each) <- indivclus$clusterID
-    w.boot <- function(x, y, n.b) {
-      n.x <- length(x)
-      n.y <- length(y)
-      x.b <- matrix(switch(as.character(n.x == 1),
+    w_boot <- function(x, y, n.b) {
+      n_x <- length(x)
+      n_y <- length(y)
+      x_b <- matrix(switch(as.character(n_x == 1),
                            "TRUE" = rep(x, n.b),
-                           "FALSE" = sample(x, size = n.b * n.x,
+                           "FALSE" = sample(x, size = n.b * n_x,
                                             replace = TRUE)),
-                    n.b, n.x)
-      y.b <- matrix(switch(as.character(n.y == 1),
+                    n.b, n_x)
+      y_b <- matrix(switch(as.character(n_y == 1),
                            "TRUE" = rep(y, n.b),
-                           "FALSE" = sample(y, size = n.b * n.y,
+                           "FALSE" = sample(y, size = n.b * n_y,
                                             replace = TRUE)),
-                    n.b, n.y)
-      w <- apply(cbind(x.b, y.b), 1,
-                 function(x, n.x) {
-                   sum(rank(x)[1:n.x])
+                    n.b, n_y)
+      w <- apply(cbind(x_b, y_b), 1,
+                 function(x, n_x) {
+                   sum(rank(x)[1:n_x])
                  },
-                 n.x)
-      return(list(w, x.b, y.b))
+                 n_x)
+      return(list(w, x_b, y_b))
     }
 
     lapply(1:nclus, FUN = function(a) {
@@ -172,22 +172,22 @@ MFhBoot <- function(formula, data,
         as_vector() |>
         unname()
 
-      n.x <- length(x)
-      n.y <- length(y)
+      n_x <- length(x)
+      n_y <- length(y)
 
-      n.each[a] <<- sum(strat.b == a)
-      thiswboot <- w.boot(x, y, n.each[a])
-      w[strat.b == a] <<- thiswboot[[1]]
-      u[strat.b == a] <<- w[strat.b == a] - (n.x * (n.x + 1)) / 2
-      n1n2[strat.b == a] <<- n.x * n.y
-      con_n[strat.b == a] <<- n.x
-      vac_n[strat.b == a] <<- n.y
-      medResp1[strat.b == a] <<- median(x, na.rm = TRUE)
-      medResp2[strat.b == a] <<- median(y, na.rm = TRUE)
+      n.each[a] <<- sum(strat_b == a)
+      thiswboot <- w_boot(x, y, n.each[a])
+      w[strat_b == a] <<- thiswboot[[1]]
+      u[strat_b == a] <<- w[strat_b == a] - (n_x * (n_x + 1)) / 2
+      n1n2[strat_b == a] <<- n_x * n_y
+      con_n[strat_b == a] <<- n_x
+      vac_n[strat_b == a] <<- n_y
+      med_resp1[strat_b == a] <<- median(x, na.rm = TRUE)
+      med_resp2[strat_b == a] <<- median(y, na.rm = TRUE)
       return(NULL)
     })
 
-    newnames <- c("medResp1", "medResp2", "n1", "n2")
+    newnames <- c("med_resp1", "med_resp2", "n1", "n2")
     names(newnames) <- c(paste(compare, "medResp", sep = "_"),
                          paste(compare, "n", sep = "_"))
     budat <- newdf |>
@@ -196,8 +196,8 @@ MFhBoot <- function(formula, data,
              n1n2 = as.vector((t(n1n2))),
              n1 = as.vector((t(con_n))),
              n2 = as.vector((t(vac_n))),
-             medResp1 = as.vector(t(medResp1)),
-             medResp2 = as.vector(t(medResp2))) |>
+             med_resp1 = as.vector(t(med_resp1)),
+             med_resp2 = as.vector(t(med_resp2))) |>
       rename(!!newnames) |>
       full_join(indivclus, by = c("newClus" = "clusterID")) |>
       ungroup() |>
