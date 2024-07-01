@@ -1,17 +1,17 @@
 
 #' @description Estimates mitigated fraction from matched pairs.
-#' @details Estimates *MF* from matched pairs by the difference of
-#'   multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The
-#'   trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
+#' @details Estimates *MF* from matched pairs by the difference of multinomial
+#'   fractions \eqn{(\Sigma I(x<y) - \Sigma I(x > y)) / N}. The trinomial vector
+#'   is \eqn{\{\Sigma I(x<y), \Sigma I(x = y), \Sigma I(x > y)\}}
 #' @title Mitigated fraction from matched pairs
 #' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - `compare[1]` is
-#'   the control or reference group to which `compare[2]` is compared
-#' @param x Trinomial vector \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma
-#'   I(x>y)\}}
+#' @param compare Text vector stating the factor levels - `compare[1]` is the
+#'   control or reference group to which `compare[2]` is compared
+#' @param x Trinomial vector \eqn{\{\Sigma I(x < y), \Sigma I(x = y), \Sigma
+#'   I(x > y)\}}
 #' @param alpha Complement of the confidence level.
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence
@@ -26,16 +26,16 @@
 #'   **4:500--508**
 #' @author [MF-package]
 #' @examples
-#' MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
+#' MFmp(les ~ tx + cluster(cage), mlesions, compare = c("con", "vac"))
 #' MFmp(x = c(12, 12, 2))
 #' @importFrom stats qnorm qt
 MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
                  x = NULL, alpha = 0.05, df = NA, tdist = TRUE) {
   # asymptotic CI for matched pairs
   # x is a trinomial frequency vector
-  # unused? c(x>y, x=y, x<y))
+  # unused? c(x > y, x = y, x < y))
   # difference of multinomial fractions
-  # unused? I(x<y) - I(x>y)
+  # unused? I(x < y) - I(x > y)
 
   if (!is.null(formula) && !is.null(data)) {
     byCluster <- MFClus(formula = formula, data = data,

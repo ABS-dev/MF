@@ -23,7 +23,7 @@ NULL
 #'   NAs.
 #' \describe{
 #'   \item{`cage`}{Cage ID. 1 - 26.}
-#'   \item{`tx`}{Treatment. One of 'con' or 'vac'.}
+#'   \item{`tx`}{Treatment. One of "con" or "vac".}
 #'   \item{`les`}{Percent gross lung lesions.}
 #'
 #'   }
@@ -39,7 +39,7 @@ NULL
 #'   NAs.
 #' \describe{
 #'   \item{`lesion`}{Percent gross lung lesions.}
-#'   \item{`group`}{Treatment group. One of 'con' or 'vac'.}
+#'   \item{`group`}{Treatment group. One of "con" or "vac".}
 #'   \item{`litter`}{Litter ID.}
 #'   }
 #' @keywords datasets

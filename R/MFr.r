@@ -17,13 +17,13 @@
 #'   severity. *Journal of Modern Applied Statistical Methods.* 4:500-508
 #' @author [MF-package]
 #' @examples
-#' MFr(lesion~group, calflung)
+#' MFr(lesion ~ group, calflung)
 #' # [1] 0.44
 #' @importFrom stats model.frame
 MFr <- function(formula, data, compare = c("con", "vac")) {
-  # formula of form response~treatment
-  # x=response for compare[1]
-  # y=response for compare[2]
+  # formula of form response ~ treatment
+  # x = response for compare[1]
+  # y = response for compare[2]
   # compare y to x
   df <- data.frame(model.frame(formula = formula, data = data))
   resp <- df[, 1]

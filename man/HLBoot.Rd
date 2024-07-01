@@ -64,7 +64,7 @@ shape and differ by a constant shift. Assumes data is single pool (no
 nesting).
 }
 \examples{
-HLBoot(lesion~group, calflung, seed = 12345)
+HLBoot(lesion ~ group, calflung, seed = 12345)
 
 # Bootstrapping
 # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .

@@ -41,14 +41,14 @@
 #' #   -0.84    1 0.461500 0.46150
 #'
 #'
-#' mean(x$subj[,'mf.j'])
+#' mean(x$subj[, "mf.j"])
 #'
 #' # [1] 0.44
 #' @importFrom stats model.frame
 MFSubj <- function(formula, data, compare = c("con", "vac")) {
-  # formula of form response~treatment
-  # x=response for compare[1]
-  # y=response for compare[2]
+  # formula of form response ~ treatment
+  # x = response for compare[1]
+  # y = response for compare[2]
   # compare y to x
 
   df <- data.frame(model.frame(formula = formula, data = data))

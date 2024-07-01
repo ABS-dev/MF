@@ -11,7 +11,7 @@ MFnestBoot(x, which.factor = "All", alpha = 0.05)
 
 \item{which.factor}{one or more grouping variable(s) of interest. This can be
 any of the core or nest variables from the data set. A MF value will be
-calculated for each level of the variable(s) specified. Default is 'All',
+calculated for each level of the variable(s) specified. Default is "All",
 to sum over entire tree.}
 
 \item{alpha}{Passed to \code{emp_hpd} to calculate eq tailed upper and high
@@ -41,26 +41,26 @@ MFnest using bootstrapping
 }
 \examples{
 set.seed(76153)
-a <- data.frame(room = paste('Room', rep(c('W','Z'), each = 24)),
-                pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
-                litter = paste('Litter', rep(11:22, each = 4)),
-                tx = rep(rep(c('vac', 'con'), each = 2), 12))
-a[a$tx == 'vac', 'lung'] <- rnorm(24, 5, 1.3)
-a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
+a <- data.frame(room = paste("Room", rep(c("W", "Z"), each = 24)),
+                pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+                litter = paste("Litter", rep(11:22, each = 4)),
+                tx = rep(rep(c("vac", "con"), each = 2), 12))
+a[a$tx == "vac", "lung"] <- rnorm(24, 5, 1.3)
+a[a$tx == "con", "lung"] <- rnorm(24, 7, 1.3)
 a
 
 formula <- lung ~ tx + room / pen / litter
 nboot <- 10000
 boot.cluster <- TRUE
 boot.unit <- TRUE
-which.factors <- c('All', 'room', 'pen', 'litter')
+which.factors <- c("All", "room", "pen", "litter")
 
 #################
 
 test1 <- MFhBoot(formula, a,
                  nboot = 10000,
                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
-MFnestBoot(test1, c('All', 'litter'))
+MFnestBoot(test1, c("All", "litter"))
 
 \dontrun{
 system.time(test2 <- MFnestBoot(test1, which.factors))

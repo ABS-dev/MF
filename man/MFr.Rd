@@ -28,7 +28,7 @@ probability scale, it is often a good idea to accompany it with an estimator
 on the original scale of measurement.
 }
 \examples{
-MFr(lesion~group, calflung)
+MFr(lesion ~ group, calflung)
 # [1] 0.44
 }
 \references{

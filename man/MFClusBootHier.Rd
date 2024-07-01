@@ -17,11 +17,11 @@ MFClusBootHier(
 )
 }
 \arguments{
-\item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a
-continuous response, x is a factor with two levels of treatment, and a/b/c
-are grouping variables corresponding to the clusters. Nesting is assumed to
-be in order, left to right, highest to lowest. So a single level of "a"
-will contain multiple levels of "b" and a single level of "b" will contain
+\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous
+response, x is a factor with two levels of treatment, and a/b/c are
+grouping variables corresponding to the clusters. Nesting is assumed to be
+in order, left to right, highest to lowest. So a single level of "a" will
+contain multiple levels of "b" and a single level of "b" will contain
 multiple levels of "c".}
 
 \item{data}{a data.frame or tibble with the variables specified in formula.
@@ -39,7 +39,7 @@ the same core.}
 TRUE, some trees have all the cores while others only have a subset.}
 
 \item{which.factor}{Which variables to include in the mitigated fraction
-summation. Default is 'All', to sum over entire tree.}
+summation. Default is "All", to sum over entire tree.}
 
 \item{alpha}{Passed to \code{emp_hpd} to calculate high tailed upper and high
 tailed lower of mitigated fraction.}
@@ -64,13 +64,13 @@ refers to a summary of the entire tree.
 }
 \examples{
 a <- data.frame(
-  room = paste('Room', rep(c('W','Z'), each=24)),
-  pen = paste('Pen', rep(LETTERS[1:6], each=8)),
-  litter = paste('Litter', rep(11:22, each=4)),
-  tx = rep(rep(c('vac','con'), each=2), 12))
+  room = paste("Room", rep(c("W", "Z"), each = 24)),
+  pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+  litter = paste("Litter", rep(11:22, each = 4)),
+  tx = rep(rep(c("vac", "con"), each = 2), 12))
 set.seed(76153)
-a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
-a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
+a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 thismf1 <- MFClusBootHier(lung ~ tx + room / pen / litter, a, nboot = 10000,
                        boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 thismf1

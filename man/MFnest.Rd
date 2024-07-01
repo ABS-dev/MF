@@ -41,13 +41,13 @@ summary of the entire tree.
 }
 \examples{
 a <- data.frame(
- room = paste('Room', rep(c('W','Z'), each=24)),
- pen = paste('Pen', rep(LETTERS[1:6], each=8)),
- litter = paste('Litter', rep(11:22, each=4)),
- tx = rep(rep(c('vac','con'), each=2), 12))
+ room = paste("Room", rep(c("W", "Z"), each = 24)),
+ pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+ litter = paste("Litter", rep(11:22, each = 4)),
+ tx = rep(rep(c("vac", "con"), each = 2), 12))
 set.seed(76153)
-a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
-a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
+a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 
 aCore <- MFh(lung ~ tx + room / pen / litter, a)
 MFnest(aCore)
@@ -63,14 +63,14 @@ MFnest(aCore$coreTbl)
 #   <fct>    <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
 # 1 All      All   0.875    48    45    24    24
 
-MFnest(aCore, 'room')
+MFnest(aCore, "room")
 # # A tibble: 2 x 9
 #   variable level     MF  N1N2     U con_N vac_N con_medResp vac_medResp
 #   <fct>    <chr>  <dbl> <dbl> <dbl> <dbl> <dbl>       <dbl>       <dbl>
 # 1 room     Room W 0.833    24    22    12    12        7.79        4.85
 # 2 room     Room Z 0.917    24    23    12    12        6.71        4.98
 
-MFnest(aCore, 'pen')
+MFnest(aCore, "pen")
 # Complete separation observed for variable(s): pen
 # # A tibble: 6 x 9
 #   variable level    MF  N1N2     U con_N vac_N con_medResp vac_medResp
@@ -82,7 +82,7 @@ MFnest(aCore, 'pen')
 # 5 pen      Pen E  1        8     8     4     4        6.86        4.86
 # 6 pen      Pen F  1        8     8     4     4        6.88        5.13
 
-MFnest(aCore, c('All', 'litter'))
+MFnest(aCore, c("All", "litter"))
 # Complete separation observed for variable(s): litter
 # # A tibble: 13 x 9
 #    variable level        MF  N1N2     U con_N vac_N con_medResp vac_medResp
@@ -101,7 +101,7 @@ MFnest(aCore, c('All', 'litter'))
 # 12 litter   Litter 21 1         4     4     2     2        6.82        5.36
 # 13 litter   Litter 22 1         4     4     2     2        7.27        5.13
 
-MFnest(aCore, 'litter')
+MFnest(aCore, "litter")
 # Complete separation observed for variable(s): litter
 # # A tibble: 12 x 9
 #    variable level        MF  N1N2     U con_N vac_N con_medResp vac_medResp
@@ -119,7 +119,7 @@ MFnest(aCore, 'litter')
 # 11 litter   Litter 21   1       4     4     2     2        6.82        5.36
 # 12 litter   Litter 22   1       4     4     2     2        7.27        5.13
 
-MFnest(aCore, c('room', 'pen', 'litter'))
+MFnest(aCore, c("room", "pen", "litter"))
 # # A tibble: 20 x 9
 #    variable level        MF  N1N2     U con_N vac_N con_medResp vac_medResp
 #    <fct>    <chr>     <dbl> <dbl> <dbl> <dbl> <dbl>       <dbl>       <dbl>

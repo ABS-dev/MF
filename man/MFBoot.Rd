@@ -59,7 +59,7 @@ intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 }
 \examples{
 
-MFBoot(lesion~group, calflung, seed = 12345)
+MFBoot(lesion ~ group, calflung, seed = 12345)
 
 # 10000 bootstrap samples
 # 95\% confidence interval

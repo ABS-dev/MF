@@ -39,7 +39,7 @@
 #'   Hall, New York, 1993.
 #' @author [MF-package]
 #' @examples
-#' HLBoot(lesion~group, calflung, seed = 12345)
+#' HLBoot(lesion ~ group, calflung, seed = 12345)
 #'
 #' # Bootstrapping
 #' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .

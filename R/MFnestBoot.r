@@ -32,19 +32,19 @@
 #' @export
 #' @examples
 #' set.seed(76153)
-#' a <- data.frame(room = paste('Room', rep(c('W','Z'), each = 24)),
-#'                 pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
-#'                 litter = paste('Litter', rep(11:22, each = 4)),
-#'                 tx = rep(rep(c('vac', 'con'), each = 2), 12))
-#' a[a$tx == 'vac', 'lung'] <-  rnorm(24, 5, 1.3)
-#' a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
+#' a <- data.frame(room = paste("Room", rep(c("W", "Z"), each = 24)),
+#'                 pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+#'                 litter = paste("Litter", rep(11:22, each = 4)),
+#'                 tx = rep(rep(c("vac", "con"), each = 2), 12))
+#' a[a$tx == "vac", "lung"] <-  rnorm(24, 5, 1.3)
+#' a[a$tx == "con", "lung"] <- rnorm(24, 7, 1.3)
 #' a
 #'
 #' formula <- lung ~ tx + room / pen / litter
 #' nboot <- 10000
 #' boot.cluster <- TRUE
 #' boot.unit <- TRUE
-#' which.factors <- c('All', 'room', 'pen', 'litter')
+#' which.factors <- c("All", "room", "pen", "litter")
 #'
 #' system.time(test1 <- MFhBoot(formula, a,
 #'                             nboot = 10000,
@@ -126,7 +126,7 @@ MFhBoot <- function(formula, data,
   #    Note that depending on which bootstrap incidence, this may not be a
   #    complete w for a unique core node.
   #
-  # u = w - nx(nx + 1)/2. The value on the rhs of minus is constant regardless
+  # u = w - nx(nx + 1) / 2. The value on the rhs of minus is constant regardless
   #    of boot.unit. As the value of "w" changes due to sampling when
   #    isTRUE(boot.unit), so will "u" by the same amount. Note that for
   #    bootstrap cases where a unique core node is included > 1x, the value
@@ -242,7 +242,7 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' @param x output from [MFhBoot]
 #' @param which.factor one or more grouping variable(s) of interest. This can be
 #'   any of the core or nest variables from the data set. A MF value will be
-#'   calculated for each level of the variable(s) specified. Default is 'All',
+#'   calculated for each level of the variable(s) specified. Default is "All",
 #'   to sum over entire tree.
 #' @param alpha Passed to `emp_hpd` to calculate eq tailed upper and high
 #'   lower of mitigated fraction
@@ -267,26 +267,26 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' @author [MF-package]
 #' @examples
 #' set.seed(76153)
-#' a <- data.frame(room = paste('Room', rep(c('W','Z'), each = 24)),
-#'                 pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
-#'                 litter = paste('Litter', rep(11:22, each = 4)),
-#'                 tx = rep(rep(c('vac', 'con'), each = 2), 12))
-#' a[a$tx == 'vac', 'lung'] <- rnorm(24, 5, 1.3)
-#' a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
+#' a <- data.frame(room = paste("Room", rep(c("W", "Z"), each = 24)),
+#'                 pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+#'                 litter = paste("Litter", rep(11:22, each = 4)),
+#'                 tx = rep(rep(c("vac", "con"), each = 2), 12))
+#' a[a$tx == "vac", "lung"] <- rnorm(24, 5, 1.3)
+#' a[a$tx == "con", "lung"] <- rnorm(24, 7, 1.3)
 #' a
 #'
 #' formula <- lung ~ tx + room / pen / litter
 #' nboot <- 10000
 #' boot.cluster <- TRUE
 #' boot.unit <- TRUE
-#' which.factors <- c('All', 'room', 'pen', 'litter')
+#' which.factors <- c("All", "room", "pen", "litter")
 #'
 #' #################
 #'
 #' test1 <- MFhBoot(formula, a,
 #'                  nboot = 10000,
 #'                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
-#' MFnestBoot(test1, c('All', 'litter'))
+#' MFnestBoot(test1, c("All", "litter"))
 #'
 #' \dontrun{
 #' system.time(test2 <- MFnestBoot(test1, which.factors))
