@@ -22,32 +22,22 @@ control or reference group to which \code{compare[2]} is compared.}
 }
 \value{
 A \link{mfhierdata} object, which is a list of three items.
-\cr \describe{
-
+\describe{
 \item{coreTbl}{A \link[dplyr:reexports]{dplyr::tibble} with one row for each unique
 core level showing values for:
-
-\itemize{
-
-\item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations
-for each treatment level in the core level.
-
-\item \emph{con}\code{_medResp} & \emph{vac}\code{_medResp} - median of the
-y continuous response for each treatment level.
-
-\item \code{n1n2} - product of the counts, \emph{con}\code{_n} *
-\emph{vac}\code{_n}.
-
-\item \code{w} - Wilcoxon statistic
-
-\item \code{u} - Mann-Whitney statistic
-
+\describe{
+\item{\code{con_n} & \code{vac_n}}{counts of observations for each treatment level
+in the core level.}
+\item{\code{con_medResp} & \code{vac_medResp}}{median of the \code{y} continuous
+response for each treatment level.}
+\item{\code{n1n2}}{product of the counts, \code{con_n * vac_n}.}
+\item{\code{w}}{Wilcoxon statistic}
+\item{\code{u}}{Mann-Whitney statistic}
+}
 }
 
-}
-
-\item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data
-used for calculations.}
+\item{data}{A \link[dplyr:reexports]{dplyr::tibble} of the restructured input data used for
+calculations.}
 
 \item{compare}{The compare variables as input by user.}
 
@@ -64,13 +54,13 @@ hierarchial tree. Nest variables are those above the core.
 }
 \examples{
 a <- data.frame(
- room = paste('Room', rep(c('W','Z'), each=24)),
- pen = paste('Pen', rep(LETTERS[1:6], each=8)),
- litter = paste('Litter', rep(11:22, each=4)),
- tx = rep(rep(c('vac','con'), each=2), 12))
+ room   = paste('Room', rep(c('W','Z'), each = 24)),
+ pen    = paste('Pen', rep(LETTERS[1:6], each = 8)),
+ litter = paste('Litter', rep(11:22, each = 4)),
+ tx     = rep(rep(c('vac','con'), each = 2), 12))
 set.seed(76153)
-a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
-a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
+a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
 
 aCore <- MFh(lung ~ tx + room / pen / litter, a)
 aCore

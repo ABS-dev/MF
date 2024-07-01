@@ -5,13 +5,13 @@
 #'   density intervals are estimated by selecting the shortest of all possible
 #'   intervals.
 #' @title Bootstrap MF CI from clustered data
-#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a
+#' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
-#' @param data Data frame. See \code{Note} for handling of input data with more
+#' @param data Data frame. See `Note` for handling of input data with more
 #'   than two levels.
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is
-#'   the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - `compare[1]` is
+#'   the control or reference group to which `compare[2]` is compared
 #' @param boot.cluster Boolean whether to resample the clusters.
 #' @param boot.unit Boolean whether to resample the units within cluster.
 #' @param b Number of bootstrap samples to take with each cycle
@@ -22,18 +22,21 @@
 #'   statistic.
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
-#'   to \code{set.seed}.
+#'   to `set.seed`.
 #' @return a [mfbootcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
-#' associated with unused treatment levels will be removed. \cr Factor levels
-#' for treatments not present in the input data will be ignored. \cr Clusters
-#' with missing treatments will be excluded. See
-#' [mfbootcluster-class] or use \code{trace.it} to identify excluded
-#' clusters.
+#'   associated with unused treatment levels will be removed.
+#'
+#'   Factor levels for treatments not present in the input data will be ignored.
+#'
+#'   Clusters with missing treatments will be excluded. See
+#'   [mfbootcluster-class] or use `trace.it` to identify excluded clusters.
 #' @references Siev D. (2005). An estimator of intervention effect on disease
-#'   severity. \emph{Journal of Modern Applied Statistical Methods.}
-#'   \bold{4:500--508}\cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
-#'   the Bootstrap.} Chapman and Hall, New York, 1993.
+#'   severity. *Journal of Modern Applied Statistical Methods.*
+#'   **4:500--508**
+#'
+#'   Efron B, Tibshirani RJ. *An Introduction to the Bootstrap.* Chapman and
+#'   Hall, New York, 1993.
 #' @author [MF-package]
 #' @examples
 #' \dontrun{

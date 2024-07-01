@@ -65,11 +65,12 @@ intervals.
 }
 \note{
 If input data contains more than two levels of treatment, rows
-associated with unused treatment levels will be removed. \cr Factor levels
-for treatments not present in the input data will be ignored. \cr Clusters
-with missing treatments will be excluded. See
-\linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded
-clusters.
+associated with unused treatment levels will be removed.
+
+Factor levels for treatments not present in the input data will be ignored.
+
+Clusters with missing treatments will be excluded. See
+\linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded clusters.
 }
 \examples{
 \dontrun{
@@ -94,8 +95,10 @@ MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
 severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508}\cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
-the Bootstrap.} Chapman and Hall, New York, 1993.
+\strong{4:500--508}
+
+Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and
+Hall, New York, 1993.
 }
 \author{
 \link{MF-package}

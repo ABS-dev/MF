@@ -25,9 +25,10 @@ Estimates the subject components of the mitigated fraction.
 The mitigated fraction is an estimator that quantifies an intervention's
 effect on reducing the severity of a condition. Since its units are on the
 probability scale, it is often a good idea to accompany it with an estimator
-on the original scale of measurement. \cr \cr The subject components are the
-individual contributions of the treated subjects to \emph{MF}, which is the
-average of the subject components.
+on the original scale of measurement.
+
+The subject components are the individual contributions of the treated
+subjects to \emph{MF}, which is the average of the subject components.
 }
 \examples{
 x <- MFSubj(lesion ~ group, calflung)
@@ -57,7 +58,7 @@ mean(x$subj[,'mf.j'])
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
 severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508}
+\strong{4:500--508}
 }
 \author{
 \link{MF-package}

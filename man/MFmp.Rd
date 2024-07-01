@@ -56,7 +56,7 @@ MFmp(x = c(12, 12, 2))
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
 severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508}
+\strong{4:500--508}
 }
 \seealso{
 \linkS4class{mfmp}

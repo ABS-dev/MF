@@ -44,22 +44,23 @@ summation. Default is 'All', to sum over entire tree.}
 \item{alpha}{Passed to \code{emp_hpd} to calculate high tailed upper and high
 tailed lower of mitigated fraction.}
 
-\item{seed}{Passed to \link{MFhBoot} to to initialize random number
-generator for reproducibility.}
+\item{seed}{Passed to \link{MFhBoot} to to initialize random number generator for
+reproducibility.}
 }
 \value{
-A list with the following elements: \cr \cr \itemize{ \item
-\strong{MFhBoot} as output from \link{MFhBoot}. \item
-\strong{MFnestBoot} as output from \link{MFnestBoot}. }
+A list with the following elements:
+\itemize{
+\item \strong{MFhBoot} as output from \link{MFhBoot}.
+\item \strong{MFnestBoot} as output from \link{MFnestBoot}.
+}
 }
 \description{
-Combines \link{MFhBoot} and \link{MFnestBoot} into
-a single function.
+Combines \link{MFhBoot} and \link{MFnestBoot} into a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes
-of the hierarchical tree. \code{Nest} variables are those above the core.
-\code{All} refers to a summary of the entire tree.
+\code{Core} variable is the variable corresponding to the lowest nodes of
+the hierarchical tree. \code{Nest} variables are those above the core. \code{All}
+refers to a summary of the entire tree.
 }
 \examples{
 a <- data.frame(

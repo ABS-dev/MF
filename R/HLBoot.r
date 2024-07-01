@@ -12,8 +12,8 @@
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - `compare[1]` is
-#'   the control or reference group to which `compare[2]` is compared
+#' @param compare Text vector stating the factor levels - `compare[1]` is the
+#'   control or reference group to which `compare[2]` is compared
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
@@ -24,15 +24,19 @@
 #'   statistics.
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
-#'   to \code{set.seed}.
+#'   to `set.seed`.
 #' @return a [mfhlboot-class] data object
 #' @seealso [mfhlboot-class]
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
-#'   rank tests. **Annals of Mathematical Statistics.** *34:598--611*.
-#'   \cr \cr Siev D, (2005). An estimator of intervention effect on disease
-#'   severity. **Journal of Modern Applied Statistical Methods.**
-#'   \bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. **An Introduction to
-#'   the Bootstrap.** Chapman and Hall, New York, 1993.
+#'   rank tests. *Annals of Mathematical Statistics.* **34:598--611**.
+#'
+#'
+#'   Siev D, (2005). An estimator of intervention effect on disease severity.
+#'   *Journal of Modern Applied Statistical Methods.*
+#'   **4:500--508**.
+#'
+#'   Efron B, Tibshirani RJ. *An Introduction to the Bootstrap.* Chapman and
+#'   Hall, New York, 1993.
 #' @author [MF-package]
 #' @examples
 #' HLBoot(lesion~group, calflung, seed = 12345)

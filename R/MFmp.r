@@ -1,15 +1,15 @@
 
 #' @description Estimates mitigated fraction from matched pairs.
-#' @details Estimates \emph{MF} from matched pairs by the difference of
+#' @details Estimates *MF* from matched pairs by the difference of
 #'   multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The
 #'   trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
 #' @title Mitigated fraction from matched pairs
-#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a
+#' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is
-#'   the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - `compare[1]` is
+#'   the control or reference group to which `compare[2]` is compared
 #' @param x Trinomial vector \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma
 #'   I(x>y)\}}
 #' @param alpha Complement of the confidence level.
@@ -22,8 +22,8 @@
 #' @return a [mfmp-class] data object
 #' @seealso [mfmp-class]
 #' @references Siev D. (2005). An estimator of intervention effect on disease
-#'   severity. \emph{Journal of Modern Applied Statistical Methods.}
-#'   \bold{4:500--508}
+#'   severity. *Journal of Modern Applied Statistical Methods.*
+#'   **4:500--508**
 #' @author [MF-package]
 #' @examples
 #' MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))

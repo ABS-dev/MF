@@ -73,8 +73,10 @@ MFBoot(lesion~group, calflung, seed = 12345)
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
 severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508} \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
-the Bootstrap.} Chapman and Hall, New York, 1993.
+\strong{4:500--508}
+
+Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and
+Hall, New York, 1993.
 }
 \seealso{
 \linkS4class{mfboot}

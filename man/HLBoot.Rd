@@ -25,8 +25,8 @@ factor indicating the clusters.}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
-the control or reference group to which \code{compare[2]} is compared}
+\item{compare}{Text vector stating the factor levels - \code{compare[1]} is the
+control or reference group to which \code{compare[2]} is compared}
 
 \item{b}{Number of bootstrap samples to take with each cycle}
 
@@ -113,11 +113,14 @@ HLBoot(lesion~group, calflung, seed = 12345)
 }
 \references{
 Hodges JL, Lehmann EL, (1963). Estimates of location based on
-rank tests. \strong{Annals of Mathematical Statistics.} \emph{34:598--611}.
-\cr \cr Siev D, (2005). An estimator of intervention effect on disease
-severity. \strong{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. \strong{An Introduction to
-the Bootstrap.} Chapman and Hall, New York, 1993.
+rank tests. \emph{Annals of Mathematical Statistics.} \strong{34:598--611}.
+
+Siev D, (2005). An estimator of intervention effect on disease severity.
+\emph{Journal of Modern Applied Statistical Methods.}
+\strong{4:500--508}.
+
+Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and
+Hall, New York, 1993.
 }
 \seealso{
 \linkS4class{mfhlboot}

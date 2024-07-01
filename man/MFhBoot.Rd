@@ -40,20 +40,14 @@ TRUE, some trees have all the cores while others only have a subset.}
 to \code{set.seed}.}
 }
 \value{
-A list with the following elements: \cr \cr
-
+A list with the following elements:
 \describe{
-
 \item{bootmfh}{Rank table for the bootstrapped values as output from
-\link{MFh}. Includes a new \code{bootID} variable to distinguish
-each bootstrapped incidence.}
-
+\link{MFh}. Includes a new \code{bootID} variable to distinguish each bootstrapped
+incidence.}
 \item{clusters}{Table of unique nodes with an ID.}
-
 \item{compare}{Compare vector as specified by user.}
-
 \item{mfh}{MFh run on original data input.}
-
 }
 }
 \description{

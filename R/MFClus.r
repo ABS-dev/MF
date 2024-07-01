@@ -4,25 +4,26 @@
 #' are excluded if they do not include both treatments.
 #'
 #' @title Clustered mitigated fraction
-#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a
+#' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
-#' @param data Data frame.  See \code{Note} for handling of input data with more
+#' @param data Data frame.  See `Note` for handling of input data with more
 #'   than two levels.
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is
-#'   the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - `compare[1]` is
+#'   the control or reference group to which `compare[2]` is compared
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
 #' @return a [mfcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
-#' associated with unused treatment levels will be removed. \cr Factor levels
-#' for treatments not present in the input data will be ignored. \cr Clusters
-#' with missing treatments will be excluded. See
-#' [mfbootcluster-class] or use \code{trace.it} to identify excluded
-#' clusters.
+#'   associated with unused treatment levels will be removed.
+#'
+#'   Factor levels for treatments not present in the input data will be ignored.
+#'
+#'   Clusters with missing treatments will be excluded. See
+#'   [mfbootcluster-class] or use `trace.it` to identify excluded clusters.
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease
-#'   severity. \emph{Journal of Modern Applied Statistical Methods.}
-#'   \bold{4:500--508}
+#'   severity. *Journal of Modern Applied Statistical Methods.*
+#'   **4:500--508**
 #' @author [MF-package]
 #' @seealso [mfcluster-class]
 #' @examples

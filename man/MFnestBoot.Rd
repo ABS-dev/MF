@@ -18,28 +18,22 @@ to sum over entire tree.}
 lower of mitigated fraction}
 }
 \value{
-A list with the following elements: \cr \describe{
+A list with the following elements:
 
+\describe{
 \item{mfnest_details}{The MF and summary statistics as calculated for each
 bootstrap event. Variables as in \link{MFnest} output.}
 \item{mfnest_summary}{Statistical summary of bootstrapped MF with each
 unique level of a core or nest variable passed to \code{which.factor} as a
-row. Other variables include: \cr \itemize{
-
-\item \code{median} Median of MFs from all of the bootstrap events.
-
-\item \code{etlower} Lower value of equal tailed range.
-
-\item \code{etupper} Upper value of equal tailed range.
-
-\item \code{hdlower} Lower value of the highest posterior density range.
-
-\item \code{hdupper} Upper value of the highest posterior density range.
-
-\item \code{mf.obs} MF calculated from data using \link{MFh}.
-
+row. Other variables include:
+\describe{
+\item{\code{median}}{Median of MFs from all of the bootstrap events.}
+\item{\code{etlower}}{Lower value of equal tailed range.}
+\item{\code{etupper}}{Upper value of equal tailed range.}
+\item{\code{hdlower}}{Lower value of the highest posterior density range.}
+\item{\code{hdupper}}{Upper value of the highest posterior density range.}
+\item{\code{mf.obs}}{MF calculated from data using \link{MFh}.}
 }}
-
 }
 }
 \description{

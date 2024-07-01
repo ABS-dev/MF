@@ -7,37 +7,28 @@
 MFnest(Y, which.factor = "All")
 }
 \arguments{
-\item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl}
-output from \link{MFh} or returned object from \url{MFh}.}
+\item{Y}{rank table (tibble or data.frame), structured as \verb{$coreTbl} output
+from \link{MFh} or returned object from \url{MFh}.}
 
 \item{which.factor}{one or more grouping variable(s) of interest. This can be
-any of the core or nest variables from the data set. If none or \code{All}
-is specified, a summary MF will be calculated for the whole tree.}
+any of the core or nest variables from the data set. If none or \code{All} is
+specified, a summary MF will be calculated for the whole tree.}
 }
 \value{
 A tibble with each unique level of a variable as a row. Other values
-include: \cr
-
+include:
 \describe{
-
 \item{\code{MF}}{Mitigated fraction for the particular level of the
 variable in this row.}
-
-\item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
-of \link{mfhierdata} object output by \link{MFh} for this
-particular variable-level combination.}
-
-\item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
-\link{mfhierdata} object output by \link{MFh} for this
-particular variable-level combination.}
-
-\item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
-\link{mfhierdata} object output by \link{MFh} for this
-particular variable-level combination.}
-
-\item{\code{_medResp}}{Median of observed responses for each comparison
-group for this particular variable-level combination.}
-
+\item{\code{N1N2}}{Sum of the \code{n1n2} variable in \verb{$coreTbl} field of
+\link{mfhierdata} object output by \link{MFh} for this particular variable-level
+combination.}
+\item{\code{U}}{Sum of u variable in \verb{$coreTbl} field of \link{mfhierdata} object
+output by \link{MFh} for this particular variable-level combination.}
+\item{\verb{_N}}{Sum of the \verb{_n} variable in \verb{$coreTbl} field of \link{mfhierdata}
+object output by \link{MFh} for this particular variable-level combination.}
+\item{\verb{_medResp}}{Median of observed responses for each comparison group
+for this particular variable-level combination.}
 }
 }
 \description{

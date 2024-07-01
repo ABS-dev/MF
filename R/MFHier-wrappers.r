@@ -1,8 +1,7 @@
 #' @name MFClusHier
 #' @title MFClusHier
 #' @description Calculate mitigated fraction directly from hierarchial nested
-#'   data. Combines [MFh] and [MFnest] into a single
-#'   function.
+#'   data. Combines [MFh] and [MFnest] into a single function.
 #' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous
 #'   response, x is a factor with two levels of treatment, and a/b/c are
 #'   grouping variables corresponding to the clusters. Nesting is assumed to be
@@ -16,12 +15,14 @@
 #' @param which.factor one or more variable(s) of interest. This can be any of
 #'   the core or nest variables from the data set. If none or NULL is specified,
 #'   MF will be calculated for the whole tree.
-#' @return A list with the following elements: \cr \cr \itemize{ \item
-#'   \strong{MFh} as output from [MFh]. \item \strong{MFnest} as
-#'   output from [MFnest]. }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes
-#'   of the hierarchical tree. \code{Nest} variables are those above the core.
-#'   \code{All} refers to a summary of the entire tree.
+#' @return A list with the following elements:
+#' \itemize{
+#'   \item **MFh** as output from [MFh].
+#'   \item **MFnest** as output from [MFnest].
+#' }
+#' @note `Core` variable is the variable corresponding to the lowest nodes of
+#'   the hierarchical tree. `Nest` variables are those above the core. `All`
+#'   refers to a summary of the entire tree.
 #' @export
 #' @seealso [MFh], [MFnest]
 #' @author [MF-package]
@@ -51,8 +52,7 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 
 #' @title MFClusBootHier
 #' @name MFClusBootHier
-#' @description Combines [MFhBoot] and [MFnestBoot] into
-#'   a single function.
+#' @description Combines [MFhBoot] and [MFnestBoot] into a single function.
 #' @param formula formula Formula of the form y ~ x + a/b/c, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and a/b/c
 #'   are grouping variables corresponding to the clusters. Nesting is assumed to
@@ -70,16 +70,18 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   TRUE, some trees have all the cores while others only have a subset.
 #' @param which.factor Which variables to include in the mitigated fraction
 #'   summation. Default is 'All', to sum over entire tree.
-#' @param alpha Passed to \code{emp_hpd} to calculate high tailed upper and high
+#' @param alpha Passed to `emp_hpd` to calculate high tailed upper and high
 #'   tailed lower of mitigated fraction.
-#' @param seed Passed to [MFhBoot] to to initialize random number
-#'   generator for reproducibility.
-#' @return A list with the following elements: \cr \cr \itemize{ \item
-#'   \strong{MFhBoot} as output from [MFhBoot]. \item
-#'   \strong{MFnestBoot} as output from [MFnestBoot]. }
-#' @note \code{Core} variable is the variable corresponding to the lowest nodes
-#'   of the hierarchical tree. \code{Nest} variables are those above the core.
-#'   \code{All} refers to a summary of the entire tree.
+#' @param seed Passed to [MFhBoot] to to initialize random number generator for
+#'   reproducibility.
+#' @return A list with the following elements:
+#' \itemize{
+#'  \item **MFhBoot** as output from [MFhBoot].
+#'  \item **MFnestBoot** as output from [MFnestBoot].
+#' }
+#' @note `Core` variable is the variable corresponding to the lowest nodes of
+#'   the hierarchical tree. `Nest` variables are those above the core. `All`
+#'   refers to a summary of the entire tree.
 #' @seealso [MFhBoot], [MFnestBoot].
 #' @author [MF-package]
 #' @export

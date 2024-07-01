@@ -31,11 +31,12 @@ are excluded if they do not include both treatments.
 }
 \note{
 If input data contains more than two levels of treatment, rows
-associated with unused treatment levels will be removed. \cr Factor levels
-for treatments not present in the input data will be ignored. \cr Clusters
-with missing treatments will be excluded. See
-\linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded
-clusters.
+associated with unused treatment levels will be removed.
+
+Factor levels for treatments not present in the input data will be ignored.
+
+Clusters with missing treatments will be excluded. See
+\linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded clusters.
 }
 \examples{
 \dontrun{
@@ -77,7 +78,7 @@ MFClus(lesion ~ group + cluster(litter), piglung)
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
 severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508}
+\strong{4:500--508}
 }
 \seealso{
 \linkS4class{mfcluster}

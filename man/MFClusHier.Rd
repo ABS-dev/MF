@@ -25,19 +25,20 @@ the core or nest variables from the data set. If none or NULL is specified,
 MF will be calculated for the whole tree.}
 }
 \value{
-A list with the following elements: \cr \cr \itemize{ \item
-\strong{MFh} as output from \link{MFh}. \item \strong{MFnest} as
-output from \link{MFnest}. }
+A list with the following elements:
+\itemize{
+\item \strong{MFh} as output from \link{MFh}.
+\item \strong{MFnest} as output from \link{MFnest}.
+}
 }
 \description{
 Calculate mitigated fraction directly from hierarchial nested
-data. Combines \link{MFh} and \link{MFnest} into a single
-function.
+data. Combines \link{MFh} and \link{MFnest} into a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes
-of the hierarchical tree. \code{Nest} variables are those above the core.
-\code{All} refers to a summary of the entire tree.
+\code{Core} variable is the variable corresponding to the lowest nodes of
+the hierarchical tree. \code{Nest} variables are those above the core. \code{All}
+refers to a summary of the entire tree.
 }
 \examples{
 a <- data.frame(

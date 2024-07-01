@@ -17,21 +17,15 @@
 #' @param boot.cluster Boolean whether to sample which cores are present. If
 #'   TRUE, some trees have all the cores while others only have a subset.
 #' @param seed to initialize random number generator for reproducibility. Passed
-#'   to \code{set.seed}.
-#' @return A list with the following elements: \cr \cr
-#'
+#'   to `set.seed`.
+#' @return A list with the following elements:
 #'   \describe{
-#'
 #'   \item{bootmfh}{Rank table for the bootstrapped values as output from
-#'   [MFh]. Includes a new \code{bootID} variable to distinguish
-#'   each bootstrapped incidence.}
-#'
+#'   [MFh]. Includes a new `bootID` variable to distinguish each bootstrapped
+#'   incidence.}
 #'   \item{clusters}{Table of unique nodes with an ID.}
-#'
 #'   \item{compare}{Compare vector as specified by user.}
-#'
 #'   \item{mfh}{MFh run on original data input.}
-#'
 #'   }
 #' @seealso [MFClusBootHier], [MFnestBoot]
 #' @author [MF-package]
@@ -250,31 +244,25 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #'   any of the core or nest variables from the data set. A MF value will be
 #'   calculated for each level of the variable(s) specified. Default is 'All',
 #'   to sum over entire tree.
-#' @param alpha Passed to \code{emp_hpd} to calculate eq tailed upper and high
+#' @param alpha Passed to `emp_hpd` to calculate eq tailed upper and high
 #'   lower of mitigated fraction
-#' @return A list with the following elements: \cr \describe{
+#' @return A list with the following elements:
 #'
+#' \describe{
 #'   \item{mfnest_details}{The MF and summary statistics as calculated for each
 #'   bootstrap event. Variables as in [MFnest] output.}
 #'   \item{mfnest_summary}{Statistical summary of bootstrapped MF with each
-#'   unique level of a core or nest variable passed to \code{which.factor} as a
-#'   row. Other variables include: \cr \itemize{
-#'
-#'   \item \code{median} Median of MFs from all of the bootstrap events.
-#'
-#'   \item \code{etlower} Lower value of equal tailed range.
-#'
-#'   \item \code{etupper} Upper value of equal tailed range.
-#'
-#'   \item \code{hdlower} Lower value of the highest posterior density range.
-#'
-#'   \item \code{hdupper} Upper value of the highest posterior density range.
-#'
-#'   \item \code{mf.obs} MF calculated from data using [MFh].
-#'
+#'   unique level of a core or nest variable passed to `which.factor` as a
+#'   row. Other variables include:
+#'   \describe{
+#'     \item{`median`}{Median of MFs from all of the bootstrap events.}
+#'     \item{`etlower`}{Lower value of equal tailed range.}
+#'     \item{`etupper`}{Upper value of equal tailed range.}
+#'     \item{`hdlower`}{Lower value of the highest posterior density range.}
+#'     \item{`hdupper`}{Upper value of the highest posterior density range.}
+#'     \item{`mf.obs`}{MF calculated from data using [MFh].}
 #'   }}
-#'
-#'   }
+#' }
 #' @seealso [MFClusBootHier], [MFhBoot]
 #' @author [MF-package]
 #' @examples

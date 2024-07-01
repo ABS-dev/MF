@@ -3,21 +3,22 @@
 #' The mitigated fraction is an estimator that quantifies an intervention's
 #' effect on reducing the severity of a condition. Since its units are on the
 #' probability scale, it is often a good idea to accompany it with an estimator
-#' on the original scale of measurement. \cr \cr The subject components are the
-#' individual contributions of the treated subjects to \emph{MF}, which is the
-#' average of the subject components.
+#' on the original scale of measurement.
+#'
+#' The subject components are the individual contributions of the treated
+#' subjects to *MF*, which is the average of the subject components.
 #'
 #' @title Subject components of mitigated fraction
-#' @param formula Formula of the form \code{y ~ x}, where y is a continuous
+#' @param formula Formula of the form `y ~ x`, where y is a continuous
 #'   response and x is a factor with two levels
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is
-#'   the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - `compare[1]` is
+#'   the control or reference group to which `compare[2]` is compared
 #' @return a [mfcomponents-class] data object
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease
-#'   severity. \emph{Journal of Modern Applied Statistical Methods.}
-#'   \bold{4:500--508}
+#'   severity. *Journal of Modern Applied Statistical Methods.*
+#'   **4:500--508**
 #' @author [MF-package]
 #' @examples
 #' x <- MFSubj(lesion ~ group, calflung)

@@ -11,33 +11,22 @@
 #' @param compare Text vector stating the factor levels - `compare[1]` is the
 #'   control or reference group to which `compare[2]` is compared.
 #' @return A [mfhierdata] object, which is a list of three items.
-#'   \cr \describe{
-#'
-#'
+#'   \describe{
 #'   \item{coreTbl}{A [dplyr::tibble] with one row for each unique
 #'   core level showing values for:
-#'
-#'   \itemize{
-#'
-#'   \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations
-#'   for each treatment level in the core level.
-#'
-#'   \item \emph{con}\code{_medResp} & \emph{vac}\code{_medResp} - median of the
-#'   y continuous response for each treatment level.
-#'
-#'   \item \code{n1n2} - product of the counts, \emph{con}\code{_n} *
-#'   \emph{vac}\code{_n}.
-#'
-#'   \item \code{w} - Wilcoxon statistic
-#'
-#'   \item \code{u} - Mann-Whitney statistic
-#'
+#'   \describe{
+#'     \item{`con_n` & `vac_n`}{counts of observations for each treatment level
+#'     in the core level.}
+#'     \item{`con_medResp` & `vac_medResp`}{median of the `y` continuous
+#'     response for each treatment level.}
+#'     \item{`n1n2`}{product of the counts, `con_n * vac_n`.}
+#'     \item{`w`}{Wilcoxon statistic}
+#'     \item{`u`}{Mann-Whitney statistic}
+#'   }
 #'   }
 #'
-#'   }
-#'
-#'   \item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data
-#'   used for calculations.}
+#'   \item{data}{A [dplyr::tibble] of the restructured input data used for
+#'     calculations.}
 #'
 #'   \item{compare}{The compare variables as input by user.}
 #'
@@ -50,13 +39,13 @@
 #'   [mfhierdata] for returned object. [MFClusHier] for a wrapper.
 #' @examples
 #' a <- data.frame(
-#'  room = paste('Room', rep(c('W','Z'), each=24)),
-#'  pen = paste('Pen', rep(LETTERS[1:6], each=8)),
-#'  litter = paste('Litter', rep(11:22, each=4)),
-#'  tx = rep(rep(c('vac','con'), each=2), 12))
+#'  room   = paste('Room', rep(c('W','Z'), each = 24)),
+#'  pen    = paste('Pen', rep(LETTERS[1:6], each = 8)),
+#'  litter = paste('Litter', rep(11:22, each = 4)),
+#'  tx     = rep(rep(c('vac','con'), each = 2), 12))
 #' set.seed(76153)
-#' a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
-#' a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
+#' a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
+#' a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
 #'
 #' aCore <- MFh(lung ~ tx + room / pen / litter, a)
 #' aCore
@@ -135,34 +124,25 @@ globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
-#' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl}
-#'   output from [MFh] or returned object from [MFh]().
+#' @param Y rank table (tibble or data.frame), structured as `$coreTbl` output
+#'   from [MFh] or returned object from [MFh]().
 #' @param which.factor one or more grouping variable(s) of interest. This can be
-#'   any of the core or nest variables from the data set. If none or \code{All}
-#'   is specified, a summary MF will be calculated for the whole tree.
+#'   any of the core or nest variables from the data set. If none or `All` is
+#'   specified, a summary MF will be calculated for the whole tree.
 #' @return A tibble with each unique level of a variable as a row. Other values
-#'   include: \cr
-#'
+#'   include:
 #'   \describe{
-#'
-#'   \item{\code{MF}}{Mitigated fraction for the particular level of the
+#'   \item{`MF`}{Mitigated fraction for the particular level of the
 #'   variable in this row.}
-#'
-#'   \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
-#'   of [mfhierdata] object output by [MFh] for this
-#'   particular variable-level combination.}
-#'
-#'   \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
-#'   [mfhierdata] object output by [MFh] for this
-#'   particular variable-level combination.}
-#'
-#'   \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
-#'   [mfhierdata] object output by [MFh] for this
-#'   particular variable-level combination.}
-#'
-#'   \item{\code{_medResp}}{Median of observed responses for each comparison
-#'   group for this particular variable-level combination.}
-#'
+#'   \item{`N1N2`}{Sum of the `n1n2` variable in `$coreTbl` field of
+#'   [mfhierdata] object output by [MFh] for this particular variable-level
+#'   combination.}
+#'   \item{`U`}{Sum of u variable in `$coreTbl` field of [mfhierdata] object
+#'   output by [MFh] for this particular variable-level combination.}
+#'   \item{`_N`}{Sum of the `_n` variable in `$coreTbl` field of [mfhierdata]
+#'   object output by [MFh] for this particular variable-level combination.}
+#'   \item{`_medResp`}{Median of observed responses for each comparison group
+#'   for this particular variable-level combination.}
 #'   }
 #' @note Core variable is the variable corresponding to the lowest nodes of the
 #'   hierarchial tree. Nest variables are those above the core. All refers to a
@@ -278,9 +258,8 @@ globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' @importFrom tidyr gather spread
 #' @importFrom forcats fct_relevel
 #' @importFrom stats median
-#' @importFrom dplyr select as_tibble sym mutate_if mutate bind_rows
-#'   group_by summarize filter ungroup distinct pull rename left_join arrange
-#'   everything
+#' @importFrom dplyr select as_tibble sym mutate_if mutate bind_rows group_by
+#'   summarize filter ungroup distinct pull rename left_join arrange everything
 #' @importFrom rlang ":=" quo_name
 MFnest <- function(Y, which.factor = "All") {
   ## restructure if using output from MFh
