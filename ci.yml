@@ -1,0 +1,29 @@
+# .gitlab-ci.yml
+
+image: rocker/tidyverse:4.3.2
+
+variables:
+  DOCKER_DRIVER: overlay2
+  PKGNAME: "MF"
+
+stages:
+  - build
+  - test
+
+before_script:
+  - echo 'options(repos = c(CRAN = "https://ncahrpackage.usda.net/prod-cran/2024-06-01", internal_packages = "https://ncahrpackage.usda.net/cvb-gitlab/latest"))' > .Rprofile
+  - R -e 'devtools::install_deps(dependencies = TRUE)'
+
+buildbinary:
+  stage: build
+  script:
+    - R -e 'devtools::check(vignettes = FALSE, error_on = "error")'
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+unittests:
+  stage: test
+  script:
+    - r -e 'if (any(as.data.frame(devtools::test())[["failed"]] > 0)) stop("Some tests failed.")'
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH

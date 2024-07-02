@@ -1,5 +1,8 @@
 url: ~
-destination: public/
+destination: docs/
 stemplate:
   bootstrap: 5
-
+repo:
+  url:
+    home:  ttps://github.com/ABS-dev/MF/
+    issue: ttps://github.com/ABS-dev/MF/issues/
