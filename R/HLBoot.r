@@ -25,7 +25,7 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
-#' @return a [mfhlboot-class] data object
+#' @returns a [mfhlboot-class] data object
 #' @seealso [mfhlboot-class]
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
 #'   rank tests. *Annals of Mathematical Statistics.* **34:598--611**.

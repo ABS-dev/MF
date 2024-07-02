@@ -12,25 +12,23 @@ with additional fields \emph{MFstat}, \emph{HLstat}, \emph{QDIFstat}, \emph{QXst
 
 \section{Fields}{
 
-\describe{
-\item{\code{nboot}}{Numeric value specifying number of samples.}
-\item{\code{alpha}}{Numeric value specifying complement of confidence interval.}
-\item{\code{seed}}{Vector of integers specifying seed for pseudo-random number
-generator used.}
-\item{\code{compare}}{Vector of character strings naming groups compared.}
-\item{\code{rng}}{Character string naming type of random number generator.}
-\item{\code{sample}}{The bootstrapped values.}
-\item{\code{MFstat}}{Matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper}
-for Equal Tailed and Highest Density estimates of mitigated fraction (MF).}
-\item{\code{HLstat}}{Matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper}
-for Equal Tailed and Highest Density estimates of Hodge-Lehmann estimator
-(HL).}
-\item{\code{QDIFstat}}{Matrix with columns \emph{observed}, \emph{median}, \emph{lower},
-\emph{upper} for estimates of Quartile Differences.}
-\item{\code{QXstat}}{Matrix with columns \emph{observed}, \emph{median}, \emph{lower},
-\emph{upper} for quartiles of treatments, equal tailed.}
-\item{\code{QYstat}}{Matrix with columns \emph{observed}, \emph{median}, \emph{lower},
-\emph{upper} for quartiles of response, equal tailed.}
+\itemize{
+\item \code{nboot}: Numeric value specifying number of samples.
+\item \code{alpha}: Numeric value specifying complement of confidence interval.
+\item \code{seed}: Vector of integers specifying seed for pseudo-random number generator used.
+\item \code{compare}: Vector of character strings naming groups compared.
+\item \code{rng}: Character string naming type of random number generator.
+\item \code{sample}: The bootstrapped values.
+\item \code{MFstat}: Matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper} for
+Equal Tailed and Highest Density estimates of mitigated fraction (MF).
+\item \code{HLstat}: Matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper} for
+Equal Tailed and Highest Density estimates of Hodge-Lehmann estimator (HL).
+\item \code{QDIFstat}: Matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper} for
+estimates of Quartile Differences.
+\item \code{QXstat}: Matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper} for
+quartiles of treatments, equal tailed.
+\item \code{QYstat}: Matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper} for
+quartiles of response, equal tailed.
 }
 }
 

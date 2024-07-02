@@ -50,8 +50,8 @@ reproducibility.}
 \value{
 A list with the following elements:
 \itemize{
-\item \strong{MFhBoot} as output from \link{MFhBoot}.
-\item \strong{MFnestBoot} as output from \link{MFnestBoot}.
+\item \code{MFhBoot}: as output from \link{MFhBoot}.
+\item \code{MFnestBoot}: as output from \link{MFnestBoot}.
 }
 }
 \description{

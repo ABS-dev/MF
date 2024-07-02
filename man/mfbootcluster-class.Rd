@@ -12,22 +12,21 @@ MFClusBoot
 
 \section{Fields}{
 
-\describe{
-\item{\code{nboot}}{numeric value specifying number of samples}
-\item{\code{alpha}}{numeric value specifying complement of confidence interval}
-\item{\code{seed}}{vector of integers specifying seed for pseudo-random number
-generator used}
-\item{\code{compare}}{vector of character strings naming groups compared}
-\item{\code{rng}}{character string naming type of random number generator}
-\item{\code{stat}}{matrix matrix with columns \emph{observed}, \emph{median}, \emph{lower},
-\emph{upper} for estimates}
-\item{\code{what}}{character vector naming what was resampled: \emph{clusters},
-\emph{units}, \emph{both}}
-\item{\code{excludedClusters}}{character vector naming clusters excluded
-because of missing treatment(s)}
-\item{\code{call}}{the call to \code{MFClusBoot}}
-\item{\code{sample}}{what is this?}
-\item{\code{All}}{Field "All" from MFClus call.}
+\itemize{
+\item \code{nboot}: numeric value specifying number of samples
+\item \code{alpha}: numeric value specifying complement of confidence interval
+\item \code{seed}: vector of integers specifying seed for pseudo-random number generator used
+\item \code{compare}: vector of character strings naming groups compared
+\item \code{rng}: character string naming type of random number generator
+\item \code{stat}: matrix matrix with columns \emph{observed}, \emph{median}, \emph{lower}, \emph{upper}
+for estimates
+\item \code{what}: character vector naming what was resampled: \emph{clusters}, \emph{units},
+\emph{both}
+\item \code{excludedClusters}: character vector naming clusters excluded because of
+missing treatment(s)
+\item \code{call}: the call to \code{MFClusBoot}
+\item \code{sample}: what is this?
+\item \code{All}: Field "All" from MFClus call.
 }
 }
 

@@ -15,11 +15,12 @@
 #' @param which.factor one or more variable(s) of interest. This can be any of
 #'   the core or nest variables from the data set. If none or NULL is specified,
 #'   MF will be calculated for the whole tree.
-#' @return A list with the following elements:
-#' \itemize{
-#'   \item **MFh** as output from [MFh].
-#'   \item **MFnest** as output from [MFnest].
-#' }
+#' @returns A list with the following elements:
+#'
+#' * `MFh`: as output from [MFh].
+#'
+#' * `MFnest`: as output from [MFnest].
+#'
 #' @note `Core` variable is the variable corresponding to the lowest nodes of
 #'   the hierarchical tree. `Nest` variables are those above the core. `All`
 #'   refers to a summary of the entire tree.
@@ -74,11 +75,12 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   tailed lower of mitigated fraction.
 #' @param seed Passed to [MFhBoot] to to initialize random number generator for
 #'   reproducibility.
-#' @return A list with the following elements:
-#' \itemize{
-#'  \item **MFhBoot** as output from [MFhBoot].
-#'  \item **MFnestBoot** as output from [MFnestBoot].
-#' }
+#' @returns A list with the following elements:
+#'
+#' * `MFhBoot`: as output from [MFhBoot].
+#'
+#' * `MFnestBoot`: as output from [MFnestBoot].
+#'
 #' @note `Core` variable is the variable corresponding to the lowest nodes of
 #'   the hierarchical tree. `Nest` variables are those above the core. `All`
 #'   refers to a summary of the entire tree.

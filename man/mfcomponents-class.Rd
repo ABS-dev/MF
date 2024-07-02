@@ -11,12 +11,12 @@ Class mfcomponents is created from output of function MFSubj
 
 \section{Fields}{
 
-\describe{
-\item{\code{mf}}{numeric estimator for mitigated fraction}
-\item{\code{x}}{numeric vector containing responses of group 1}
-\item{\code{y}}{numeric vector containing responses of group 2}
-\item{\code{subj}}{matrix where \code{mf_j}re the subject components}
-\item{\code{compare}}{character vector naming groups being compared}
+\itemize{
+\item \code{mf}: numeric estimator for mitigated fraction
+\item \code{x}: numeric vector containing responses of group 1
+\item \code{y}: numeric vector containing responses of group 2
+\item \code{subj}: matrix where \code{mf_j}re the subject components
+\item \code{compare}: character vector naming groups being compared
 }
 }
 

@@ -19,7 +19,7 @@
 #' @export
 #' @note upper confidence interval is truncated to 1; lower confidence interval
 #'   is truncated to -1. Point estimate of 1.0 indicates complete separation.
-#' @return a [mfmp-class] data object
+#' @returns a [mfmp-class] data object
 #' @seealso [mfmp-class]
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. *Journal of Modern Applied Statistical Methods.*

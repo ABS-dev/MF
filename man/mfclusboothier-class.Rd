@@ -12,9 +12,9 @@ MFClusBootHier.
 
 \section{Fields}{
 
-\describe{
-\item{\code{MFhBoot}}{output from MFhBoot. A list.}
-\item{\code{MFnestBoot}}{output from MFnestBoot. A list.}
+\itemize{
+\item \code{MFhBoot} output from MFhBoot. A list.
+\item \code{MFnestBoot} output from MFnestBoot. A list.
 }
 }
 

@@ -19,7 +19,7 @@
 #' @param trace.it Verbose tracking of the cycles?
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
-#' @return a [mfboot-class] data object
+#' @returns a [mfboot-class] data object
 #' @seealso [mfboot-class]
 #' @references Siev D. (2005). An estimator of intervention effect on disease
 #'   severity. *Journal of Modern Applied Statistical Methods.*

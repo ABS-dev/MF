@@ -11,7 +11,7 @@
 #' @param data Data frame
 #' @param compare Text vector stating the factor levels -- `compare[1]` is
 #'   the control or reference group to which `compare[2]` is compared
-#' @return The estimated mitigated fraction.
+#' @returns The estimated mitigated fraction.
 #' @export
 #' @references Siev D, 2005. An estimator of intervention effect on disease
 #'   severity. *Journal of Modern Applied Statistical Methods.* 4:500-508

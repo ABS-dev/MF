@@ -17,18 +17,18 @@ specified, a summary MF will be calculated for the whole tree.}
 \value{
 A tibble with each unique level of a variable as a row. Other values
 include:
-\describe{
-\item{\code{MF}}{Mitigated fraction for the particular level of the
-variable in this row.}
-\item{\code{N1N2}}{Sum of the \code{n1n2} variable in \verb{$coreTbl} field of
+\itemize{
+\item \code{MF}: Mitigated fraction for the particular level of the
+variable in this row.
+\item \code{N1N2}: Sum of the \code{n1n2} variable in \verb{$coreTbl} field of
 \link{mfhierdata} object output by \link{MFh} for this particular variable-level
-combination.}
-\item{\code{U}}{Sum of u variable in \verb{$coreTbl} field of \link{mfhierdata} object
-output by \link{MFh} for this particular variable-level combination.}
-\item{\verb{_N}}{Sum of the \verb{_n} variable in \verb{$coreTbl} field of \link{mfhierdata}
-object output by \link{MFh} for this particular variable-level combination.}
-\item{\verb{_medResp}}{Median of observed responses for each comparison group
-for this particular variable-level combination.}
+combination.
+\item \code{U}: Sum of u variable in \verb{$coreTbl} field of \link{mfhierdata} object
+output by \link{MFh} for this particular variable-level combination.
+\item \verb{_N}: Sum of the \verb{_n} variable in \verb{$coreTbl} field of \link{mfhierdata}
+object output by \link{MFh} for this particular variable-level combination.
+\item \verb{_medResp}: Median of observed responses for each comparison group
+for this particular variable-level combination.
 }
 }
 \description{

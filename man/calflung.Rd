@@ -8,8 +8,9 @@
 \format{
 a data frame with 50 observations of the following 2 variables, no
 NAs
-\describe{
-\item{\verb{group``\}\{Treatment group. One of con = control or vac = vaccinate \} \\item\{}lesion``}{Fraction of lungs with gross lesions.}
+\itemize{
+\item \code{group}: Treatment group. One of con = control or vac = vaccinate
+\item \code{lesion}: Fraction of lungs with gross lesions.
 }
 }
 \description{

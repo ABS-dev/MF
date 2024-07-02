@@ -10,29 +10,28 @@
 #'   Additional variables will be ignored.
 #' @param compare Text vector stating the factor levels - `compare[1]` is the
 #'   control or reference group to which `compare[2]` is compared.
-#' @return A [mfhierdata] object, which is a list of three items.
-#'   \describe{
-#'   \item{coreTbl}{A [dplyr::tibble] with one row for each unique
-#'   core level showing values for:
-#'   \describe{
-#'     \item{`con_n` & `vac_n`}{counts of observations for each treatment level
-#'     in the core level.}
-#'     \item{`con_medResp` & `vac_medResp`}{median of the `y` continuous
-#'     response for each treatment level.}
-#'     \item{`n1n2`}{product of the counts, `con_n * vac_n`.}
-#'     \item{`w`}{Wilcoxon statistic}
-#'     \item{`u`}{Mann-Whitney statistic}
-#'   }
-#'   }
+#' @returns A [mfhierdata] object, which is a list of three items.
+#' * `coreTbl` A [dplyr::tibble] with one row for each unique core level showing
+#'  values for:
 #'
-#'   \item{data}{A [dplyr::tibble] of the restructured input data used for
-#'     calculations.}
+#'   * `con_n` & `vac_n`: counts of observations for each treatment level
+#'   in the core level.
 #'
-#'   \item{compare}{The compare variables as input by user.}
+#'   * `con_medResp` & `vac_medResp`: median of the `y` continuous
+#'   response for each treatment level.
 #'
-#'   \item{formula}{The formula as input by user.}
+#'   * `n1n2`: product of the counts, `con_n` \eqn{\times} `vac_n`.
 #'
-#'   }
+#'   * `w`: Wilcoxon statistic
+#'
+#'   * `u`: Mann-Whitney statistic
+#'
+#' * `data`: A [dplyr::tibble] of the restructured input data used for
+#' calculations.
+#'
+#' * `compare`: The compare variables as input by user.
+#'
+#' * `formula`: The formula as input by user.
 #' @note Core variable is the variable corresponding to the lowest nodes of the
 #'   hierarchial tree. Nest variables are those above the core.
 #' @seealso [MFnest] for calculation of MF for nest, core and all variables.
@@ -128,21 +127,25 @@ globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
 #' @param which.factor one or more grouping variable(s) of interest. This can be
 #'   any of the core or nest variables from the data set. If none or `All` is
 #'   specified, a summary MF will be calculated for the whole tree.
-#' @return A tibble with each unique level of a variable as a row. Other values
+#' @returns A tibble with each unique level of a variable as a row. Other values
 #'   include:
-#'   \describe{
-#'   \item{`MF`}{Mitigated fraction for the particular level of the
-#'   variable in this row.}
-#'   \item{`N1N2`}{Sum of the `n1n2` variable in `$coreTbl` field of
+#'
+#' * `MF`: Mitigated fraction for the particular level of the
+#'   variable in this row.
+#'
+#' * `N1N2`: Sum of the `n1n2` variable in `$coreTbl` field of
 #'   [mfhierdata] object output by [MFh] for this particular variable-level
-#'   combination.}
-#'   \item{`U`}{Sum of u variable in `$coreTbl` field of [mfhierdata] object
-#'   output by [MFh] for this particular variable-level combination.}
-#'   \item{`_N`}{Sum of the `_n` variable in `$coreTbl` field of [mfhierdata]
-#'   object output by [MFh] for this particular variable-level combination.}
-#'   \item{`_medResp`}{Median of observed responses for each comparison group
-#'   for this particular variable-level combination.}
-#'   }
+#'   combination.
+#'
+#' * `U`: Sum of u variable in `$coreTbl` field of [mfhierdata] object
+#'   output by [MFh] for this particular variable-level combination.
+#'
+#' * `_N`: Sum of the `_n` variable in `$coreTbl` field of [mfhierdata]
+#'   object output by [MFh] for this particular variable-level combination.
+#'
+#' * `_medResp`: Median of observed responses for each comparison group
+#'   for this particular variable-level combination.
+#'
 #' @note Core variable is the variable corresponding to the lowest nodes of the
 #'   hierarchial tree. Nest variables are those above the core. All refers to a
 #'   summary of the entire tree.

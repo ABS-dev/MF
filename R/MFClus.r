@@ -12,7 +12,7 @@
 #' @param compare Text vector stating the factor levels - `compare[1]` is
 #'   the control or reference group to which `compare[2]` is compared
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
-#' @return a [mfcluster-class] data object
+#' @returns a [mfcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
 #'   associated with unused treatment levels will be removed.
 #'

@@ -18,7 +18,7 @@ BugReports: https://github.com/ABS-dev/MF/issues
 LazyLoad: true
 LazyData: true
 Depends:
-  R (>= 4.1.0)
+  R (>= 4.2)
 Imports:
   methods,
   dplyr (>= 0.7.1),

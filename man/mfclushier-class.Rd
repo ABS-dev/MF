@@ -11,9 +11,9 @@ Class mfclushier is created from output of function MFClusHier
 
 \section{Fields}{
 
-\describe{
-\item{\code{MFh}}{output from MFh. A \link{mfhierdata} object.}
-\item{\code{MFnest}}{output from MFnest. A tibble.}
+\itemize{
+\item \code{MFh}: output from MFh. A \link{mfhierdata} object.
+\item \code{MFnest}: output from MFnest. A tibble.
 }
 }
 

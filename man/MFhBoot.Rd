@@ -41,13 +41,13 @@ to \code{set.seed}.}
 }
 \value{
 A list with the following elements:
-\describe{
-\item{bootmfh}{Rank table for the bootstrapped values as output from
+\itemize{
+\item \code{bootmfh}: Rank table for the bootstrapped values as output from
 \link{MFh}. Includes a new \code{bootID} variable to distinguish each bootstrapped
-incidence.}
-\item{clusters}{Table of unique nodes with an ID.}
-\item{compare}{Compare vector as specified by user.}
-\item{mfh}{MFh run on original data input.}
+incidence.
+\item \code{clusters}: Table of unique nodes with an ID.
+\item \code{compare}: Compare vector as specified by user.
+\item \code{mfh}: MFh run on original data input.
 }
 }
 \description{

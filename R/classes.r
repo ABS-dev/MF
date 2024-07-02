@@ -1,6 +1,5 @@
 #' @importFrom methods new setClassUnion setRefClass
 
-
 setClassUnion("characterORNULL", c("character", "NULL"))
 setClassUnion("listORNULL", c("list", "NULL"))
 setClassUnion("numericORNULL", c("numeric", "NULL"))
@@ -13,14 +12,12 @@ setClassUnion("numericORinteger", c("numeric", "integer"))
 #' @description Parent class for package MF data objects.
 #' @docType class
 #' @section Fields:
-#' \describe{
-#'   \item{`nboot`}{numeric value specifying number of samples}
-#'   \item{`alpha`}{numeric value specifying complement of confidence interval}
-#'   \item{`seed`}{vector of integers specifying seed for pseudo-random
-#'   number generator used}
-#'   \item{`compare`}{vector of character strings naming groups compared}
-#'   \item{`rng`}{character string naming type of random number generator}
-#'   }
+#' * `nboot`: numeric value specifying number of samples
+#' * `alpha`: numeric value specifying complement of confidence interval
+#' * `seed`: vector of integers specifying seed for pseudo-random number
+#' generator used
+#' * `compare`: vector of character strings naming groups compared
+#' * `rng`: character string naming type of random number generator
 #' @keywords documentation
 #' @family mf
 #' @author [MF-package]
@@ -36,16 +33,13 @@ mf <- setRefClass("mf", fields = list(nboot = "numeric",
 #'   with the two additional fields *stat* and *stuff*.
 #' @docType class
 #' @section Fields:
-#'   \describe{
-#'   \item{`nboot`}{numeric value specifying number of samples}
-#'   \item{`alpha`}{numeric value specifying complement of confidence interval}
-#'   \item{`seed`}{vector of integers specifying seed for pseudo-random
-#'   number generator used}
-#'   \item{`compare`}{vector of character strings naming groups compared}
-#'   \item{`rng`}{character string naming type of random number generator}
-#'   \item{`sample`}{ what is this?}
-#'   \item{`stat`}{matrix of estimates}
-#' }
+#' * `nboot`: numeric value specifying number of samples
+#' * `alpha`: numeric value specifying complement of confidence interval
+#' * `seed`: vector of integers specifying seed for pseudo-random number generator used
+#' * `compare`: vector of character strings naming groups compared
+#' * `rng`: character string naming type of random number generator
+#' * `sample`:  what is this?
+#' * `stat`: matrix of estimates
 #' @section Contains: [mf-class]
 #' @keywords documentation
 #' @family mf
@@ -61,26 +55,22 @@ mfboot <- setRefClass("mfboot", contains = "mf",
 #'   with additional fields *MFstat*, *HLstat*, *QDIFstat*, *QXstat*, *QYstat*
 #' @docType class
 #' @section Fields:
-#' \describe{
-#'   \item{`nboot`}{Numeric value specifying number of samples.}
-#'   \item{`alpha`}{Numeric value specifying complement of confidence interval.}
-#'   \item{`seed`}{Vector of integers specifying seed for pseudo-random number
-#'   generator used.}
-#'   \item{`compare`}{Vector of character strings naming groups compared.}
-#'   \item{`rng`}{Character string naming type of random number generator.}
-#'   \item{`sample`}{The bootstrapped values.}
-#'   \item{`MFstat`}{Matrix with columns *observed*, *median*, *lower*, *upper*
-#'   for Equal Tailed and Highest Density estimates of mitigated fraction (MF).}
-#'   \item{`HLstat`}{Matrix with columns *observed*, *median*, *lower*, *upper*
-#'   for Equal Tailed and Highest Density estimates of Hodge-Lehmann estimator
-#'    (HL).}
-#'   \item{`QDIFstat`}{Matrix with columns *observed*, *median*, *lower*,
-#'   *upper* for estimates of Quartile Differences.}
-#'   \item{`QXstat`}{Matrix with columns *observed*, *median*, *lower*,
-#'   *upper* for quartiles of treatments, equal tailed.}
-#'   \item{`QYstat`}{Matrix with columns *observed*, *median*, *lower*,
-#'   *upper* for quartiles of response, equal tailed.}
-#' }
+#' * `nboot`: Numeric value specifying number of samples.
+#' * `alpha`: Numeric value specifying complement of confidence interval.
+#' * `seed`: Vector of integers specifying seed for pseudo-random number generator used.
+#' * `compare`: Vector of character strings naming groups compared.
+#' * `rng`: Character string naming type of random number generator.
+#' * `sample`: The bootstrapped values.
+#' * `MFstat`: Matrix with columns *observed*, *median*, *lower*, *upper* for
+#' Equal Tailed and Highest Density estimates of mitigated fraction (MF).
+#' * `HLstat`: Matrix with columns *observed*, *median*, *lower*, *upper* for
+#' Equal Tailed and Highest Density estimates of Hodge-Lehmann estimator (HL).
+#' * `QDIFstat`: Matrix with columns *observed*, *median*, *lower*, *upper* for
+#' estimates of Quartile Differences.
+#' * `QXstat`: Matrix with columns *observed*, *median*, *lower*, *upper* for
+#' quartiles of treatments, equal tailed.
+#' * `QYstat`: Matrix with columns *observed*, *median*, *lower*, *upper* for
+#' quartiles of response, equal tailed.
 #' @section Contains: [mf-class]
 #' @keywords documentation
 #' @family mf
@@ -99,15 +89,12 @@ mfhlboot <- setRefClass("mfhlboot", contains = "mf",
 #' @description Class `mfmp` is created from output of function `MFmp`
 #' @docType class
 #' @section Fields:
-#' \describe{
-#'   \item{`ci`}{numeric vector of point and interval estimates}
-#'   \item{`x` }{numeric vector of length three holding data}
-#'   \item{`what`}{text string describing interval type}
-#'   \item{`alpha`}{numeric value specifying complement of confidence interval}
-#'   \item{`tdist`}{Logical indicating if t distribution(TRUE) or gaussian
-#'    (FALSE)}
-#'   \item{`df`}{numeric value indicating degrees freedom}
-#' }
+#' * `ci`: numeric vector of point and interval estimates
+#' * `x`: numeric vector of length three holding data
+#' * `what`: text string describing interval type
+#' * `alpha`: numeric value specifying complement of confidence interval
+#' * `tdist`: Logical indicating if t distribution(TRUE) or Gaussian (FALSE)
+#' * `df`: numeric value indicating degrees freedom
 #' @keywords documentation
 #' @family mfmp
 #' @author [MF-package]
@@ -126,23 +113,20 @@ mfmp <- setRefClass("mfmp",
 #'   MFClusBoot
 #' @docType class
 #' @section Fields:
-#' \describe{
-#'   \item{`nboot`}{numeric value specifying number of samples}
-#'   \item{`alpha`}{numeric value specifying complement of confidence interval}
-#'   \item{`seed`}{vector of integers specifying seed for pseudo-random number
-#'   generator used}
-#'   \item{`compare`}{vector of character strings naming groups compared}
-#'   \item{`rng`}{character string naming type of random number generator}
-#'   \item{`stat`}{matrix matrix with columns *observed*, *median*, *lower*,
-#'   *upper* for estimates}
-#'   \item{`what`}{character vector naming what was resampled: *clusters*,
-#'   *units*, *both*}
-#'   \item{`excludedClusters`}{character vector naming clusters excluded
-#'   because of missing treatment(s)}
-#'   \item{`call`}{the call to `MFClusBoot`}
-#'   \item{`sample`}{what is this?}
-#'   \item{`All`}{Field "All" from MFClus call.}
-#'   }
+#' * `nboot`: numeric value specifying number of samples
+#' * `alpha`: numeric value specifying complement of confidence interval
+#' * `seed`: vector of integers specifying seed for pseudo-random number generator used
+#' * `compare`: vector of character strings naming groups compared
+#' * `rng`: character string naming type of random number generator
+#' * `stat`: matrix matrix with columns *observed*, *median*, *lower*, *upper*
+#' for estimates
+#' * `what`: character vector naming what was resampled: *clusters*, *units*,
+#' *both*
+#' * `excludedClusters`: character vector naming clusters excluded because of
+#' missing treatment(s)
+#' * `call`: the call to `MFClusBoot`
+#' * `sample`: what is this?
+#' * `All`: Field "All" from MFClus call.
 #' @section Contains: [mf-class]
 #' @keywords documentation
 #' @family mf
@@ -161,23 +145,17 @@ mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
 #' @description Class mfcluster is created from output of function MFClus
 #' @docType class
 #' @section Fields:
-#'  \describe{
-#'   \item{`All`}{vector with elements:
-#'   \describe{
-#'     \item{`w`}{Wilcoxon statistic}
-#'     \item{`u`}{Mann-Whitney statistic}
-#'     \item{`r`}{mean ridit}
-#'     \item{`n1`}{size of group 1}
-#'     \item{`n2`}{size of group 2}
-#'     \item{`mf`}{mitigated fraction}
-#'   }}
-#'   \item{`byCluster`}{As for All, by clusters}
-#'   \item{`excludedClusters`}{character vector naming clusters excluded
-#'   because of missing treatment}
-#'   \item{`call`}{the call to `MFClus`}
-#'   \item{`compare`}{character vector naming groups compared}
-#' }
-#'
+#' * `All`: vector with elements
+#'   * `w`: Wilcoxon statistic
+#'   * `u`: Mann-Whitney statistic
+#'   * `r`: mean ridit
+#'   * `n1`: size of group 1
+#'   * `n2`: size of group 2
+#'   * `mf`: mitigated fraction
+#' * `byCluster`: As for All, by clusters
+#' * `excludedClusters`: character vector naming clusters excluded because of missing treatment
+#' * `call`: the call to `MFClus`
+#' * `compare`: character vector naming groups compared
 #' @keywords documentation
 #' @family mfcluster
 #' @seealso [MFClus]
@@ -194,13 +172,11 @@ mfcluster <- setRefClass("mfcluster",
 #' @description Class mfcomponents is created from output of function MFSubj
 #' @docType class
 #' @section Fields:
-#' \describe{
-#' \item{`mf`}{numeric estimator for mitigated fraction}
-#' \item{`x`}{numeric vector containing responses of group 1}
-#' \item{`y`}{numeric vector containing responses of group 2}
-#' \item{`subj`}{matrix where `mf_j`re the subject components}
-#' \item{`compare`}{character vector naming groups being compared}
-#' }
+#' * `mf`: numeric estimator for mitigated fraction
+#' * `x`: numeric vector containing responses of group 1
+#' * `y`: numeric vector containing responses of group 2
+#' * `subj`: matrix where `mf_j`re the subject components
+#' * `compare`: character vector naming groups being compared
 #' @keywords documentation
 #' @family mfcomponents
 #' @seealso [MFSubj]
@@ -217,15 +193,12 @@ mfcomponents <- setRefClass("mfcomponents",
 #' @description Class mfhierdata is created from output of function MFh
 #' @docType class
 #' @section Fields:
-#' \describe{
-#'   \item{`coreTbl`}{data.frame with one row for each unique core level
-#'   showing values for `nx``ny``N``w``u`and
-#'   median observed response.}
-#'   \item{`data`}{data.frame is the restructured input data used for
-#'   calculations in MFh and MFnest.}
-#'   \item{`compare`}{character vector naming groups being compared.}
-#'   \item{`formula`}{formula that was called by user.}
-#' }
+#' * `coreTbl`: data.frame with one row for each unique core level showing
+#' values for `nx`, `ny`, `N`, `w`, `u`, and `median` observed response.
+#' * `data`: data.frame is the restructured input data used for calculations in
+#' MFh and MFnest.
+#' * `compare`: character vector naming groups being compared.
+#' * `formula`: formula that was called by user.
 #' @keywords documentation
 #' @family mfhierdata
 #' @seealso [MFh]
@@ -242,10 +215,8 @@ mfhierdata <- setRefClass("mfhierdata",
 #' @description Class mfclushier is created from output of function MFClusHier
 #' @docType class
 #' @section Fields:
-#' \describe{
-#' \item{`MFh`}{output from MFh. A [mfhierdata] object.}
-#' \item{`MFnest`}{output from MFnest. A tibble.}
-#' }
+#' * `MFh`: output from MFh. A [mfhierdata] object.
+#' * `MFnest`: output from MFnest. A tibble.
 #' @keywords documentation
 #' @family mfclushier
 #' @seealso [MFh], [MFnest]
@@ -259,10 +230,8 @@ mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
 #' MFClusBootHier.
 #' @docType class
 #' @section Fields:
-#' \describe{
-#' \item{`MFhBoot`}{output from MFhBoot. A list.}
-#' \item{`MFnestBoot`}{output from MFnestBoot. A list.}
-#' }
+#' * `MFhBoot` output from MFhBoot. A list.
+#' * `MFnestBoot` output from MFnestBoot. A list.
 #' @keywords documentation
 #' @family mfclusboothier
 #' @seealso [MFhBoot], [MFnestBoot]

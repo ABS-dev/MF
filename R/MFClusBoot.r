@@ -23,7 +23,7 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
-#' @return a [mfbootcluster-class] data object
+#' @returns a [mfbootcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
 #'   associated with unused treatment levels will be removed.
 #'

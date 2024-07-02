@@ -27,8 +27,8 @@ MF will be calculated for the whole tree.}
 \value{
 A list with the following elements:
 \itemize{
-\item \strong{MFh} as output from \link{MFh}.
-\item \strong{MFnest} as output from \link{MFnest}.
+\item \code{MFh}: as output from \link{MFh}.
+\item \code{MFnest}: as output from \link{MFnest}.
 }
 }
 \description{
