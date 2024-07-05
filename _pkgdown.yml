@@ -4,8 +4,8 @@ stemplate:
   bootstrap: 5
 repo:
   url:
-    home:  ttps://github.com/ABS-dev/MF/
-    issue: ttps://github.com/ABS-dev/MF/issues/
+    home:  https://github.com/ABS-dev/MF/
+    issue: https://github.com/ABS-dev/MF/issues/
 reference:
 - title: Functions
 - contents:
