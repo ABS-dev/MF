@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "locale": "en_US",
+  "platform": "4.4.0",
+  "metadata": {
+    "appmode": "static",
+    "primary_rmd": null,
+    "primary_html": "index.html",
+    "content_category": "site",
+    "has_parameters": false
+  },
+  "packages": null,
+  "files": {
+    ".nojekyll": {
+      "checksum": "81051bcc2cf1bedf378224b0a93e2877"
+    },
+    "404.html": {
+      "checksum": "e7a5a58d935440a19ba66514c845c675"
+    },
+    "apple-touch-icon-120x120.png": {
+      "checksum": "6ad7a65ec262060ad3c747d4f337e660"
+    },
+    "apple-touch-icon-152x152.png": {
+      "checksum": "5607c82fcaef15678e4c555c41b76d30"
+    },
+    "apple-touch-icon-180x180.png": {
+      "checksum": "26935dc16757dd39392ddfce3df0f1e9"
+    },
+    "apple-touch-icon-60x60.png": {
+      "checksum": "1ff6ad3448809cd8cc00e9e99b1663b5"
+    },
+    "apple-touch-icon-76x76.png": {
+      "checksum": "a46e45b9dfa79ab723fe96f62073cd29"
+    },
+    "apple-touch-icon.png": {
+      "checksum": "27df8e736c44a2631f3a0d0fdf2f1312"
+    },
+    "articles/index.html": {
+      "checksum": "f244ce22d7e6e09f9a9488fb5bb36a63"
+    },
+    "articles/MFHierarchicalData.html": {
+      "checksum": "5532ceccd4cf6a7449d24058afa7b18d"
+    },
+    "articles/QuickStartHierData.html": {
+      "checksum": "8ac2b56807aa943c715445d05c913be4"
+    },
+    "authors.html": {
+      "checksum": "aeb28e0bfa4c4a7228b5c78d99265715"
+    },
+    "bootstrap-toc.css": {
+      "checksum": "5eec6702c35b15a8c2c123301987735d"
+    },
+    "bootstrap-toc.js": {
+      "checksum": "aaa610b29d895e1128447e76b9bc0076"
+    },
+    "docsearch.css": {
+      "checksum": "828dbea96017a994efccb7c30c041577"
+    },
+    "docsearch.js": {
+      "checksum": "2f3c1f7995c9f4f966323f008e3984ad"
+    },
+    "favicon-16x16.png": {
+      "checksum": "ef27b1e5458208a87936abb2b5540b86"
+    },
+    "favicon-32x32.png": {
+      "checksum": "2dc155a527d662d26bae9cf20c76fe93"
+    },
+    "favicon.ico": {
+      "checksum": "21fee6972b45d3b3fc9893504a187e21"
+    },
+    "index.html": {
+      "checksum": "9c12ff50488a07fdb79211f427166907"
+    },
+    "LICENSE-text.html": {
+      "checksum": "297b380a3124ec81f8af6f77b5c969de"
+    },
+    "link.svg": {
+      "checksum": "4759f31f8a585e9af173fc579d730265"
+    },
+    "logo.png": {
+      "checksum": "ec5eb910be646a0138dd8080f82a7aea"
+    },
+    "news/index.html": {
+      "checksum": "96d6adaf987e3339f4e9246db166865b"
+    },
+    "pkgdown.css": {
+      "checksum": "9cd7da30627ce8d0e18fd1cf1f48c83f"
+    },
+    "pkgdown.js": {
+      "checksum": "916db342671c073ca830f33df8c36adc"
+    },
+    "pkgdown.yml": {
+      "checksum": "df2a8e51dcbcc83ebe3b3fdc055168d1"
+    },
+    "reference/calflung.html": {
+      "checksum": "0a54d771042a5a3a094f6f1f8f8d1553"
+    },
+    "reference/figures/logo.png": {
+      "checksum": "ec5eb910be646a0138dd8080f82a7aea"
+    },
+    "reference/HLBoot.html": {
+      "checksum": "59f3612f42931a95ddcb67801eabe4b5"
+    },
+    "reference/index.html": {
+      "checksum": "2df713a90bdd1f408d774cf02467fe1c"
+    },
+    "reference/mf-class.html": {
+      "checksum": "302e8bcaf38badedc97c33af4be97f58"
+    },
+    "reference/MF-package.html": {
+      "checksum": "35f7c3807e2cdfcd354d6ddf86a6c54b"
+    },
+    "reference/mfboot-class.html": {
+      "checksum": "a5d71fdd92fb08489d3833b1e678cd3b"
+    },
+    "reference/MFBoot.html": {
+      "checksum": "fa555d414cdd8d8d5427c00233d4de17"
+    },
+    "reference/mfbootcluster-class.html": {
+      "checksum": "58fee671ce90608ccbf20002f8a686f7"
+    },
+    "reference/MFClus.html": {
+      "checksum": "d89cf1a6d8f49f358c587dafdb5ff68d"
+    },
+    "reference/MFClusBoot.html": {
+      "checksum": "9944eec210b1f79713bcdbe4e36f94cd"
+    },
+    "reference/mfclusboothier-class.html": {
+      "checksum": "2df68b1dddaa6781265f4a2c0d15fd76"
+    },
+    "reference/MFClusBootHier.html": {
+      "checksum": "594548043ba789120fecf96162eabe5c"
+    },
+    "reference/mfclushier-class.html": {
+      "checksum": "6723e9d4467764583a1a86210eca1be3"
+    },
+    "reference/MFClusHier.html": {
+      "checksum": "77913eb2dd8332e88831006b4da9c013"
+    },
+    "reference/mfcluster-class.html": {
+      "checksum": "e67710c2567fbb44bde5ba6596c68770"
+    },
+    "reference/mfcomponents-class.html": {
+      "checksum": "dae7de92aec0e2e165842fbf78d32cb0"
+    },
+    "reference/MFh.html": {
+      "checksum": "1f81af91836a5e9997e893e5c3d3964b"
+    },
+    "reference/MFhBoot.html": {
+      "checksum": "961864fdf092642074d0afb3c7ab265d"
+    },
+    "reference/mfhierdata-class.html": {
+      "checksum": "631670a4abbfc6a83d586db6dfc1a3c0"
+    },
+    "reference/mfhlboot-class.html": {
+      "checksum": "a5411b9aa296b0cb217ee80ca922a9b6"
+    },
+    "reference/mfmp-class.html": {
+      "checksum": "abc512b5956c0367c553aad38996dd9a"
+    },
+    "reference/MFmp.html": {
+      "checksum": "6d51fa2ecc2133c56cbb5c0018eb8bf5"
+    },
+    "reference/MFnest.html": {
+      "checksum": "4a6c4d83113404924197dc08256ec825"
+    },
+    "reference/MFnestBoot.html": {
+      "checksum": "0caaf7f0feb11e67167c836e441ddce0"
+    },
+    "reference/MFr.html": {
+      "checksum": "892bb87de427a34f71c49549c3ec18eb"
+    },
+    "reference/MFSubj.html": {
+      "checksum": "5a56d465f6cd97e8a445f8de543e4601"
+    },
+    "reference/mlesions.html": {
+      "checksum": "82972dac1cef46cf0e3e1798e29a7d3d"
+    },
+    "reference/piglung.html": {
+      "checksum": "4d0b2fa3b2437cc174ee1a329544688d"
+    },
+    "reference/Rplot001.png": {
+      "checksum": "9b7a75eb2a0170ac2c15ab46a66f862b"
+    },
+    "sitemap.xml": {
+      "checksum": "b8e9933483cc99b55da43a9ae8937a5e"
+    }
+  },
+  "users": null
+}
