@@ -6,3 +6,51 @@ repo:
   url:
     home:  ttps://github.com/ABS-dev/MF/
     issue: ttps://github.com/ABS-dev/MF/issues/
+reference:
+- title: Functions
+- contents:
+  - HLBoot
+  - MFBoot
+  - MFClus
+  - MFClusBoot
+  - MFClusBootHier
+  - MFClusHier
+  - MFh
+  - MFhBoot
+  - MFmp
+  - MFnest
+  - MFnestBoot
+  - MFr
+  - MFSubj
+  - mf-class
+  - mf
+  - mfboot-class
+  - mfboot
+  - mfbootcluster-class
+  - mfbootcluster
+  - mfclusboothier-class
+  - mfclusboothier
+  - mfclushier-class
+  - mfclushier
+  - mfcluster-class
+  - mfcluster
+  - mfcomponents-class
+  - mfcomponents
+  - mfhierdata-class
+  - mfhierdata
+  - mfhlboot-class
+  - mfhlboot
+  - mfmp-class
+  - mfmp
+- title: Data Sets
+- contents:
+  - calflung
+  - mlesions
+  - piglung
+
+
+
+
+
+
+
