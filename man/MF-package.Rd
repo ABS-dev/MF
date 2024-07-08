@@ -13,8 +13,8 @@ Calculate MF (mitigated fraction) with clustering and bootstrap options. See htt
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/ABS-dev/MF/blob/master/README.md}
-  \item Report bugs at \url{https://github.com/ABS-dev/MF/issues}
+  \item \url{https://github.com/ABS-dev/MF/}
+  \item Report bugs at \url{https://github.com/ABS-dev/MF/issues/}
 }
 
 }
