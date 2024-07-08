@@ -1,8 +1,10 @@
 pandoc: 3.1.1
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   MFHierarchicalData: MFHierarchicalData.html
   QuickStartHierData: QuickStartHierData.html
-last_built: 2024-07-05T21:31Z
-
+last_built: 2024-07-08T14:14Z
+urls:
+  reference: https://github.com/ABS-dev/MF/reference
+  article: https://github.com/ABS-dev/MF/articles
