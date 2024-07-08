@@ -45,7 +45,7 @@
       "checksum": "365ec01929e9151b069f7235d6c6ac01"
     },
     "authors.html": {
-      "checksum": "770a9ea770b7afdea71cd023d8175e4c"
+      "checksum": "32cb42fc1764017d1e8ab65e317139b9"
     },
     "deps/bootstrap-5.3.1/bootstrap.bundle.min.js": {
       "checksum": "e2b09c06f0e714b6144a6788a28e3950"
@@ -135,7 +135,7 @@
       "checksum": "21fee6972b45d3b3fc9893504a187e21"
     },
     "index.html": {
-      "checksum": "b12801ed44b5b9076181938f2e8a5aee"
+      "checksum": "729b11086e0f4965d8b7968873043a62"
     },
     "katex-auto.js": {
       "checksum": "b6babfc10247cf9190b9fa172dde62b8"
@@ -159,7 +159,7 @@
       "checksum": "0196cc47dc30c3c4d73560cd19848986"
     },
     "pkgdown.yml": {
-      "checksum": "57621dac26d3127804dfb9c25bec5b25"
+      "checksum": "189a7975085efccc428f55d2da490743"
     },
     "reference/calflung-data.html": {
       "checksum": "de082a0830be194b3747fbdc8d5f9ce6"
@@ -180,7 +180,7 @@
       "checksum": "82083fb8b90c5affebd994f82a31ec4e"
     },
     "reference/MF-package.html": {
-      "checksum": "f683a7bba415ae38d50e2dfacf974e01"
+      "checksum": "b797d9cf1e482e4b8f0e5e517e2dc631"
     },
     "reference/mf.html": {
       "checksum": "3a2e3c5fb80a60d34e0fb27459e2f6e6"
@@ -231,7 +231,7 @@
       "checksum": "e83583bdb1bed56a1dda542362ae9c9e"
     },
     "reference/MFhBoot.html": {
-      "checksum": "0185ee786fb8373aa3080380eedd39fa"
+      "checksum": "cc2940d0281496459809fdefc731bc6b"
     },
     "reference/mfhierdata-class.html": {
       "checksum": "bf2ab537d0cb175b8347a7a62f5d3ddd"
@@ -279,7 +279,7 @@
       "checksum": "9b7a75eb2a0170ac2c15ab46a66f862b"
     },
     "search.json": {
-      "checksum": "8bbb70a84435b74571877cc986b9b914"
+      "checksum": "14ec25d9c975e48857418c9ece33b216"
     },
     "sitemap.xml": {
       "checksum": "244baf968c9ffb1244c4aaf45dfb96fb"
