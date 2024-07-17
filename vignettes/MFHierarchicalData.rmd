@@ -61,12 +61,16 @@ design of the data set is crossed (all factors of a variable co-occur with
 all factors of another variable), it is not appropriate to use this guide as
 written.
 
-```{r, expdesign, echo = FALSE, }
-knitr::kable(a, align = "c", row.names = FALSE,
-             caption = "Nested hierarchical data structure.",
-             format = "latex") |>
-  kable_styling("bordered", full_width = FALSE, font_size = 8) |>
-  collapse_rows(columns = 1:4, valign = "middle")
+```{r expdesign, echo = FALSE}
+kbl(a, 
+    align = "c", 
+    row.names = FALSE,
+    caption = "Nested hierarchical data structure.")  |>
+  kable_styling("bordered", 
+                full_width = FALSE, 
+                font_size = 8) |>
+  collapse_rows(columns = 1:4, 
+                valign = "middle")
 ```
 
 

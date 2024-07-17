@@ -61,14 +61,13 @@ A nested design assumes that the factor level of one variable co-occurs with
 that of another variable. For example, Pen D exists only within Room Z.
 
 ```{r, expdesign, echo = FALSE}
-kable(a,
-      align = "c",
-      row.names = FALSE,
-      caption = "Nested hierarchical data structure.",
-      format = "latex") |>
+kbl(a,
+    align = "c",
+    row.names = FALSE,
+    caption = "Nested hierarchical data structure.") |>
   kable_styling("bordered",
                 full_width = FALSE,
-                font_size = 8) |>
+                font_size = 8)  |>
   collapse_rows(columns = 1:4,
                 valign = "middle")
 ```
