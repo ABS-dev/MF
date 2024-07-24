@@ -11,15 +11,10 @@ From **within R**
 1. Installing current release
 
 ```
-devtools::install_github("ABS-dev/MF", ref = "4.4.9")
+devtools::install_github("ABS-dev/MF")
 ```
   *See all historical releases [here](https://github.com/ABS-dev/MF/releases)*
   
-2. Installing work-in-progress on the main development branch 
-
-
-```
-devtools::install_github("ABS-dev/MF")
 ```
 
 ### For CVB employees
