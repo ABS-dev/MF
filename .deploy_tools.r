@@ -18,7 +18,7 @@ CVBdevtools::deploy_pkgdown_local()
 # in pkgdown and public to remove them from being followed.  Hopefully it
 # sticks.
 #
-# I finally just started deploying into docs/ since that has been in gitigore
+# I finally just started deploying into docs/ since that has been in gitignore
 # since the beginning.
 
 ## Deploy pkgdown Content to remote git repository ####
