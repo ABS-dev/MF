@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="index.html">MF</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.10</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,21 +76,17 @@
 <ol style="list-style-type: decimal">
 <li>Installing current release</li>
 </ol>
-<pre><code><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ABS-dev/MF"</span>, ref <span class="op">=</span> <span class="st">"4.4.9"</span><span class="op">)</span></span></code></pre>
-<p><em>See all historical releases <a href="https://github.com/ABS-dev/MF/releases">here</a></em></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Installing work-in-progress on the main development branch</li>
-</ol>
 <pre><code><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"ABS-dev/MF"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="for-cvb-employees">For CVB employees<a class="anchor" aria-label="anchor" href="#for-cvb-employees"></a>
-</h3>
-<p>After setting up Rstudio to work with <a href="https://ncahconnect.usda.net/CVBverse/articles/package_manager.html" class="external-link">Package Manager</a>, you can install the most recent version of <code>MF</code> like so:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">install.package</span><span class="op">(</span><span class="st">"MF"</span><span class="op">)</span></span></code></pre></div>
+<p><em>See all historical releases <a href="https://github.com/ABS-dev/MF/releases">here</a></em></p>
+<pre><code>
+### For CVB employees
+
+After setting up Rstudio to work with [Package Manager](https://ncahconnect.usda.net/CVBverse/articles/package_manager.html), you can install the most recent version of `MF` like so:
+
+``` r
+install.package("MF")</code></pre>
 <p>You can install an archived version of <code>MF</code> thus:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html" class="external-link">install_version</a></span><span class="op">(</span><span class="st">'MF'</span>, <span class="st">'4.4.3'</span><span class="op">)</span></span></code></pre></div>
 <p>Refer to the <a href="https://ncahrpackage.usda.net/client/#/repos/cvb-gitlab/packages/MF/overview#package-details" class="external-link">MF overview</a> on Package Manager to find a list of the archived versions.</p>
 </div>
