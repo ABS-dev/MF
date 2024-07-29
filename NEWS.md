@@ -1,3 +1,6 @@
+# Version 4.4.11
+- Create online vignettes
+
 # Version 4.4.10
 - Updating Vignettes and documentation deployment
 
