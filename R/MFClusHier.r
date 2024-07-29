@@ -11,7 +11,7 @@
 #' @param compare Text vector stating the factor levels - `compare[1]` is the
 #'   control or reference group to which `compare[2]` is compared.
 #' @returns A [mfhierdata] object, which is a list of three items.
-#' * `coreTbl` A [dplyr::tibble] with one row for each unique core level showing
+#' * `coreTbl` A [tibble] with one row for each unique core level showing
 #'  values for:
 #'
 #'   * `con_n` & `vac_n`: counts of observations for each treatment level
@@ -26,7 +26,7 @@
 #'
 #'   * `u`: Mann-Whitney statistic
 #'
-#' * `data`: A [dplyr::tibble] of the restructured input data used for
+#' * `data`: A [tibble] of the restructured input data used for
 #' calculations.
 #'
 #' * `compare`: The compare variables as input by user.

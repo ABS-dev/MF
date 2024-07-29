@@ -23,7 +23,7 @@ control or reference group to which \code{compare[2]} is compared.}
 \value{
 A \link{mfhierdata} object, which is a list of three items.
 \itemize{
-\item \code{coreTbl} A \link[dplyr:reexports]{dplyr::tibble} with one row for each unique core level showing
+\item \code{coreTbl} A \link{tibble} with one row for each unique core level showing
 values for:
 \itemize{
 \item \code{con_n} & \code{vac_n}: counts of observations for each treatment level
@@ -34,7 +34,7 @@ response for each treatment level.
 \item \code{w}: Wilcoxon statistic
 \item \code{u}: Mann-Whitney statistic
 }
-\item \code{data}: A \link[dplyr:reexports]{dplyr::tibble} of the restructured input data used for
+\item \code{data}: A \link{tibble} of the restructured input data used for
 calculations.
 \item \code{compare}: The compare variables as input by user.
 \item \code{formula}: The formula as input by user.

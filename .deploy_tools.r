@@ -9,7 +9,6 @@
 # 7. Push new version
 CVBdevtools::create_static_documentation()
 
-
 ## Create pkgdown Content locally ####
 
 CVBdevtools::deploy_pkgdown_local()
