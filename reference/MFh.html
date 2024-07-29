@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MF</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">4.4.11</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@ control or reference group to which <code>compare[2]</code> is compared.</p></dd
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <a href="mfhierdata-class.html">mfhierdata</a> object, which is a list of three items.</p><ul><li><p><code>coreTbl</code> A <a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">dplyr::tibble</a> with one row for each unique core level showing
+    <p>A <a href="mfhierdata-class.html">mfhierdata</a> object, which is a list of three items.</p><ul><li><p><code>coreTbl</code> A tibble with one row for each unique core level showing
 values for:</p><ul><li><p><code>con_n</code> &amp; <code>vac_n</code>: counts of observations for each treatment level
 in the core level.</p></li>
 <li><p><code>con_medResp</code> &amp; <code>vac_medResp</code>: median of the <code>y</code> continuous
@@ -80,7 +80,7 @@ response for each treatment level.</p></li>
 <li><p><code>w</code>: Wilcoxon statistic</p></li>
 <li><p><code>u</code>: Mann-Whitney statistic</p></li>
 </ul></li>
-<li><p><code>data</code>: A <a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">dplyr::tibble</a> of the restructured input data used for
+<li><p><code>data</code>: A tibble of the restructured input data used for
 calculations.</p></li>
 <li><p><code>compare</code>: The compare variables as input by user.</p></li>
 <li><p><code>formula</code>: The formula as input by user.</p></li>

@@ -15,31 +15,31 @@
       "checksum": "81051bcc2cf1bedf378224b0a93e2877"
     },
     "404.html": {
-      "checksum": "d30a279f39924c9c9a22885c6d8117e1"
+      "checksum": "068d1c7213036a8e33d1e4fbd5b84872"
     },
     "apple-touch-icon-120x120.png": {
-      "checksum": "8d4d87fed5318779e6a532e93643ce15"
+      "checksum": "dc534dd104a8e9b09b6e61bd24a6dbbb"
     },
     "apple-touch-icon-152x152.png": {
-      "checksum": "cd755649196830846d8784b4f12d5911"
+      "checksum": "fb28c92616f6b09725633edb3d895c65"
     },
     "apple-touch-icon-180x180.png": {
-      "checksum": "9aef5e50247ea592aa0e8d9d78ada439"
+      "checksum": "6c2f0ede8ee18cdf52cd918b9d308dae"
     },
     "apple-touch-icon-60x60.png": {
-      "checksum": "8f2c9220287ce19c14babd61ae074fab"
+      "checksum": "7824927d7402121204eb23bbf06ec996"
     },
     "apple-touch-icon-76x76.png": {
-      "checksum": "bc4cf3011764877dc92b63fe86058cb8"
+      "checksum": "575fc4b3760df5b0ae6ceeefae400531"
     },
     "apple-touch-icon.png": {
-      "checksum": "84e8f5c78a66c13a7e9832815cee1ddc"
+      "checksum": "7646683aaf1c48072795ce8507d34f94"
     },
     "articles/index.html": {
-      "checksum": "ec43591be8c9d9ed707ceaedf273782d"
+      "checksum": "9a33d6be9513194b7e46d269b3d97ff7"
     },
     "articles/MFHierarchicalData.html": {
-      "checksum": "558b1e6acba232ebcbeeb14e891f92f5"
+      "checksum": "a8d8bf18253fdcaf428bacb3a6cc1a81"
     },
     "articles/MFHierarchicalData_files/kePrint-0.0.1/kePrint.js": {
       "checksum": "03b791fcaee0a40c261c3c14f3d85d27"
@@ -48,7 +48,7 @@
       "checksum": "25547ce4d44910ea8f377212d34397fa"
     },
     "articles/QuickStartHierData.html": {
-      "checksum": "e3b454fe4dbf6bc175dce1948e9b61ae"
+      "checksum": "c6982cffb95d6ec7446aac9e99e37e74"
     },
     "articles/QuickStartHierData_files/kePrint-0.0.1/kePrint.js": {
       "checksum": "03b791fcaee0a40c261c3c14f3d85d27"
@@ -57,7 +57,7 @@
       "checksum": "25547ce4d44910ea8f377212d34397fa"
     },
     "authors.html": {
-      "checksum": "47fba20e91f635f98f69be46366db45c"
+      "checksum": "dbd6fe07598f7152b643799aaa3bb755"
     },
     "deps/bootstrap-5.3.1/bootstrap.bundle.min.js": {
       "checksum": "e2b09c06f0e714b6144a6788a28e3950"
@@ -141,22 +141,22 @@
       "checksum": "d0c5399929d81f67cd6d7687880498a6"
     },
     "favicon-16x16.png": {
-      "checksum": "0278058787de0cd34d2da041a53e1b52"
+      "checksum": "6e6579ac30aeb17ac1282cab14a64d7f"
     },
     "favicon-32x32.png": {
-      "checksum": "f881c61c2c04a3c380d1151654ac5633"
+      "checksum": "717a99ea877fef519b3f343bc6983140"
     },
     "favicon.ico": {
       "checksum": "21fee6972b45d3b3fc9893504a187e21"
     },
     "index.html": {
-      "checksum": "7ea27a0a83adff77971f6a37be45de7d"
+      "checksum": "de35f3a6f93d7e5f6fd43384f1b4a8b8"
     },
     "katex-auto.js": {
       "checksum": "b6babfc10247cf9190b9fa172dde62b8"
     },
     "LICENSE-text.html": {
-      "checksum": "83c8ecdb773e2fe6ece772acf9cdbce8"
+      "checksum": "3010d4157542069427351f83e94a080b"
     },
     "lightswitch.js": {
       "checksum": "5806fcea81ccc70e1ffc453a7d9e12b5"
@@ -168,133 +168,133 @@
       "checksum": "ec5eb910be646a0138dd8080f82a7aea"
     },
     "news/index.html": {
-      "checksum": "3616bc11d841a6f12d3e763a5f8361b1"
+      "checksum": "12a6c6502b1b3e32634df6e4107532ce"
     },
     "pkgdown.js": {
       "checksum": "0196cc47dc30c3c4d73560cd19848986"
     },
     "pkgdown.yml": {
-      "checksum": "05eb7aac1425d1e80549faf67bbb5882"
+      "checksum": "414c018e6dfe1ae3445296ec4af3cbbd"
     },
     "reference/calflung-data.html": {
       "checksum": "de082a0830be194b3747fbdc8d5f9ce6"
     },
     "reference/calflung.html": {
-      "checksum": "d16b9354b03a74cbe1373f1c0b6e669e"
+      "checksum": "b4d1bf9dcb7c3c09789692235a5a50c4"
     },
     "reference/figures/logo.png": {
       "checksum": "ec5eb910be646a0138dd8080f82a7aea"
     },
     "reference/HLBoot.html": {
-      "checksum": "d51523d2c449b733e82925a144f9e533"
+      "checksum": "bc2279f47915721ef886a7f0b2a47043"
     },
     "reference/index.html": {
-      "checksum": "a0c4c4cbc137113cc7de217f56983cb1"
+      "checksum": "c288b39f33684d101caf62ff27646626"
     },
     "reference/mf-class.html": {
-      "checksum": "15de709dada38616d24db57df60f1923"
+      "checksum": "13ccdd248b4d251b10c56e9935889694"
     },
     "reference/MF-package.html": {
-      "checksum": "694733f3f7ecd4512cb0048e6e0363b9"
+      "checksum": "66bf3b5d2e143eefa9781ea3aeb133a1"
     },
     "reference/mf.html": {
       "checksum": "3a2e3c5fb80a60d34e0fb27459e2f6e6"
     },
     "reference/mfboot-class.html": {
-      "checksum": "596d7d03bae370f37dae96768e174c2a"
+      "checksum": "839fd4d115e396e311b3e294986f0c99"
     },
     "reference/MFBoot.html": {
       "checksum": "f8327e980b91ae0f5e41c625200a707b"
     },
     "reference/mfbootcluster-class.html": {
-      "checksum": "e4a32f29d980910c13c41d0278686fb6"
+      "checksum": "76e8511a8f1b5e480ee5e7367a418788"
     },
     "reference/mfbootcluster.html": {
       "checksum": "821fbafc746d9b007b4e3c6c181c4e5d"
     },
     "reference/MFClus.html": {
-      "checksum": "664bbf3e4bf016d85421bef58dff087a"
+      "checksum": "b16624b182d76e034dc657cf65e909e7"
     },
     "reference/MFClusBoot.html": {
-      "checksum": "e6742f5600ac1900c8742b0fd8f104cc"
+      "checksum": "30644c2208637962c0d0326b6ddf1484"
     },
     "reference/mfclusboothier-class.html": {
-      "checksum": "1a30acc0318eee84449caef0462b2302"
+      "checksum": "3fb8c487508c9695a6d561f86fbd99f5"
     },
     "reference/MFClusBootHier.html": {
       "checksum": "a5fa0b3e50fc4baa6284fa69842e345a"
     },
     "reference/mfclushier-class.html": {
-      "checksum": "028344d524ffb388761eb98a612b4b15"
+      "checksum": "6d9e538f5110a1425c3f0bfa91a3e69e"
     },
     "reference/MFClusHier.html": {
       "checksum": "4f214745346bda5f5181ea4c0f7ed7f6"
     },
     "reference/mfcluster-class.html": {
-      "checksum": "d6aeede730831f5f66e9fea8d2c1cccf"
+      "checksum": "4fa7540681960b4cd701c0d17c01ac3f"
     },
     "reference/mfcluster.html": {
       "checksum": "456bb771b5b9372a1273bbfc28a7c19c"
     },
     "reference/mfcomponents-class.html": {
-      "checksum": "50ad69226aa6e5a0e7ed088bd4e20c44"
+      "checksum": "0f97b002795a80981c6e6e683d0fc210"
     },
     "reference/mfcomponents.html": {
       "checksum": "f0168ac6ef8a68e59a62052374f1d60a"
     },
     "reference/MFh.html": {
-      "checksum": "a05aa16fd31d2d3d386b5449396b93ec"
+      "checksum": "84b5b36c4f00d550eedb858442578dbe"
     },
     "reference/MFhBoot.html": {
-      "checksum": "92b02543f69bbd0b102b7891a861dd37"
+      "checksum": "b865812c9cb25ae03effcc23efb69c02"
     },
     "reference/mfhierdata-class.html": {
-      "checksum": "42bd49e9d985f8a02c6ace958b823ac8"
+      "checksum": "537692e951dc6565f4901baf393a7c04"
     },
     "reference/mfhierdata.html": {
       "checksum": "13fa529a40a5a3b85e59182cd91b9394"
     },
     "reference/mfhlboot-class.html": {
-      "checksum": "bf04214f9753225e45c5f9f8df2fd97c"
+      "checksum": "48d17bb8ae7633e5a43fe20cdbd3f8a7"
     },
     "reference/mfhlboot.html": {
       "checksum": "a44bf2090c9252ac4bd790fb4713854c"
     },
     "reference/mfmp-class.html": {
-      "checksum": "531acbdc6283ce2f90928d25fde4cb16"
+      "checksum": "0cd4a475827ce79e9c6086e6f4025327"
     },
     "reference/MFmp.html": {
       "checksum": "b6ccb51318d9b4c4758595441612c3db"
     },
     "reference/MFnest.html": {
-      "checksum": "aad9bbca89ecfd465f61e2311e26c8aa"
+      "checksum": "a34ac5c431aa012fc8d28ea0787b726f"
     },
     "reference/MFnestBoot.html": {
-      "checksum": "c29167ceb841c1e0881db2212e776624"
+      "checksum": "99566360162fe85ec4d102d9cbf7320c"
     },
     "reference/MFr.html": {
-      "checksum": "a7349a9a01d2d4bcc6043b3295bdbeb5"
+      "checksum": "5cc7efd24d23a59c7d05915dd0ceb77e"
     },
     "reference/MFSubj.html": {
-      "checksum": "6715cf0f292eb672b1f89baeb88ca735"
+      "checksum": "63b06743ba688ad84b4296ceafe59b74"
     },
     "reference/mlesions-data.html": {
       "checksum": "09c04131d5db33a367f6dd9926186720"
     },
     "reference/mlesions.html": {
-      "checksum": "1008ffa1a34805164ebe8434355ca1b1"
+      "checksum": "bd1ce5c49ff1cecf77ec425858bc0a94"
     },
     "reference/piglung-data.html": {
       "checksum": "3d0429a14ea004da91e673e872221778"
     },
     "reference/piglung.html": {
-      "checksum": "49cb9fdb466b6de41634136b842e6a9f"
+      "checksum": "928436cc9576fb5ccbce9258760f895b"
     },
     "reference/Rplot001.png": {
       "checksum": "9b7a75eb2a0170ac2c15ab46a66f862b"
     },
     "search.json": {
-      "checksum": "a040dc02c3144a84b36a99cd778ecf22"
+      "checksum": "55a4da9b060446fa0e465e8cd5701733"
     },
     "sitemap.xml": {
       "checksum": "244baf968c9ffb1244c4aaf45dfb96fb"
