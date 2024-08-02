@@ -39,7 +39,7 @@
       "checksum": "9a33d6be9513194b7e46d269b3d97ff7"
     },
     "articles/MFHierarchicalData.html": {
-      "checksum": "a8d8bf18253fdcaf428bacb3a6cc1a81"
+      "checksum": "c878952fcda47ebb93b2d017864cadc9"
     },
     "articles/MFHierarchicalData_files/kePrint-0.0.1/kePrint.js": {
       "checksum": "03b791fcaee0a40c261c3c14f3d85d27"
@@ -150,7 +150,7 @@
       "checksum": "21fee6972b45d3b3fc9893504a187e21"
     },
     "index.html": {
-      "checksum": "de35f3a6f93d7e5f6fd43384f1b4a8b8"
+      "checksum": "8c0e12942916be935e60f0f5d667601e"
     },
     "katex-auto.js": {
       "checksum": "b6babfc10247cf9190b9fa172dde62b8"
@@ -174,7 +174,7 @@
       "checksum": "0196cc47dc30c3c4d73560cd19848986"
     },
     "pkgdown.yml": {
-      "checksum": "414c018e6dfe1ae3445296ec4af3cbbd"
+      "checksum": "a8b13ec6899970ef2fc63a91b13ab6e2"
     },
     "reference/calflung-data.html": {
       "checksum": "de082a0830be194b3747fbdc8d5f9ce6"
@@ -243,10 +243,10 @@
       "checksum": "f0168ac6ef8a68e59a62052374f1d60a"
     },
     "reference/MFh.html": {
-      "checksum": "84b5b36c4f00d550eedb858442578dbe"
+      "checksum": "6963b1361419c839f0f2a0938c80c549"
     },
     "reference/MFhBoot.html": {
-      "checksum": "b865812c9cb25ae03effcc23efb69c02"
+      "checksum": "bc95c24d73a0c2e1d70bcda0fd3dc6b1"
     },
     "reference/mfhierdata-class.html": {
       "checksum": "537692e951dc6565f4901baf393a7c04"
@@ -294,7 +294,7 @@
       "checksum": "9b7a75eb2a0170ac2c15ab46a66f862b"
     },
     "search.json": {
-      "checksum": "55a4da9b060446fa0e465e8cd5701733"
+      "checksum": "17ca561dd192bb58de347bfcd8cfe6a6"
     },
     "sitemap.xml": {
       "checksum": "244baf968c9ffb1244c4aaf45dfb96fb"
