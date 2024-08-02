@@ -7,6 +7,13 @@ repo:
   url:
     home:  https://github.com/ABS-dev/MF/
     issue: https://github.com/ABS-dev/MF/issues/
+home:
+  sidebar:
+    structure: [links, license, community, citation, authors, dev, cvbverse]
+    components:
+      cvbverse:
+        title: CVBverse
+        text: This package is part of the [CVBverse](https://ncahconnect.usda.net/CVBverse/)
 reference:
 - title: Functions
 - contents:
