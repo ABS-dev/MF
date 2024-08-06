@@ -3,6 +3,7 @@ destination: docs/
 template:
   bootstrap: 5
   math-rendering: mathjax
+  light-switch: true
 repo:
   url:
     home:  https://github.com/ABS-dev/MF/

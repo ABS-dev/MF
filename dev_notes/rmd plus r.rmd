@@ -1,0 +1,32 @@
+---
+output: html_document
+author: "Thomas Kent"
+date: "Sept 1, 2021"
+title: "test"
+--- 
+
+```{r load-libraries, echo = FALSE}
+library(data.table)
+options(datatable.print.nrows = 30)
+options(width = 150)
+library(knitr)
+```
+
+```{r, echo = FALSE}
+progress = function(i, total) {
+  p1 = floor(100 * (i - 1) / total)
+  p2 = floor(100 * i / total)
+  if ((p1 < p2 | i == 1) && interactive()) {
+    cat(paste0("\r", p2, "%"))
+  }
+  if (i == total) {
+    cat("\r100%\n")
+  }
+}
+
+total = 10000
+for (i in 1:total) {
+  r = runif(total)
+  progress(i, total)
+}
+```

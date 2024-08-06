@@ -1,0 +1,9 @@
+rrmplsi is an R5 class?
+
+Move to PF
+
+From CVBMisc:
+RRmplsi*.r
+
+From AsstStat
+PFall.r

@@ -1,0 +1,46 @@
+HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100, alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000, 1))
+
+MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100, alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000, 1))
+
+MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE)
+
+MFh <- function(formula, data, compare = c("con", "vac"))
+
+MFnest <- function(Y, which.factor = 'All')
+
+MFClusHier <- function(formula, data, compare = c("con", "vac"), which.factor = 'All')
+
+MFClusBootHier <- function(formula, data, compare = c('con', 'vac'), nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE, which.factor = 'All', alpha = 0.05, seed = sample(1:1e+05, 1))
+
+MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NULL, alpha = 0.05, df = NA, tdist = TRUE)
+
+MFhBoot <- function(formula, data, compare = c("con", "vac"), nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE, seed = sample(1:100000, 1))
+
+MFnestBoot <- function(x, which.factor = 'All', alpha = 0.05)
+
+MFr <- function(formula, data, compare = c("con", "vac"))
+
+MFSubj <- function(formula, data, compare = c("con", "vac"))
+
+MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = TRUE, b = 100, B = 100, alpha = 0.05, hpd = TRUE, return.boot = FALSE, trace.it = FALSE, seed = sample(1:100000, 1))
+
+IDRlsi <- function(y = NULL, formula = NULL, data = NULL, alpha = 0.05, k = 8, use.alpha = FALSE, pf = TRUE, converge = 1e-8, rnd = 3, start = NULL, trace.it = FALSE, iter.max = 24, compare = c("con", "vac"))
+
+IDRsc <- function(y = NULL, data = NULL, formula = NULL, compare = c('con', 'vac'), alpha = 0.05, pf = TRUE, rnd = 3)
+
+RRsc <- function(y = NULL, data = NULL, formula = NULL, compare = c('vac', 'con'), alpha = 0.05, pf = TRUE, trace.it = FALSE, iter.max = 18, converge = 1e-6, rnd = 3)
+
+RRlsi <- function(y = NULL, formula = NULL, data = NULL, compare = c("vac", "con"), alpha = 0.05, k = 8, use.alpha = FALSE, pf = TRUE, iter.max = 50, converge = 1e-006, rnd = 3, start = NULL, track = FALSE, full.track = FALSE)
+
+RRmh <- function(formula = NULL, data = NULL, compare = c('vac', 'con'), Y, alpha = 0.05, pf = TRUE, rnd = 3)
+
+RRmpWald <- function(formula = NULL, data = NULL, compare = c('vac', 'con'), affected = 1, x, alpha = 0.05, pf = TRUE, tdist = TRUE, df = NULL, rnd = 3)
+
+RRor <- function(fit=NULL, beta.hat=NULL, var.beta.hat=NULL, degf=NULL, which = c(1, 2), pf=T, norm = F, alpha = 0.05, rnd=3)
+
+RRotsst <- function(y = NULL, data = NULL, formula = NULL, compare = c("vac", "con"), alpha = 0.05, pf = TRUE, stepstart = .1, iter.max = 36, converge = 1e-6, rnd = 3, trace.it = FALSE, nuisance.points = 120, gamma = 1e-6)
+
+RRstr <- function(formula = NULL, data = NULL, compare = c('vac', 'con'), Y, alpha = 0.05,  pf = TRUE, trace.it = FALSE, iter.max = 24, converge = 1e-6, rnd = 3, multiplier = 0.7, divider = 1.1)
+
+RRtosst <- function(y = NULL, formula = NULL, data = NULL, compare = c("vac", "con"), alpha = 0.05, pf = TRUE, stepstart = .1, iter.max = 36, converge = 1e-6, rnd = 3, trace.it = FALSE, nuisance.points = 120, gamma = 1e-6)
+
