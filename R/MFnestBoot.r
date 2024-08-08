@@ -66,7 +66,8 @@
 #' @importFrom rlang ":=" quo_name
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFhBoot <- function(formula, data,
+MFhBoot <- function(formula,
+                    data,
                     vac_grp = "vac",
                     con_grp = "con",
                     nboot = 10000,
