@@ -10,11 +10,33 @@ repo:
     issue: https://github.com/ABS-dev/MF/issues/
 home:
   sidebar:
-    structure: [links, license, community, citation, authors, dev, cvbverse]
+    structure: [links, license, community, citation, authors, dev, cvbverse, primary, RPBrewer, deprecated]
     components:
       cvbverse:
         title: CVBverse
         text: This package is part of the [CVBverse](https://ncahconnect.usda.net/CVBverse/)
+      primary:
+        title: Primary Packages
+        text: |
+          | [AsstStat](https://ncahconnect.usda.net/AsstStat/)
+          | [CVBdxlca](https://ncahconnect.usda.net/CVBdxlca/)
+          | [CVBmisc](https://ncahconnect.usda.net/CVBmisc/)
+          | [cvbplots](https://ncahconnect.usda.net/cvbplots/)
+          | [CVBrp](https://ncahconnect.usda.net/CVBrp/)
+          | [dataFormats](https://ncahconnect.usda.net/dataFormats/)
+          | [DiagTestKit](https://ncahconnect.usda.net/DiagTestKit/)
+          | [MF](https://ncahconnect.usda.net/MF/)
+          | [PF](https://ncahconnect.usda.net/PF/)
+          | [skrmdb](https://ncahconnect.usda.net/skrmdb/)
+      RPBrewer:
+        title: RPBrewer Packages
+        text: |
+          | [CVBreadfiles](https://ncahconnect.usda.net/CVBreadfiles/)
+          | [plateDataAnalyzer](https://ncahconnect.usda.net/plateDataAnalyzer/)
+      deprecated:
+        title: Deprecated Packages
+        text: |
+          | [CVBreports](https://ncahconnect.usda.net/CVBreports/)
 reference:
 - title: Functions
 - contents:
