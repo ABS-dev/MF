@@ -12,14 +12,14 @@
 #' @param compare Text vector stating the factor levels: `compare[1]` is the
 #'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @returns The estimated mitigated fraction.
-#' @export
 #' @references Siev D, 2005. An estimator of intervention effect on disease
 #'   severity. *Journal of Modern Applied Statistical Methods.* 4:500-508
 #' @author [MF-package]
 #' @examples
 #' MFr(lesion ~ group, calflung)
-#' # [1] 0.44
 #' @importFrom stats model.frame
+#' @importFrom lifecycle badge deprecate_warn is_present deprecated
+#' @export
 MFr <- function(formula, data, compare = c("con", "vac")) {
   # formula of form response ~ treatment
   # x = response for compare[1]

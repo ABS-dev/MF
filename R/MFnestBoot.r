@@ -31,7 +31,6 @@
 #' * `mfh`: MFh run on original data input.
 #' @seealso [MFClusBootHier], [MFnestBoot]
 #' @author [MF-package]
-#' @export
 #' @examples
 #' set.seed(76153)
 #' a <- data.frame(room = paste("Room", rep(c("W", "Z"), each = 24)),
@@ -62,6 +61,8 @@
 #'   case_when arrange filter rename ungroup group_by group_by_at vars summarize
 #'   everything
 #' @importFrom rlang ":=" quo_name
+#' @importFrom lifecycle badge deprecate_warn is_present deprecated
+#' @export
 MFhBoot <- function(formula, data,
                     compare = c("con", "vac"),
                     nboot = 10000,
@@ -286,8 +287,6 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' boot.cluster <- TRUE
 #' boot.unit <- TRUE
 #' which.factors <- c("All", "room", "pen", "litter")
-#'
-#' #################
 #'
 #' test1 <- MFhBoot(formula, a,
 #'                  nboot = 10000,

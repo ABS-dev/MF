@@ -16,7 +16,6 @@
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence
 #'   interval? Default t distribution.
-#' @export
 #' @note upper confidence interval is truncated to 1; lower confidence interval
 #'   is truncated to -1. Point estimate of 1.0 indicates complete separation.
 #' @returns a [mfmp-class] data object
@@ -29,6 +28,8 @@
 #' MFmp(les ~ tx + cluster(cage), mlesions, compare = c("con", "vac"))
 #' MFmp(x = c(12, 12, 2))
 #' @importFrom stats qnorm qt
+#' @importFrom lifecycle badge deprecate_warn is_present deprecated
+#' @export
 MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
                  x = NULL, alpha = 0.05, df = NA, tdist = TRUE) {
   # asymptotic CI for matched pairs

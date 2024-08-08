@@ -24,7 +24,6 @@
 #' @note `Core` variable is the variable corresponding to the lowest nodes of
 #'   the hierarchical tree. `Nest` variables are those above the core. `All`
 #'   refers to a summary of the entire tree.
-#' @export
 #' @seealso [MFh], [MFnest]
 #' @author [MF-package]
 #' @examples
@@ -43,6 +42,8 @@
 #' aCore$data
 #' aCore$formula
 #' aCore$compare
+#' @importFrom lifecycle badge deprecate_warn is_present deprecated
+#' @export
 MFClusHier <- function(formula, data, compare = c("con", "vac"),
                        which.factor = "All") {
   aCore <- MFh(formula, data, compare)
@@ -86,7 +87,6 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   refers to a summary of the entire tree.
 #' @seealso [MFhBoot], [MFnestBoot].
 #' @author [MF-package]
-#' @export
 #' @examples
 #' a <- data.frame(
 #'   room = paste("Room", rep(c("W", "Z"), each = 24)),
@@ -99,6 +99,8 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #' thismf1 <- MFClusBootHier(lung ~ tx + room / pen / litter, a, nboot = 10000,
 #'                        boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 #' thismf1
+#' @importFrom lifecycle badge deprecate_warn is_present deprecated
+#' @export
 MFClusBootHier <- function(formula, data, compare = c("con", "vac"),
                            nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
                            which.factor = "All", alpha = 0.05,

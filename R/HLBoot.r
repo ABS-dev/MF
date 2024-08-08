@@ -41,57 +41,9 @@
 #' @examples
 #' HLBoot(lesion ~ group, calflung, seed = 12345)
 #'
-#' # Bootstrapping
-#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#' # . . . . . . . . . . . . . . . . . . . . . . . .
-#' #
-#' # 10000 bootstrap samples
-#' # 95% confidence intervals
-#' # Comparing vac to con
-#' #
-#' #
-#' # Mitigated Fraction
-#' #
-#' # observed median lower  upper
-#' # Equal Tailed        0.44 0.4496 0.152 0.7088
-#' # Highest Density     0.44 0.4496 0.152 0.7088
-#' #
-#' #
-#' # Hodges-Lehmann
-#' #
-#' # observed   median    lower       upper
-#' # Equal Tailed    -0.07335 -0.07615 -0.17220 -0.01565000
-#' # Highest Density -0.07335 -0.07615 -0.15635 -0.00850065
-#' #
-#' #
-#' # Quartile Differences (quartiles of vac - quartiles of con)
-#' #
-#' # observed    median    lower     upper
-#' # Q25 -0.041500 -0.041500 -0.10340 -0.000905
-#' # Q50 -0.112525 -0.111175 -0.28115  0.019350
-#' # Q75 -0.168000 -0.170425 -0.38890  0.005300
-#' #
-#' #
-#' # Quartiles of con
-#' # observed   median    lower   upper
-#' # Q25 0.054000 0.054000 0.021005 0.11275
-#' # Q50 0.139275 0.139275 0.061400 0.31000
-#' # Q75 0.315000 0.315000 0.173000 0.44625
-#' #
-#' #
-#' # Quartiles of vac
-#' # observed  median   lower    upper
-#' # Q25  0.01250 0.01250 0.00125 0.026000
-#' # Q50  0.02675 0.02675 0.01665 0.144575
-#' # Q75  0.14700 0.14700 0.02810 0.219250
 #' @importFrom stats quantile median model.frame pnorm qnorm
+#' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-
-#--------------------------------------------------------------------
-# Bootstrap HL, quartiles, quartile diffs
-#--------------------------------------------------------------------
-#
 HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
                    alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
                    trace.it = FALSE, seed = sample(1:100000, 1)) {

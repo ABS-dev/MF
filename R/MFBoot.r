@@ -32,15 +32,8 @@
 #'
 #' MFBoot(lesion ~ group, calflung, seed = 12345)
 #'
-#' # 10000 bootstrap samples
-#' # 95% confidence interval
-#' # Seed = 12345
-#' #
-#' # Comparing vac to con
-#' # observed median lower  upper
-#' # Equal Tailed        0.44 0.4496 0.152 0.7088
-#' # Highest Density     0.44 0.4496 0.152 0.7088
 #' @importFrom stats quantile median model.frame pnorm qnorm
+#' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
 MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
                    alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
