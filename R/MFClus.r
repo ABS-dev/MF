@@ -12,8 +12,9 @@
 #' @param vac_grp The name of the vaccinated group.
 #' @param con_grp The name of the control group.
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared
 #' @returns a [mfcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
 #'   associated with unused treatment levels will be removed.
@@ -39,16 +40,17 @@ MFClus <- function(formula,
                    con_grp = "con",
                    trace.it = FALSE,
                    compare = deprecated()) {
-  # formula of the form response ~ treatment + cluster(clustername)
-  # based on prob{F(y) < F(x)}
-  # within-cluster ranking only
-  # 3/19/01 initial coding
-  # revised 10/3/06 to eliminate clusters without both treatments represented
-  # revised 8/27/13 - remove group levels if no observations from that level
-  #     are present in original data
-  # revised 9/03/13 - subset initial data by comparison group levels
-  # revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to
-  #     external function
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "MFClus(compare)",
+                   "MFClus(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
+
   dat <- NULL
   group <- NULL
   clusters <- NULL

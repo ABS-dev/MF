@@ -37,7 +37,8 @@ mf <- setRefClass("mf", fields = list(nboot = "numeric",
 #' @section Fields:
 #' * `nboot`: numeric value specifying number of samples
 #' * `alpha`: numeric value specifying complement of confidence interval
-#' * `seed`: vector of integers specifying seed for pseudo-random number generator used
+#' * `seed`: vector of integers specifying seed for pseudo-random number
+#'    generator used
 #' * `vac_grp`:  text vector, same as input
 #' * `con_grp`:  text vector, same as input
 #' * `rng`: character string naming type of random number generator
@@ -60,7 +61,8 @@ mfboot <- setRefClass("mfboot", contains = "mf",
 #' @section Fields:
 #' * `nboot`: Numeric value specifying number of samples.
 #' * `alpha`: Numeric value specifying complement of confidence interval.
-#' * `seed`: Vector of integers specifying seed for pseudo-random number generator used.
+#' * `seed`: Vector of integers specifying seed for pseudo-random number
+#'   generator used.
 #' * `vac_grp`:  text vector, same as input
 #' * `con_grp`:  text vector, same as input
 #' * `rng`: Character string naming type of random number generator.
@@ -119,7 +121,8 @@ mfmp <- setRefClass("mfmp",
 #' @section Fields:
 #' * `nboot`: numeric value specifying number of samples
 #' * `alpha`: numeric value specifying complement of confidence interval
-#' * `seed`: vector of integers specifying seed for pseudo-random number generator used
+#' * `seed`: vector of integers specifying seed for pseudo-random number
+#'    generator used
 #' * `vac_grp`:  text vector, same as input
 #' * `con_grp`:  text vector, same as input
 #' * `rng`: character string naming type of random number generator
@@ -158,7 +161,8 @@ mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
 #'   * `n2`: size of group 2
 #'   * `mf`: mitigated fraction
 #' * `byCluster`: As for All, by clusters
-#' * `excludedClusters`: character vector naming clusters excluded because of missing treatment
+#' * `excludedClusters`: character vector naming clusters excluded because of
+#'    missing treatment
 #' * `call`: the call to `MFClus`
 #' * `vac_grp`:  text vector, same as input
 #' * `con_grp`:  text vector, same as input

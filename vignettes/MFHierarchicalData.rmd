@@ -62,14 +62,14 @@ all factors of another variable), it is not appropriate to use this guide as
 written.
 
 ```{r expdesign, echo = FALSE}
-kbl(a, 
-    align = "c", 
+kbl(a,
+    align = "c",
     row.names = FALSE,
     caption = "Nested hierarchical data structure.")  |>
-  kable_styling("bordered", 
-                full_width = FALSE, 
+  kable_styling("bordered",
+                full_width = FALSE,
                 font_size = 8) |>
-  collapse_rows(columns = 1:4, 
+  collapse_rows(columns = 1:4,
                 valign = "middle")
 ```
 

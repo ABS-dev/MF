@@ -15,8 +15,9 @@
 #' @param which.factor one or more variable(s) of interest. This can be any of
 #'   the core or nest variables from the data set. If none or NULL is specified,
 #'   MF will be calculated for the whole tree.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared.
 #' @returns A list with the following elements:
 #'
 #' * `MFh`: as output from [MFh].
@@ -53,6 +54,16 @@ MFClusHier <- function(formula,
                        con_grp = "con",
                        which.factor = "All",
                        compare = deprecated()) {
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "MFClusHier(compare)",
+                   "MFClusHier(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
   aCore <- MFh(formula, data, vac_grp, con_grp)
   out <- mfclushier$new(MFh = aCore, MFnest = MFnest(aCore, which.factor))
   return(out)
@@ -83,8 +94,9 @@ MFClusHier <- function(formula,
 #'   tailed lower of mitigated fraction.
 #' @param seed Passed to [MFhBoot] to to initialize random number generator for
 #'   reproducibility.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared.
 #' @returns A list with the following elements:
 #'
 #' * `MFhBoot`: as output from [MFhBoot].
@@ -121,6 +133,16 @@ MFClusBootHier <- function(formula,
                            alpha = 0.05,
                            seed = sample(1:1e5, 1),
                            compare = deprecated()) {
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "MFClusBootHier(compare)",
+                   "MFClusBootHier(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
   thisbootmfh <- MFhBoot(formula = formula, data = data, vac_grp = vac_grp,
                          con_grp = con_grp, nboot = nboot,
                          boot.unit = boot.unit, boot.cluster = boot.cluster,

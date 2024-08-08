@@ -25,8 +25,9 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared
 #' @returns a [mfhlboot-class] data object
 #' @seealso [mfhlboot-class]
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
@@ -61,6 +62,17 @@ HLBoot <- function(formula,
                    compare = deprecated()) {
   # set seed
   set.seed(seed)
+
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "HLBoot(compare)",
+                   "HLBoot(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
 
   # Wilcoxon rank sum statistic
   w <- function(xy, n_x) {

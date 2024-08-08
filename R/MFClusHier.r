@@ -10,8 +10,9 @@
 #'   Additional variables will be ignored.
 #' @param vac_grp The name of the vaccinated group.
 #' @param con_grp The name of the control group.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared.
 #' @returns A [mfhierdata] object, which is a list of three items.
 #' * `coreTbl` A [tibble] with one row for each unique core level showing
 #'   values for:
@@ -63,6 +64,17 @@ MFh <- function(formula,
                 vac_grp = "vac",
                 con_grp = "con",
                 compare = deprecated()) {
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "Mfh(compare)",
+                   "Mfh(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
+
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))

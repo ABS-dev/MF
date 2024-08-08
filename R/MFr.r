@@ -11,8 +11,9 @@
 #' @param data Data frame
 #' @param vac_grp The name of the vaccinated group.
 #' @param con_grp The name of the control group.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared
 #' @returns The estimated mitigated fraction.
 #' @references Siev D, 2005. An estimator of intervention effect on disease
 #'   severity. *Journal of Modern Applied Statistical Methods.* 4:500-508
@@ -27,6 +28,17 @@ MFr <- function(formula,
                 vac_grp = "vac",
                 con_grp = "con",
                 compare = deprecated()) {
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "MFr(compare)",
+                   "MFr(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
+
   # formula of form response ~ treatment
   # x = response for con_grp
   # y = response for vac_grp

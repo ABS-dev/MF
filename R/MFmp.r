@@ -16,8 +16,9 @@
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence
 #'   interval? Default t distribution.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared
 #' @note upper confidence interval is truncated to 1; lower confidence interval
 #'   is truncated to -1. Point estimate of 1.0 indicates complete separation.
 #' @returns a [mfmp-class] data object
@@ -41,6 +42,17 @@ MFmp <- function(formula = NULL,
                  df = NA,
                  tdist = TRUE,
                  compare = deprecated()) {
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "MFmp(compare)",
+                   "MFmp(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
+
   # asymptotic CI for matched pairs
   # x is a trinomial frequency vector
   # difference of multinomial fractions

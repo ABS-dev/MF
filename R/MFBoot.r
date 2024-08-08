@@ -19,8 +19,9 @@
 #' @param trace.it Verbose tracking of the cycles?
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
-#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels:
+#'   `compare[1]` is the control or reference group to which `compare[2]`
+#'   (vaccinate) is compared
 #' @returns a [mfboot-class] data object
 #' @seealso [mfboot-class]
 #' @references Siev D. (2005). An estimator of intervention effect on disease
@@ -50,12 +51,16 @@ MFBoot <- function(formula,
                    trace.it = FALSE,
                    seed = sample(1:100000, 1),
                    compare = deprecated()) {
-  # bootstrap confidence intervals for MF
-  # 11/17/99 initial coding
-  # 2/24/04 added BC.a interval
-  # 5/25/10 added empirical HPD interval
-  # takes b bootstrap samples B times, so nboot = B * b
-  # 10/1/2018 add seed utility
+  if (is_present(compare)) {
+    deprecate_warn("4.5.0",
+                   "MFBoot(compare)",
+                   "MFBoot(vac_grp, con_grp)")
+    if (length(compare) != 2) {
+      stop("`compare` must be a vector of length 2!")
+    }
+    vac_grp <- compare[2]
+    con_grp <- compare[1]
+  }
 
   # set seed
   set.seed(seed)
