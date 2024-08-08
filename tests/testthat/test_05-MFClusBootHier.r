@@ -19,7 +19,8 @@ test_that("output", {
 
   ## MFhBoot
   expect_identical(names(thismf1$MFhBoot),
-                   c("bootmfh", "clusters", "compare", "mfh", "seed"))
+                   c("bootmfh", "clusters", "vac_grp", "con_grp",
+                     "mfh", "seed"))
   expect_equal(dim(thismf1$MFhBoot$bootmfh), c(120000, 11))
   expect_identical(names(thismf1$MFhBoot$bootmfh),
                    c("bootID", "w", "u", "n1n2", "con_n", "vac_n",
@@ -31,8 +32,9 @@ test_that("output", {
   expect_equal(nrow(thismf1$MFhBoot$clusters), 12)
   expect_identical(names(thismf1$MFhBoot$clusters),
                    c("room", "pen", "litter", "clusterID"))
-  expect_identical(thismf1$MFhBoot$compare,
-                   c("con", "vac"))
+  expect_identical(thismf1$MFhBoot$vac_grp, "vac")
+  expect_identical(thismf1$MFhBoot$con_grp, "con")
+
 
   ## MFnestBoot
   expect_identical(names(thismf1$MFnestBoot),
@@ -69,14 +71,14 @@ test_that("level_types", {
                          obs = rnorm(n = 8, mean = 23.5, sd = 0.53))
   ex1 <- thisdata |>
     MFClusBootHier(formula = obs ~ group + location / pen,
-                   compare = c("con", "vacc"),
+                   vac_grp = "vacc", con_grp = "con",
                    which.factor = c("location", "All"), seed = 61889)
   expect_is(ex1, "mfclusboothier")
 
   ex2 <- thisdata |>
     mutate_if(is.factor, as.character) |>
     MFClusBootHier(formula = obs ~ group + location / pen,
-                   compare = c("con", "vacc"),
+                   vac_grp = "vacc", con_grp = "con",
                    which.factor = c("location", "All"), seed = 61889)
   expect_is(ex2, "mfclusboothier")
 

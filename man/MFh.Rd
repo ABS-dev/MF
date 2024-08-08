@@ -4,7 +4,7 @@
 \alias{MFh}
 \title{Identify ranks for use when evaluating MF for nested hierarchy.}
 \usage{
-MFh(formula, data, compare = c("con", "vac"))
+MFh(formula, data, vac_grp = "vac", con_grp = "con", compare = deprecated())
 }
 \arguments{
 \item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous
@@ -17,8 +17,12 @@ multiple levels of "c".}
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is the
-control or reference group to which \code{compare[2]} is compared.}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared.}
 }
 \value{
 A \link{mfhierdata} object, which is a list of three items.
@@ -59,21 +63,6 @@ a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 
 aCore <- MFh(lung ~ tx + room / pen / litter, a)
 aCore
-#  A tibble: 12 x 10
-#     room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2
-#     <chr>  <chr> <chr>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl>
-#   1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4
-#   2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4
-#   3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4
-#   4 Room W Pen B Litter 14        8.11     2     7        5.59     2     4
-#   5 Room W Pen C Litter 15        8.09     2     7        5.26     2     4
-#   6 Room W Pen C Litter 16        6.77     2     7        4.50     2     4
-#   7 Room Z Pen D Litter 17        5.58     2     7        4.26     2     4
-#   8 Room Z Pen D Litter 18        7.44     2     6        6.33     2     4
-#   9 Room Z Pen E Litter 19        7.98     2     7        4.58     2     4
-#  10 Room Z Pen E Litter 20        6.78     2     7        4.86     2     4
-#  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4
-#  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4
 }
 \seealso{
 \link{MFnest} for calculation of MF for nest, core and all variables.

@@ -28,8 +28,9 @@ test_that("output", {
                       "numeric"))
   expect_equal(dim(thismf$MFh$data),
                c(48, 5))
-  expect_identical(thismf$MFh$compare,
-                   c("con", "vac"))
+  expect_identical(thismf$MFh$vac_grp, "vac")
+  expect_identical(thismf$MFh$con_grp, "con")
+
   expect_identical(all.vars(thismf$MFh$formula),
                    c("lung", "tx", "room", "pen", "litter"))
 

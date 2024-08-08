@@ -8,14 +8,16 @@
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param x Trinomial vector \eqn{\{\Sigma I(x < y), \Sigma I(x = y), \Sigma I(x
 #'   > y)\}}
 #' @param alpha Complement of the confidence level.
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence
 #'   interval? Default t distribution.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @note upper confidence interval is truncated to 1; lower confidence interval
 #'   is truncated to -1. Point estimate of 1.0 indicates complete separation.
 #' @returns a [mfmp-class] data object
@@ -25,20 +27,27 @@
 #'   **4:500--508**
 #' @author [MF-package]
 #' @examples
-#' MFmp(les ~ tx + cluster(cage), mlesions, compare = c("con", "vac"))
+#' MFmp(les ~ tx + cluster(cage), mlesions, vac_grp = "vac", con_grp = "con")
 #' MFmp(x = c(12, 12, 2))
 #' @importFrom stats qnorm qt
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
-                 x = NULL, alpha = 0.05, df = NA, tdist = TRUE) {
+MFmp <- function(formula = NULL,
+                 data = NULL,
+                 vac_grp = "vac",
+                 con_grp = "con",
+                 x = NULL,
+                 alpha = 0.05,
+                 df = NA,
+                 tdist = TRUE,
+                 compare = deprecated()) {
   # asymptotic CI for matched pairs
   # x is a trinomial frequency vector
   # difference of multinomial fractions
 
   if (!is.null(formula) && !is.null(data)) {
     byCluster <- MFClus(formula = formula, data = data,
-                        compare = compare)$byCluster[, "mf"]
+                        vac_grp = vac_grp, con_grp = con_grp)$byCluster[, "mf"]
     ##
     byCluster <- factor(byCluster)
     levels(byCluster) <- c("-1", "1", "0")

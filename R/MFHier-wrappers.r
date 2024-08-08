@@ -10,11 +10,13 @@
 #'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared.
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param which.factor one or more variable(s) of interest. This can be any of
 #'   the core or nest variables from the data set. If none or NULL is specified,
 #'   MF will be calculated for the whole tree.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @returns A list with the following elements:
 #'
 #' * `MFh`: as output from [MFh].
@@ -41,12 +43,17 @@
 #' aCore
 #' aCore$data
 #' aCore$formula
-#' aCore$compare
+#' aCore$vac_grp
+#' aCore$con_grp
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFClusHier <- function(formula, data, compare = c("con", "vac"),
-                       which.factor = "All") {
-  aCore <- MFh(formula, data, compare)
+MFClusHier <- function(formula,
+                       data,
+                       vac_grp = "vac",
+                       con_grp = "con",
+                       which.factor = "All",
+                       compare = deprecated()) {
+  aCore <- MFh(formula, data, vac_grp, con_grp)
   out <- mfclushier$new(MFh = aCore, MFnest = MFnest(aCore, which.factor))
   return(out)
 }
@@ -61,10 +68,10 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   in order, left to right, highest to lowest. So a single level of "a" will
 #'   contain multiple levels of "b" and a single level of "b" will contain
 #'   multiple levels of "c".
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @param nboot number of bootstrapping events
 #' @param boot.unit Boolean whether to sample observations from within those of
 #'   the same core.
@@ -76,6 +83,8 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   tailed lower of mitigated fraction.
 #' @param seed Passed to [MFhBoot] to to initialize random number generator for
 #'   reproducibility.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @returns A list with the following elements:
 #'
 #' * `MFhBoot`: as output from [MFhBoot].
@@ -101,13 +110,20 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #' thismf1
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFClusBootHier <- function(formula, data, compare = c("con", "vac"),
-                           nboot = 10000, boot.unit = TRUE, boot.cluster = TRUE,
-                           which.factor = "All", alpha = 0.05,
-                           seed = sample(1:1e5, 1)) {
-  thisbootmfh <- MFhBoot(formula = formula, data = data, compare = compare,
-                         nboot = nboot, boot.unit = boot.unit,
-                         boot.cluster = boot.cluster,
+MFClusBootHier <- function(formula,
+                           data,
+                           vac_grp = "vac",
+                           con_grp = "con",
+                           nboot = 10000,
+                           boot.unit = TRUE,
+                           boot.cluster = TRUE,
+                           which.factor = "All",
+                           alpha = 0.05,
+                           seed = sample(1:1e5, 1),
+                           compare = deprecated()) {
+  thisbootmfh <- MFhBoot(formula = formula, data = data, vac_grp = vac_grp,
+                         con_grp = con_grp, nboot = nboot,
+                         boot.unit = boot.unit, boot.cluster = boot.cluster,
                          seed = seed)
   out <- mfclusboothier$new(MFhBoot = thisbootmfh,
                             MFnestBoot = MFnestBoot(thisbootmfh,

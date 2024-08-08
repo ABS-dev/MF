@@ -1,6 +1,6 @@
 # shared reshaping portion of MFClus and MFClusBoot
 #' @importFrom stats model.frame terms
-reshape_cluster <- function(data, formula, compare, envir) {
+reshape_cluster <- function(data, formula, vac_grp, con_grp, envir) {
   cluster <- function(x) {
     return(x)
   }
@@ -9,7 +9,8 @@ reshape_cluster <- function(data, formula, compare, envir) {
   clus_frame <- model.frame(formula = clus_terms, data = data)
   # reduce data to the comparison groups - mcv 09/03/13
   clus_frame <-
-    clus_frame[clus_frame[, attr(clus_terms, "term.labels")[1]] %in% compare, ]
+    clus_frame[clus_frame[, attr(clus_terms,
+                                 "term.labels")[1]] %in% c(vac_grp, con_grp), ]
   dat <- clus_frame[, 1]
   group <- clus_frame[, 2]
   # remove any group levels that aren't present; don't want to evaluate for

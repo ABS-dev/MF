@@ -4,20 +4,31 @@
 \alias{MFClus}
 \title{Clustered mitigated fraction}
 \usage{
-MFClus(formula, data, compare = c("con", "vac"), trace.it = FALSE)
+MFClus(
+  formula,
+  data,
+  vac_grp = "vac",
+  con_grp = "con",
+  trace.it = FALSE,
+  compare = deprecated()
+)
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a
 continuous response, x is a factor with two levels of treatment, and w is a
 factor indicating the clusters.}
 
-\item{data}{Data frame.  See \code{Note} for handling of input data with more
-than two levels.}
+\item{data}{Data frame.  See \code{Note} for handling of input data with more than
+two levels.}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
-the control or reference group to which \code{compare[2]} is compared}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
 
 \item{trace.it}{Verbose tracking of the cycles? Default FALSE.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared}
 }
 \value{
 a \linkS4class{mfcluster} data object
@@ -41,38 +52,6 @@ Clusters with missing treatments will be excluded. See
 \examples{
 \dontrun{
 MFClus(lesion ~ group + cluster(litter), piglung)
-
-#  Comparing vac to con
-#
-#  MF = 0.3533835
-#
-#  By Cluster
-#     w  u         r n1 n2         mf
-#  U 25 10 0.4000000  5  5 -0.2000000
-#  K 12  2 0.2500000  4  2 -0.5000000
-#  Z 16 10 0.8333333  3  4  0.6666667
-#  D  3  2 1.0000000  1  2  1.0000000
-#  N  1  0 0.0000000  1  3 -1.0000000
-#  T  8  5 0.8333333  2  3  0.6666667
-#  P  4  1 0.5000000  2  1  0.0000000
-#  L  3  2 0.6666667  1  3  0.3333333
-#  G 15  9 0.7500000  3  4  0.5000000
-#  J 15  9 1.0000000  3  3  1.0000000
-#  W  6  3 0.7500000  2  2  0.5000000
-#  A  9  3 0.3333333  3  3 -0.3333333
-#  X 12  6 1.0000000  3  2  1.0000000
-#  F 13  7 0.7777778  3  3  0.5555556
-#  S 21 11 0.9166667  4  3  0.8333333
-#  H 14  8 0.8888889  3  3  0.7777778
-#  Y  2  1 1.0000000  1  1  1.0000000
-#  E  2  1 1.0000000  1  1  1.0000000
-#
-#  All
-#        w  u         r n1 n2        mf
-#  All 181 90 0.6766917 50 52 0.3533835
-#
-#  Excluded Clusters
-#  [1] M, Q, R, B, O, V, I, C
 }
 }
 \references{

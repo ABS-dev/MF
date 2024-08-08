@@ -54,8 +54,6 @@ boot.cluster <- TRUE
 boot.unit <- TRUE
 which.factors <- c("All", "room", "pen", "litter")
 
-#################
-
 test1 <- MFhBoot(formula, a,
                  nboot = 10000,
                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)

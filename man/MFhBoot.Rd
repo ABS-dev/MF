@@ -7,11 +7,13 @@
 MFhBoot(
   formula,
   data,
-  compare = c("con", "vac"),
+  vac_grp = "vac",
+  con_grp = "con",
   nboot = 10000,
   boot.unit = TRUE,
   boot.cluster = TRUE,
-  seed = sample(1:1e+05, 1)
+  seed = sample(1:1e+05, 1),
+  compare = deprecated()
 )
 }
 \arguments{
@@ -25,8 +27,9 @@ multiple levels of "c".}
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is the
-control or reference group to which \code{compare[2]} is compared.}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
 
 \item{nboot}{number of bootstrapping events}
 
@@ -38,6 +41,9 @@ TRUE, some trees have all the cores while others only have a subset.}
 
 \item{seed}{to initialize random number generator for reproducibility. Passed
 to \code{set.seed}.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared.}
 }
 \value{
 A list with the following elements:

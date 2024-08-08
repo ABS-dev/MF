@@ -10,8 +10,8 @@
 #'   factor indicating the clusters.
 #' @param data Data frame. See `Note` for handling of input data with more than
 #'   two levels.
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param boot.cluster Boolean whether to resample the clusters.
 #' @param boot.unit Boolean whether to resample the units within cluster.
 #' @param b Number of bootstrap samples to take with each cycle
@@ -23,6 +23,8 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @returns a [mfbootcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
 #'   associated with unused treatment levels will be removed.
@@ -45,10 +47,20 @@
 #' @importFrom stats quantile
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFClusBoot <- function(formula, data, compare = c("con", "vac"),
-                       boot.cluster = TRUE, boot.unit = TRUE, b = 100,
-                       B = 100, alpha = 0.05, hpd = TRUE, return.boot = FALSE,
-                       trace.it = FALSE, seed = sample(1:100000, 1)) {
+MFClusBoot <- function(formula,
+                       data,
+                       vac_grp = "vac",
+                       con_grp = "con",
+                       boot.cluster = TRUE,
+                       boot.unit = TRUE,
+                       b = 100,
+                       B = 100,
+                       alpha = 0.05,
+                       hpd = TRUE,
+                       return.boot = FALSE,
+                       trace.it = FALSE,
+                       seed = sample(1:100000, 1),
+                       compare = deprecated()) {
   ## set seed
   set.seed(seed)
   # short circuit if no bootstrapping!
@@ -56,22 +68,6 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
     stop("No bootstrapping specified")
   }
   # takes b bootstrap samples B times, so nboot = B * b
-  # 3/19/01 initial coding
-  # revised 6/30/05 to allow bootstrapping clusters, units, or both
-  # revised 8/25/06 to allow possibility there may be only one unit assigned
-  #     to one of the groups within a cluster
-  # revised 10/3/06 to eliminate clusters without both treatments represented
-  # revised 03/07/07 by MMR to add the compare argument in the call to MFClus
-  # revised 6/15/07 by DS - moved lines 59-60 from original location to
-  #    correctly identify clusters that are eliminated
-  # R version 5/6/10 - added quotes in switch()
-  # revised 5/25/10 - added empirical HPD interval
-  # revised 8/27/13 - remove group levels if no observations from that level
-  #      are present in original data
-  # revised 9/03/13 - subset initial data by comparison group levels
-  # revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to
-  #      external function
-  # revised 1/10/14 - move empirical HPD interval to external function shared
 
   rng <- "Mersenne-Twister"
   RNGkind(rng)
@@ -79,9 +75,8 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   group <- NULL
   clusters <- NULL
   strat <- NULL
-  reshape_cluster(data = data, formula = formula, compare = compare,
-                  envir = environment())
-  id <- compare
+  reshape_cluster(data = data, formula = formula, vac_grp = vac_grp,
+                  con_grp = con_grp, envir = environment())
   keep <- apply(table(group, clusters), 2, function(x) {
     all(x > 0)
   })[strat]
@@ -119,8 +114,8 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
     w <- u <- n1n2 <- rep(NA, n.strat)
     names(w) <- names(u) <- names(n1n2) <- strat
     for (stratum in strat) {
-      x <- dat[group == id[1] & as.character(clusters) == stratum]
-      y <- dat[group == id[2] & as.character(clusters) == stratum]
+      x <- dat[group == con_grp & as.character(clusters) == stratum]
+      y <- dat[group == vac_grp & as.character(clusters) == stratum]
       n_x <- length(x)
       n_y <- length(y)
       x_y <- c(x, y)
@@ -168,8 +163,8 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
       } else {
         cat(". ")
       }
-      x <- dat[group == id[1] & as.character(clusters) == stratum]
-      y <- dat[group == id[2] & as.character(clusters) == stratum]
+      x <- dat[group == con_grp & as.character(clusters) == stratum]
+      y <- dat[group == vac_grp & as.character(clusters) == stratum]
       n_x <- length(x)
       n_y <- length(y)
       n.each[stratum] <- sum(strat_b == stratum)
@@ -183,7 +178,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
     MF <- 2 * R - 1
   }
   q <- c(.5, alpha / 2, 1 - alpha / 2)
-  mf_all <-  MFClus(formula, data, compare = compare)$All
+  mf_all <-  MFClus(formula, data, vac_grp = vac_grp, con_grp = con_grp)$All
   mf.obs <- mf_all$mf
   nboot <- b * B
   cluster.text <- ifelse(boot.cluster, "clusters", "")
@@ -209,6 +204,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   return(mfbootcluster$new(stat = stat, nboot = nboot, alpha = alpha,
                            what = the_text,
                            excludedClusters = excluded.clusters, seed = seed,
-                           call = match.call(), compare = compare, rng = rng,
+                           call = match.call(), vac_grp = vac_grp,
+                           con_grp = con_grp, rng = rng,
                            sample = sample, All =  mf_all))
 }

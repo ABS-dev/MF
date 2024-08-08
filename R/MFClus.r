@@ -9,9 +9,11 @@
 #'   factor indicating the clusters.
 #' @param data Data frame.  See `Note` for handling of input data with more than
 #'   two levels.
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @returns a [mfcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
 #'   associated with unused treatment levels will be removed.
@@ -31,7 +33,12 @@
 #' }
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
+MFClus <- function(formula,
+                   data,
+                   vac_grp = "vac",
+                   con_grp = "con",
+                   trace.it = FALSE,
+                   compare = deprecated()) {
   # formula of the form response ~ treatment + cluster(clustername)
   # based on prob{F(y) < F(x)}
   # within-cluster ranking only
@@ -46,15 +53,14 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
   group <- NULL
   clusters <- NULL
   strat <- NULL
-  reshape_cluster(data = data, formula = formula, compare = compare,
-                  envir = environment())
-  id <- compare
+  reshape_cluster(data = data, formula = formula, vac_grp = vac_grp,
+                  con_grp = con_grp, envir = environment())
   out <- matrix(NA, length(strat), 6,
                 dimnames = list(strat, c("w", "u", "r", "n1", "n2", "mf")))
   excluded.clusters <- NULL
   for (stratum in strat) {
-    x <- dat[group == id[1] & as.character(clusters) == stratum]
-    y <- dat[group == id[2] & as.character(clusters) == stratum]
+    x <- dat[group == con_grp & as.character(clusters) == stratum]
+    y <- dat[group == vac_grp & as.character(clusters) == stratum]
     n_x <- length(x)
     n_y <- length(y)
     if (n_x > 0 && n_y > 0) {
@@ -86,5 +92,5 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
   return(mfcluster$new(All = All, byCluster = out,
                        excludedClusters = excluded.clusters,
                        call = match.call(),
-                       compare = compare))
+                       vac_grp = vac_grp, con_grp = con_grp))
 }

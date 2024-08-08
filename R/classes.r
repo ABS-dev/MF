@@ -16,7 +16,8 @@ setClassUnion("numericORinteger", c("numeric", "integer"))
 #' * `alpha`: numeric value specifying complement of confidence interval
 #' * `seed`: vector of integers specifying seed for pseudo-random number
 #' generator used
-#' * `compare`: vector of character strings naming groups compared
+#' * `vac_grp`:  text vector, same as input
+#' * `con_grp`:  text vector, same as input
 #' * `rng`: character string naming type of random number generator
 #' @keywords documentation
 #' @family mf
@@ -24,7 +25,8 @@ setClassUnion("numericORinteger", c("numeric", "integer"))
 mf <- setRefClass("mf", fields = list(nboot = "numeric",
                                       alpha = "numeric",
                                       seed = "numericORinteger",
-                                      compare = "character",
+                                      vac_grp = "character",
+                                      con_grp = "character",
                                       rng = "character"))
 
 #' @name mfboot-class
@@ -36,7 +38,8 @@ mf <- setRefClass("mf", fields = list(nboot = "numeric",
 #' * `nboot`: numeric value specifying number of samples
 #' * `alpha`: numeric value specifying complement of confidence interval
 #' * `seed`: vector of integers specifying seed for pseudo-random number generator used
-#' * `compare`: vector of character strings naming groups compared
+#' * `vac_grp`:  text vector, same as input
+#' * `con_grp`:  text vector, same as input
 #' * `rng`: character string naming type of random number generator
 #' * `sample`:  what is this?
 #' * `stat`: matrix of estimates
@@ -58,7 +61,8 @@ mfboot <- setRefClass("mfboot", contains = "mf",
 #' * `nboot`: Numeric value specifying number of samples.
 #' * `alpha`: Numeric value specifying complement of confidence interval.
 #' * `seed`: Vector of integers specifying seed for pseudo-random number generator used.
-#' * `compare`: Vector of character strings naming groups compared.
+#' * `vac_grp`:  text vector, same as input
+#' * `con_grp`:  text vector, same as input
 #' * `rng`: Character string naming type of random number generator.
 #' * `sample`: The bootstrapped values.
 #' * `MFstat`: Matrix with columns *observed*, *median*, *lower*, *upper* for
@@ -116,7 +120,8 @@ mfmp <- setRefClass("mfmp",
 #' * `nboot`: numeric value specifying number of samples
 #' * `alpha`: numeric value specifying complement of confidence interval
 #' * `seed`: vector of integers specifying seed for pseudo-random number generator used
-#' * `compare`: vector of character strings naming groups compared
+#' * `vac_grp`:  text vector, same as input
+#' * `con_grp`:  text vector, same as input
 #' * `rng`: character string naming type of random number generator
 #' * `stat`: matrix matrix with columns *observed*, *median*, *lower*, *upper*
 #' for estimates
@@ -155,7 +160,8 @@ mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
 #' * `byCluster`: As for All, by clusters
 #' * `excludedClusters`: character vector naming clusters excluded because of missing treatment
 #' * `call`: the call to `MFClus`
-#' * `compare`: character vector naming groups compared
+#' * `vac_grp`:  text vector, same as input
+#' * `con_grp`:  text vector, same as input
 #' @keywords documentation
 #' @family mfcluster
 #' @seealso [MFClus]
@@ -165,7 +171,8 @@ mfcluster <- setRefClass("mfcluster",
                                        byCluster = "matrix",
                                        excludedClusters = "characterORNULL",
                                        call = "call",
-                                       compare = "character"))
+                                       vac_grp = "character",
+                                       con_grp = "character"))
 
 #' @name mfcomponents-class
 #' @title Class mfcomponents
@@ -176,7 +183,8 @@ mfcluster <- setRefClass("mfcluster",
 #' * `x`: numeric vector containing responses of group 1
 #' * `y`: numeric vector containing responses of group 2
 #' * `subj`: matrix where `mf_j`re the subject components
-#' * `compare`: character vector naming groups being compared
+#' * `vac_grp`:  text vector, same as input
+#' * `con_grp`:  text vector, same as input
 #' @keywords documentation
 #' @family mfcomponents
 #' @seealso [MFSubj]
@@ -186,7 +194,8 @@ mfcomponents <- setRefClass("mfcomponents",
                                           x = "numeric",
                                           y = "numeric",
                                           subj = "matrix",
-                                          compare = "character"))
+                                          vac_grp = "character",
+                                          con_grp = "character"))
 
 #' @name mfhierdata-class
 #' @title Class mfhierdata
@@ -197,7 +206,8 @@ mfcomponents <- setRefClass("mfcomponents",
 #' values for `nx`, `ny`, `N`, `w`, `u`, and `median` observed response.
 #' * `data`: data.frame is the restructured input data used for calculations in
 #' MFh and MFnest.
-#' * `compare`: character vector naming groups being compared.
+#' * `vac_grp`:  text vector, same as input
+#' * `con_grp`:  text vector, same as input
 #' * `formula`: formula that was called by user.
 #' @keywords documentation
 #' @family mfhierdata
@@ -206,7 +216,8 @@ mfcomponents <- setRefClass("mfcomponents",
 mfhierdata <- setRefClass("mfhierdata",
                           fields = list(coreTbl = "tbl",
                                         data = "tbl",
-                                        compare = "character",
+                                        vac_grp = "character",
+                                        con_grp = "character",
                                         formula = "formula"))
 
 

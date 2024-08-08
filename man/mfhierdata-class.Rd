@@ -16,7 +16,8 @@ Class mfhierdata is created from output of function MFh
 values for \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and \code{median} observed response.
 \item \code{data}: data.frame is the restructured input data used for calculations in
 MFh and MFnest.
-\item \code{compare}: character vector naming groups being compared.
+\item \code{vac_grp}:  text vector, same as input
+\item \code{con_grp}:  text vector, same as input
 \item \code{formula}: formula that was called by user.
 }
 }

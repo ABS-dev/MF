@@ -2,7 +2,8 @@ context("MFmp")
 
 
 test_that("output", {
-  mfmp1 <- MFmp(les ~ tx + cluster(cage), mlesions, compare = c("con", "vac"))
+  mfmp1 <- MFmp(les ~ tx + cluster(cage), mlesions, vac_grp = "vac",
+                con_grp = "con")
   mfmp2 <- MFmp(x = c(12, 12, 2))
 
   ## mfmp1

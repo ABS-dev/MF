@@ -12,8 +12,8 @@
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
@@ -25,6 +25,8 @@
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @returns a [mfhlboot-class] data object
 #' @seealso [mfhlboot-class]
 #' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
@@ -44,9 +46,19 @@
 #' @importFrom stats quantile median model.frame pnorm qnorm
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-                   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
-                   trace.it = FALSE, seed = sample(1:100000, 1)) {
+HLBoot <- function(formula,
+                   data,
+                   vac_grp = "vac",
+                   con_grp = "con",
+                   b = 100,
+                   B = 100,
+                   alpha = 0.05,
+                   hpd = TRUE,
+                   bca = FALSE,
+                   return.boot = FALSE,
+                   trace.it = FALSE,
+                   seed = sample(1:100000, 1),
+                   compare = deprecated()) {
   # set seed
   set.seed(seed)
 
@@ -69,8 +81,8 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   A <- data.frame(model.frame(formula = formula, data = data))
   resp <- A[, 1]
   tx <- A[, 2]
-  x <- resp[tx == compare[1]]
-  y <- resp[tx == compare[2]]
+  x <- resp[tx == con_grp]
+  y <- resp[tx == vac_grp]
 
   # shortcircuit if complete separation
   if (range(x)[1] < range(y)[1]) {
@@ -188,6 +200,6 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 
   return(mfhlboot$new(MFstat = mfstat, HLstat = hlstat, QDIFstat = qdifstat,
                       QXstat = qxstat, QYstat = qystat, nboot = nboot,
-                      alpha = alpha, seed = seed, compare = compare,
-                      rng = rng, sample = sample))
+                      alpha = alpha, seed = seed, vac_grp = vac_grp,
+                      con_grp = con_grp, rng = rng, sample = sample))
 }

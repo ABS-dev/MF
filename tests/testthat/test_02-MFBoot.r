@@ -7,7 +7,8 @@ test_that("output", {
   expect_s4_class(test2, "mfboot")
   expect_equal(test2$nboot, expected = 10000, tolerance = 0)
   expect_equal(test2$alpha, expected = 0.05, tolerance = 0)
-  expect_identical(test2$compare, expected = c("con", "vac"))
+  expect_identical(test2$vac_grp, "vac")
+  expect_identical(test2$con_grp, "con")
   expect_identical(test2$rng, expected = "Mersenne-Twister")
 
   # stat

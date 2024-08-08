@@ -6,7 +6,7 @@ setMethod(
         "confidence interval\n")
     cat(paste("Seed = ", x$seed))
     cat("\n")
-    cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
+    cat("\nComparing", x$vac_grp, "to", x$con_grp, "\n")
     print(x$stat)
     cat("\n")
   }
@@ -24,18 +24,18 @@ setMethod("print", "mfhlboot",
             cat("\n", x$nboot, " bootstrap samples", sep = "")
             cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
                 " confidence intervals", sep = "")
-            cat("\nComparing", x$compare[2], "to", x$compare[1], "\n\n")
+            cat("\nComparing", x$vac_grp, "to", x$con_grp, "\n\n")
             cat(paste("Seed = ", x$seed))
             cat("\nMitigated Fraction\n\n")
             print(x$MFstat)
             cat("\n\nHodges-Lehmann\n\n")
             print(x$HLstat)
-            cat("\n\nQuartile Differences (quartiles of ", x$compare[2],
-                " - quartiles of ", x$compare[1], ")\n\n", sep = "")
+            cat("\n\nQuartile Differences (quartiles of ", x$vac_grp,
+                " - quartiles of ", x$con_grp, ")\n\n", sep = "")
             print(x$QDIFstat)
-            cat("\n\nQuartiles of", x$compare[1], "\n")
+            cat("\n\nQuartiles of", x$con_grp, "\n")
             print(x$QXstat)
-            cat("\n\nQuartiles of", x$compare[2], "\n")
+            cat("\n\nQuartiles of", x$vac_grp, "\n")
             print(x$QYstat)
             cat("\n")
           })
@@ -69,7 +69,7 @@ setMethod(
   "print", "mfbootcluster",
   function(x, ...) {
     cat("\n\n", x$what, sep = "")
-    cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
+    cat("\nComparing", x$vac_grp, "to", x$con_grp, "\n")
     cat(paste("Seed = ", x$seed))
     cat("\n", paste(100 * (1 - x$alpha), "%", sep = ""),
         "confidence interval\n\n")
@@ -94,7 +94,7 @@ setMethod(
 #' @importFrom stats na.omit
 setMethod("print", "mfcluster",
           function(x, ...) {
-            cat("\nComparing", x$compare[2], "to", x$compare[1], "\n")
+            cat("\nComparing", x$vac_grp, "to", x$con_grp, "\n")
             cat("\nMF = ", x$All$mf, "\n")
             cat("\nBy Cluster\n")
             byclus <- na.omit(x$byCluster)
@@ -121,7 +121,7 @@ setMethod(
 setMethod("print", "mfcomponents",
           function(x, ...) {
             cat("\nMF =", x$mf, "comparing",
-                x$compare[2], "to", x$compare[1], "\n")
+                x$vac_grp, "to", x$con_grp, "\n")
             subj <- data.frame(x$subj)
             mfju <- unique(subj$mf_j)
             nu <- length(mfju)

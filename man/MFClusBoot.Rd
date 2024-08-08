@@ -7,7 +7,8 @@
 MFClusBoot(
   formula,
   data,
-  compare = c("con", "vac"),
+  vac_grp = "vac",
+  con_grp = "con",
   boot.cluster = TRUE,
   boot.unit = TRUE,
   b = 100,
@@ -16,7 +17,8 @@ MFClusBoot(
   hpd = TRUE,
   return.boot = FALSE,
   trace.it = FALSE,
-  seed = sample(1:1e+05, 1)
+  seed = sample(1:1e+05, 1),
+  compare = deprecated()
 )
 }
 \arguments{
@@ -24,11 +26,12 @@ MFClusBoot(
 continuous response, x is a factor with two levels of treatment, and w is a
 factor indicating the clusters.}
 
-\item{data}{Data frame. See \code{Note} for handling of input data with more
-than two levels.}
+\item{data}{Data frame. See \code{Note} for handling of input data with more than
+two levels.}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
-the control or reference group to which \code{compare[2]} is compared}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
 
 \item{boot.cluster}{Boolean whether to resample the clusters.}
 
@@ -49,6 +52,9 @@ statistic.}
 
 \item{seed}{to initialize random number generator for reproducibility. Passed
 to \code{set.seed}.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared}
 }
 \value{
 a \linkS4class{mfbootcluster} data object
@@ -75,21 +81,6 @@ Clusters with missing treatments will be excluded. See
 \examples{
 \dontrun{
 MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
-# Bootstrapping clusters. . . . . . . . . . . . . . . . .
-#
-# Bootstrapping units. . . . . . . . . . . . . . . . . .
-#
-# 10000 bootstrap samples of clusters and units in treatment in cluster
-# Comparing vac to con
-#
-# 95\% confidence interval
-#
-# observed    median       lower     upper
-# Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
-# Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
-#
-# Excluded Clusters
-# M, Q, R, B, O, V, I, C
 }
 }
 \references{

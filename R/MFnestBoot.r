@@ -9,8 +9,8 @@
 #'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared.
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param nboot number of bootstrapping events
 #' @param boot.unit Boolean whether to sample observations from within those of
 #'   the same core.
@@ -18,6 +18,8 @@
 #'   TRUE, some trees have all the cores while others only have a subset.
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @returns A list with the following elements:
 #'
 #' * `bootmfh`: Rank table for the bootstrapped values as output from
@@ -64,10 +66,13 @@
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
 MFhBoot <- function(formula, data,
-                    compare = c("con", "vac"),
+                    vac_grp = "vac",
+                    con_grp = "con",
                     nboot = 10000,
-                    boot.unit = TRUE, boot.cluster = TRUE,
-                    seed = sample(1:100000, 1)) {
+                    boot.unit = TRUE,
+                    boot.cluster = TRUE,
+                    seed = sample(1:100000, 1),
+                    compare = deprecated()) {
   ## set seed
   set.seed(seed)
 
@@ -79,12 +84,12 @@ MFhBoot <- function(formula, data,
   # create symbols for later access
   symresp <- sym(resp)
   symtgroup <- sym(tgroup)
-  wx <- sym(paste0(c(compare[1], "w"), collapse = "_"))
-  wy <- sym(paste0(c(compare[2], "w"), collapse = "_"))
-  nx <- sym(str_c(compare[1], "n", sep = "_"))
-  ny <- sym(str_c(compare[2], "n", sep = "_"))
-  mednm <- compare
-  names(mednm) <- paste0("median_resp:", compare, sep = "")
+  wx <- sym(paste0(c(con_grp, "w"), collapse = "_"))
+  wy <- sym(paste0(c(vac_grp, "w"), collapse = "_"))
+  nx <- sym(str_c(con_grp, "n", sep = "_"))
+  ny <- sym(str_c(vac_grp, "n", sep = "_"))
+  mednm <- c(con_grp, vac_grp)
+  names(mednm) <- paste0("median_resp:", mednm, sep = "")
 
   # assign an ID to each unique core node
   indivclus <- data |>
@@ -164,13 +169,13 @@ MFhBoot <- function(formula, data,
 
     lapply(1:nclus, FUN = function(a) {
       x <- datID |>
-        filter(!!symtgroup == compare[1] & clusterID == a) |>
+        filter(!!symtgroup == con_grp & clusterID == a) |>
         select(!!symresp) |>
         as_vector() |>
         unname()
 
       y <- datID |>
-        filter(!!symtgroup == compare[2] & clusterID == a) |>
+        filter(!!symtgroup == vac_grp & clusterID == a) |>
         select(!!symresp) |>
         as_vector() |>
         unname()
@@ -191,8 +196,8 @@ MFhBoot <- function(formula, data,
     })
 
     newnames <- c("med_resp1", "med_resp2", "n1", "n2")
-    names(newnames) <- c(paste(compare, "medResp", sep = "_"),
-                         paste(compare, "n", sep = "_"))
+    names(newnames) <- c(paste(c(con_grp, vac_grp), "medResp", sep = "_"),
+                         paste(c(con_grp, vac_grp), "n", sep = "_"))
     budat <- newdf |>
       mutate(w = as.vector(t(w)),
              u = as.vector(t(u)),
@@ -232,8 +237,8 @@ MFhBoot <- function(formula, data,
 
   return(list(bootmfh = budat,
               clusters = indivclus,
-              compare = compare,
-              mfh = MFh(formula, data, compare), seed = seed))
+              vac_grp = vac_grp, con_grp = con_grp,
+              mfh = MFh(formula, data, vac_grp, con_grp), seed = seed))
 
 }
 # to keep R CMD happy
@@ -319,17 +324,19 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
   tmpall <- x$bootmfh |>
     select(-ends_with("_medResp"))
 
-  stat_names <- paste(x$compare, "n", sep = "_")
-  comp1 <- sym(stat_names[1])
-  comp2 <- sym(stat_names[2])
+  stat_names_1 <- paste(x$con_grp, "n", sep = "_")
+  stat_names_2 <- paste(x$vac_grp, "n", sep = "_")
 
-  comp3 <- sym(gsub(stat_names[1], pattern = "_n", replacement = "_N"))
-  comp4 <- sym(gsub(stat_names[2], pattern = "_n", replacement = "_N"))
+  comp1 <- sym(stat_names_1)
+  comp2 <- sym(stat_names_2)
+
+  comp3 <- sym(gsub(stat_names_1, pattern = "_n", replacement = "_N"))
+  comp4 <- sym(gsub(stat_names_2, pattern = "_n", replacement = "_N"))
 
   mfnest_all <- bind_rows(tmpall |>
                             gather(variable, level,
                                    -all_of(c("bootID", "w", "u", "n1n2",
-                                             stat_names))) |>
+                                             stat_names_1, stat_names_2))) |>
                             mutate(level = as.character(level)),
                           tmpall |>
                             select(bootID, w, u, n1n2, !!comp1, !!comp2) |>

@@ -7,11 +7,13 @@
 MFmp(
   formula = NULL,
   data = NULL,
-  compare = c("con", "vac"),
+  vac_grp = "vac",
+  con_grp = "con",
   x = NULL,
   alpha = 0.05,
   df = NA,
-  tdist = TRUE
+  tdist = TRUE,
+  compare = deprecated()
 )
 }
 \arguments{
@@ -21,11 +23,12 @@ factor indicating the clusters.}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is the
-control or reference group to which \code{compare[2]} is compared}
+\item{vac_grp}{The name of the vaccinated group.}
 
-\item{x}{Trinomial vector \eqn{\{\Sigma I(x < y), \Sigma I(x = y), \Sigma
-I(x > y)\}}}
+\item{con_grp}{The name of the control group.}
+
+\item{x}{Trinomial vector \eqn{\{\Sigma I(x < y), \Sigma I(x = y), \Sigma I(x
+> y)\}}}
 
 \item{alpha}{Complement of the confidence level.}
 
@@ -33,6 +36,9 @@ I(x > y)\}}}
 
 \item{tdist}{Use quantiles of t or Gaussian distribution for confidence
 interval? Default t distribution.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared}
 }
 \value{
 a \linkS4class{mfmp} data object
@@ -50,7 +56,7 @@ upper confidence interval is truncated to 1; lower confidence interval
 is truncated to -1. Point estimate of 1.0 indicates complete separation.
 }
 \examples{
-MFmp(les ~ tx + cluster(cage), mlesions, compare = c("con", "vac"))
+MFmp(les ~ tx + cluster(cage), mlesions, vac_grp = "vac", con_grp = "con")
 MFmp(x = c(12, 12, 2))
 }
 \references{

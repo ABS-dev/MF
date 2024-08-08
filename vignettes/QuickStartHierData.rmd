@@ -111,9 +111,8 @@ to right, highest to lowest. So a single level of "a" will contain multiple
 levels of "b" and a single level of "b" will contain multiple levels of "c".
 - `data`: The data table (`data.frame` or `tibble`) with variables as identified
 in formula. If there are extra variables, they will be ignored.
-- `compare`: Treatment groups, a text vector of length two. The first position [1] is treated as
-the control or reference group to which members of the second position [2] are
-compared.
+- `vac_grp`: The name of the treatment group.
+- `con_grp`: The name of the control group.
 - `which.factor`: One or more variable(s) of interest. This can be any of the
 grouping variables from the data set. If "All" is specified, a summary MF will be
 calculated for the whole tree.
@@ -182,9 +181,9 @@ that row.
 - `U`: Sum of the `u` values from the rank table for the factor level of
 that row.
 - `con_N` & `vac_N`: Sum of the counts from the rank table matching the
-particular factor level of the row. Note that the left hand side of the underscore will match values passed by user to `compare`.
+particular factor level of the row. Note that the left hand side of the underscore will match values passed by user to compare.
 - `con_medResp` & `vac_medResp`: Median of responses for each comparison
-group matching the particular factor level of the row. Note that the left hand side of the underscore will match values passed by user to argument `compare`.
+group matching the particular factor level of the row. Note that the left hand side of the underscore will match values passed by user to argument compare.
 
 ## Advanced usage. {-}
 
@@ -223,13 +222,13 @@ Basic Output table as described previously:
 
 - `con_n` & `vac_n`: Counts of observations for each treatment for a
 particular instance of unique factor level of a variable. Note that the left
-hand side of the underscore will match values passed by user to `compare`.
+hand side of the underscore will match values passed by user to compare.
 - `n1n2`: Product of counts, `con_n` * `vac_n`.
 - `w`: Wilcoxon statistic.
 - `u`: Mann-Whitney statistic.
 - `con_medResp` & `vac_medResp`: Median observed response for each treatment group
 in a particular instance of unique factor level. Note that the
-left hand side of the underscore will match values passed by user to `compare`.
+left hand side of the underscore will match values passed by user to compare.
 
 There is one row for each unique combination of factor levels across
 all variables. This table shows the initial statistics as determined by
@@ -286,7 +285,8 @@ variables. Nesting is assumed to be in order, left
 to right, highest to lowest. So a single level of "a" will contain multiple
 levels of "b" and a single level of "b" will contain multiple levels of "c".
 - `data`: The data table (`data.frame` or `tibble`) with variables as identified in argument `formula`. If there are extra variables, they will be ignored.
-- `compare`: Treatment groups, a text vector of length two. The first position [1] is treated as the control or reference group to which members of the second position [2] are compared.
+- `vac_grp`: The name of the treatement group.
+- `con_grp`: The name of the control group
 - `which.factor`: Variable(s) of interest. This can be any of the
 grouping variables from the data set. If "All" is specified, a summary MF will be
 calculated for the whole tree.
@@ -426,7 +426,8 @@ formatted as the rank table for non-bootstrapped data with designation of a sing
 bootstrapping instance using the additional variable **bootID**. Values
 for **bootID** are simply `1:nboot`.
 - `clusters`: Unique clusters in the data.
-- `compare`: User-supplied value passed to compare argument.
+- `vac_grp`: User-supplied value to indicate the vaccinate group.
+- `con_grp`: User-supplied value to indicate the control group.
 - `mfh`: The rank table from user-supplied data; formatted as for non-bootstrapped data.
 
 Note that in the particular case of `boot.cluster = FALSE`, although all

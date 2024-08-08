@@ -8,7 +8,9 @@
 #'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
 #'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @returns A [mfhierdata] object, which is a list of three items.
 #' * `coreTbl` A [tibble] with one row for each unique core level showing
@@ -56,7 +58,11 @@
 #'   summarize rename everything
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFh <- function(formula, data, compare = c("con", "vac")) {
+MFh <- function(formula,
+                data,
+                vac_grp = "vac",
+                con_grp = "con",
+                compare = deprecated()) {
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
@@ -67,8 +73,8 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
   resp <- all.vars(formula)[1]
 
   ## groups for comparison
-  xname <- compare[1]
-  yname <- compare[2]
+  xname <- con_grp
+  yname <- vac_grp
 
   nx <- sym(str_c(xname, "n", sep = "_"))
   ny <- sym(str_c(yname, "n", sep = "_"))
@@ -87,20 +93,21 @@ MFh <- function(formula, data, compare = c("con", "vac")) {
     mutate(rank = rank(resp)) |>
     group_by_at(vars(all_of(nests), tgroup)) |>
     summarize(n = length(resp),
-              medResp = median(resp, na.rm = TRUE),
-              w = sum(rank)) |>
+             medResp = median(resp, na.rm = TRUE),
+             w = sum(rank)) |>
     gather(variable, value, -c(tgroup, all_of(nests))) |>
     unite(temp, tgroup, variable) |>
     spread(temp, value) |>
     select(-!!wy) |>
     rename(w = !!wx) |>
     mutate(n1n2 = !!nx * !!ny,
-           u = w - (!!nx * (!!nx + 1)) / 2) |>
+          u = w - (!!nx * (!!nx + 1)) / 2) |>
     select(everything(), w, n1n2, u) |>
     ungroup()
 
   return(mfhierdata$new(coreTbl = this_core_tbl, data = newdat,
-                        compare = compare, formula = formula))
+                        vac_grp = vac_grp, con_grp = con_grp,
+                        formula = formula))
 }
 # to keep R CMD happy
 globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
@@ -215,10 +222,9 @@ MFnest <- function(Y, which.factor = "All") {
   if (!exists("input")) {
     message("Skipping median summary, no response data provided.")
   } else {
-
     thisdata <- input$data
-    compare <- input$compare
-    names(compare) <- paste0(input$compare, "_medResp", sep = "")
+    compare <- c(input$con_grp, input$vac_grp)
+    names(compare) <- paste0(compare, "_medResp", sep = "")
 
     out <- thisdata |>
       mutate_if(is.factor, as.character) |>

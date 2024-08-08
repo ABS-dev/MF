@@ -19,7 +19,8 @@ test_that("output", {
                    boot.unit = TRUE)
 
   expect_identical(names(test8),
-                   c("bootmfh", "clusters", "compare", "mfh", "seed"))
+                   c("bootmfh", "clusters", "vac_grp",
+                     "con_grp", "mfh", "seed"))
 
   ## bootmfh
   expect_equal(dim(test8$bootmfh), c(120000, 11))
@@ -33,9 +34,9 @@ test_that("output", {
   expect_identical(names(test8$clusters),
                    c("room", "pen", "litter", "clusterID"))
 
-  ## compare
-  expect_identical(test8$compare,
-                   c("con", "vac"))
+  ## vac_grp and con_grp
+  expect_identical(test8$vac_grp, "vac")
+  expect_identical(test8$con_grp, "con")
 
   #' @note aCore table not found?
   #' @note expect_equal(test8$mfh$coreTbl, aCore$coreTbl)

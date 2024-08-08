@@ -4,7 +4,14 @@
 \alias{MFClusHier}
 \title{MFClusHier}
 \usage{
-MFClusHier(formula, data, compare = c("con", "vac"), which.factor = "All")
+MFClusHier(
+  formula,
+  data,
+  vac_grp = "vac",
+  con_grp = "con",
+  which.factor = "All",
+  compare = deprecated()
+)
 }
 \arguments{
 \item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous
@@ -17,12 +24,16 @@ multiple levels of "c".}
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is the
-control or reference group to which \code{compare[2]} is compared.}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
 
 \item{which.factor}{one or more variable(s) of interest. This can be any of
 the core or nest variables from the data set. If none or NULL is specified,
 MF will be calculated for the whole tree.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared.}
 }
 \value{
 A list with the following elements:
@@ -55,7 +66,8 @@ aCore <- thismf$MFh
 aCore
 aCore$data
 aCore$formula
-aCore$compare
+aCore$vac_grp
+aCore$con_grp
 }
 \seealso{
 \link{MFh}, \link{MFnest}

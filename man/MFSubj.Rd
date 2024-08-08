@@ -4,16 +4,20 @@
 \alias{MFSubj}
 \title{Subject components of mitigated fraction}
 \usage{
-MFSubj(formula, data, compare = c("con", "vac"))
+MFSubj(formula, data, vac_grp = "vac", con_grp = "con", compare = deprecated())
 }
 \arguments{
-\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous
-response and x is a factor with two levels}
+\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous response
+and x is a factor with two levels}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
-the control or reference group to which \code{compare[2]} is compared}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared}
 }
 \value{
 a \linkS4class{mfcomponents} data object
@@ -34,26 +38,8 @@ subjects to \emph{MF}, which is the average of the subject components.
 x <- MFSubj(lesion ~ group, calflung)
 x
 
-#  MF = 0.44 comparing vac to con
-#
-#  MF Subject Components
-#
-#    mf_j freq    min_y   max_y
-#    1.00    6 0.000030 0.00970
-#    0.84    1 0.012500 0.01250
-#    0.76    3 0.016650 0.02030
-#    0.68    6 0.023250 0.03190
-#    0.04    1 0.132100 0.13210
-#   -0.04    3 0.144575 0.16325
-#   -0.20    2 0.210000 0.21925
-#   -0.36    1 0.292000 0.29200
-#   -0.52    1 0.356500 0.35650
-#   -0.84    1 0.461500 0.46150
-
-
 mean(x$subj[, "mf_j"])
 
-# [1] 0.44
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease

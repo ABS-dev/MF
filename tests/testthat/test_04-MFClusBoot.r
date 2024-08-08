@@ -8,7 +8,8 @@ test_that("output", {
   expect_s4_class(test4, "mfbootcluster")
   expect_equal(test4$nboot, 10000)
   expect_equal(test4$alpha, 0.05)
-  expect_identical(test4$compare, c("con", "vac"))
+  expect_identical(test4$vac_grp, "vac")
+  expect_identical(test4$con_grp, "con")
   expect_identical(test4$rng, "Mersenne-Twister")
   expect_match(
     test4$what,

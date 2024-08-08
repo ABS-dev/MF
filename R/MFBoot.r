@@ -8,8 +8,8 @@
 #' @param formula Formula of the form `y ~ x`, where y is a continuous response
 #'   and x is a factor with two levels.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
-#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
@@ -19,6 +19,8 @@
 #' @param trace.it Verbose tracking of the cycles?
 #' @param seed to initialize random number generator for reproducibility. Passed
 #'   to `set.seed`.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @returns a [mfboot-class] data object
 #' @seealso [mfboot-class]
 #' @references Siev D. (2005). An estimator of intervention effect on disease
@@ -35,9 +37,19 @@
 #' @importFrom stats quantile median model.frame pnorm qnorm
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-                   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
-                   trace.it = FALSE, seed = sample(1:100000, 1)) {
+MFBoot <- function(formula,
+                   data,
+                   vac_grp = "vac",
+                   con_grp = "con",
+                   b = 100,
+                   B = 100,
+                   alpha = 0.05,
+                   hpd = TRUE,
+                   bca = FALSE,
+                   return.boot = FALSE,
+                   trace.it = FALSE,
+                   seed = sample(1:100000, 1),
+                   compare = deprecated()) {
   # bootstrap confidence intervals for MF
   # 11/17/99 initial coding
   # 2/24/04 added BC.a interval
@@ -51,8 +63,8 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   A <- data.frame(model.frame(formula = formula, data = data))
   resp <- A[, 1]
   tx <- A[, 2]
-  x <- resp[tx == compare[1]]
-  y <- resp[tx == compare[2]]
+  x <- resp[tx == con_grp]
+  y <- resp[tx == vac_grp]
 
   # shortcircuit if complete separation
   if (range(x)[1] < range(y)[1]) {
@@ -124,7 +136,8 @@ MFBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     stat <- rbind(stat, "BC.a" = c(mf, qmf))
   }
   out <- mfboot$new(stat = stat, nboot = nboot, alpha = alpha, seed = seed,
-                    rng = rng, compare = compare, sample = MF)
+                    rng = rng, vac_grp = vac_grp, con_grp = con_grp,
+                    sample = MF)
 
   return(out)
 }

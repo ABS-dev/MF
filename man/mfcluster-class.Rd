@@ -24,7 +24,8 @@ Class mfcluster is created from output of function MFClus
 \item \code{byCluster}: As for All, by clusters
 \item \code{excludedClusters}: character vector naming clusters excluded because of missing treatment
 \item \code{call}: the call to \code{MFClus}
-\item \code{compare}: character vector naming groups compared
+\item \code{vac_grp}:  text vector, same as input
+\item \code{con_grp}:  text vector, same as input
 }
 }
 

@@ -4,16 +4,20 @@
 \alias{MFr}
 \title{Mitigated fraction}
 \usage{
-MFr(formula, data, compare = c("con", "vac"))
+MFr(formula, data, vac_grp = "vac", con_grp = "con", compare = deprecated())
 }
 \arguments{
-\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous
-response and x is a factor with two levels}
+\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous response
+and x is a factor with two levels}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels -- \code{compare[1]} is
-the control or reference group to which \code{compare[2]} is compared}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared}
 }
 \value{
 The estimated mitigated fraction.
@@ -29,7 +33,6 @@ on the original scale of measurement.
 }
 \examples{
 MFr(lesion ~ group, calflung)
-# [1] 0.44
 }
 \references{
 Siev D, 2005. An estimator of intervention effect on disease

@@ -12,7 +12,9 @@
 #' @param formula Formula of the form `y ~ x`, where y is a continuous response
 #'   and x is a factor with two levels
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#' @param vac_grp The name of the vaccinated group.
+#' @param con_grp The name of the control group.
+#' @param compare `r badge("deprecated")` Text vector stating the factor levels: `compare[1]` is the
 #'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @returns a [mfcomponents-class] data object
 #' @references Siev D. (2005). An estimator of intervention effect on disease
@@ -28,17 +30,21 @@
 #' @importFrom stats model.frame
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
-MFSubj <- function(formula, data, compare = c("con", "vac")) {
+MFSubj <- function(formula,
+                   data,
+                   vac_grp = "vac",
+                   con_grp = "con",
+                   compare = deprecated()) {
   # formula of form response ~ treatment
-  # x = response for compare[1]
-  # y = response for compare[2]
+  # x = response for con_grp
+  # y = response for vac_grp
   # compare y to x
 
   df <- data.frame(model.frame(formula = formula, data = data))
   resp <- df[, 1]
   tx <- df[, 2]
-  x <- resp[tx == compare[1]]
-  y <- resp[tx == compare[2]]
+  x <- resp[tx == con_grp]
+  y <- resp[tx == vac_grp]
   n_x <- length(x)
   n_y <- length(y)
   nn <- n_x + n_y
@@ -55,5 +61,5 @@ MFSubj <- function(formula, data, compare = c("con", "vac")) {
   subj <- cbind(y, rank = rank_xy[(n_x + 1):nn], u_j, r_j, mf_j)
   subj <- subj[order(subj[, "rank"]), ]
   return(mfcomponents$new(mf = mf, x = sort(x), y = sort(y), subj = subj,
-                          compare = compare))
+                          vac_grp = vac_grp, con_grp = con_grp))
 }

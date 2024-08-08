@@ -16,7 +16,8 @@ Parent class for package MF data objects.
 \item \code{alpha}: numeric value specifying complement of confidence interval
 \item \code{seed}: vector of integers specifying seed for pseudo-random number
 generator used
-\item \code{compare}: vector of character strings naming groups compared
+\item \code{vac_grp}:  text vector, same as input
+\item \code{con_grp}:  text vector, same as input
 \item \code{rng}: character string naming type of random number generator
 }
 }

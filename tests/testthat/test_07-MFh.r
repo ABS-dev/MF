@@ -25,8 +25,8 @@ test_that("output", {
   expect_identical(a_core$coreTbl$w,
                    c(7, 5, 7, 7, 7, 7, 7, 6, 7, 7, 7, 7))
 
-  expect_identical(a_core$compare,
-                   c("con", "vac"))
+  expect_identical(a_core$vac_grp, "vac")
+  expect_identical(a_core$con_grp, "con")
 
   expect_identical(all.vars(a_core$formula),
                    c("lung", "tx", "room", "pen", "litter"))

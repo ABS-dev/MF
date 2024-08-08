@@ -30,6 +30,7 @@ test_that("output", {
                                             "group", "cluster", "litter",
                                             "piglung"))
 
-  ## compare
-  expect_identical(test3$compare, c("con", "vac"))
+  ## vac_grp and con_grp
+  expect_identical(test3$vac_grp, "vac")
+  expect_identical(test3$con_grp, "con")
 })

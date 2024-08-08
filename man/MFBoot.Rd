@@ -7,7 +7,8 @@
 MFBoot(
   formula,
   data,
-  compare = c("con", "vac"),
+  vac_grp = "vac",
+  con_grp = "con",
   b = 100,
   B = 100,
   alpha = 0.05,
@@ -15,17 +16,19 @@ MFBoot(
   bca = FALSE,
   return.boot = FALSE,
   trace.it = FALSE,
-  seed = sample(1:1e+05, 1)
+  seed = sample(1:1e+05, 1),
+  compare = deprecated()
 )
 }
 \arguments{
-\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous
-response and x is a factor with two levels.}
+\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous response
+and x is a factor with two levels.}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
-the control or reference group to which \code{compare[2]} is compared}
+\item{vac_grp}{The name of the vaccinated group.}
+
+\item{con_grp}{The name of the control group.}
 
 \item{b}{Number of bootstrap samples to take with each cycle}
 
@@ -43,6 +46,9 @@ the control or reference group to which \code{compare[2]} is compared}
 
 \item{seed}{to initialize random number generator for reproducibility. Passed
 to \code{set.seed}.}
+
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
+control or reference group to which \code{compare[2]} (vaccinate) is compared}
 }
 \value{
 a \linkS4class{mfboot} data object
@@ -61,14 +67,6 @@ intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 
 MFBoot(lesion ~ group, calflung, seed = 12345)
 
-# 10000 bootstrap samples
-# 95\% confidence interval
-# Seed = 12345
-#
-# Comparing vac to con
-# observed median lower  upper
-# Equal Tailed        0.44 0.4496 0.152 0.7088
-# Highest Density     0.44 0.4496 0.152 0.7088
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
