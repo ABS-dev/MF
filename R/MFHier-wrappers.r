@@ -10,8 +10,8 @@
 #'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels - `compare[1]` is the
-#'   control or reference group to which `compare[2]` is compared.
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @param which.factor one or more variable(s) of interest. This can be any of
 #'   the core or nest variables from the data set. If none or NULL is specified,
 #'   MF will be calculated for the whole tree.
@@ -62,8 +62,8 @@ MFClusHier <- function(formula, data, compare = c("con", "vac"),
 #'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels - `compare[1]` is the
-#'   control or reference group to which `compare[2]` is compared.
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @param nboot number of bootstrapping events
 #' @param boot.unit Boolean whether to sample observations from within those of
 #'   the same core.

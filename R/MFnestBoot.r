@@ -9,8 +9,8 @@
 #'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels - `compare[1]` is the
-#'   control or reference group to which `compare[2]` is compared.
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared.
 #' @param nboot number of bootstrapping events
 #' @param boot.unit Boolean whether to sample observations from within those of
 #'   the same core.
@@ -21,8 +21,8 @@
 #' @returns A list with the following elements:
 #'
 #' * `bootmfh`: Rank table for the bootstrapped values as output from
-#' [MFh]. Includes a new `bootID` variable to distinguish each bootstrapped
-#' incidence.
+#'   [MFh]. Includes a new `bootID` variable to distinguish each bootstrapped
+#'   incidence.
 #'
 #' * `clusters`: Table of unique nodes with an ID.
 #'
@@ -58,9 +58,9 @@
 #' @importFrom tidyr gather unite spread all_of
 #' @importFrom stats median terms
 #' @importFrom purrr as_vector
-#' @importFrom dplyr select sym mutate_if distinct mutate n full_join
-#'   tibble case_when arrange filter rename ungroup group_by group_by_at
-#'   vars summarize everything
+#' @importFrom dplyr select sym mutate_if distinct mutate n full_join tibble
+#'   case_when arrange filter rename ungroup group_by group_by_at vars summarize
+#'   everything
 #' @importFrom rlang ":=" quo_name
 MFhBoot <- function(formula, data,
                     compare = c("con", "vac"),

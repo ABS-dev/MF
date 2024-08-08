@@ -9,11 +9,11 @@
 #' subjects to *MF*, which is the average of the subject components.
 #'
 #' @title Subject components of mitigated fraction
-#' @param formula Formula of the form `y ~ x`, where y is a continuous
-#'   response and x is a factor with two levels
+#' @param formula Formula of the form `y ~ x`, where y is a continuous response
+#'   and x is a factor with two levels
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - `compare[1]` is
-#'   the control or reference group to which `compare[2]` is compared
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @returns a [mfcomponents-class] data object
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease

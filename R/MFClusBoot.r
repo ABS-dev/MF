@@ -8,10 +8,10 @@
 #' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
-#' @param data Data frame. See `Note` for handling of input data with more
-#'   than two levels.
-#' @param compare Text vector stating the factor levels - `compare[1]` is
-#'   the control or reference group to which `compare[2]` is compared
+#' @param data Data frame. See `Note` for handling of input data with more than
+#'   two levels.
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @param boot.cluster Boolean whether to resample the clusters.
 #' @param boot.unit Boolean whether to resample the units within cluster.
 #' @param b Number of bootstrap samples to take with each cycle

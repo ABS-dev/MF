@@ -7,10 +7,10 @@
 #' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
-#' @param data Data frame.  See `Note` for handling of input data with more
-#'   than two levels.
-#' @param compare Text vector stating the factor levels - `compare[1]` is
-#'   the control or reference group to which `compare[2]` is compared
+#' @param data Data frame.  See `Note` for handling of input data with more than
+#'   two levels.
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
 #' @returns a [mfcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows

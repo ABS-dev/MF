@@ -5,11 +5,11 @@
 #'   density intervals are estimated by selecting the shortest of all possible
 #'   intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 #' @title Bootstrap MF CI
-#' @param formula Formula of the form `y ~ x`, where y is a continuous
-#'   response and x is a factor with two levels.
+#' @param formula Formula of the form `y ~ x`, where y is a continuous response
+#'   and x is a factor with two levels.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - `compare[1]` is
-#'   the control or reference group to which `compare[2]` is compared
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level

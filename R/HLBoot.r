@@ -12,8 +12,8 @@
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - `compare[1]` is the
-#'   control or reference group to which `compare[2]` is compared
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level

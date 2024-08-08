@@ -8,10 +8,10 @@
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - `compare[1]` is the
-#'   control or reference group to which `compare[2]` is compared
-#' @param x Trinomial vector \eqn{\{\Sigma I(x < y), \Sigma I(x = y), \Sigma
-#'   I(x > y)\}}
+#' @param compare Text vector stating the factor levels: `compare[1]` is the
+#'   control or reference group to which `compare[2]` (vaccinate) is compared
+#' @param x Trinomial vector \eqn{\{\Sigma I(x < y), \Sigma I(x = y), \Sigma I(x
+#'   > y)\}}
 #' @param alpha Complement of the confidence level.
 #' @param df Degrees of freedom. Default N-2
 #' @param tdist Use quantiles of t or Gaussian distribution for confidence
