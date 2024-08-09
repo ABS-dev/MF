@@ -86,6 +86,8 @@ MFhBoot <- function(formula,
     vac_grp <- compare[2]
     con_grp <- compare[1]
   }
+  bootID <- newClus <- clusterID <- variable <- value <- tmp <- NULL
+
   ## set seed
   set.seed(seed)
 
@@ -254,8 +256,6 @@ MFhBoot <- function(formula,
               mfh = MFh(formula, data, vac_grp, con_grp), seed = seed))
 
 }
-# to keep R CMD happy
-globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 
 #' @title MFnestBoot
 #' @name MFnestBoot
@@ -329,7 +329,7 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' @importFrom rlang ":=" quo_name
 #' @export
 MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
-
+  variable <- level <- bootID <- w <- u <- n1n2 <- U <- N1N2 <- MF <- NULL
   quant <- c(.5, alpha / 2, 1 - alpha / 2)
 
   tmpall <- x$bootmfh |>
@@ -382,7 +382,3 @@ MFnestBoot <- function(x, which.factor = "All", alpha = 0.05) {
               mfnest_summary = mfnest_summary,
               seed = x$seed))
 }
-
-# to keep R CMD happy
-globalVariables(c("variable", "level", "bootID", "w", "u", "n1n2",
-                         "U", "N1N2", "MF"))

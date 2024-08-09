@@ -50,12 +50,12 @@ MFClus <- function(formula,
     con_grp <- compare[1]
   }
 
-  dat <- NULL
-  group <- NULL
-  clusters <- NULL
-  strat <- NULL
-  reshape_cluster(data = data, formula = formula, vac_grp = vac_grp,
-                  con_grp = con_grp, envir = environment())
+  res <- reshape_cluster(data = data, formula = formula, vac_grp = vac_grp,
+                         con_grp = con_grp, envir = environment())
+  dat      <- res$dat
+  group    <- res$group
+  clusters <- res$clusters
+  strat    <- res$strat
   if (!vac_grp %in% group) {
     stop("MFClus :: No matches in data for `vac_grp` = '", vac_grp, "'.",
          call. = FALSE)

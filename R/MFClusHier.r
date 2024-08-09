@@ -77,6 +77,7 @@ MFh <- function(formula,
     con_grp <- compare[1]
   }
 
+  ntgroups <- variable <- value <- temp <- w <- n1n2 <- u <- NULL
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
@@ -133,9 +134,6 @@ MFh <- function(formula,
                         vac_grp = vac_grp, con_grp = con_grp,
                         formula = formula))
 }
-# to keep R CMD happy
-globalVariables(c("u", "bootID", "n1n2", "w", "variable", "value", "tmp",
-                  "ntgroups", "temp"))
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
@@ -209,6 +207,8 @@ MFnest <- function(Y, which.factor = "All") {
     Y <- as_tibble(Y)
   }
 
+  variable <- level <- n1n2 <- u <- U <- N1N2 <- R <- con_N <-
+    vac_N <- MF <- tgroup <- resp <- medResp <- NULL
   stat.names <- c(str_subset(names(Y), "_medResp"),
                   str_subset(names(Y), "_n"), "n1n2", "u", "w")
   comp1 <- sym(stat.names[3])
@@ -273,6 +273,3 @@ MFnest <- function(Y, which.factor = "All") {
 
   return(out)
 }
-
-# to keep R CMD happy
-globalVariables(c("R", "con_N", "vac_N", "tgroup", "resp", "medResp"))

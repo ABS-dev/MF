@@ -16,10 +16,10 @@ reshape_cluster <- function(data, formula, vac_grp, con_grp, envir) {
   group <- factor(group)
   clusters <- clus_frame[, 3]
   strat <- unique(as.character(clusters))
-  assign("dat", dat, envir = envir)
-  assign("group", group, envir = envir)
-  assign("clusters", clusters, envir = envir)
-  assign("strat", strat, envir = envir)
+  list(dat      = dat,
+       group    = group,
+       clusters = clusters,
+       strat    = strat)
 }
 
 #' @description  used in the bootstrapping functions MFClusBoot  MFBoot HLBoot
