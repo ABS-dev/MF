@@ -55,9 +55,10 @@ MFClusHier <- function(formula,
                        which.factor = "All",
                        compare = deprecated()) {
   if (is_present(compare)) {
-    deprecate_warn("4.5.0",
-                   "MFClusHier(compare)",
-                   "MFClusHier(vac_grp, con_grp)")
+    deprecate_warn(
+      "4.5.0",
+      "MFClusHier(compare)",
+      details = "Please use the `vac_grp` and `con_grp` argumetns instead.")
     if (length(compare) != 2) {
       stop("`compare` must be a vector of length 2!")
     }
@@ -134,9 +135,10 @@ MFClusBootHier <- function(formula,
                            seed = sample(1:1e5, 1),
                            compare = deprecated()) {
   if (is_present(compare)) {
-    deprecate_warn("4.5.0",
-                   "MFClusBootHier(compare)",
-                   "MFClusBootHier(vac_grp, con_grp)")
+    deprecate_warn(
+      "4.5.0",
+      "MFClusBootHier(compare)",
+      details = "Please use the `vac_grp` and `con_grp` argumetns instead.")
     if (length(compare) != 2) {
       stop("`compare` must be a vector of length 2!")
     }

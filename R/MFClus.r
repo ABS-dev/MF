@@ -41,9 +41,10 @@ MFClus <- function(formula,
                    trace.it = FALSE,
                    compare = deprecated()) {
   if (is_present(compare)) {
-    deprecate_warn("4.5.0",
-                   "MFClus(compare)",
-                   "MFClus(vac_grp, con_grp)")
+    deprecate_warn(
+      "4.5.0",
+      "MFClus(compare)",
+      details = "Please use the `vac_grp` and `con_grp` argumetns instead.")
     if (length(compare) != 2) {
       stop("`compare` must be a vector of length 2!")
     }

@@ -46,10 +46,10 @@ MFmp <- function(formula = NULL,
   if (is.null(df)) df <- NA_real_
   if (!is.numeric(df) && !is.integer(df)) df <- NA_real_
   if (is_present(compare)) {
-    print("yeah")
-    deprecate_warn("4.5.0",
-                   "MFmp(compare)",
-                   "MFmp(con_grp)")
+    deprecate_warn(
+      "4.5.0",
+      "MFmp(compare)",
+      details = "Please use the `vac_grp` and `con_grp` argumetns instead.")
     if (length(compare) != 2) {
       stop("`compare` must be a vector of length 2!")
     }

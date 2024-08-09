@@ -64,9 +64,10 @@ HLBoot <- function(formula,
   set.seed(seed)
 
   if (is_present(compare)) {
-    deprecate_warn("4.5.0",
-                   "HLBoot(compare)",
-                   "HLBoot(vac_grp, con_grp)")
+    deprecate_warn(
+      "4.5.0",
+      "HLBoot(compare)",
+      details = "Please use the `vac_grp` and `con_grp` argumetns instead.")
     if (length(compare) != 2) {
       stop("`compare` must be a vector of length 2!")
     }

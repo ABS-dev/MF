@@ -76,9 +76,10 @@ MFhBoot <- function(formula,
                     seed = sample(1:100000, 1),
                     compare = deprecated()) {
   if (is_present(compare)) {
-    deprecate_warn("4.5.0",
-                   "MFhBoot(compare)",
-                   "MFhBoot(vac_grp, con_grp)")
+    deprecate_warn(
+      "4.5.0",
+      "MFhBoot(compare)",
+      details = "Please use the `vac_grp` and `con_grp` argumetns instead.")
     if (length(compare) != 2) {
       stop("`compare` must be a vector of length 2!")
     }
