@@ -27,8 +27,9 @@ two levels.}
 
 \item{trace.it}{Verbose tracking of the cycles? Default FALSE.}
 
-\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
-control or reference group to which \code{compare[2]} (vaccinate) is compared}
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels:
+\code{compare[1]} is the control or reference group to which \code{compare[2]}
+(vaccinate) is compared}
 }
 \value{
 a \linkS4class{mfcluster} data object
@@ -50,9 +51,7 @@ Clusters with missing treatments will be excluded. See
 \linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded clusters.
 }
 \examples{
-\dontrun{
 MFClus(lesion ~ group + cluster(litter), piglung)
-}
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease

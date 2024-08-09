@@ -11,7 +11,7 @@ MFmp(
   con_grp = "con",
   x = NULL,
   alpha = 0.05,
-  df = NA,
+  df = NA_real_,
   tdist = TRUE,
   compare = deprecated()
 )
@@ -37,8 +37,9 @@ factor indicating the clusters.}
 \item{tdist}{Use quantiles of t or Gaussian distribution for confidence
 interval? Default t distribution.}
 
-\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
-control or reference group to which \code{compare[2]} (vaccinate) is compared}
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels:
+\code{compare[1]} is the control or reference group to which \code{compare[2]}
+(vaccinate) is compared}
 }
 \value{
 a \linkS4class{mfmp} data object
@@ -56,7 +57,7 @@ upper confidence interval is truncated to 1; lower confidence interval
 is truncated to -1. Point estimate of 1.0 indicates complete separation.
 }
 \examples{
-MFmp(les ~ tx + cluster(cage), mlesions, vac_grp = "vac", con_grp = "con")
+MFmp(les ~ tx + cluster(cage), mlesions)
 MFmp(x = c(12, 12, 2))
 }
 \references{

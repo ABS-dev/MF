@@ -59,7 +59,6 @@ test1 <- MFhBoot(formula, a,
                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 MFnestBoot(test1, c("All", "litter"))
 
-\dontrun{
 system.time(test2 <- MFnestBoot(test1, which.factors))
 test2
 system.time(test3 <- MFnestBoot(test1, which.factors[1]))
@@ -70,7 +69,6 @@ system.time(test5 <- MFnestBoot(test1, which.factors[2:3]))
 test5
 system.time(test6 <- MFnestBoot(test1, which.factors[2:4]))
 test6
-}
 }
 \seealso{
 \link{MFClusBootHier}, \link{MFhBoot}

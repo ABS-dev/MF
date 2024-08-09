@@ -13,8 +13,6 @@ reshape_cluster <- function(data, formula, vac_grp, con_grp, envir) {
                                  "term.labels")[1]] %in% c(vac_grp, con_grp), ]
   dat <- clus_frame[, 1]
   group <- clus_frame[, 2]
-  # remove any group levels that aren't present; don't want to evaluate for
-  #   empty groups - mcv 08/27/13
   group <- factor(group)
   clusters <- clus_frame[, 3]
   strat <- unique(as.character(clusters))

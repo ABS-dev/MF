@@ -50,8 +50,9 @@ tailed lower of mitigated fraction.}
 \item{seed}{Passed to \link{MFhBoot} to to initialize random number generator for
 reproducibility.}
 
-\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels: \code{compare[1]} is the
-control or reference group to which \code{compare[2]} (vaccinate) is compared.}
+\item{compare}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Text vector stating the factor levels:
+\code{compare[1]} is the control or reference group to which \code{compare[2]}
+(vaccinate) is compared.}
 }
 \value{
 A list with the following elements:

@@ -311,7 +311,6 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #'                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 #' MFnestBoot(test1, c("All", "litter"))
 #'
-#' \dontrun{
 #' system.time(test2 <- MFnestBoot(test1, which.factors))
 #' test2
 #' system.time(test3 <- MFnestBoot(test1, which.factors[1]))
@@ -322,7 +321,6 @@ globalVariables(c("clusterID", "newClus", "variable", "value", "tmp"))
 #' test5
 #' system.time(test6 <- MFnestBoot(test1, which.factors[2:4]))
 #' test6
-#' }
 #' @importFrom stats quantile
 #' @importFrom tidyr gather
 #' @importFrom forcats fct_relevel

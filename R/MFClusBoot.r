@@ -42,9 +42,7 @@
 #'   Hall, New York, 1993.
 #' @author [MF-package]
 #' @examples
-#' \dontrun{
 #' MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
-#' }
 #' @importFrom stats quantile
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
@@ -89,6 +87,15 @@ MFClusBoot <- function(formula,
   strat <- NULL
   reshape_cluster(data = data, formula = formula, vac_grp = vac_grp,
                   con_grp = con_grp, envir = environment())
+  if (!vac_grp %in% group) {
+    stop("MFClusBoot :: No matches in data for `vac_grp` = '", vac_grp, "'.",
+         call. = FALSE)
+  }
+  if (!con_grp %in% group) {
+    stop("MFClusBoot :: No matches in data for `con_grp` = '", con_grp, "'.",
+         call. = FALSE)
+  }
+
   keep <- apply(table(group, clusters), 2, function(x) {
     all(x > 0)
   })[strat]

@@ -55,8 +55,17 @@ MFSubj <- function(formula,
   df <- data.frame(model.frame(formula = formula, data = data))
   resp <- df[, 1]
   tx <- df[, 2]
-  x <- resp[tx == con_grp]
-  y <- resp[tx == vac_grp]
+  x <- resp[tx %in% con_grp]
+  y <- resp[tx %in% vac_grp]
+  if (length(y) == 0) {
+    stop("MFSubj :: No matches in data for `vac_grp` = '", vac_grp, "'.",
+         call. = FALSE)
+  }
+  if (length(x) == 0) {
+    stop("MFSubj :: No matches in data for `con_grp` = '", con_grp, "'.",
+         call. = FALSE)
+  }
+
   n_x <- length(x)
   n_y <- length(y)
   nn <- n_x + n_y

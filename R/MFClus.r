@@ -29,9 +29,7 @@
 #' @author [MF-package]
 #' @seealso [mfcluster-class]
 #' @examples
-#' \dontrun{
 #' MFClus(lesion ~ group + cluster(litter), piglung)
-#' }
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
 #' @export
 MFClus <- function(formula,
@@ -58,6 +56,15 @@ MFClus <- function(formula,
   strat <- NULL
   reshape_cluster(data = data, formula = formula, vac_grp = vac_grp,
                   con_grp = con_grp, envir = environment())
+  if (!vac_grp %in% group) {
+    stop("MFClus :: No matches in data for `vac_grp` = '", vac_grp, "'.",
+         call. = FALSE)
+  }
+  if (!con_grp %in% group) {
+    stop("MFClus :: No matches in data for `con_grp` = '", con_grp, "'.",
+         call. = FALSE)
+  }
+
   out <- matrix(NA, length(strat), 6,
                 dimnames = list(strat, c("w", "u", "r", "n1", "n2", "mf")))
   excluded.clusters <- NULL

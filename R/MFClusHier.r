@@ -58,6 +58,7 @@
 #' @importFrom dplyr select sym as_tibble ungroup group_by_at mutate filter vars
 #'   summarize rename everything
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
+#' @importFrom rlang .data
 #' @export
 MFh <- function(formula,
                 data,
@@ -89,14 +90,24 @@ MFh <- function(formula,
   xname <- con_grp
   yname <- vac_grp
 
-  nx <- sym(str_c(xname, "n", sep = "_"))
-  ny <- sym(str_c(yname, "n", sep = "_"))
-  wy <- sym(str_c(yname, "w", sep = "_"))
-  wx <- sym(str_c(xname, "w", sep = "_"))
+
+  if (nrow(filter(data, .data[[tgroup]] == vac_grp)) == 0) {
+    stop("MFh :: No matches in data for `vac_grp` = '", vac_grp, "'.",
+         call. = FALSE)
+  }
+  if (nrow(filter(data, .data[[tgroup]] == con_grp)) == 0) {
+    stop("MFh :: No matches in data for `con_grp` = '", con_grp, "'.",
+         call. = FALSE)
+  }
 
   newdat <- as_tibble(data) |>
     ungroup() |>
     select(all_of(nests), tgroup = all_of(tgroup), resp = all_of(resp))
+
+  nx <- sym(str_c(xname, "n", sep = "_"))
+  ny <- sym(str_c(yname, "n", sep = "_"))
+  wy <- sym(str_c(yname, "w", sep = "_"))
+  wx <- sym(str_c(xname, "w", sep = "_"))
 
   this_core_tbl <- newdat |>
     group_by_at(nests) |>

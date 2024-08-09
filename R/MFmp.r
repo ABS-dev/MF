@@ -28,7 +28,7 @@
 #'   **4:500--508**
 #' @author [MF-package]
 #' @examples
-#' MFmp(les ~ tx + cluster(cage), mlesions, vac_grp = "vac", con_grp = "con")
+#' MFmp(les ~ tx + cluster(cage), mlesions)
 #' MFmp(x = c(12, 12, 2))
 #' @importFrom stats qnorm qt
 #' @importFrom lifecycle badge deprecate_warn is_present deprecated
@@ -42,7 +42,6 @@ MFmp <- function(formula = NULL,
                  df = NA_real_,
                  tdist = TRUE,
                  compare = deprecated()) {
-  message("bob")
   if (is.null(df)) df <- NA_real_
   if (!is.numeric(df) && !is.integer(df)) df <- NA_real_
   if (is_present(compare)) {

@@ -94,8 +94,16 @@ HLBoot <- function(formula,
   A <- data.frame(model.frame(formula = formula, data = data))
   resp <- A[, 1]
   tx <- A[, 2]
-  x <- resp[tx == con_grp]
-  y <- resp[tx == vac_grp]
+  x <- resp[tx %in% con_grp]
+  y <- resp[tx %in% vac_grp]
+  if (length(y) == 0) {
+    stop("HLBoot :: No matches in data for `vac_grp` = '", vac_grp, "'.",
+         call. = FALSE)
+  }
+  if (length(x) == 0) {
+    stop("HLBoot :: No matches in data for `con_grp` = '", con_grp, "'.",
+         call. = FALSE)
+  }
 
   # shortcircuit if complete separation
   if (range(x)[1] < range(y)[1]) {
