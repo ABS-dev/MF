@@ -45,7 +45,7 @@ the control or reference group to which \code{compare[2]} is compared}
 to \code{set.seed}.}
 }
 \value{
-a \code{\link{mfboot-class}} data object
+a \linkS4class{mfboot} data object
 }
 \description{
 Estimates bootstrap confidence intervals for the mitigated
@@ -59,7 +59,7 @@ intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 }
 \examples{
 
-MFBoot(lesion~group, calflung, seed = 12345)
+MFBoot(lesion ~ group, calflung, seed = 12345)
 
 # 10000 bootstrap samples
 # 95\% confidence interval
@@ -73,11 +73,13 @@ MFBoot(lesion~group, calflung, seed = 12345)
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
 severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508} \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
-the Bootstrap.} Chapman and Hall, New York, 1993.
+\strong{4:500--508}
+
+Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and
+Hall, New York, 1993.
 }
 \seealso{
-\code{\link{mfboot-class}}
+\linkS4class{mfboot}
 }
 \author{
 \link{MF-package}

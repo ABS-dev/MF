@@ -4,27 +4,28 @@
 #' are excluded if they do not include both treatments.
 #'
 #' @title Clustered mitigated fraction
-#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a
+#' @param formula Formula of the form `y ~ x + cluster(w)`, where y is a
 #'   continuous response, x is a factor with two levels of treatment, and w is a
 #'   factor indicating the clusters.
-#' @param data Data frame.  See \code{Note} for handling of input data with more
+#' @param data Data frame.  See `Note` for handling of input data with more
 #'   than two levels.
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is
-#'   the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - `compare[1]` is
+#'   the control or reference group to which `compare[2]` is compared
 #' @param trace.it Verbose tracking of the cycles? Default FALSE.
-#' @return a \code{\link{mfcluster-class}} data object
+#' @returns a [mfcluster-class] data object
 #' @note If input data contains more than two levels of treatment, rows
-#' associated with unused treatment levels will be removed. \cr Factor levels
-#' for treatments not present in the input data will be ignored. \cr Clusters
-#' with missing treatments will be excluded. See
-#' \code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded
-#' clusters.
+#'   associated with unused treatment levels will be removed.
+#'
+#'   Factor levels for treatments not present in the input data will be ignored.
+#'
+#'   Clusters with missing treatments will be excluded. See
+#'   [mfbootcluster-class] or use `trace.it` to identify excluded clusters.
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease
-#'   severity. \emph{Journal of Modern Applied Statistical Methods.}
-#'   \bold{4:500--508}
-#' @author \link{MF-package}
-#' @seealso \code{\link{mfcluster-class}}
+#'   severity. *Journal of Modern Applied Statistical Methods.*
+#'   **4:500--508**
+#' @author [MF-package]
+#' @seealso [mfcluster-class]
 #' @examples
 #' \dontrun{
 #' MFClus(lesion ~ group + cluster(litter), piglung)
@@ -90,20 +91,20 @@ MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE) {
   for (stratum in strat) {
     x <- dat[group == id[1] & as.character(clusters) == stratum]
     y <- dat[group == id[2] & as.character(clusters) == stratum]
-    n.x <- length(x)
-    n.y <- length(y)
-    if (n.x > 0 && n.y > 0) {
-      x.y <- c(x, y)
-      w <- sum(rank(x.y)[1:n.x])
-      u <- w - (n.x * (n.x + 1)) / 2
-      r <- u / (n.x * n.y)
+    n_x <- length(x)
+    n_y <- length(y)
+    if (n_x > 0 && n_y > 0) {
+      x_y <- c(x, y)
+      w <- sum(rank(x_y)[1:n_x])
+      u <- w - (n_x * (n_x + 1)) / 2
+      r <- u / (n_x * n_y)
       mf <- 2 * r - 1
-      out[stratum, ] <- c(w, u, r, n.x, n.y, mf)
+      out[stratum, ] <- c(w, u, r, n_x, n_y, mf)
     } else {
       if (trace.it) {
         cat("Cluster", stratum, "missing a treatment\n")
       }
-      out[stratum, ] <- c(NA, NA, NA, n.x, n.y, NA)
+      out[stratum, ] <- c(NA, NA, NA, n_x, n_y, NA)
       excluded.clusters <- c(excluded.clusters, stratum)
     }
   }

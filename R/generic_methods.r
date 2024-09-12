@@ -123,18 +123,18 @@ setMethod("print", "mfcomponents",
             cat("\nMF =", x$mf, "comparing",
                 x$compare[2], "to", x$compare[1], "\n")
             subj <- data.frame(x$subj)
-            mfju <- unique(subj$mf.j)
+            mfju <- unique(subj$mf_j)
             nu <- length(mfju)
-            subtab <- data.frame(mf.j = mfju,
+            subtab <- data.frame(mf_j = mfju,
                                  freq = rep(NA, nu),
-                                 min.y = rep(NA, nu),
-                                 max.y = rep(NA, nu))
-            subtab <- subtab[rev(order(subtab$mf.j)), ]
+                                 min_y = rep(NA, nu),
+                                 max_y = rep(NA, nu))
+            subtab <- subtab[rev(order(subtab$mf_j)), ]
             for (i in seq_len(nrow(subtab))) {
-              ys <- subj$y[subj$mf.j == subtab$mf.j[i]]
+              ys <- subj$y[subj$mf_j == subtab$mf_j[i]]
               subtab$freq[i] <- length(ys)
-              subtab$min.y[i] <- min(ys)
-              subtab$max.y[i] <- max(ys)
+              subtab$min_y[i] <- min(ys)
+              subtab$max_y[i] <- max(ys)
             }
             cat("\nMF Subject Components\n\n")
             print(subtab, row.names = FALSE)

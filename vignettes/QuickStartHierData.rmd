@@ -28,8 +28,7 @@ a <- data.frame(
   room = paste("Room", rep(c("W", "Z"), each = 24)),
   pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
   litter = paste("Litter", rep(11:22, each = 4)),
-  tx = rep(rep(c("vac", "con"), each = 2), 12),
-  stringsAsFactors = FALSE
+  tx = rep(rep(c("vac", "con"), each = 2), 12)
 )
 set.seed(76153)
 a$lung[a$tx == "vac"] <- round(rnorm(24, 5, 1.3), 2)
@@ -62,14 +61,13 @@ A nested design assumes that the factor level of one variable co-occurs with
 that of another variable. For example, Pen D exists only within Room Z.
 
 ```{r, expdesign, echo = FALSE}
-kable(a,
-      align = "c",
-      row.names = FALSE,
-      caption = "Nested hierarchical data structure.",
-      format = "latex") |>
+kbl(a,
+    align = "c",
+    row.names = FALSE,
+    caption = "Nested hierarchical data structure.") |>
   kable_styling("bordered",
                 full_width = FALSE,
-                font_size = 8) |>
+                font_size = 8)  |>
   collapse_rows(columns = 1:4,
                 valign = "middle")
 ```
@@ -474,8 +472,7 @@ a <- data.frame(
   room = paste("Room", rep(c("W", "Z"), each = 24)),
   pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
   litter = paste("Litter", rep(11:22, each = 4)),
-  tx = rep(rep(c("vac", "con"), each = 2), 12),
-  stringsAsFactors = FALSE
+  tx = rep(rep(c("vac", "con"), each = 2), 12)
 )
 set.seed(76153)
 a$lung[a$tx == "vac"] <- round(rnorm(24, 5, 1.3), 2)

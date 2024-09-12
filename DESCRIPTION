@@ -1,8 +1,8 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.4.9
-Date: 2024-04-22
+Version: 4.4.10
+Date: 2024-07-25
 Authors@R: c(
   person(given   = "CVB Statistics", email = "CVB.Data.Help@usda.gov", role = c("cre", "fmo")),
   person(given   = "David",  family  = "Siev",        role = "aut", comment = "until 2019"),
@@ -13,12 +13,12 @@ Description: Calculate MF (mitigated fraction) with clustering and bootstrap
   claim, or warranty is implied for this package. It is made available for 
   investigational or pedagogical use only.
 License: file LICENSE
-URL: https://github.com/ABS-dev/MF/blob/master/README.md
-BugReports: https://github.com/ABS-dev/MF/issues
+URL: https://github.com/ABS-dev/MF/
+BugReports: https://github.com/ABS-dev/MF/issues/
 LazyLoad: true
 LazyData: true
 Depends:
-  R (>= 4.1.0)
+  R (>= 4.2)
 Imports:
   methods,
   dplyr (>= 0.7.1),
@@ -34,19 +34,19 @@ Suggests:
   kableExtra,
   testthat,
   covr,
-  R.rsp,
-  knitr
+  knitr,
+  R.rsp
 Collate:
   'aaa.r'
   'classes.r'
   'generic_methods.r'
-  'MF.R'
+  'MF.r'
   'MF-package.r'
   'HLBoot.r'
   'MFBoot.r'
   'MFClus.r'
   'MFClusBoot.r'
-  'MFClusHier.R'
+  'MFClusHier.r'
   'MFmp.r'
   'MFnestBoot.r'
   'MFr.r'
@@ -54,6 +54,5 @@ Collate:
   'MFHier-wrappers.r'
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-Config/build/clean-inst-doc: FALSE
+RoxygenNote: 7.3.2
 VignetteBuilder: R.rsp

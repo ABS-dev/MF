@@ -40,20 +40,14 @@ TRUE, some trees have all the cores while others only have a subset.}
 to \code{set.seed}.}
 }
 \value{
-A list with the following elements: \cr \cr
-
-\describe{
-
-\item{bootmfh}{Rank table for the bootstrapped values as output from
-\code{\link{MFh}}. Includes a new \code{bootID} variable to distinguish
-each bootstrapped incidence.}
-
-\item{clusters}{Table of unique nodes with an ID.}
-
-\item{compare}{Compare vector as specified by user.}
-
-\item{mfh}{MFh run on original data input.}
-
+A list with the following elements:
+\itemize{
+\item \code{bootmfh}: Rank table for the bootstrapped values as output from
+\link{MFh}. Includes a new \code{bootID} variable to distinguish each bootstrapped
+incidence.
+\item \code{clusters}: Table of unique nodes with an ID.
+\item \code{compare}: Compare vector as specified by user.
+\item \code{mfh}: MFh run on original data input.
 }
 }
 \description{
@@ -61,20 +55,19 @@ Calculate rank tables for MF using bootstrapping.
 }
 \examples{
 set.seed(76153)
-a <- data.frame(room = paste('Room', rep(c('W','Z'), each = 24)),
-                pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
-                litter = paste('Litter', rep(11:22, each = 4)),
-                tx = rep(rep(c('vac', 'con'), each = 2), 12),
-                stringsAsFactors = FALSE)
-a[a$tx == 'vac', 'lung'] <-  rnorm(24, 5, 1.3)
-a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
+a <- data.frame(room = paste("Room", rep(c("W", "Z"), each = 24)),
+                pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+                litter = paste("Litter", rep(11:22, each = 4)),
+                tx = rep(rep(c("vac", "con"), each = 2), 12))
+a[a$tx == "vac", "lung"] <-  rnorm(24, 5, 1.3)
+a[a$tx == "con", "lung"] <- rnorm(24, 7, 1.3)
 a
 
 formula <- lung ~ tx + room / pen / litter
 nboot <- 10000
 boot.cluster <- TRUE
 boot.unit <- TRUE
-which.factors <- c('All', 'room', 'pen', 'litter')
+which.factors <- c("All", "room", "pen", "litter")
 
 system.time(test1 <- MFhBoot(formula, a,
                             nboot = 10000,
@@ -84,7 +77,7 @@ system.time(test1 <- MFhBoot(formula, a,
 test1$bootmfh
 }
 \seealso{
-\code{\link{MFClusBootHier}}, \code{\link{MFnestBoot}}
+\link{MFClusBootHier}, \link{MFnestBoot}
 }
 \author{
 \link{MF-package}

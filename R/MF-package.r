@@ -4,13 +4,12 @@
 #' @docType data
 #' @description Post-mortem examination of the lungs of groups of calves.
 #' @format a data frame with 50 observations of the following 2 variables, no
-#'   NAs \describe{
+#'   NAs
 #'
-#'   \item{group}{Treatment group. One of con = control or vac = vaccinate }
+#' * `group`: Treatment group. One of con = control or vac = vaccinate
 #'
-#'   \item{lesion}{Fraction of lungs with gross lesions.}
+#' * `lesion`: Fraction of lungs with gross lesions.
 #'
-#'   }
 #' @keywords datasets
 NULL
 
@@ -22,15 +21,14 @@ NULL
 #' @description Post-mortem examination of the lungs of dogs housed in cages by
 #'   pairs.
 #' @format A data frame with 52 observations of the following 3 variables, no
-#'   NAs. \describe{
+#'   NAs.
 #'
-#'   \item{cage}{Cage ID. 1 - 26.}
+#' * `cage`: Cage ID. 1 - 26.
 #'
-#'   \item{tx}{Treatment. One of 'con' or 'vac'.}
+#' * `tx`: Treatment. One of "con" or "vac".
 #'
-#'   \item{les}{Percent gross lung lesions.}
+#' * `les`: Percent gross lung lesions.
 #'
-#'   }
 #' @keywords datasets
 NULL
 
@@ -40,17 +38,16 @@ NULL
 #' @docType data
 #' @description Post-mortem examination of the lungs of pigs in litters.
 #' @format A data frame with 102 observations of the following 3 variables, no
-#'   NAs. \describe{
+#'   NAs.
 #'
-#'   \item{lesion}{Percent gross lung lesions.}
+#' * `lesion`: Percent gross lung lesions.
 #'
-#'   \item{group}{Treatment group. One of 'con' or 'vac'.}
+#' * `group`: Treatment group. One of "con" or "vac".
 #'
-#'   \item{litter}{Litter ID.}
+#' * `litter`: Litter ID.
 #'
-#'   }
 #' @keywords datasets
 NULL
 
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
-if (getRversion() >= "2.15.1")  utils::globalVariables(c("."))
+if (getRversion() >= "2.15.1")  globalVariables(c("."))

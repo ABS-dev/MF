@@ -25,31 +25,30 @@ the core or nest variables from the data set. If none or NULL is specified,
 MF will be calculated for the whole tree.}
 }
 \value{
-A list with the following elements: \cr \cr \itemize{ \item
-\strong{MFh} as output from \code{\link{MFh}}. \item \strong{MFnest} as
-output from \code{\link{MFnest}}. }
+A list with the following elements:
+\itemize{
+\item \code{MFh}: as output from \link{MFh}.
+\item \code{MFnest}: as output from \link{MFnest}.
+}
 }
 \description{
 Calculate mitigated fraction directly from hierarchial nested
-data. Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single
-function.
+data. Combines \link{MFh} and \link{MFnest} into a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes
-of the hierarchical tree. \code{Nest} variables are those above the core.
-\code{All} refers to a summary of the entire tree.
+\code{Core} variable is the variable corresponding to the lowest nodes of
+the hierarchical tree. \code{Nest} variables are those above the core. \code{All}
+refers to a summary of the entire tree.
 }
 \examples{
 a <- data.frame(
-room = paste('Room', rep(c('W','Z'), each=24)),
-pen = paste('Pen', rep(LETTERS[1:6], each=8)),
-litter = paste('Litter', rep(11:22, each=4)),
-tx = rep(rep(c('vac','con'), each=2), 12),
-stringsAsFactors = FALSE
-)
+room = paste("Room", rep(c("W", "Z"), each = 24)),
+pen = paste("Pen", rep(LETTERS[1:6], each = 8)),
+litter = paste("Litter", rep(11:22, each = 4)),
+tx = rep(rep(c("vac", "con"), each = 2), 12))
 set.seed(76153)
-a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
-a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
+a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
 thismf <- MFClusHier(lung ~ tx + room / pen / litter, a)
 thismf$MFnest
 aCore <- thismf$MFh
@@ -59,7 +58,7 @@ aCore$formula
 aCore$compare
 }
 \seealso{
-\code{\link{MFh}}, \code{\link{MFnest}}
+\link{MFh}, \link{MFnest}
 }
 \author{
 \link{MF-package}

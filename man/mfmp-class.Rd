@@ -6,33 +6,23 @@
 \alias{mfmp}
 \title{Class mfmp}
 \description{
-Class mfmp is created from output of function MFmp
+Class \code{mfmp} is created from output of function \code{MFmp}
 }
 
 \section{Fields}{
 
-
 \itemize{
-
-\item{\code{ci:} }{numeric vector of point and interval estimates}
-
-\item{\code{x: } }{numeric vector of length three holding data}
-
-\item{\code{what: }}{text string describing interval type}
-
-\item{\code{alpha: }}{numeric value specifying complement of confidence
-interval}
-
-\item{\code{tdist: }}{Logical indicating if t distribution(TRUE) or
-gaussian (FALSE)}
-
-\item{\code{df: }}{numeric value indicating degrees freedom}
-
+\item \code{ci}: numeric vector of point and interval estimates
+\item \code{x}: numeric vector of length three holding data
+\item \code{what}: text string describing interval type
+\item \code{alpha}: numeric value specifying complement of confidence interval
+\item \code{tdist}: Logical indicating if t distribution(TRUE) or Gaussian (FALSE)
+\item \code{df}: numeric value indicating degrees freedom
 }
 }
 
 \seealso{
-\code{\link{MFmp}}
+\link{MFmp}
 }
 \author{
 \link{MF-package}

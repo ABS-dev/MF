@@ -12,13 +12,13 @@ Class mfclushier is created from output of function MFClusHier
 \section{Fields}{
 
 \itemize{
-\item{\code{MFh: }}{output from MFh. A \code{\link{mfhierdata}} object.}
-\item{\code{MFnest: }}{output from MFnest. A tibble.}
+\item \code{MFh}: output from MFh. A \link{mfhierdata} object.
+\item \code{MFnest}: output from MFnest. A tibble.
 }
 }
 
 \seealso{
-\code{\link{MFh}}, \code{\link{MFnest}}
+\link{MFh}, \link{MFnest}
 }
 \author{
 \link{MF-package}

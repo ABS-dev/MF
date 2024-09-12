@@ -51,7 +51,7 @@ statistic.}
 to \code{set.seed}.}
 }
 \value{
-a \code{\link{mfbootcluster-class}} data object
+a \linkS4class{mfbootcluster} data object
 }
 \description{
 Estimates bootstrap confidence intervals for the mitigated
@@ -65,37 +65,40 @@ intervals.
 }
 \note{
 If input data contains more than two levels of treatment, rows
-associated with unused treatment levels will be removed. \cr Factor levels
-for treatments not present in the input data will be ignored. \cr Clusters
-with missing treatments will be excluded. See
-\code{\link{mfbootcluster-class}} or use \code{trace.it} to identify excluded
-clusters.
+associated with unused treatment levels will be removed.
+
+Factor levels for treatments not present in the input data will be ignored.
+
+Clusters with missing treatments will be excluded. See
+\linkS4class{mfbootcluster} or use \code{trace.it} to identify excluded clusters.
 }
 \examples{
 \dontrun{
 MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
-Bootstrapping clusters. . . . . . . . . . . . . . . . .
-
-Bootstrapping units. . . . . . . . . . . . . . . . . .
-
-10000 bootstrap samples of clusters and units in treatment in cluster
-Comparing vac to con
-
-95\% confidence interval
-
-observed    median       lower     upper
-Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
-Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
-
-Excluded Clusters
-M, Q, R, B, O, V, I, C
+# Bootstrapping clusters. . . . . . . . . . . . . . . . .
+#
+# Bootstrapping units. . . . . . . . . . . . . . . . . .
+#
+# 10000 bootstrap samples of clusters and units in treatment in cluster
+# Comparing vac to con
+#
+# 95\% confidence interval
+#
+# observed    median       lower     upper
+# Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
+# Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
+#
+# Excluded Clusters
+# M, Q, R, B, O, V, I, C
 }
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
 severity. \emph{Journal of Modern Applied Statistical Methods.}
-\bold{4:500--508}\cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
-the Bootstrap.} Chapman and Hall, New York, 1993.
+\strong{4:500--508}
+
+Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and
+Hall, New York, 1993.
 }
 \author{
 \link{MF-package}

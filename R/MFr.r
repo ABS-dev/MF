@@ -6,24 +6,24 @@
 #' on the original scale of measurement.
 #'
 #' @title Mitigated fraction
-#' @param formula Formula of the form \code{y ~ x}, where y is a continuous
+#' @param formula Formula of the form `y ~ x`, where y is a continuous
 #'   response and x is a factor with two levels
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels -- \code{compare[1]} is
-#'   the control or reference group to which \code{compare[2]} is compared
-#' @return The estimated mitigated fraction.
+#' @param compare Text vector stating the factor levels -- `compare[1]` is
+#'   the control or reference group to which `compare[2]` is compared
+#' @returns The estimated mitigated fraction.
 #' @export
 #' @references Siev D, 2005. An estimator of intervention effect on disease
-#'   severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
-#' @author \link{MF-package}
+#'   severity. *Journal of Modern Applied Statistical Methods.* 4:500-508
+#' @author [MF-package]
 #' @examples
-#' MFr(lesion~group, calflung)
+#' MFr(lesion ~ group, calflung)
 #' # [1] 0.44
 #' @importFrom stats model.frame
 MFr <- function(formula, data, compare = c("con", "vac")) {
-  # formula of form response~treatment
-  # x=response for compare[1]
-  # y=response for compare[2]
+  # formula of form response ~ treatment
+  # x = response for compare[1]
+  # y = response for compare[2]
   # compare y to x
   df <- data.frame(model.frame(formula = formula, data = data))
   resp <- df[, 1]
@@ -32,7 +32,6 @@ MFr <- function(formula, data, compare = c("con", "vac")) {
   y <- resp[tx == compare[2]]
   n_x <- length(x)
   n_y <- length(y)
-  # unused? N <- n_x + n_y
   x_y <- c(x, y)
   w <- sum(rank(x_y)[seq_len(n_x)])
   return(((2. * w - n_x * (1. + n_x + n_y)) / (n_x * n_y)))

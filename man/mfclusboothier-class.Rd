@@ -13,13 +13,13 @@ MFClusBootHier.
 \section{Fields}{
 
 \itemize{
-\item{\code{MFhBoot: }}{output from MFhBoot. A list.}
-\item{\code{MFnestBoot: }}{output from MFnestBoot. A list.}
+\item \code{MFhBoot} output from MFhBoot. A list.
+\item \code{MFnestBoot} output from MFnestBoot. A list.
 }
 }
 
 \seealso{
-\code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
+\link{MFhBoot}, \link{MFnestBoot}
 }
 \author{
 \link{MF-package}

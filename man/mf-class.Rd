@@ -11,22 +11,13 @@ Parent class for package MF data objects.
 
 \section{Fields}{
 
-
 \itemize{
-
-\item{\code{nboot: } }{numeric value specifying number of samples}
-
-\item{\code{alpha: }}{numeric value specifying complement of confidence
-interval}
-
-\item{\code{seed: }}{vector of integers specifying seed for pseudo-random
-number generator used}
-
-\item{\code{compare: }}{vector of character strings naming groups compared}
-
-\item{\code{rng: }}{character string naming type of random number
-generator}
-
+\item \code{nboot}: numeric value specifying number of samples
+\item \code{alpha}: numeric value specifying complement of confidence interval
+\item \code{seed}: vector of integers specifying seed for pseudo-random number
+generator used
+\item \code{compare}: vector of character strings naming groups compared
+\item \code{rng}: character string naming type of random number generator
 }
 }
 

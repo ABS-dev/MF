@@ -7,14 +7,11 @@
 \title{piglung dataset}
 \format{
 A data frame with 102 observations of the following 3 variables, no
-NAs. \describe{
-
-\item{lesion}{Percent gross lung lesions.}
-
-\item{group}{Treatment group. One of 'con' or 'vac'.}
-
-\item{litter}{Litter ID.}
-
+NAs.
+\itemize{
+\item \code{lesion}: Percent gross lung lesions.
+\item \code{group}: Treatment group. One of "con" or "vac".
+\item \code{litter}: Litter ID.
 }
 }
 \description{
