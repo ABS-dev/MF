@@ -1,57 +1,58 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.4.3
-Date: 2023-11-1
+Version: 4.4.4
+Date: 2024-04-15
 Authors@R: c(
   person(given   = "CVB Statistics", email = "CVB.Data.Help@usda.gov", role = c("cre", "fmo")),
   person(given   = "David",  family  = "Siev",        role = "aut", comment = "until 2019"),
   person(given   = "Marie",  family  = "Vendettuoli", role = "aut", comment = "until 2019"),
   person(given   = "Thomas", family  = "Kent",        role = "aut", comment = "starting 2020"))
 Description: Calculate MF (mitigated fraction) with clustering and bootstrap 
-    options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, 
-    claim, or warranty is implied for this package. It is made available for 
-    investigational or pedagogical use only.
-License: CC0
+  options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, 
+  claim, or warranty is implied for this package. It is made available for 
+  investigational or pedagogical use only.
+License: file LICENSE
 URL: https://github.com/ABS-dev/MF/blob/master/README.md
 BugReports: https://github.com/ABS-dev/MF/issues
 LazyLoad: true
 LazyData: true
 Depends:
-    R (>= 4.0)
+  R (>= 4.0)
 Imports:
-    methods,
-    dplyr (>= 0.7.1),
-    plyr,
-    stringr,
-    tidyr (>= 1.3.0),
-    forcats,
-    purrr,
-    rlang (>= 1.1.1)
+  methods,
+  dplyr (>= 0.7.1),
+  plyr,
+  stringr,
+  tidyr (>= 1.3.0),
+  forcats,
+  purrr,
+  rlang (>= 1.1.1)
 Suggests:
-    rmarkdown,
-    tidyverse,
-    kableExtra,
-    testthat,
-    knitr,
-    covr
+  rmarkdown,
+  tidyverse,
+  kableExtra,
+  testthat,
+  knitr,
+  covr
 Collate:
-    'aaa.r'
-    'classes.r'
-    'generic_methods.r'
-    'MF.R'
-    'MF-package.r'
-    'HLBoot.r'
-    'MFBoot.r'
-    'MFClus.r'
-    'MFClusBoot.r'
-    'MFClusHier.R'
-    'MFmp.r'
-    'MFnestBoot.r'
-    'MFr.r'
-    'MFSubj.r'
-    'MFHier-wrappers.r'
-VignetteBuilder: knitr
+  'aaa.r'
+  'classes.r'
+  'generic_methods.r'
+  'MF.R'
+  'MF-package.r'
+  'HLBoot.r'
+  'MFBoot.r'
+  'MFClus.r'
+  'MFClusBoot.r'
+  'MFClusHier.R'
+  'MFmp.r'
+  'MFnestBoot.r'
+  'MFr.r'
+  'MFSubj.r'
+  'MFHier-wrappers.r'
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Config/build/clean-inst-doc: FALSE
+VignetteBuilder: knitr

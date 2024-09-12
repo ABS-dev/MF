@@ -8,8 +8,8 @@
 #'   multiple levels of "c".
 #' @param data a data.frame or tibble with the variables specified in formula.
 #'   Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels - compare[1] is the
-#'   control or reference group to which compare[2] is compared.
+#' @param compare Text vector stating the factor levels - `compare[1]` is the
+#'   control or reference group to which `compare[2]` is compared.
 #' @return A \code{\link{mfhierdata}} object, which is a list of three items.
 #'   \cr \describe{
 #'

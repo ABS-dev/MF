@@ -1,9 +1,9 @@
-^codecov\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^Dockerfile$
-^\.travis\.yml$
-CODEOWNERS
-^\.appveyor\.yml$
-^LICENSE$
-vignettes
+^\.[^/]*$
+^[^/]*\.r$
+^[^/]*\.R$
+NEWS
+dev_notes
+old_files
+utilities

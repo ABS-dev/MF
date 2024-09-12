@@ -461,7 +461,7 @@ which takes the following input arguments:
 For example:
 
 ```{r}
-MFnestBoot(thisBootMFh, which.factor = c("pen", "All"), alpha = 0.1)
+MFnestBoot(this_boot_mfh, which.factor = c("pen", "All"), alpha = 0.1)
 ```
 
 # APPENDIX {-}
