@@ -4,20 +4,17 @@
 #' percentile method. Highest density intervals are estimated by selecting the shortest of all possible intervals.
 #' 
 #' @title Boostrap MF CI from clustered data
-#' @usage MFClusBoot(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, 
-#'    boot.unit = FALSE, b = 100, B = 100, alpha = 0.05, hpd = TRUE, 
-#'    return.boot = FALSE, trace.it = FALSE)
 #' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.
 #' @param data Data frame. See \code{Note} for handling of input data with more than two levels.
 #' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared
-#' @param boot.cluster Resample the clusters? Default TRUE
-#' @param boot.unit Resample the units within cluster? Default FALSE
+#' @param boot.cluster Boolean whether to resample the clusters.
+#' @param boot.unit Boolean whether to resample the units within cluster.
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
-#' @param hpd Estimate highest density intervals? Default TRUE
-#' @param return.boot Save the bootstrap sample of the MF statistic? Default FALSE
-#' @param trace.it Verbose tracking of the cycles? Default FALSE
+#' @param hpd Boolean whether to estimate highest density intervals.
+#' @param return.boot Boolean whether to save the bootstrap sample of the MF statistic.
+#' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @return a \code{\link{mfbootcluster-class}} data object
 #' @note
 #' If input data contains more than two levels of treatment, rows associated with unused treatment levels will be removed. \cr
@@ -68,7 +65,7 @@
 ##--------------------------------------------------------------------
 ## Bootstrap stratified or clustered MF
 ##--------------------------------------------------------------------
-MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = FALSE, b = 100, 
+MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = TRUE, boot.unit = TRUE, b = 100, 
 	B = 100, alpha = 0.05, hpd=TRUE, return.boot = FALSE,trace.it= FALSE){
     # takes b bootstrap samples B times, so nboot = B * b
     # 3/19/01 initial coding
@@ -131,7 +128,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = 
 			
         }
 		
-	
+        cat('\n')
     }
     else strat.b <- matrix(strat, b * B, n.strat, byrow = T)
 
@@ -205,7 +202,8 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = 
 
 
     q <- c(.5,alpha/2, 1 - alpha/2)
-    mf.obs <- MFClus(formula, data, compare = compare)$All$mf
+    mf.All <-  MFClus(formula, data, compare = compare)$All
+    mf.obs <-mf.All$mf
 
     nboot <- b * B
     cluster.text <- ifelse(boot.cluster, "clusters", "")
@@ -231,5 +229,5 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"), boot.cluster = 
 
 	return(mfbootcluster$new(stat = stat, nboot = nboot, alpha = alpha, what = the.text, 
 		excludedClusters = excluded.clusters, seed = seed, call = match.call(), 
-		compare = compare, rng = rng, sample = sample))
+		compare = compare, rng = rng, sample = sample, All =  mf.All))
 }

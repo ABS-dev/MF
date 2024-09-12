@@ -1,10 +1,8 @@
 #' @description Estimates bootstrap confidence intervals for MF, HL, and Qdif.
 #' @details Estimates bootstrap confidence intervals for the mitigated fraction (MF), Hodge-Lehmann estimator (HL), and the difference of medians and quartiles (Qdif). 
-#' The Hodges-Lehmann estimator is the media difference; it assumes that the two distributions have the same shape and differ by a constant shift.
+#' The Hodges-Lehmann estimator is the median difference; it assumes that the two distributions have the same shape and differ by a constant shift. Assumes data is
+#' single pool (no nesting).
 #' @title Bootstrap CI for MF, HL, and Qdif
-#' @usage HLBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-#'   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, 
-#'   trace.it = FALSE, seed = NULL)
 #' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, 
 #'   and w is a factor indicating the clusters.
 #' @param data Data frame
@@ -12,10 +10,10 @@
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
-#' @param hpd Estimate highest density intervals for MF and HL? Default TRUE.
-#' @param bca Estimate BCa intervals for MF? Default FALSE.
-#' @param return.boot Save the bootstrap samples of the statistics? Default FALSE.
-#' @param trace.it Verbose tracking of the cycles? Default FALSE.
+#' @param hpd Boolean whether to estimate highest density intervals for MF and HL.
+#' @param bca Boolean whether to estimate BCa intervals for MF.
+#' @param return.boot Boolean whether to save the bootstrap samples of the statistics.
+#' @param trace.it Boolean whether to display verbose tracking of the cycles.
 #' @param seed initial seed value. Ignored.
 #' @return a \code{\link{mfhlboot-class}} data object
 #' @seealso \code{\link{mfhlboot-class}} 
@@ -87,6 +85,20 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     x <- resp[tx == compare[1]]
     y <- resp[tx == compare[2]]
 
+    ## shortcircuit if complete separation
+    if(range(x)[1] < range(y)[1]){
+      lowtx <- x
+      hitx <- y
+    } else{
+      lowtx <- y
+      hitx <- x
+    }
+    
+    if(max(lowtx) < min(hitx)){
+      message('Complete separation observed. MF is 1.0 with no c.i.')
+      return()
+    }
+    
     rng <- 'Mersenne-Twister'
     RNGkind(rng)
     # if(!is.null(seed))
@@ -99,6 +111,10 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 
     # observed stats
     mf <- ((2 * w(c(x, y), n.x) - n.x * (1 + n.x + n.y))/(n.x * n.y))
+    
+    if(round(mf, 1) == 1.0){
+      message("Complete separation observed.")
+    }
     hl <- hl.fn(c(x, y), n.x)
     qx <- quantile(x, probs = c(1:3)/4)
     qy <- quantile(y, probs = c(1:3)/4)
@@ -178,14 +194,7 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
         mfstat <- rbind(mfstat, 'BC.a'= c(mf, qmf))
     }
     
-    # out <- list(MFstat = mfstat, HLstat= hlstat, QDIFstat = qdifstat, QXstat = qxstat, 
-		# QYstat = qystat, nboot = nboot, alpha=alpha, seed = seed, compare = compare, 
-		# rng = rng)
-    # if(return.boot){
-        # out <- list(out, sample = list(MF = MF,HL = HL,Qx = Qx, Qy = Qy))
-	# }
-    # class(out) <- 'mfhlboot'
-    # return(out)
+   
 	
 	if(return.boot){
 		sample  <- list(MF = MF, HL = H, Qx = Qx, Qy = Qy)

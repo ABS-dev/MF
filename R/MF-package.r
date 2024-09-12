@@ -6,8 +6,8 @@
 #' \tabular{ll}{
 #' Package: \tab MF-package\cr
 #' Type: \tab Package\cr
-#' Version: \tab 4.3.3\cr
-#' Date: \tab 2014-08-11\cr
+#' Version: \tab 4.3.4\cr
+#' Date: \tab 2018-03-15\cr
 #' License: \tab MIT \cr
 #' LazyLoad: \tab yes\cr
 #' }
@@ -30,7 +30,7 @@ NULL
 
 #' @name calflung
 #' @title calflung dataset
-#' @alias calflung-data
+#' @aliases calflung-data
 #' @docType data
 #' @description something here
 #' @format a data frame with 50 observations of the following 2 variables, no NAs
@@ -44,7 +44,7 @@ NULL
 
 #' @name mlesions
 #' @title mlesions dataset
-#' @alias mlesions-data
+#' @aliases mlesions-data
 #' @docType data
 #' @description something here
 #' @format a data frame with 52 observations of the following 3 variables, no NAs
@@ -58,7 +58,7 @@ NULL
 
 #' @name piglung
 #' @title piglung dataset
-#' @alias piglung-data
+#' @aliases piglung-data
 #' @docType data
 #' @description something here
 #' @format a data frame with 102 observations of the following 3 variables, no NAs

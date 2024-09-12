@@ -1,6 +1,6 @@
 # shared reshaping portion of MFClus and MFClusBoot
 reshapeCluster <- function(data, formula, compare, envir){
-	assign("test", 5, envir = envir)
+
 	
 ## remove assignment to global; this is bad practice!!
     #assign('cluster', function(x){return(x)}, envir = .GlobalEnv)
