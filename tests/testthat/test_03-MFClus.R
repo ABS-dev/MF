@@ -15,7 +15,7 @@ test_that("output", {
   expect_equal(round(test3$All, 5), round(all3, 5))
 
   ##byCluster
-  by3 <- test3$byCluster %>% as.data.frame() %>% drop_na()
+  by3 <- test3$byCluster |> as.data.frame() |> drop_na()
   expect_equal(nrow(by3), 18)
   expect_identical(names(by3), c("w", "u", "r", "n1", "n2", "mf"))
   expect_identical(rownames(by3), c("U", "K", "Z", "D", "N", "T",

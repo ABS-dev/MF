@@ -66,10 +66,10 @@ kable(a,
       align = "c",
       row.names = FALSE,
       caption = "Nested hierarchical data structure.",
-      format = "latex") %>%
+      format = "latex") |>
   kable_styling("bordered",
                 full_width = FALSE,
-                font_size = 8) %>%
+                font_size = 8) |>
   collapse_rows(columns = 1:4,
                 valign = "middle")
 ```
@@ -169,9 +169,9 @@ mf_multiple <- MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
 mf_multiple
 ```
 ```{r, echo=FALSE}
-mf_multiple$MFnest %>%
-  mutate(MF = round(MF, 2)) %>%
-  as.data.frame
+mf_multiple$MFnest |>
+  mutate(MF = round(MF, 2)) |>
+  as.data.frame()
 ```
 
 The table columns are:
@@ -205,8 +205,8 @@ thisMFh
 ```
 
 ```{r, echo = FALSE}
-thisMFh$coreTbl %>%
-  as.data.frame
+thisMFh$coreTbl |>
+  as.data.frame()
 ```
 
 Alternatively, calculate rank table directly by using the `MFh()` function:
@@ -214,9 +214,10 @@ Alternatively, calculate rank table directly by using the `MFh()` function:
 ```{r, message=FALSE, eval=FALSE}
 MFh(formula = lung ~ tx + room / pen / litter, data = a)
 ```
+
 ```{r, message=FALSE, echo=FALSE}
-MFh(formula = lung ~ tx + room / pen / litter, data = a)$coreTbl %>%
-  as.data.frame(.)
+MFh(formula = lung ~ tx + room / pen / litter, data = a)$coreTbl |>
+  as.data.frame()
 ```
 
 The output table includes the following information, used to calculate the
@@ -258,7 +259,7 @@ MFnest(thisMFh, which.factor = "pen")
 ```
 
 ```{r, message=FALSE, echo=FALSE}
-MFnest(thisMFh, which.factor = "pen") %>% as.data.frame
+MFnest(thisMFh, which.factor = "pen") |> as.data.frame()
 ```
 
 This is the same output as if the user had initially selected for variable "pen":
@@ -269,8 +270,8 @@ MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
 ```
 ```{r, message=FALSE, echo=FALSE}
 MFClusHier(formula = lung ~ tx + room / pen / litter, data = a,
-           which.factor = "pen")$MFnest %>%
-  as.data.frame
+           which.factor = "pen")$MFnest |>
+  as.data.frame()
 ```
 # BOOTSTRAPPED MF {-}
 
@@ -361,11 +362,11 @@ mfboot_multiple
 ```
 
 ```{r, message=FALSE, echo=FALSE}
-mfboot_multiple$MFnestBoot$mfnest_summary %>%
+mfboot_multiple$MFnestBoot$mfnest_summary |>
   mutate(median = round(median, 2),
          etlower = round(etlower, 2),
-         mf.obs = round(mf.obs, 2)) %>%
-  as.data.frame
+         mf.obs = round(mf.obs, 2)) |>
+  as.data.frame()
 ```
 
 \clearpage

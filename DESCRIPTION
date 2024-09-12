@@ -1,8 +1,8 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.4.8
-Date: 2024-04-17
+Version: 4.4.9
+Date: 2024-04-22
 Authors@R: c(
   person(given   = "CVB Statistics", email = "CVB.Data.Help@usda.gov", role = c("cre", "fmo")),
   person(given   = "David",  family  = "Siev",        role = "aut", comment = "until 2019"),
@@ -18,7 +18,7 @@ BugReports: https://github.com/ABS-dev/MF/issues
 LazyLoad: true
 LazyData: true
 Depends:
-  R (>= 4.0)
+  R (>= 4.1.0)
 Imports:
   methods,
   dplyr (>= 0.7.1),

@@ -65,8 +65,8 @@ written.
 ```{r, expdesign, echo = FALSE, }
 knitr::kable(a, align = "c", row.names = FALSE,
              caption = "Nested hierarchical data structure.",
-             format = "latex") %>%
-  kable_styling("bordered", full_width = FALSE, font_size = 8) %>%
+             format = "latex") |>
+  kable_styling("bordered", full_width = FALSE, font_size = 8) |>
   collapse_rows(columns = 1:4, valign = "middle")
 ```
 
@@ -175,8 +175,8 @@ mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room / pen / litter,
                                   data = a, boot.unit = FALSE,
                                   boot.cluster = TRUE, alpha = 0.1,
                                   which.factor = c("room", "litter", "All"))
-mfboot_multiple$MFhBoot$bootmfh %>%
-  filter(bootID == 1) %>%
+mfboot_multiple$MFhBoot$bootmfh |>
+  filter(bootID == 1) |>
   select(c("bootID", "room", "pen", "litter"))
 ```
 
@@ -233,8 +233,8 @@ MFClusBootHier(formula = lung ~ tx + room / pen / litter,
                boot.cluster = TRUE, alpha = 0.1,
                which.factor = c("room", "litter", "All"))
 
-mfboot_multiple$MFhBoot$bootmfh %>%
-  filter(bootID == 1) %>%
+mfboot_multiple$MFhBoot$bootmfh |>
+  filter(bootID == 1) |>
   select(c("bootID", "room", "pen", "litter"))
 ```
 
