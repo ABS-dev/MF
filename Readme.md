@@ -1,27 +1,24 @@
-MF
-==
+# MF - Mitigated Fraction <img src="man/figures/logo.png" alt="Package Logo" width="100" align="right" />
 
-Mitigated Fraction. Calculate mitigated fraction with clustering and bootstrap options. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only.
+Mitigated Fraction. Calculate mitigated fraction with clustering and bootstrap
+options. No endorsement, claim, or warranty is implied for this package. It is
+made available for investigational or pedagogical use only.
 
-#### To install or update MF
-
-From **within R**
-
-1. Installing last release [v4.3.6](https://github.com/ABS-dev/MF/releases/tag/4.3.6)
+## Installation
 
 ```
-require(devtools)
-install_github("ABS-dev/MF", ref = "4.3.6")
+devtools::install_github("ABS-dev/MF")
 ```
-  *See all historical releases [here](https://github.com/ABS-dev/MF/releases)*
-  
-2. Installing work-in-progress on the main development branch 
 
-[![Travis Build Status](https://travis-ci.org/ABS-dev/MF.svg?branch=master)](https://travis-ci.org/ABS-dev/MF) [![codecov](https://codecov.io/gh/ABS-dev/MF/branch/master/graph/badge.svg)](https://codecov.io/gh/ABS-dev/MF)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ABS-dev/MF?branch=master&svg=true)](https://ci.appveyor.com/project/ABS-dev/MF)
+## Vignettes
 
+This package contains the following manuals and vignettes:
 
-```
-require(devtools)
-install_github("ABS-dev/MF")
-```
+-   MF Package
+-   Algorithms for calculating MF from hierarchical data
+-   Quick Start when calculating MF from Hierarchical Data
+
+## Issues
+
+Report any issues or requests on the package
+[issues](https://github.com/ABS-dev/MF/issues) page.
