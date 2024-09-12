@@ -1,0 +1,244 @@
+---
+title: "Algorithms for calculating MF from hierarchical data"
+author: "Center for Veterinary Biologics - Statistics Section"
+date: "December 21, 2018"
+output: pdf_document
+numbersections: yes
+number_sections: yes
+fontsize: 12pt
+toc: yes
+urlcolor: blue
+vignette: >
+  %\VignetteIndexEntry{Algorithms for calculating MF from hierarchical data} 
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r hiddensetup, echo = FALSE, include = FALSE}
+require(kableExtra)
+require(tidyverse)
+require(MF)
+
+## example data
+a <- data.frame(
+ room = paste('Room', rep(c('W', 'Z'), each = 24)),
+ pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
+ litter = paste('Litter', rep(11:22, each = 4)),
+ tx = rep(rep(c('vac', 'con'), each = 2), 12),
+ stringsAsFactors = FALSE
+ )
+set.seed(76153)
+a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
+a <- a[-48,]
+a$lung <- round(a$lung, 2)
+a
+```
+
+# INTRODUCTION {-}
+
+This document is intended to provide additional details regarding the algorithms
+used for calculating mitigated fraction values for hierarchical data as 
+implemented in package `MF` via the functions `MFClusHier`, `MFnest`, 
+`MFClusBootHier`, and `MFnestBoot`. A passing familiarity is helpful in 
+understanding the examples and underlying data input in this guide. 
+A quick start may be found at
+[Quick Start when calculating MF from Hierarchical Data](https://github.com/ABS-dev/MF/blob/master/inst/doc/QuickStartHierData.pdf). 
+
+## Data assumptions. Nested Hierarchical structure. {-}
+
+Examples in this document expect data to be structured in a *nested hierarchical 
+tree*, as shown in Table 1. If there are only two variables (columns) or the 
+experimental design is not nested, then the methods described here may not apply.
+A nested design assumes that the factor of one variable co-occur with another 
+variable. For example, Pen D exists only within Room Z. If the experimental 
+design of the data set is crossed (all factors of a variable co-occur with 
+all factors of another variable), it is not appropriate to use this guide as 
+written.
+
+```{r, expdesign, echo = FALSE}
+kable(a, align = "c", row.names = FALSE, 
+  caption = "Nested hierarchical data structure.",
+  format = 'latex') %>%
+  kable_styling('bordered', full_width = FALSE, font_size = 6) %>%  
+  collapse_rows(columns = 1:4, valign = "middle")
+```
+
+\clearpage
+
+# DETERMINING MITIGATED FRACTION {-}
+
+## Rank tables. {-}
+
+Deterimining the rank table is the first step of the algorithm. For each 
+*cluster*, the following values are determined: 
+
+- `con_n` & `vac_n`: Counts of observations for each treatment (control or 
+vaccinate) for a particular instance of a unique factor level of a variable.
+- `n1n2`: Product of counts, `con_n` * `vac_n`.
+- `w`: Wilcoxon statistic.
+- `u`: Mann-Whitney statistic.
+- `con_medResp` & `vac_medResp`: Median observation for each treatment 
+(control or vaccinate) in a particular instance of a unique factor level of a variable.
+
+```{r, echo = FALSE}
+thismfh <- MFh(formula = lung ~ tx + room/pen/litter, data = a)
+thismfh$coreTbl %>% as.data.frame()
+```
+
+A *cluster* refers to the full grouping designation of each observation. 
+For example, in Table 1 the cluster of the first observation is 
+Room W/Pen A/Litter 11, and there are four observations within that cluster. 
+
+The values in the rank table is the same regardless of the variable of interest.
+That is, whether a user is interested in the value of mitigated fraction for variable
+"pen" or "litter" does not affect the content of rows or columns, assuming the 
+same input data.
+
+
+### Using package MF. {-}
+
+Rank tables can be output with the following usage in package `MF`:
+
+- `MFClusHier(...)$MFh`: Rank table field from `MFClusHier()` output, 
+calculated from input data.
+- `MFh(...)`: Calculate just the rank table from input data.
+- `MFClusBootHier(...)$MFhBoot`: List which includes rank table using 
+bootstrapped input data as `...$bootmfh` and calculated directly from 
+inputdata as `...$mfh`.
+- `MFhBoot(...)`: List which includes rank table using 
+bootstrapped input data as `...$bootmfh` and calculated directly from 
+inputdata as `...$mfh` without the additional `...$MFnestBoot` output.
+
+## Summarizing the rank table. {-}
+
+With a detailed rank table, it is possible to calculate the mitigated fraction 
+for a variety of variable choices. This is the second step of the algorithm. For each variable of interest the following 
+summations are calculated for each level of that variable.
+
+- `N1N2`: Sum of the `n1n2` values from the rank table for the factor level 
+designated in the row.
+- `U`: Sum of the `u` values from the rank table for the factor level 
+designated in the row.
+- `con_N` & `vac_N`: Sum of the counts from the rank table matching the 
+particular factor level 
+designated in the row. 
+- `con_medResp` & `vac_medResp`: Median of responses for each comparison
+group matching the particular factor level of the row. 
+- `MF`: $2 * U/N1N2 - 1$.
+
+The following example looks at the mitigated fraction of factors in variable "pen".
+We can see that the values for "N1N2" have been summed from the previous rank 
+table for all cases of "Pen A", "Pen B", etc.
+
+```{r, message=FALSE, echo=FALSE}
+MFnest(thismfh, which.factor = "pen") %>% data.frame(.)
+```
+
+It is possible to perform this summary without regard for variables to get
+an overall mitigated fraction value.
+
+```{r, message=FALSE, echo=FALSE}
+MFnest(thismfh, which.factor = "All")  %>% data.frame(.)
+```
+
+### Using package MF. {-}
+
+- `MFClusHier(...)`: calculates rank table and MF table as a single step.
+- `MFnest(...)`: calculates MF table from rank table.
+- `MFClusBootHier(...)`: calculates rank table and MF table as a single step, 
+with bootstrapping.
+- `MFnestBoot(...)`: calculates MF table including  from bootstrapped rank table.
+
+
+# BOOTSTRAPPING {-}
+
+Bootstrapping can occur in one of two points of consideration: at *clusters*
+or at *units*. 
+
+## Resampling clusters. {-}
+
+In Table 1 the cluster of the first observation is 
+Room W/Pen A/Litter 11, and there are four observations within that cluster. 
+Bootstrapping clusters samples from the unique clusters with replacement, so 
+every instance will have the same number of clusters as the original data, but 
+they may not be unique. The example below shows one possiblility of a bootstrap
+instance from the example data. 
+
+```{r, echo = FALSE, message = FALSE}
+mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                                  data = a, boot.unit = FALSE, 
+                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  which.factor = c('room', 'litter', 'All'))
+mfboot_multiple$MFhBoot$bootmfh %>% 
+  filter(bootID == 1) %>% 
+  select(c('bootID', 'room', 'pen', 'litter')) %>%
+  data.frame(.)
+```
+
+During bootstrapping of clusters, the observations within that cluster do not 
+change composition. That is, Room W/Pen A/Litter 11 continues to have the same
+two vaccinates (5.63, 4.62) and the same two controls (9.20, 7.28).
+
+
+## Resampling units. {-}
+
+Bootstrapping the unit involves sampling with replacement the observed 
+values within a particular comparison group for that cluster. The mix of control 
+and vaccinate groups remains constant for a unique cluster and determines the number of 
+sampling events. For example, the cluster Room W/Pen A/Litter 11 has
+2 vaccinates and 2 controls. Bootstrapping the unit involves sampling 
+with replacement twice from the observed response of samples in the selection
+Room W/Pen A/Litter 11/vac and twice from the observed response of samples in 
+the selection Room W/Pen A/Litter 11/con for each instance of the cluster
+Room W/Pen A/Litter 11. The number of times that a unique cluster exists in the 
+bootstrapped data is determined by sampling of the clusters (see above 
+discussion).
+
+After bootstrapping at the unit level, a particular instance of the cluster 
+Room W/Pen A/Litter 11 will continue to contain two vaccinates but the values 
+may both be 5.63 while the two controls may have the values (7.28, 9.20).
+
+
+
+# APPENDIX {-}
+
+## Code used in this example {-}
+
+```{r, eval = FALSE}
+a <- data.frame(
+ room = paste('Room', rep(c('W', 'Z'), each = 24)),
+ pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
+ litter = paste('Litter', rep(11:22, each = 4)),
+ tx = rep(rep(c('vac', 'con'), each = 2), 12),
+ stringsAsFactors = FALSE
+ )
+set.seed(76153)
+a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
+a <- a[-48,]
+a$lung <- round(a$lung, 2)
+
+# DETERMINING MITIGATED FRACTION 
+thismfh <- MFh(formula = lung ~ tx + room/pen/litter, data = a)
+MFnest(thismfh, which.factor = "pen")
+MFnest(thismfh, which.factor = "All")
+
+# BOOTSTRAPPING   
+MFClusBootHier(formula = lung ~ tx + room/pen/litter, 
+                                  data = a, boot.unit = FALSE, 
+                                  boot.cluster = TRUE,  alpha = 0.1,
+                                  which.factor = c('room', 'litter', 'All'))
+mfboot_multiple$MFhBoot$bootmfh %>% 
+  filter(bootID == 1) %>% 
+  select(c('bootID', 'room', 'pen', 'litter'))
+```
+
+
+## Session details for this manual. {-}
+
+```{r}
+sessionInfo()
+```

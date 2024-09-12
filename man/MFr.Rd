@@ -28,10 +28,9 @@ to accompany it with an estimator on the original scale of measurement.
 MFr(lesion~group,calflung)
 # [1] 0.44
 }
-\author{
-David Siev
-}
 \references{
 Siev D, 2005. An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
 }
-
+\author{
+David Siev
+}

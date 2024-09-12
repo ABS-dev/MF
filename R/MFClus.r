@@ -53,60 +53,64 @@
 #' #  Excluded Clusters
 #' #  [1] M, Q, R, B, O, V, I, C
 #' }
-##
-##--------------------------------------------------------------------
-## Clustered or Stratified MF
-##--------------------------------------------------------------------
-##
+#
+#--------------------------------------------------------------------
+# Clustered or Stratified MF
+#--------------------------------------------------------------------
+#
 MFClus <- function(formula, data, compare = c("con", "vac"), trace.it = FALSE){
-    # formula of the form response ~ treatment + cluster(clustername)
-    # based on prob{F(y)<F(x)}
-    # within-cluster ranking only 
-    # 3/19/01 initial coding
-    # revised 10/3/06 to eliminate clusters without both treatments represented
-	# revised 8/27/13 - remove group levels if no observations from that level are present in original data 
+  # formula of the form response ~ treatment + cluster(clustername)
+  # based on prob{F(y) < F(x)}
+  # within-cluster ranking only
+  # 3/19/01 initial coding
+  # revised 10/3/06 to eliminate clusters without both treatments represented
+	# revised 8/27/13 - remove group levels if no observations from that level
+  #     are present in original data
 	# revised 9/03/13 - subset initial data by comparison group levels
-	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to external function 
+	# revised 9/03/13 - move data reshaping shared by MFClusBoot and MFClus to
+  #     external function
 	dat <- NULL
 	group <- NULL
 	clusters <- NULL
 	strat <- NULL
-	reshapeCluster(data = data, formula = formula, compare = compare, envir = environment()) 
+	reshapeCluster(data = data, formula = formula, compare = compare,
+	               envir = environment())
 	id <- compare
-    out <- matrix(NA, length(strat), 6, dimnames = list(strat, c("w", "u", "r", 
+  out <- matrix(NA, length(strat), 6, dimnames = list(strat, c("w", "u", "r",
 		"n1", "n2", "mf")))
-    excluded.clusters <- NULL
-    for(stratum in strat) {     
-        x <- dat[group == id[1] & as.character(clusters) == stratum]
-        y <- dat[group == id[2] & as.character(clusters) == stratum]
-        n.x <- length(x)
-        n.y <- length(y)
-        if(n.x > 0 & n.y > 0) {
-            N <- n.x + n.y
-            x.y <- c(x, y)
-            w <- sum(rank(x.y)[1:n.x])
-            u <- w - (n.x * (n.x + 1))/2
-            r <- u/(n.x * n.y)
-            mf <- 2 * r - 1
-            out[stratum,  ] <- c(w, u, r, n.x, n.y, mf)
-        }
-        else {
-            if(trace.it) cat('Cluster',stratum,'missing a treatment\n')
-            out[stratum,  ] <- c(NA, NA, NA, n.x, n.y, NA)
-            excluded.clusters <- c(excluded.clusters, stratum)
-        }
+  excluded.clusters <- NULL
+  for (stratum in strat) {
+    x <- dat[group == id[1] & as.character(clusters) == stratum]
+    y <- dat[group == id[2] & as.character(clusters) == stratum]
+    n.x <- length(x)
+    n.y <- length(y)
+    if (n.x > 0 & n.y > 0) {
+       x.y <- c(x, y)
+       w <- sum(rank(x.y)[1:n.x])
+       u <- w - (n.x * (n.x + 1)) / 2
+       r <- u / (n.x * n.y)
+       mf <- 2 * r - 1
+       out[stratum,  ] <- c(w, u, r, n.x, n.y, mf)
+    } else {
+      if (trace.it) {
+        cat("Cluster", stratum, "missing a treatment\n")
+      }
+      out[stratum,  ] <- c(NA, NA, NA, n.x, n.y, NA)
+      excluded.clusters <- c(excluded.clusters, stratum)
     }
-    All <- apply(out, 2, sum, na.rm = T)
-    R <- All["u"]/sum(out[, "n1"] * out[, "n2"])
-    MF <- 2 * R - 1
-    All["r"] <- R
-    All["mf"] <- MF
-    All <- data.frame(t(All))
-    dimnames(All)[[1]] <- 'All'
-    
-    if(round(All$mf, digits = 1) == 1.0){
+  }
+  All <- apply(out, 2, sum, na.rm = TRUE)
+  R <- All["u"] / sum(out[, "n1"] * out[, "n2"])
+  MF <- 2 * R - 1
+  All["r"] <- R
+  All["mf"] <- MF
+  All <- data.frame(t(All))
+  dimnames(All)[[1]] <- "All"
+
+  if (round(All$mf, digits = 1) == 1.0) {
       message("Complete separation observed.")
-    }
-	return(mfcluster$new(All = All, byCluster = out, excludedClusters = excluded.clusters,
-		call = match.call(), compare = compare))
+  }
+	return(mfcluster$new(All = All, byCluster = out,
+	       excludedClusters = excluded.clusters, call = match.call(),
+	       compare = compare))
 }

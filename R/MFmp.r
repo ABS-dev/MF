@@ -20,8 +20,8 @@
 #' @examples
 #' MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
 #' MFmp(x = c(12, 12, 2))
-MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NULL, 
-	alpha = 0.05, df = NA, tdist = T){
+MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"),
+                 x = NULL, alpha = 0.05, df = NA, tdist = TRUE){
 	# asymptotic CI for matched pairs
 	# x is a trinomial frequency vector
 	# c(x>y,x=y,x<y))
@@ -29,7 +29,8 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 	# I(x<y) - I(x>y)
 
 	if(!is.null(formula) & !is.null(data)){
-		byCluster <- MFClus(formula = formula, data = data, compare = compare)$byCluster[, 'mf']
+		byCluster <- MFClus(formula = formula, data = data, 
+		                    compare = compare)$byCluster[, 'mf']
         ##
         byCluster <- factor(byCluster)
         levels(byCluster) <- c('-1', '1', '0')
@@ -63,7 +64,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 		what <- paste(100 * (1 - alpha), "% gaussian interval\n", sep = "")
 	}
 
-	ci <- B + q * sqrt(VB) 
+	ci <- as.numeric(B) + q * as.numeric(sqrt(VB))
 	names(ci) <- c("point", "lower", "upper")
 	
 	if(round(ci[["point"]], digits = 1) == 1.0){
@@ -74,6 +75,7 @@ MFmp <- function(formula = NULL, data = NULL, compare = c("con", "vac"), x = NUL
 	ci["lower"] <- max(ci["lower"], -1)
 
 
-	return(mfmp$new(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist, df = df))
+	return(mfmp$new(ci = ci, x = x, what = what, alpha = alpha, tdist = tdist,
+	                df = df))
 }
 	

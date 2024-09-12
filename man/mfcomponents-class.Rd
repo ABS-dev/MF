@@ -2,15 +2,16 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mfcomponents-class}
-\alias{mfcomponents}
 \alias{mfcomponents-class}
+\alias{mfcomponents}
 \title{Class mfcomponents}
 \usage{
 mfcomponents$new(mf, x, y, subj, compare)
 }
 \description{
-Class mfcomponens is created from output of function MFSubj
+Class mfcomponents is created from output of function MFSubj
 }
+
 \section{Fields}{
 
 \itemize{
@@ -21,11 +22,11 @@ Class mfcomponens is created from output of function MFSubj
 \item{\code{compare: }}{character vector naming groups being compared}
 }
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 \code{\link{MFSubj}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-

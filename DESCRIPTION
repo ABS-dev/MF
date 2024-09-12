@@ -1,8 +1,8 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.3.4
-Date: 15 March 2018
+Version: 4.3.5
+Date: 21 December 2018
 Author: David Siev
 Maintainer: Marie Vendettuoli <marie.c.vendettuoli@aphis.usda.gov>
 Description: Calculate MF (mitigated fraction) with clustering and bootstrap options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only
@@ -10,8 +10,16 @@ License: MIT + file LICENSE
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.2.0),
-    methods
+    R (>= 3.4.4),
+    knitr
+Imports:
+    methods,
+    dplyr (>= 0.7.1),
+    plyr,
+    stringr,
+    tidyr,
+    forcats,
+    purrr
 Collate:
     'aaa.r'
     'classes.r'
@@ -21,7 +29,11 @@ Collate:
     'MFBoot.r'
     'MFClus.r'
     'MFClusBoot.r'
+    'MFClusHier.R'
     'MFmp.r'
+    'MFnestBoot.r'
     'MFr.r'
     'MFSubj.r'
-RoxygenNote: 5.0.1
+    'MFHier-wrappers.r'
+RoxygenNote: 6.0.1
+VignetteBuilder: knitr

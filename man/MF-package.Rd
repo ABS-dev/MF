@@ -2,8 +2,8 @@
 % Please edit documentation in R/MF-package.r
 \docType{package}
 \name{MF-package}
-\alias{MF}
 \alias{MF-package}
+\alias{MF}
 \title{MF Package}
 \description{
 Includes functions related to mitigated fraction. \cr \cr For internal use only at
@@ -13,8 +13,8 @@ the USDA Center for Veterinary Biologics. \cr
 \tabular{ll}{
 Package: \tab MF-package\cr
 Type: \tab Package\cr
-Version: \tab 4.3.4\cr
-Date: \tab 2018-03-15\cr
+Version: \tab 4.3.5\cr
+Date: \tab 21-Dec-2018\cr
 License: \tab MIT \cr
 LazyLoad: \tab yes\cr
 }
@@ -32,4 +32,3 @@ invisible()
 \author{
 David Siev \email{David.Siev@aphis.usda.gov}
 }
-

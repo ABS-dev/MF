@@ -8,10 +8,9 @@
 \format{a data frame with 50 observations of the following 2 variables, no NAs
 \describe{
 \item{group}{Treatment group. One of con = control or vac = vaccinate }
-\item{lesion}{Percent lung lesion, in decimal form}
+\item{lesion}{Fraction of lungs with gross lesions.}
 }}
 \description{
-something here
+Post-mortem examination of the lungs of groups of calves.
 }
 \keyword{datasets}
-

@@ -1,8 +1,8 @@
-setClassUnion('characterORNULL', c('character', 'NULL'))
-setClassUnion('listORNULL', c('list', 'NULL'))
-setClassUnion('numericORNULL', c('numeric', 'NULL'))
-setClassUnion('numericORarray', c('numeric', 'array'))
-
+setClassUnion("characterORNULL", c("character", "NULL"))
+setClassUnion("listORNULL", c("list", "NULL"))
+setClassUnion("numericORNULL", c("numeric", "NULL"))
+setClassUnion("numericORarray", c("numeric", "array"))
+setClassUnion("numericORarrayORtable", c("numeric", "array", "table"))
 
 #' @name mf-class
 #' @title Class mf
@@ -20,10 +20,8 @@ setClassUnion('numericORarray', c('numeric', 'array'))
 #' @keywords documentation
 #' @family mf
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mf <- setRefClass('mf', 
-		fields = list(nboot = 'numeric', alpha = 'numeric', seed = 
-		'integer', compare = 'character', rng = 'character'))
-
+mf <- setRefClass("mf", fields = list(nboot = "numeric", alpha = "numeric",
+  seed = "integer", compare = "character", rng = "character"))
 
 #' @name mfboot-class
 #' @title Class mfboot
@@ -47,35 +45,35 @@ mf <- setRefClass('mf',
 #' @family mf
 #' @seealso \code{\link{MFBoot}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}	
-mfboot <- setRefClass('mfboot', contains = 'mf', fields = list(stat = 'matrix',
-	sample = 'numericORNULL'))
+mfboot <- setRefClass("mfboot", contains = "mf",
+  fields = list(stat = "matrix",
+  sample = "numericORNULL"))
 
 #' @name mfhlboot-class
 #' @title Class mfhlboot
 #' @usage mfhlboot$new(nboot, alpha, seed, compare, rng, sample, MFstat, HLstat,
 #' QDIFstat, QXstat, QYstat)
 #' @description class for data objects produced by HLBoot, contains class mf with
-#' addtional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
+#' additional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
 #' @docType class
 #' @section Fields:
 #' \itemize{
-#' \item{\code{nboot: } }{numeric value specifying number of samples}
-#' \item{\code{alpha: }}{numeric value specifying complement of confidence interval}
-#' \item{\code{seed: }}{vector of integers specifying seed for pseudo-random number generator used}
-#' \item{\code{compare: }}{vector of character strings naming groups compared}
-#' \item{\code{rng: }}{character string naming type of random number generator}
-#' \item{\code{sample: }}{ what is this?}
-#' \item{\code{MFstat}}{matrix with columns \emph{observed, median, lower, upper} for 
-#' Equal Tailed and Highest Density estimates of mitigated fraction (MF)}
-#' \item{\code{HLstat}}{matrix with columns \emph{observed, median, lower, upper} for 
-#' Equal Tailed and Highest Density estimates of Hodge-Lehmann estimator (HL)}
-#' \item{\code{QDIFstat}}{matrix with columns \emph{observed, median, lower, upper} for 
-#' estimates of Quartile Differences}
-#' \item{\code{QXstat}}{matrix with columns \emph{observed, median, lower, upper} for 
-#' quartiles of treatments}
-#' \item{\code{QYstat}}{matrix with columns \emph{observed, median, lower, upper} for 
-#' quartiles of responses}
-#' \item{\code{sample: }}{ what is this?}
+#' \item{\code{nboot: } }{Numeric value specifying number of samples.}
+#' \item{\code{alpha: }}{Numeric value specifying complement of confidence interval.}
+#' \item{\code{seed: }}{Vector of integers specifying seed for pseudo-random number generator used.}
+#' \item{\code{compare: }}{Vector of character strings naming groups compared.}
+#' \item{\code{rng: }}{Character string naming type of random number generator.}
+#' \item{\code{sample: }}{The bootstrapped values.}
+#' \item{\code{MFstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+#' Equal Tailed and Highest Density estimates of mitigated fraction (MF).}
+#' \item{\code{HLstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+#' Equal Tailed and Highest Density estimates of Hodge-Lehmann estimator (HL).}
+#' \item{\code{QDIFstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+#' estimates of Quartile Differences.}
+#' \item{\code{QXstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+#' quartiles of treatments, equal tailed.}
+#' \item{\code{QYstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+#' quartiles of response, equal tailed.}
 #' }
 #' @section Contains:
 #' \code{\link{mf-class}}
@@ -83,14 +81,14 @@ mfboot <- setRefClass('mfboot', contains = 'mf', fields = list(stat = 'matrix',
 #' @family mf
 #' @seealso \code{\link{HLBoot}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}	
-mfhlboot <- setRefClass('mfhlboot', contains = 'mf', fields = list(MFstat = 'matrix',
-	HLstat = 'matrix', QDIFstat = 'matrix', QXstat = 'matrix', QYstat = 'matrix', 
-	sample = 'listORNULL'))
+mfhlboot <- setRefClass("mfhlboot", contains = "mf",
+  fields = list(MFstat = "matrix", HLstat = "matrix", QDIFstat = "matrix",
+       QXstat = "matrix", QYstat = "matrix", sample = "listORNULL"))
 	
 #' @name mfmp-class
 #' @title Class mfmp
 #' @usage mfmp$new(ci, x, what, alpha, tdist, df)
-#' @description Class mfmp is created from output of funtion MFmp
+#' @description Class mfmp is created from output of function MFmp
 #' @docType class
 #' @section Fields:
 #' \itemize{
@@ -105,9 +103,9 @@ mfhlboot <- setRefClass('mfhlboot', contains = 'mf', fields = list(MFstat = 'mat
 #' @family mfmp
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
 #' @seealso \code{\link{MFmp}}
-mfmp <- setRefClass('mfmp', 
-		fields = list(ci = 'numeric', x = 'numericORarray', what = 'character', alpha = 
-		'numeric', tdist = 'logical', df = 'numeric'))
+mfmp <- setRefClass("mfmp",
+  fields = list(ci = "numeric", x = "numericORarrayORtable", what = "character",
+  alpha = "numeric", tdist = "logical", df = "numeric"))
 
 #' @name mfbootcluster-class
 #' @title Class mfbootcluster
@@ -136,9 +134,10 @@ mfmp <- setRefClass('mfmp',
 #' @family mf
 #' @seealso \code{\link{MFClusBoot}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfbootcluster <- setRefClass('mfbootcluster', contains = 'mf', fields = list(
-	stat = 'matrix', what = 'character', excludedClusters = 'character', call = 'call',
-	sample = 'numericORNULL', All = 'data.frame'))
+mfbootcluster <- setRefClass("mfbootcluster", contains = "mf",
+  fields = list(stat = "matrix", what = "character",
+    excludedClusters = "character", call = "call", sample = "numericORNULL",
+    All = "data.frame"))
 	
 #' @name mfcluster-class
 #' @title Class mfcluster
@@ -165,13 +164,14 @@ mfbootcluster <- setRefClass('mfbootcluster', contains = 'mf', fields = list(
 #' @family mfcluster
 #' @seealso \code{\link{MFClus}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfcluster <- setRefClass('mfcluster', fields = list(All = 'data.frame', byCluster = 
-	'matrix', excludedClusters = 'characterORNULL', call = 'call', compare = 'character'))
+mfcluster <- setRefClass("mfcluster", fields = list(All = "data.frame",
+  byCluster = "matrix", "excludedClusters" = "characterORNULL", call = "call",
+  compare = "character"))
 	
 #' @name mfcomponents-class
 #' @title Class mfcomponents
 #' @usage mfcomponents$new(mf, x, y, subj, compare)
-#' @description Class mfcomponens is created from output of function MFSubj
+#' @description Class mfcomponents is created from output of function MFSubj
 #' @docType class
 #' @section Fields:
 #' \itemize{
@@ -185,5 +185,61 @@ mfcluster <- setRefClass('mfcluster', fields = list(All = 'data.frame', byCluste
 #' @family mfcomponents
 #' @seealso \code{\link{MFSubj}}
 #' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
-mfcomponents <- setRefClass('mfcomponents', fields = list(mf = 'numeric', x = 'numeric',
-	y = 'numeric', subj = 'matrix', compare = 'character'))
+mfcomponents <- setRefClass("mfcomponents", fields = list(mf = "numeric",
+  x = "numeric", y = "numeric", subj = "matrix", compare = "character"))
+
+#' @name mfhierdata-class
+#' @title Class mfhierdata
+#' @usage mfhierdata$new(coreTbl, data)
+#' @description Class mfhierdata is created from output of function MFh
+#' @docType class
+#' @section Fields:
+#' \itemize{
+#' \item{\code{coreTbl: }}{data.frame with one row for each unique core level showing values for
+#' \code{nx}, \code{ny}, \code{N}, \code{w}, \code{u}, and median observed response.}
+#' \item{\code{data: }}{data.frame is the restructured input data used for calculations in MFh and MFnest.}
+#' \item{\code{compare: }}{character vector naming groups being compared.}
+#' \item{\code{formula: }}{formula that was called by user.}
+#' }
+#' @keywords documentation
+#' @family mfhierdata
+#' @seealso \code{\link{MFh}}
+#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+mfhierdata <- setRefClass("mfhierdata", fields = list(coreTbl = "tbl",
+  data = "tbl", compare = "character", formula = "formula"))
+
+
+#' @name mfclushier-class
+#' @title Class mfclushier
+#' @usage mfclushier$new(MFh, MFnest)
+#' @description Class mfclushier is created from output of function MFClusHier
+#' @docType class
+#' @section Fields:
+#' \itemize{
+#' \item{\code{MFh: }}{output from MFh. A \code{\link{mfhierdata}} object.}
+#' \item{\code{MFnest: }}{output from MFnest. A tibble.}
+#' }
+#' @keywords documentation
+#' @family mfclushier
+#' @seealso \code{\link{MFh}}, \code{\link{MFnest}}
+#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+mfclushier <- setRefClass("mfclushier", fields = list(MFh = "mfhierdata",
+  MFnest = "tbl"))
+
+#' @name mfclusboothier-class
+#' @title Class mfclusboothier
+#' @usage mfclusboothier$new(MFhBoot, MFnestBoot)
+#' @description Class mfclusboothier is created from output of function 
+#' MFClusBootHier.
+#' @docType class
+#' @section Fields:
+#' \itemize{
+#' \item{\code{MFhBoot: }}{output from MFhBoot. A list.}
+#' \item{\code{MFnestBoot: }}{output from MFnestBoot. A list.}
+#' }
+#' @keywords documentation
+#' @family mfclusboothier
+#' @seealso \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}
+#' @author Marie Vendettuoli \email{marie.c.vendettuoli@@aphis.usda.gov}
+mfclusboothier <- setRefClass("mfclusboothier", fields = list(MFhBoot = "list",
+  MFnestBoot = "list"))

@@ -2,8 +2,8 @@
 % Please edit documentation in R/classes.r
 \docType{class}
 \name{mfcluster-class}
-\alias{mfcluster}
 \alias{mfcluster-class}
+\alias{mfcluster}
 \title{Class mfcluster}
 \usage{
 mfcluster$new(All, bycluster, excludedClusters, call, compare)
@@ -11,6 +11,7 @@ mfcluster$new(All, bycluster, excludedClusters, call, compare)
 \description{
 Class mfcluster is created from output of function MFClus
 }
+
 \section{Fields}{
 
 \itemize{
@@ -29,11 +30,11 @@ Class mfcluster is created from output of function MFClus
 \item{\code{compare: }}{character vector naming groups compared}
 }
 }
-\author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
-}
+
 \seealso{
 \code{\link{MFClus}}
 }
+\author{
+Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+}
 \keyword{documentation}
-
