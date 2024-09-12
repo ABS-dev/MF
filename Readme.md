@@ -1,8 +1,13 @@
-# Under Reconstruction
+MF
+==
 
-**2024-09-11**
+Mitigated Fraction
 
-The Repository for the R package `{MF}` has temporarily been taken down.
+#### First-time usage
 
-Watch for updates.
+From **within R**
 
+```
+require(devtools)
+install_github(repo = "MF", username = "ABS-dev")
+```
