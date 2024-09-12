@@ -33,10 +33,10 @@ Clusters with missing treatments will be excluded. See \code{\link{mfbootcluster
 \dontrun{
 MFClus(lesion ~ group + cluster(litter), piglung)
 
-#  Comparing vac to con 
-#  
-#  MF = 0.3533835 
-#  
+#  Comparing vac to con
+#
+#  MF = 0.3533835
+#
 #  By Cluster
 #     w  u         r n1 n2         mf
 #  U 25 10 0.4000000  5  5 -0.2000000
@@ -57,11 +57,11 @@ MFClus(lesion ~ group + cluster(litter), piglung)
 #  H 14  8 0.8888889  3  3  0.7777778
 #  Y  2  1 1.0000000  1  1  1.0000000
 #  E  2  1 1.0000000  1  1  1.0000000
-#  
+#
 #  All
 #        w  u         r n1 n2        mf
 #  All 181 90 0.6766917 50 52 0.3533835
-#  
+#
 #  Excluded Clusters
 #  [1] M, Q, R, B, O, V, I, C
 }
@@ -73,5 +73,5 @@ Siev D. (2005). An estimator of intervention effect on disease severity. \emph{J
 \code{\link{mfcluster-class}}
 }
 \author{
-David Siev \email{david.siev@aphis.usda.gov}
+\link{MF-package}
 }

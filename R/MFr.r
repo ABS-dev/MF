@@ -1,9 +1,9 @@
 #' Mitigated fraction comparing treatment to control.
-#' 
-#' The mitigated fraction is an estimator that quantifies an intervention's effect on reducing the 
-#' severity of a condition. Since its units are on the probability scale, it is often a good idea 
+#'
+#' The mitigated fraction is an estimator that quantifies an intervention's effect on reducing the
+#' severity of a condition. Since its units are on the probability scale, it is often a good idea
 #' to accompany it with an estimator on the original scale of measurement.
-#' 
+#'
 #' @title Mitigated fraction
 #' @usage MFr(formula, data, compare = c("con", "vac"))
 #' @param formula Formula of the form \code{y ~ x}, where y is a continuous response and x is a factor with two levels
@@ -12,7 +12,7 @@
 #' @return The estimated mitigated fraction.
 #' @export
 #' @references Siev D, 2005. An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
-#' @author David Siev
+#' @author \link{MF-package}
 #' @examples
 #' MFr(lesion~group,calflung)
 #' # [1] 0.44

@@ -5,9 +5,6 @@
 \alias{mfmp-class}
 \alias{mfmp}
 \title{Class mfmp}
-\usage{
-mfmp$new(ci, x, what, alpha, tdist, df)
-}
 \description{
 Class mfmp is created from output of function MFmp
 }
@@ -28,6 +25,7 @@ Class mfmp is created from output of function MFmp
 \code{\link{MFmp}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
+\concept{mfmp}
 \keyword{documentation}

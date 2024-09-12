@@ -7,34 +7,37 @@
 MFnest(Y, which.factor = "All")
 }
 \arguments{
-\item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl} 
+\item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl}
 output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.}
 
-\item{which.factor}{one or more grouping variable(s) of interest. This can be any of 
-the core or nest variables from the data set. If none or \code{All} is 
+\item{which.factor}{one or more grouping variable(s) of interest. This can be any of
+the core or nest variables from the data set. If none or \code{All} is
 specified, a summary MF will be calculated for the whole tree.}
 }
 \value{
-A tibble with each unique level of a variable as a row. Other values 
+A tibble with each unique level of a variable as a row. Other values
 include: \cr
 \describe{
-\item{\code{MF}}{Mitigated fraction for the particular level of the variable 
+\item{\code{MF}}{Mitigated fraction for the particular level of the variable
 in this row.}
-\item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field of 
+\item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field of
                   \code{\link{mfhierdata}} object output by \code{\link{MFh}}
                    for this particular variable-level combination.}
-\item{\code{U}}{Sum of u variable in \code{$coreTbl} field of 
+\item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
                   \code{\link{mfhierdata}} object output by \code{\link{MFh}}
                   for this particular variable-level combination.}
-\item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of 
+\item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
 \code{\link{mfhierdata}} object output by \code{\link{MFh}}
                    for this particular variable-level combination.}
-\item{\code{_medResp}}{Median of observed responses for each comparison group for 
+\item{\code{_medResp}}{Median of observed responses for each comparison group for
 this particular variable-level combination.}
 }
 }
+\description{
+Summations to calculate the MF for nested data from a rank table.
+}
 \note{
-Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+Core variable is the variable corresponding to the lowest nodes of the hierarchial
 tree. Nest variables are those above the core. All refers to a summary of the entire tree.
 }
 \examples{
@@ -146,4 +149,7 @@ MFnest(aCore, c('room', 'pen', 'litter'))
 }
 \seealso{
 \code{\link{MFh}}
+}
+\author{
+\link{MF-package}
 }

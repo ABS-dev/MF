@@ -1,17 +1,17 @@
 #' @name MFh
 #' @title Identify ranks for use when evaluating MF for nested hierarchy.
-#' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-#' response, x is a factor with two levels of treatment, and a/b/c are vgrouping variables 
+#' @param formula Formula of the form y ~ x + a/b/c, where y is a continuous
+#' response, x is a factor with two levels of treatment, and a/b/c are vgrouping variables
 #' corresponding to the clusters. Nesting is assumed to be in order, left to right,
-#' highest to lowest. So a single level of "a" will contain multiple levels of 
+#' highest to lowest. So a single level of "a" will contain multiple levels of
 #' "b" and a single level of "b" will contain multiple levels of "c".
-#' @param data a data.frame or tibble with the variables specified in formula. 
+#' @param data a data.frame or tibble with the variables specified in formula.
 #' Additional variables will be ignored.
-#' @param compare Text vector stating the factor levels - compare[1] is the control or 
+#' @param compare Text vector stating the factor levels - compare[1] is the control or
 #' reference group to which compare[2] is compared.
 #' @return A \code{\link{mfhierdata}} object, which is a list of three items. \cr
 #' \describe{
-#' 
+#'
 #' \item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique core level showing values for:
 #' \itemize{
 #'   \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations for each treatment level in the core level.
@@ -25,12 +25,12 @@
 #' \item{compare}{The compare variables as input by user.}
 #' \item{formula}{The formula as input by user.}
 #' }
-#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial
 #' tree. Nest variables are those above the core.
-#' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all 
+#' @seealso \code{\link{MFnest}} for calculation of MF for nest, core and all
 #' variables. \code{\link{mfhierdata}} for returned object.\code{\link{MFClusHier}}
 #' for a wrapper.
-#' @examples 
+#' @examples
 #' a <- data.frame(
 #'  room = paste('Room',rep(c('W','Z'),each=24)),
 #'  pen = paste('Pen',rep(LETTERS[1:6],each=8)),
@@ -41,7 +41,7 @@
 #' set.seed(76153)
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
-#' 
+#'
 #' aCore <- MFh(lung ~ tx + room/pen/litter,a)
 #' aCore
 #' #  A tibble: 12 x 10
@@ -60,30 +60,31 @@
 #' #  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4     4
 #' #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
 #' @export
+#' @author \link{MF-package}
 MFh <- function(formula, data, compare = c("con", "vac")){
   ## get all variables from formula & identify role
   termlab <- attr(terms(formula), "term.labels")
   nests <- unlist(strsplit(termlab[[length(termlab)]], split = ":"))
-  if(length(nests) == 1){
+  if (length(nests) == 1){
     stop("This is not nested hierarchy. See MFClus.")
   }
   core <- nests[length(nests)]
   tgroup <- termlab[1]
   resp <- all.vars(formula)[1]
-  
+
   ## groups for comparison
   xname <- compare[1]
   yname <- compare[2]
-  
+
   nx <- sym(str_c(xname, "n", sep = "_"))
   ny <- sym(str_c(yname, "n", sep = '_'))
   wy <- sym(str_c(yname, "w", sep = "_"))
   wx <- sym(str_c(xname, "w", sep = "_"))
-  
+
   newdat <- as_tibble(data) %>%
     ungroup() %>%
-    select(nests, tgroup = tgroup, resp = resp) 
-  
+    select(nests, tgroup = tgroup, resp = resp)
+
   thiscoreTbl <- newdat %>%
     group_by_at(nests) %>%
     mutate(ntgroups = length(unique(tgroup))) %>%
@@ -96,7 +97,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
               w = sum(rank)) %>%
     gather(variable, value, -c(tgroup, nests)) %>%
     unite(temp, tgroup, variable) %>%
-    spread(temp, value) %>%    
+    spread(temp, value) %>%
     select(-!!wy) %>%
     rename(w = !!wx) %>%
     mutate(n1n2 = !!nx * !!ny,
@@ -104,35 +105,38 @@ MFh <- function(formula, data, compare = c("con", "vac")){
     select(everything(), w, n1n2, u) %>%
     ungroup()
 
-  return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat, 
+  return(mfhierdata$new(coreTbl = thiscoreTbl, data = newdat,
                         compare = compare, formula = formula))
 }
+# to keep R CMD happy
+utils::globalVariables(c('u', 'bootID', 'n1n2', 'w', 'variable', 'value', 'tmp',
+  'ntgroups', 'temp'))
 
 #' @name MFnest
 #' @title Summations to calculate the MF for nested data from a rank table.
-#' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl} 
+#' @param Y rank table (tibble or data.frame), structured as \code{$coreTbl}
 #' output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.
-#' @param which.factor one or more grouping variable(s) of interest. This can be any of 
-#' the core or nest variables from the data set. If none or \code{All} is 
+#' @param which.factor one or more grouping variable(s) of interest. This can be any of
+#' the core or nest variables from the data set. If none or \code{All} is
 #' specified, a summary MF will be calculated for the whole tree.
-#' @return A tibble with each unique level of a variable as a row. Other values 
+#' @return A tibble with each unique level of a variable as a row. Other values
 #' include: \cr
 #' \describe{
-#' \item{\code{MF}}{Mitigated fraction for the particular level of the variable 
+#' \item{\code{MF}}{Mitigated fraction for the particular level of the variable
 #' in this row.}
-#' \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field of 
+#' \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field of
 #'                   \code{\link{mfhierdata}} object output by \code{\link{MFh}}
 #'                    for this particular variable-level combination.}
-#' \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of 
+#' \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
 #'                   \code{\link{mfhierdata}} object output by \code{\link{MFh}}
 #'                   for this particular variable-level combination.}
-#' \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of 
+#' \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
 #' \code{\link{mfhierdata}} object output by \code{\link{MFh}}
 #'                    for this particular variable-level combination.}
-#' \item{\code{_medResp}}{Median of observed responses for each comparison group for 
+#' \item{\code{_medResp}}{Median of observed responses for each comparison group for
 #' this particular variable-level combination.}
 #' }
-#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+#' @note Core variable is the variable corresponding to the lowest nodes of the hierarchial
 #' tree. Nest variables are those above the core. All refers to a summary of the entire tree.
 #' @seealso \code{\link{MFh}}
 #' @examples
@@ -146,28 +150,28 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' set.seed(76153)
 #' a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 #' a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
-#' 
+#'
 #' aCore <- MFh(lung ~ tx + room/pen/litter,a)
 #' MFnest(aCore)
 #' # # A tibble: 1 x 9
 #' #   variable level    MF  N1N2     U con_N vac_N con_medResp vac_medResp
 #' #   <fct>    <chr> <dbl> <dbl> <dbl> <dbl> <dbl>       <dbl>       <dbl>
 #' # 1 All      All   0.875    48    45    24    24        7.24        4.91
-#' 
+#'
 #' MFnest(aCore$coreTbl)
 #' # Skipping median summary, no response data provided.
 #' # # A tibble: 1 x 7
 #' #   variable level    MF  N1N2     U con_N vac_N
 #' #   <fct>    <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
 #' # 1 All      All   0.875    48    45    24    24
-#' 
+#'
 #' MFnest(aCore, 'room')
 #' # # A tibble: 2 x 9
 #' #   variable level     MF  N1N2     U con_N vac_N con_medResp vac_medResp
 #' #   <fct>    <chr>  <dbl> <dbl> <dbl> <dbl> <dbl>       <dbl>       <dbl>
 #' # 1 room     Room W 0.833    24    22    12    12        7.79        4.85
 #' # 2 room     Room Z 0.917    24    23    12    12        6.71        4.98
-#' 
+#'
 #' MFnest(aCore, 'pen')
 #' # Complete separation observed for variable(s): pen
 #' # # A tibble: 6 x 9
@@ -179,7 +183,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' # 4 pen      Pen D  0.75     8     7     4     4        6.10        4.98
 #' # 5 pen      Pen E  1        8     8     4     4        6.86        4.86
 #' # 6 pen      Pen F  1        8     8     4     4        6.88        5.13
-#' 
+#'
 #' MFnest(aCore, c('All', 'litter'))
 #' # Complete separation observed for variable(s): litter
 #' # # A tibble: 13 x 9
@@ -216,7 +220,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' # 10 litter   Litter 20   1       4     4     2     2        6.78        4.86
 #' # 11 litter   Litter 21   1       4     4     2     2        6.82        5.36
 #' # 12 litter   Litter 22   1       4     4     2     2        7.27        5.13
-#' 
+#'
 #' MFnest(aCore, c('room', 'pen', 'litter'))
 #' # # A tibble: 20 x 9
 #' #    variable level        MF  N1N2     U con_N vac_N con_medResp vac_medResp
@@ -242,6 +246,7 @@ MFh <- function(formula, data, compare = c("con", "vac")){
 #' # 19 litter   Litter 21 1         4     4     2     2        6.82        5.36
 #' # 20 litter   Litter 22 1         4     4     2     2        7.27        5.13
 #' @export
+#' @author \link{MF-package}
 MFnest <- function(Y, which.factor = 'All') {
   ## restructure if using output from MFh
   if (class(Y)[1] == 'mfhierdata') {
@@ -250,23 +255,24 @@ MFnest <- function(Y, which.factor = 'All') {
   } else if (class(Y)[1] != 'tbl_df') {
     Y <- as_tibble(Y)
   }
-  
-  stat.names <- c(str_subset(names(Y), "_medResp"), 
+
+  stat.names <- c(str_subset(names(Y), "_medResp"),
                   str_subset(names(Y), "_n"), 'n1n2', 'u', 'w')
   comp1 <- sym(stat.names[3])
   comp2 <- sym(stat.names[4])
-  
+
   comp3 <- sym(gsub(stat.names[3], pattern = "_n", replacement = "_N"))
   comp4 <- sym(gsub(stat.names[4], pattern = "_n", replacement = "_N"))
-  
+
   out <- Y %>%
     mutate_if(is.factor, as.character) %>%
     gather(variable, level, -stat.names) %>%
-    bind_rows(., 
+    mutate(level = as.character(level)) %>%
+    bind_rows(.,
               select(Y, stat.names) %>%
               mutate(variable = 'All', level = 'All')) %>%
     group_by(variable, level) %>%
-    summarize(N1N2 = sum(n1n2), U = sum(u), con_N = sum(!!comp1), 
+    summarize(N1N2 = sum(n1n2), U = sum(u), con_N = sum(!!comp1),
               vac_N = sum(!!comp2)) %>%
     mutate(R = U/N1N2, MF = 2 * R - 1) %>%
     select(-R, !!quo_name(comp3) := con_N, !!quo_name(comp4) := vac_N) %>%
@@ -282,12 +288,12 @@ MFnest <- function(Y, which.factor = 'All') {
     paste0(collapse = ', ') %>%
     message("Complete separation observed for variable(s): ", ., collapse = "")
   }
-  
+
   ## inform user why medians are not available
   if(!exists('input')){
-    message('Skipping median summary, no response data provided.') 
+    message('Skipping median summary, no response data provided.')
   } else{
-    
+
     thisdata <- input$data
     compare <- input$compare
     names(compare) <- paste0(input$compare, "_medResp", sep = '')
@@ -295,6 +301,7 @@ MFnest <- function(Y, which.factor = 'All') {
     out <- thisdata %>%
       mutate_if(is.factor, as.character) %>%
       gather(variable, level, -c(tgroup, resp)) %>%
+      mutate(level = as.character(level)) %>%
       bind_rows(.,
                 select(thisdata, c(tgroup, resp)) %>%
                 mutate(variable = "All", level = "All") %>%
@@ -305,16 +312,18 @@ MFnest <- function(Y, which.factor = 'All') {
       ungroup() %>%
       rename(!!compare) %>%
       filter(tolower(variable) %in% tolower(which.factor)) %>%
-      left_join(out, ., by = c('variable', 'level')) 
-      
-  }    
-  
+      left_join(out, ., by = c('variable', 'level'))
+
+  }
+
   out <- out %>%
     mutate(variable = fct_relevel(variable, which.factor)) %>%
     arrange(variable) %>%
     select(variable, level, MF, everything())
- 
+
   return(out)
 }
 
+# to keep R CMD happy
+utils::globalVariables(c('R', 'con_N', 'vac_N', 'tgroup', 'resp', 'medResp'))
 

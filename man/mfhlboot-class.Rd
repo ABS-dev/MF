@@ -5,10 +5,6 @@
 \alias{mfhlboot-class}
 \alias{mfhlboot}
 \title{Class mfhlboot}
-\usage{
-mfhlboot$new(nboot, alpha, seed, compare, rng, sample, MFstat, HLstat,
-QDIFstat, QXstat, QYstat)
-}
 \description{
 class for data objects produced by HLBoot, contains class mf with
 additional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
@@ -23,15 +19,15 @@ additional fields \emph{MFstat, HLstat, QDIFstat, QXstat, QYstat}
 \item{\code{compare: }}{Vector of character strings naming groups compared.}
 \item{\code{rng: }}{Character string naming type of random number generator.}
 \item{\code{sample: }}{The bootstrapped values.}
-\item{\code{MFstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+\item{\code{MFstat}}{Matrix with columns \emph{observed, median, lower, upper} for
 Equal Tailed and Highest Density estimates of mitigated fraction (MF).}
-\item{\code{HLstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+\item{\code{HLstat}}{Matrix with columns \emph{observed, median, lower, upper} for
 Equal Tailed and Highest Density estimates of Hodge-Lehmann estimator (HL).}
-\item{\code{QDIFstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+\item{\code{QDIFstat}}{Matrix with columns \emph{observed, median, lower, upper} for
 estimates of Quartile Differences.}
-\item{\code{QXstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+\item{\code{QXstat}}{Matrix with columns \emph{observed, median, lower, upper} for
 quartiles of treatments, equal tailed.}
-\item{\code{QYstat}}{Matrix with columns \emph{observed, median, lower, upper} for 
+\item{\code{QYstat}}{Matrix with columns \emph{observed, median, lower, upper} for
 quartiles of response, equal tailed.}
 }
 }
@@ -49,6 +45,7 @@ Other mf: \code{\link{mf-class}},
   \code{\link{mfbootcluster-class}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
+\concept{mf}
 \keyword{documentation}

@@ -4,17 +4,17 @@
 \alias{MFBoot}
 \title{Bootstrap MF CI}
 \usage{
-MFBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100, 
-   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE, 
+MFBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100,
+   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE,
    seed = sample(1:100000, 1))
 }
 \arguments{
-\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous 
+\item{formula}{Formula of the form \code{y ~ x}, where y is a continuous
 response and x is a factor with two levels.}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is 
+\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
 the control or reference group to which \code{compare[2]} is compared}
 
 \item{b}{Number of bootstrap samples to take with each cycle}
@@ -40,9 +40,9 @@ a \code{\link{mfboot-class}} data object
 Estimates bootstrap confidence intervals for the mitigated fraction.
 }
 \details{
-Resamples the data and produces bootstrap confidence intervals. 
-Equal tailed intervals are estimated by the percentile method. Highest 
-density intervals are estimated by selecting the shortest of all possible 
+Resamples the data and produces bootstrap confidence intervals.
+Equal tailed intervals are estimated by the percentile method. Highest
+density intervals are estimated by selecting the shortest of all possible
 intervals. For BCa intervals, see Efron and Tibshirani section 14.3.
 }
 \examples{
@@ -52,8 +52,8 @@ MFBoot(lesion~group, calflung, seed = 12345)
 # 10000 bootstrap samples
 # 95\% confidence interval
 # Seed = 12345
-# 
-# Comparing vac to con 
+#
+# Comparing vac to con
 # observed median lower  upper
 # Equal Tailed        0.44 0.4496 0.152 0.7088
 # Highest Density     0.44 0.4496 0.152 0.7088
@@ -66,5 +66,5 @@ Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hal
 \code{\link{mfboot-class}}
 }
 \author{
-David Siev \email{david.siev@aphis.usda.gov}
+\link{MF-package}
 }

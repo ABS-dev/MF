@@ -23,7 +23,8 @@ reshapeCluster <- function(data, formula, compare, envir){
 }
 
 # used in the bootstrapping functions MFClusBoot  MFBoot HLBoot
-emp.hpd <- function (X, alpha){
+#' @export
+emp.hpd <- function(X, alpha){
     # empirical hpd by shortest length interval
     X <- sort(X)
     probs <- cbind(low = seq(0, alpha, .001), high = seq(1 - alpha, 1, .001))
@@ -39,7 +40,7 @@ emp.hpd <- function (X, alpha){
 resampleHier <- function(dat, cluster) {
 
   # exit early for trivial data
-  if (nrow(dat) == 1 ){
+  if (nrow(dat) == 1){
     return(dat)
   }
 

@@ -4,7 +4,8 @@
 \alias{MFmp}
 \title{Mitigated fraction from matched pairs}
 \usage{
-MFmp(formula=NULL, data=NULL, compare = c("con", "vac"), x=NULL, alpha=0.05, df=NULL, tdist=T)
+MFmp(formula = NULL, data = NULL, compare = c("con", "vac"),
+  x = NULL, alpha = 0.05, df = NA, tdist = TRUE)
 }
 \arguments{
 \item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.}
@@ -45,5 +46,5 @@ Siev D. (2005). An estimator of intervention effect on disease severity. \emph{J
 \code{\link{mfmp-class}}
 }
 \author{
-David Siev \email{david.siev@aphis.usda.gov}
+\link{MF-package}
 }

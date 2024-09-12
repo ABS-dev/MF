@@ -1,8 +1,11 @@
 ---
 title: "Algorithms for calculating MF from hierarchical data"
 author: "Center for Veterinary Biologics - Statistics Section"
-date: "December 21, 2018"
+date: "August 2019"
 output: pdf_document
+header-includes:
+    - \usepackage{multirow}
+    - \usepackage{array}
 numbersections: yes
 number_sections: yes
 fontsize: 12pt
@@ -17,6 +20,7 @@ vignette: >
 
 
 ```{r hiddensetup, echo = FALSE, include = FALSE}
+require(knitr)
 require(kableExtra)
 require(tidyverse)
 require(MF)
@@ -58,15 +62,14 @@ design of the data set is crossed (all factors of a variable co-occur with
 all factors of another variable), it is not appropriate to use this guide as 
 written.
 
-```{r, expdesign, echo = FALSE}
-kable(a, align = "c", row.names = FALSE, 
+```{r, expdesign, echo = FALSE, }
+knitr::kable(a, align = "c", row.names = FALSE, 
   caption = "Nested hierarchical data structure.",
   format = 'latex') %>%
-  kable_styling('bordered', full_width = FALSE, font_size = 6) %>%  
+  kable_styling('bordered', full_width = FALSE, font_size = 8) %>%  
   collapse_rows(columns = 1:4, valign = "middle")
 ```
 
-\clearpage
 
 # DETERMINING MITIGATED FRACTION {-}
 
@@ -85,7 +88,7 @@ vaccinate) for a particular instance of a unique factor level of a variable.
 
 ```{r, echo = FALSE}
 thismfh <- MFh(formula = lung ~ tx + room/pen/litter, data = a)
-thismfh$coreTbl %>% as.data.frame()
+thismfh
 ```
 
 A *cluster* refers to the full grouping designation of each observation. 
@@ -134,14 +137,14 @@ We can see that the values for "N1N2" have been summed from the previous rank
 table for all cases of "Pen A", "Pen B", etc.
 
 ```{r, message=FALSE, echo=FALSE}
-MFnest(thismfh, which.factor = "pen") %>% data.frame(.)
+MFnest(thismfh, which.factor = "pen")
 ```
 
 It is possible to perform this summary without regard for variables to get
 an overall mitigated fraction value.
 
 ```{r, message=FALSE, echo=FALSE}
-MFnest(thismfh, which.factor = "All")  %>% data.frame(.)
+MFnest(thismfh, which.factor = "All")
 ```
 
 ### Using package MF. {-}
@@ -174,8 +177,7 @@ mfboot_multiple <- MFClusBootHier(formula = lung ~ tx + room/pen/litter,
                                   which.factor = c('room', 'litter', 'All'))
 mfboot_multiple$MFhBoot$bootmfh %>% 
   filter(bootID == 1) %>% 
-  select(c('bootID', 'room', 'pen', 'litter')) %>%
-  data.frame(.)
+  select(c('bootID', 'room', 'pen', 'litter'))
 ```
 
 During bootstrapping of clusters, the observations within that cluster do not 
@@ -219,7 +221,6 @@ set.seed(76153)
 a$lung[a$tx == 'vac'] <- rnorm(24, 5, 1.3)
 a$lung[a$tx == 'con'] <- rnorm(24, 7, 1.3)
 a <- a[-48,]
-a$lung <- round(a$lung, 2)
 
 # DETERMINING MITIGATED FRACTION 
 thismfh <- MFh(formula = lung ~ tx + room/pen/litter, data = a)

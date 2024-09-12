@@ -4,23 +4,24 @@
 \alias{MFClusHier}
 \title{MFClusHier}
 \usage{
-MFClusHier(formula, data, compare = c("con", "vac"), which.factor = "All")
+MFClusHier(formula, data, compare = c("con", "vac"),
+  which.factor = "All")
 }
 \arguments{
-\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous 
-response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous
+response, x is a factor with two levels of treatment, and a/b/c are grouping variables
 corresponding to the clusters. Nesting is assumed to be in order, left to right,
- highest to lowest. So a single level of "a" will contain multiple levels of 
+ highest to lowest. So a single level of "a" will contain multiple levels of
  "b" and a single level of "b" will contain multiple levels of "c".}
 
-\item{data}{a data.frame or tibble with the variables specified in formula. 
+\item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the control 
+\item{compare}{Text vector stating the factor levels - compare[1] is the control
 or reference group to which compare[2] is compared.}
 
-\item{which.factor}{one or more variable(s) of interest. This can be any of the 
-core or nest variables from the data set. If none or NULL is specified, MF will be 
+\item{which.factor}{one or more variable(s) of interest. This can be any of the
+core or nest variables from the data set. If none or NULL is specified, MF will be
 calculated for the whole tree.}
 }
 \value{
@@ -31,11 +32,11 @@ A list with the following elements: \cr \cr
 }
 }
 \description{
-Calculate mitigated fraction directly from hierarchial nested data. 
+Calculate mitigated fraction directly from hierarchial nested data.
 Combines \code{\link{MFh}} and \code{\link{MFnest}} into a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
+\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical
 tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 }
 \examples{
@@ -59,4 +60,7 @@ aCore$compare
 }
 \seealso{
 \code{\link{MFh}}, \code{\link{MFnest}}
+}
+\author{
+\link{MF-package}
 }

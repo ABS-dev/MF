@@ -1,33 +1,3 @@
-#' MF Package
-#'
-#' Includes functions related to mitigated fraction. \cr \cr For internal use only at
-#' the USDA Center for Veterinary Biologics. \cr
-#'
-#' \tabular{ll}{
-#' Package: \tab MF-package\cr
-#' Type: \tab Package\cr
-#' Version: \tab 4.3.5\cr
-#' Date: \tab 21-Dec-2018\cr
-#' License: \tab MIT \cr
-#' LazyLoad: \tab yes\cr
-#' }
-#'
-#' @name MF-package
-#' @aliases MF
-#' @docType package
-#' @author David Siev \email{David.Siev@@aphis.usda.gov}
-#' @examples
-#' #---------------------------------------------
-#' # Checking MF package
-#' #---------------------------------------------
-#' example(MFr)
-#' #---------------------------------------------
-#' # End examples
-#' #---------------------------------------------
-#' invisible()
-NULL
-
-
 #' @name calflung
 #' @title calflung dataset
 #' @aliases calflung-data
@@ -46,7 +16,7 @@ NULL
 #' @title mlesions dataset
 #' @aliases mlesions-data
 #' @docType data
-#' @description Post-mortem examination of the lungs of dogs housed in cages by pairs. 
+#' @description Post-mortem examination of the lungs of dogs housed in cages by pairs.
 #' @format A data frame with 52 observations of the following 3 variables, no NAs.
 #' \describe{
 #' \item{cage}{Cage ID. 1 - 26.}
@@ -69,3 +39,6 @@ NULL
 #' }
 #' @keywords datasets
 NULL
+
+## quiets concerns of R CMD check re: the .'s that appear in pipelines
+if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))

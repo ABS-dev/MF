@@ -1,8 +1,8 @@
-#' @description Estimates bootstrap confidence intervals for the mitigated 
+#' @description Estimates bootstrap confidence intervals for the mitigated
 #' fraction from clustered or stratified data.
-#' @details Resamples the data and produces bootstrap confidence intervals. 
-#' Equal tailed intervals are estimated by the 
-#' percentile method. Highest density intervals are estimated by selecting the 
+#' @details Resamples the data and produces bootstrap confidence intervals.
+#' Equal tailed intervals are estimated by the
+#' percentile method. Highest density intervals are estimated by selecting the
 #' shortest of all possible intervals.
 #' @title Bootstrap MF CI from clustered data
 #' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.
@@ -25,25 +25,25 @@
 #' @export
 #' @references Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}\cr \cr
 #' Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
-#' @author David Siev \email{david.siev@@aphis.usda.gov}
+#' @author \link{MF-package}
 #' @examples
 #' \dontrun{
 #' MFClusBoot(lesion ~ group + cluster(litter), piglung, seed = 12345)
-#' Bootstrapping clusters. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
-#' 
-#' Bootstrapping units. . . . . . . . . . . . . . . . . . 
-#' 
+#' Bootstrapping clusters. . . . . . . . . . . . . . . . .
+#'
+#' Bootstrapping units. . . . . . . . . . . . . . . . . .
+#'
 #' 10000 bootstrap samples of clusters and units in treatment in cluster
-#' Comparing vac to con 
-#' 
+#' Comparing vac to con
+#'
 #' 95% confidence interval
-#' 
+#'
 #' observed    median       lower     upper
 #' Equal Tailed    0.3533835 0.3648649 -0.01409471 0.7109966
 #' Highest Density 0.3533835 0.3648649  0.00000000 0.7236842
-#' 
+#'
 #' Excluded Clusters
-#' M, Q, R, B, O, V, I, C 
+#' M, Q, R, B, O, V, I, C
 #' }
 #
 #--------------------------------------------------------------------
@@ -192,14 +192,14 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   cluster.text <- ifelse(boot.cluster, "clusters", "")
   and.text <- ifelse(boot.cluster & boot.unit, " and ", "")
   unit.text <- ifelse(boot.unit, "units in treatment in cluster", "")
-  the.text <- paste(nboot, " bootstrap samples of ", cluster.text, and.text, 
-		unit.text, sep = "")  
+  the.text <- paste(nboot, " bootstrap samples of ", cluster.text, and.text,
+		unit.text, sep = "")
   stat <- c(Observed = mf.obs, quantile(MF, prob = q))
   stat <- matrix(stat, 1, 4, dimnames = list(c("Equal Tailed"), c("observed",
 		"median", "lower", "upper")))
   if (hpd) {
       hpdmf <- emp.hpd(MF, alpha = alpha)
-      stat <- rbind(stat, "Highest Density" = c(mf.obs, stat[1, "median"], 
+      stat <- rbind(stat, "Highest Density" = c(mf.obs, stat[1, "median"],
                                                 hpdmf))
   }
   if (return.boot) {
@@ -209,7 +209,7 @@ MFClusBoot <- function(formula, data, compare = c("con", "vac"),
   }
 
   return(mfbootcluster$new(stat = stat, nboot = nboot, alpha = alpha,
-    what = the.text, excludedClusters = excluded.clusters, seed = seed, 
-    call = match.call(), compare = compare, rng = rng, sample = sample, 
+    what = the.text, excludedClusters = excluded.clusters, seed = seed,
+    call = match.call(), compare = compare, rng = rng, sample = sample,
     All =  mf.All))
 }

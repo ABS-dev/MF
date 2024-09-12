@@ -7,16 +7,16 @@
 MFh(formula, data, compare = c("con", "vac"))
 }
 \arguments{
-\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous 
-response, x is a factor with two levels of treatment, and a/b/c are vgrouping variables 
+\item{formula}{Formula of the form y ~ x + a/b/c, where y is a continuous
+response, x is a factor with two levels of treatment, and a/b/c are vgrouping variables
 corresponding to the clusters. Nesting is assumed to be in order, left to right,
-highest to lowest. So a single level of "a" will contain multiple levels of 
+highest to lowest. So a single level of "a" will contain multiple levels of
 "b" and a single level of "b" will contain multiple levels of "c".}
 
-\item{data}{a data.frame or tibble with the variables specified in formula. 
+\item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the control or 
+\item{compare}{Text vector stating the factor levels - compare[1] is the control or
 reference group to which compare[2] is compared.}
 }
 \value{
@@ -37,8 +37,11 @@ A \code{\link{mfhierdata}} object, which is a list of three items. \cr
 \item{formula}{The formula as input by user.}
 }
 }
+\description{
+Identify ranks for use when evaluating MF for nested hierarchy.
+}
 \note{
-Core variable is the variable corresponding to the lowest nodes of the hierarchial 
+Core variable is the variable corresponding to the lowest nodes of the hierarchial
 tree. Nest variables are those above the core.
 }
 \examples{
@@ -72,7 +75,10 @@ aCore
 #  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
 }
 \seealso{
-\code{\link{MFnest}} for calculation of MF for nest, core and all 
+\code{\link{MFnest}} for calculation of MF for nest, core and all
 variables. \code{\link{mfhierdata}} for returned object.\code{\link{MFClusHier}}
 for a wrapper.
+}
+\author{
+\link{MF-package}
 }

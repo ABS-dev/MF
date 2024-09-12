@@ -1,17 +1,20 @@
 Package: MF
 Type: Package
 Title: Mitigated Fraction
-Version: 4.3.5
-Date: 21 December 2018
-Author: David Siev
-Maintainer: Marie Vendettuoli <marie.c.vendettuoli@aphis.usda.gov>
-Description: Calculate MF (mitigated fraction) with clustering and bootstrap options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only
-License: MIT + file LICENSE
+Version: 4.3.6
+Date: 2019-08-15
+Description: Calculate MF (mitigated fraction) with clustering and bootstrap options. See http://goo.gl/pcXYVr for definition of MF. No endorsement, claim, or warranty is implied for this package. It is made available for investigational or pedagogical use only.
+Authors@R: c(
+  person("CVB", "Statistics", , "CVB.Data.Help@usda.gov", "cre"),
+  person("David", "Siev", , , c("fmo", "aut"), comment = "until 2019"),
+  person("CVB", "Statistics", , , "aut", comment = "starting 2010"))
+License: CC0
+URL: https://github.com/ABS-dev/MF/blob/master/README.md
+BugReports: https://github.com/ABS-dev/MF/issues
 LazyLoad: yes
 LazyData: yes
 Depends:
-    R (>= 3.4.4),
-    knitr
+    R (>= 3.5)
 Imports:
     methods,
     dplyr (>= 0.7.1),
@@ -19,11 +22,20 @@ Imports:
     stringr,
     tidyr,
     forcats,
-    purrr
+    purrr,
+    rlang
+Suggests:
+    rmarkdown,
+    tidyverse,
+    kableExtra,
+    testthat,
+    knitr,
+    covr
 Collate:
     'aaa.r'
     'classes.r'
     'generic_methods.r'
+    'MF.R'
     'MF-package.r'
     'HLBoot.r'
     'MFBoot.r'
@@ -35,5 +47,5 @@ Collate:
     'MFr.r'
     'MFSubj.r'
     'MFHier-wrappers.r'
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr

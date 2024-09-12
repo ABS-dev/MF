@@ -5,9 +5,6 @@
 \alias{mfcluster-class}
 \alias{mfcluster}
 \title{Class mfcluster}
-\usage{
-mfcluster$new(All, bycluster, excludedClusters, call, compare)
-}
 \description{
 Class mfcluster is created from output of function MFClus
 }
@@ -35,6 +32,7 @@ Class mfcluster is created from output of function MFClus
 \code{\link{MFClus}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
+\concept{mfcluster}
 \keyword{documentation}

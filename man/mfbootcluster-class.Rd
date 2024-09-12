@@ -5,10 +5,6 @@
 \alias{mfbootcluster-class}
 \alias{mfbootcluster}
 \title{Class mfbootcluster}
-\usage{
-mfbootcluster$new(nboot, alpha, seed, compare, rng, stat, what, excludedClusters,
-call, sample)
-}
 \description{
 Class mfbootcluster is created from output of function MFClusBoot
 }
@@ -21,7 +17,7 @@ Class mfbootcluster is created from output of function MFClusBoot
 \item{\code{seed: }}{vector of integers specifying seed for pseudo-random number generator used}
 \item{\code{compare: }}{vector of character strings naming groups compared}
 \item{\code{rng: }}{character string naming type of random number generator}
-\item{\code{stat: }}{matrix matrix with columns \emph{observed, median, lower, upper} for 
+\item{\code{stat: }}{matrix matrix with columns \emph{observed, median, lower, upper} for
 estimates}
 \item{\code{what: }}{character vector naming what was resampled: \emph{clusters}, \emph{units}, \emph{both}}
 \item{\code{excludedClusters: }}{character vector naming clusters excluded because of missing treatment(s)}
@@ -43,6 +39,7 @@ Other mf: \code{\link{mf-class}},
   \code{\link{mfboot-class}}, \code{\link{mfhlboot-class}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
+\concept{mf}
 \keyword{documentation}

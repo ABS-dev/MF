@@ -1,8 +1,11 @@
 ---
 title: "Quick Start when calculating MF from Hierarchical Data"
 author: "Center for Veterinary Biologics - Statistics Section"
-date: "December 21, 2018"
+date: "August 2019"
 output: pdf_document
+header-includes:
+    - \usepackage{multirow}
+    - \usepackage{array}
 numbersections: yes
 number_sections: yes
 fontsize: 12pt

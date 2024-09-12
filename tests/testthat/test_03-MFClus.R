@@ -6,7 +6,7 @@ test3 <- MFClus(lesion ~ group + cluster(litter), piglung)
 
 
 test_that("output", {
-  expect_s4_class(test2, "mfcluster")
+  expect_s4_class(test3, "mfcluster")
   ## All
   expect_is(test3$All, 'data.frame')
   all3 <- data.frame(w = 181, u = 90, r = 0.6766917, n1 = 50, n2 = 52, 

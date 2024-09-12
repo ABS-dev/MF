@@ -9,22 +9,22 @@ MFnestBoot(x, which.factor = "All", alpha = 0.05)
 \arguments{
 \item{x}{output from \code{\link{MFhBoot}}}
 
-\item{which.factor}{one or more grouping variable(s) of interest. This can be any of 
+\item{which.factor}{one or more grouping variable(s) of interest. This can be any of
 the core or nest variables from the data set. A MF value will be calculated for
-each level of the variable(s) specified. Default is ’All’, to sum over entire tree.}
+each level of the variable(s) specified. Default is 'All', to sum over entire tree.}
 
-\item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate eq tailed upper 
-and high lower 
+\item{alpha}{Passed to \code{emp.hpd} to calculate eq tailed upper
+and high lower
 of mitigated fraction}
 }
 \value{
 A list with the following elements: \cr
 \describe{
 
-\item{mfnest_details}{The MF and summary statistics as calculated for each 
+\item{mfnest_details}{The MF and summary statistics as calculated for each
 bootstrap event. Variables as in \code{\link{MFnest}} output.}
 \item{mfnest_summary}{Statistical summary of bootstrapped MF with each unique
-level of a core or nest variable passed to \code{which.factor} as a row. 
+level of a core or nest variable passed to \code{which.factor} as a row.
 Other variables include: \cr
 \itemize{
 \item \code{median} Median of MFs from all of the bootstrap events.
@@ -41,11 +41,13 @@ MFnest using bootstrapping
 }
 \examples{
 set.seed(76153)
-a <- data_frame(room = paste('Room', rep(c('W','Z'), each = 24)),
+a <- data.frame(room = paste('Room', rep(c('W','Z'), each = 24)),
                 pen = paste('Pen', rep(LETTERS[1:6], each = 8)),
                 litter = paste('Litter', rep(11:22, each = 4)),
-                tx = rep(rep(c('vac', 'con'), each = 2), 12)) \%>\%
-  mutate(lung = ifelse(tx == 'vac', rnorm(24, 5, 1.3), rnorm(24, 7, 1.3)))
+                tx = rep(rep(c('vac', 'con'), each = 2), 12),
+                stringsAsFactors = FALSE)
+a[a$tx == 'vac', 'lung'] <- rnorm(24, 5, 1.3)
+a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
 a
 
 formula <- lung ~ tx + room/pen/litter
@@ -56,7 +58,7 @@ which.factors <- c('All', 'room', 'pen', 'litter')
 
 #################
 
-test1 <- MFhBoot(formula, a, 
+test1 <- MFhBoot(formula, a,
                  nboot = 10000,
                  boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
 MFnestBoot(test1, c('All', 'litter'))
@@ -76,4 +78,7 @@ test6
 }
 \seealso{
 \code{\link{MFClusBootHier}}, \code{\link{MFhBoot}}
+}
+\author{
+\link{MF-package}
 }

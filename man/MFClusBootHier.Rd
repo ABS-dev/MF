@@ -9,32 +9,32 @@ MFClusBootHier(formula, data, compare = c("con", "vac"), nboot = 10000,
   alpha = 0.05, seed = sample(1:1e+05, 1))
 }
 \arguments{
-\item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a continuous 
-response, x is a factor with two levels of treatment, and a/b/c are grouping variables 
+\item{formula}{formula Formula of the form y ~ x + a/b/c, where y is a continuous
+response, x is a factor with two levels of treatment, and a/b/c are grouping variables
 corresponding to the clusters. Nesting is assumed to be in order, left to right,
-highest to lowest. So a single level of "a" will contain multiple levels of 
+highest to lowest. So a single level of "a" will contain multiple levels of
 "b" and a single level of "b" will contain multiple levels of "c".}
 
-\item{data}{a data.frame or tibble with the variables specified in formula. 
+\item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the control 
+\item{compare}{Text vector stating the factor levels - compare[1] is the control
 or reference group to which compare[2] is compared.}
 
 \item{nboot}{number of bootstrapping events}
 
 \item{boot.unit}{Boolean whether to sample observations from within those of the same core.}
 
-\item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE, 
+\item{boot.cluster}{Boolean whether to sample which cores are present. If TRUE,
 some trees have all the cores while others only have a subset.}
 
 \item{which.factor}{Which variables to include in the mitigated fraction summation.
-Default is ’All’, to sum over entire tree.}
+Default is 'All', to sum over entire tree.}
 
-\item{alpha}{Passed to \code{\link[MF]{emp.hpd}} to calculate high tailed upper and high tailed lower 
+\item{alpha}{Passed to \code{emp.hpd} to calculate high tailed upper and high tailed lower
 of mitigated fraction.}
 
-\item{seed}{Passed to \code{\link{MFhBoot}} to to initialize random number 
+\item{seed}{Passed to \code{\link{MFhBoot}} to to initialize random number
 generator for reproducibility.}
 }
 \value{
@@ -48,7 +48,7 @@ A list with the following elements: \cr \cr
 Combines \code{\link{MFhBoot}} and \code{\link{MFnestBoot}} into a single function.
 }
 \note{
-\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical 
+\code{Core} variable is the variable corresponding to the lowest nodes of the hierarchical
 tree. \code{Nest} variables are those above the core. \code{All} refers to a summary of the entire tree.
 }
 \examples{
@@ -62,11 +62,13 @@ a <- data.frame(
 set.seed(76153)
 a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
 a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
-set.seed(12345)
 thismf1 <- MFClusBootHier(lung ~ tx + room/pen/litter, a, nboot = 10000,
-                 boot.cluster = TRUE, boot.unit = TRUE)
-thismf1            
+                       boot.cluster = TRUE, boot.unit = TRUE, seed = 12345)
+thismf1
 }
 \seealso{
 \code{\link{MFhBoot}}, \code{\link{MFnestBoot}}.
+}
+\author{
+\link{MF-package}
 }

@@ -1,2 +1,7 @@
+^codecov\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^Dockerfile$
+^\.travis\.yml$
+CODEOWNERS
+^\.appveyor\.yml$

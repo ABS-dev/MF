@@ -5,9 +5,6 @@
 \alias{mfhierdata-class}
 \alias{mfhierdata}
 \title{Class mfhierdata}
-\usage{
-mfhierdata$new(coreTbl, data)
-}
 \description{
 Class mfhierdata is created from output of function MFh
 }
@@ -27,6 +24,7 @@ Class mfhierdata is created from output of function MFh
 \code{\link{MFh}}
 }
 \author{
-Marie Vendettuoli \email{marie.c.vendettuoli@aphis.usda.gov}
+\link{MF-package}
 }
+\concept{mfhierdata}
 \keyword{documentation}
