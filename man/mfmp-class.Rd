@@ -12,23 +12,23 @@ Class mfmp is created from output of function MFmp
 \section{Fields}{
 
 
-  \itemize{
+\itemize{
 
-  \item{\code{ci:} }{numeric vector of point and interval estimates}
+\item{\code{ci:} }{numeric vector of point and interval estimates}
 
-  \item{\code{x: } }{numeric vector of length three holding data}
+\item{\code{x: } }{numeric vector of length three holding data}
 
-  \item{\code{what: }}{text string describing interval type}
+\item{\code{what: }}{text string describing interval type}
 
-  \item{\code{alpha: }}{numeric value specifying complement of confidence
-  interval}
+\item{\code{alpha: }}{numeric value specifying complement of confidence
+interval}
 
-  \item{\code{tdist: }}{Logical indicating if t distribution(TRUE) or
-  gaussian (FALSE)}
+\item{\code{tdist: }}{Logical indicating if t distribution(TRUE) or
+gaussian (FALSE)}
 
-  \item{\code{df: }}{numeric value indicating degrees freedom}
+\item{\code{df: }}{numeric value indicating degrees freedom}
 
-  }
+}
 }
 
 \seealso{

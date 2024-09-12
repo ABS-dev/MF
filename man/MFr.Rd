@@ -33,7 +33,7 @@ MFr(lesion~group, calflung)
 }
 \references{
 Siev D, 2005. An estimator of intervention effect on disease
-  severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
+severity. \emph{Journal of Modern Applied Statistical Methods.} 4:500-508
 }
 \author{
 \link{MF-package}

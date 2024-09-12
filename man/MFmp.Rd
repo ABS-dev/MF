@@ -42,12 +42,12 @@ Estimates mitigated fraction from matched pairs.
 }
 \details{
 Estimates \emph{MF} from matched pairs by the difference of
-  multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The
-  trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
+multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The
+trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
 }
 \note{
 upper confidence interval is truncated to 1; lower confidence interval
-  is truncated to -1. Point estimate of 1.0 indicates complete separation.
+is truncated to -1. Point estimate of 1.0 indicates complete separation.
 }
 \examples{
 MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
@@ -55,8 +55,8 @@ MFmp(x = c(12, 12, 2))
 }
 \references{
 Siev D. (2005). An estimator of intervention effect on disease
-  severity. \emph{Journal of Modern Applied Statistical Methods.}
-  \bold{4:500--508}
+severity. \emph{Journal of Modern Applied Statistical Methods.}
+\bold{4:500--508}
 }
 \seealso{
 \code{\link{mfmp-class}}

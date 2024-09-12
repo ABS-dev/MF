@@ -17,51 +17,50 @@ multiple levels of "c".}
 \item{data}{a data.frame or tibble with the variables specified in formula.
 Additional variables will be ignored.}
 
-\item{compare}{Text vector stating the factor levels - compare[1] is the
-control or reference group to which compare[2] is compared.}
+\item{compare}{Text vector stating the factor levels - compare\link{1} is the
+control or reference group to which compare\link{2} is compared.}
 }
 \value{
 A \code{\link{mfhierdata}} object, which is a list of three items.
-  \cr \describe{
+\cr \describe{
 
+\item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique
+core level showing values for:
 
-  \item{coreTbl}{A \code{\link[dplyr]{tibble}} with one row for each unique
-  core level showing values for:
+\itemize{
 
-  \itemize{
+\item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations
+for each treatment level in the core level.
 
-  \item \emph{con}\code{_n} & \emph{vac}\code{_n} - counts of observations
-  for each treatment level in the core level.
+\item \emph{con}\code{_medResp} & \emph{vac}\code{_medResp} - median of the
+y continuous response for each treatment level.
 
-  \item \emph{con}\code{_medResp} & \emph{vac}\code{_medResp} - median of the
-  y continuous response for each treatment level.
+\item \code{n1n2} - product of the counts, \emph{con}\code{_n} *
+\emph{vac}\code{_n}.
 
-  \item \code{n1n2} - product of the counts, \emph{con}\code{_n} *
-  \emph{vac}\code{_n}.
+\item \code{w} - Wilcoxon statistic
 
-  \item \code{w} - Wilcoxon statistic
+\item \code{u} - Mann-Whitney statistic
 
-  \item \code{u} - Mann-Whitney statistic
+}
 
-  }
+}
 
-  }
+\item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data
+used for calculations.}
 
-  \item{data}{A \code{\link[dplyr]{tibble}} of the restructured input data
-  used for calculations.}
+\item{compare}{The compare variables as input by user.}
 
-  \item{compare}{The compare variables as input by user.}
+\item{formula}{The formula as input by user.}
 
-  \item{formula}{The formula as input by user.}
-
-  }
+}
 }
 \description{
 Identify ranks for use when evaluating MF for nested hierarchy.
 }
 \note{
 Core variable is the variable corresponding to the lowest nodes of the
-  hierarchial tree. Nest variables are those above the core.
+hierarchial tree. Nest variables are those above the core.
 }
 \examples{
 a <- data.frame(
@@ -95,8 +94,8 @@ aCore
 }
 \seealso{
 \code{\link{MFnest}} for calculation of MF for nest, core and all
-  variables. \code{\link{mfhierdata}} for returned
-  object.\code{\link{MFClusHier}} for a wrapper.
+variables. \code{\link{mfhierdata}} for returned
+object.\code{\link{MFClusHier}} for a wrapper.
 }
 \author{
 \link{MF-package}
