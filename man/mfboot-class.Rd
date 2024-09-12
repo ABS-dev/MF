@@ -6,34 +6,46 @@
 \alias{mfboot}
 \title{Class mfboot}
 \description{
-class for data objects produced by MFBoot, contains class mf with
-the two additional fields \emph{stat} and \emph{stuff}.
+class for data objects produced by MFBoot, contains class mf
+  with the two additional fields \emph{stat} and \emph{stuff}.
 }
 
 \section{Fields}{
 
-\itemize{
-\item{\code{nboot: } }{numeric value specifying number of samples}
-\item{\code{alpha: }}{numeric value specifying complement of confidence interval}
-\item{\code{seed: }}{vector of integers specifying seed for pseudo-random number generator used}
-\item{\code{compare: }}{vector of character strings naming groups compared}
-\item{\code{rng: }}{character string naming type of random number generator}
-\item{\code{sample: }}{ what is this?}
-\item{\code{stat:} }{matrix of estimates}
-}
+
+  \itemize{
+
+  \item{\code{nboot: } }{numeric value specifying number of samples}
+
+  \item{\code{alpha: }}{numeric value specifying complement of confidence
+  interval}
+
+  \item{\code{seed: }}{vector of integers specifying seed for pseudo-random
+  number generator used}
+
+  \item{\code{compare: }}{vector of character strings naming groups compared}
+
+  \item{\code{rng: }}{character string naming type of random number
+  generator}
+
+  \item{\code{sample: }}{ what is this?}
+
+  \item{\code{stat:} }{matrix of estimates}
+
+  }
 }
 
 \section{Contains}{
-
-\code{\link{mf-class}}
+ \code{\link{mf-class}}
 }
 
 \seealso{
 \code{\link{MFBoot}}
 
-Other mf: \code{\link{mf-class}},
-  \code{\link{mfbootcluster-class}},
-  \code{\link{mfhlboot-class}}
+Other mf: 
+\code{\link{mf-class}},
+\code{\link{mfbootcluster-class}},
+\code{\link{mfhlboot-class}}
 }
 \author{
 \link{MF-package}

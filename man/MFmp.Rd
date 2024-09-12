@@ -4,23 +4,35 @@
 \alias{MFmp}
 \title{Mitigated fraction from matched pairs}
 \usage{
-MFmp(formula = NULL, data = NULL, compare = c("con", "vac"),
-  x = NULL, alpha = 0.05, df = NA, tdist = TRUE)
+MFmp(
+  formula = NULL,
+  data = NULL,
+  compare = c("con", "vac"),
+  x = NULL,
+  alpha = 0.05,
+  df = NA,
+  tdist = TRUE
+)
 }
 \arguments{
-\item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment, and w is a factor indicating the clusters.}
+\item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a
+continuous response, x is a factor with two levels of treatment, and w is a
+factor indicating the clusters.}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared}
+\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
+the control or reference group to which \code{compare[2]} is compared}
 
-\item{x}{Trinomial vector \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}}
+\item{x}{Trinomial vector \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma
+I(x>y)\}}}
 
 \item{alpha}{Complement of the confidence level.}
 
 \item{df}{Degrees of freedom. Default N-2}
 
-\item{tdist}{Use quantiles of t or Gaussian distribution for confidence interval? Default t distribution.}
+\item{tdist}{Use quantiles of t or Gaussian distribution for confidence
+interval? Default t distribution.}
 }
 \value{
 a \code{\link{mfmp-class}} data object
@@ -29,18 +41,22 @@ a \code{\link{mfmp-class}} data object
 Estimates mitigated fraction from matched pairs.
 }
 \details{
-Estimates \emph{MF} from matched pairs by the difference of multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
+Estimates \emph{MF} from matched pairs by the difference of
+  multinomial fractions \eqn{(\Sigma I(x<y) - \Sigma I(x>y)) / N}. The
+  trinomial vector is \eqn{\{\Sigma I(x<y), \Sigma I(x=y), \Sigma I(x>y)\}}
 }
 \note{
-upper confidence interval is truncated to 1; lower confidence interval is truncated to -1.
-Point estimate of 1.0 indicates complete separation.
+upper confidence interval is truncated to 1; lower confidence interval
+  is truncated to -1. Point estimate of 1.0 indicates complete separation.
 }
 \examples{
 MFmp(les ~ tx + cluster(cage), mlesions, compare = c('con', 'vac'))
 MFmp(x = c(12, 12, 2))
 }
 \references{
-Siev D. (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}
+Siev D. (2005). An estimator of intervention effect on disease
+  severity. \emph{Journal of Modern Applied Statistical Methods.}
+  \bold{4:500--508}
 }
 \seealso{
 \code{\link{mfmp-class}}

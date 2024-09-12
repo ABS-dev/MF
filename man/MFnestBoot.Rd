@@ -9,32 +9,38 @@ MFnestBoot(x, which.factor = "All", alpha = 0.05)
 \arguments{
 \item{x}{output from \code{\link{MFhBoot}}}
 
-\item{which.factor}{one or more grouping variable(s) of interest. This can be any of
-the core or nest variables from the data set. A MF value will be calculated for
-each level of the variable(s) specified. Default is 'All', to sum over entire tree.}
+\item{which.factor}{one or more grouping variable(s) of interest. This can be
+any of the core or nest variables from the data set. A MF value will be
+calculated for each level of the variable(s) specified. Default is 'All',
+to sum over entire tree.}
 
-\item{alpha}{Passed to \code{emp.hpd} to calculate eq tailed upper
-and high lower
-of mitigated fraction}
+\item{alpha}{Passed to \code{emp_hpd} to calculate eq tailed upper and high
+lower of mitigated fraction}
 }
 \value{
-A list with the following elements: \cr
-\describe{
+A list with the following elements: \cr \describe{
 
-\item{mfnest_details}{The MF and summary statistics as calculated for each
-bootstrap event. Variables as in \code{\link{MFnest}} output.}
-\item{mfnest_summary}{Statistical summary of bootstrapped MF with each unique
-level of a core or nest variable passed to \code{which.factor} as a row.
-Other variables include: \cr
-\itemize{
-\item \code{median} Median of MFs from all of the bootstrap events.
-\item \code{etlower} Lower value of equal tailed range.
-\item \code{etupper} Upper value of equal tailed range.
-\item \code{hdlower} Lower value of the highest posterior density range.
-\item \code{hdupper} Upper value of the highest posterior density range.
-\item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
-}}
-}
+  \item{mfnest_details}{The MF and summary statistics as calculated for each
+  bootstrap event. Variables as in \code{\link{MFnest}} output.}
+  \item{mfnest_summary}{Statistical summary of bootstrapped MF with each
+  unique level of a core or nest variable passed to \code{which.factor} as a
+  row. Other variables include: \cr \itemize{
+
+  \item \code{median} Median of MFs from all of the bootstrap events.
+
+  \item \code{etlower} Lower value of equal tailed range.
+
+  \item \code{etupper} Upper value of equal tailed range.
+
+  \item \code{hdlower} Lower value of the highest posterior density range.
+
+  \item \code{hdupper} Upper value of the highest posterior density range.
+
+  \item \code{mf.obs} MF calculated from data using \code{\link{MFh}}.
+
+  }}
+
+  }
 }
 \description{
 MFnest using bootstrapping
@@ -50,7 +56,7 @@ a[a$tx == 'vac', 'lung'] <- rnorm(24, 5, 1.3)
 a[a$tx == 'con', 'lung'] <- rnorm(24, 7, 1.3)
 a
 
-formula <- lung ~ tx + room/pen/litter
+formula <- lung ~ tx + room / pen / litter
 nboot <- 10000
 boot.cluster <- TRUE
 boot.unit <- TRUE

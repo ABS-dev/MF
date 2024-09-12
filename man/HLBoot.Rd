@@ -4,17 +4,29 @@
 \alias{HLBoot}
 \title{Bootstrap CI for MF, HL, and Qdif}
 \usage{
-HLBoot(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-  alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
-  trace.it = FALSE, seed = sample(1:1e+05, 1))
+HLBoot(
+  formula,
+  data,
+  compare = c("con", "vac"),
+  b = 100,
+  B = 100,
+  alpha = 0.05,
+  hpd = TRUE,
+  bca = FALSE,
+  return.boot = FALSE,
+  trace.it = FALSE,
+  seed = sample(1:1e+05, 1)
+)
 }
 \arguments{
-\item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment,
-and w is a factor indicating the clusters.}
+\item{formula}{Formula of the form \code{y ~ x + cluster(w)}, where y is a
+continuous response, x is a factor with two levels of treatment, and w is a
+factor indicating the clusters.}
 
 \item{data}{Data frame}
 
-\item{compare}{Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared}
+\item{compare}{Text vector stating the factor levels - \code{compare[1]} is
+the control or reference group to which \code{compare[2]} is compared}
 
 \item{b}{Number of bootstrap samples to take with each cycle}
 
@@ -22,15 +34,18 @@ and w is a factor indicating the clusters.}
 
 \item{alpha}{Complement of the confidence level}
 
-\item{hpd}{Boolean whether to estimate highest density intervals for MF and HL.}
+\item{hpd}{Boolean whether to estimate highest density intervals for MF and
+HL.}
 
 \item{bca}{Boolean whether to estimate BCa intervals for MF.}
 
-\item{return.boot}{Boolean whether to save the bootstrap samples of the statistics.}
+\item{return.boot}{Boolean whether to save the bootstrap samples of the
+statistics.}
 
 \item{trace.it}{Boolean whether to display verbose tracking of the cycles.}
 
-\item{seed}{to initialize random number generator for reproducibility. Passed to \code{set.seed}.}
+\item{seed}{to initialize random number generator for reproducibility. Passed
+to \code{set.seed}.}
 }
 \value{
 a \code{\link{mfhlboot-class}} data object
@@ -40,20 +55,21 @@ Estimates bootstrap confidence intervals for MF, HL, and Qdif.
 }
 \details{
 Estimates bootstrap confidence intervals for the mitigated fraction
-(MF), Hodge-Lehmann estimator (HL), and the difference of medians and
-quartiles (Qdif). Equal tailed intervals are provided for all three, highest
-density intervals are optionally provided for MF and HL, and BCa intervals
-are optionally provided for MF.  The Hodges-Lehmann estimator is the median
-difference; it assumes that the two distributions have the same shape and
-differ by a constant shift. Assumes data is single pool (no nesting).
+  (MF), Hodge-Lehmann estimator (HL), and the difference of medians and
+  quartiles (Qdif). Equal tailed intervals are provided for all three,
+  highest density intervals are optionally provided for MF and HL, and BCa
+  intervals are optionally provided for MF.  The Hodges-Lehmann estimator is
+  the median difference; it assumes that the two distributions have the same
+  shape and differ by a constant shift. Assumes data is single pool (no
+  nesting).
 }
 \examples{
 HLBoot(lesion~group, calflung, seed = 12345)
 
 # Bootstrapping
-# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-# . . . . . . . . . . . . . . . . . . . .
+# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+# . . . . . . . . . . . . . . . . . . . . . . . .
 #
 # 10000 bootstrap samples
 # 95\% confidence intervals
@@ -96,9 +112,12 @@ HLBoot(lesion~group, calflung, seed = 12345)
 # Q75  0.14700 0.14700 0.02810 0.219250
 }
 \references{
-Hodges JL, Lehmann EL, (1963). Estimates of location based on rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}. \cr \cr
- Siev D, (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}. \cr \cr
- Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
+Hodges JL, Lehmann EL, (1963). Estimates of location based on
+  rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}.
+  \cr \cr Siev D, (2005). An estimator of intervention effect on disease
+  severity. \emph{Journal of Modern Applied Statistical Methods.}
+  \bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
+  the Bootstrap.} Chapman and Hall, New York, 1993.
 }
 \seealso{
 \code{\link{mfhlboot-class}}

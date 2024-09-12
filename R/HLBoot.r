@@ -1,38 +1,46 @@
 #' @description Estimates bootstrap confidence intervals for MF, HL, and Qdif.
 #' @details Estimates bootstrap confidence intervals for the mitigated fraction
-#' (MF), Hodge-Lehmann estimator (HL), and the difference of medians and
-#' quartiles (Qdif). Equal tailed intervals are provided for all three, highest
-#' density intervals are optionally provided for MF and HL, and BCa intervals
-#' are optionally provided for MF.  The Hodges-Lehmann estimator is the median
-#' difference; it assumes that the two distributions have the same shape and
-#' differ by a constant shift. Assumes data is single pool (no nesting).
+#'   (MF), Hodge-Lehmann estimator (HL), and the difference of medians and
+#'   quartiles (Qdif). Equal tailed intervals are provided for all three,
+#'   highest density intervals are optionally provided for MF and HL, and BCa
+#'   intervals are optionally provided for MF.  The Hodges-Lehmann estimator is
+#'   the median difference; it assumes that the two distributions have the same
+#'   shape and differ by a constant shift. Assumes data is single pool (no
+#'   nesting).
 #' @title Bootstrap CI for MF, HL, and Qdif
-#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a continuous response, x is a factor with two levels of treatment,
-#'   and w is a factor indicating the clusters.
+#' @param formula Formula of the form \code{y ~ x + cluster(w)}, where y is a
+#'   continuous response, x is a factor with two levels of treatment, and w is a
+#'   factor indicating the clusters.
 #' @param data Data frame
-#' @param compare Text vector stating the factor levels - \code{compare[1]} is the control or reference group to which \code{compare[2]} is compared
+#' @param compare Text vector stating the factor levels - \code{compare[1]} is
+#'   the control or reference group to which \code{compare[2]} is compared
 #' @param b Number of bootstrap samples to take with each cycle
 #' @param B Number of cycles, giving the total number of samples = B * b
 #' @param alpha Complement of the confidence level
-#' @param hpd Boolean whether to estimate highest density intervals for MF and HL.
+#' @param hpd Boolean whether to estimate highest density intervals for MF and
+#'   HL.
 #' @param bca Boolean whether to estimate BCa intervals for MF.
-#' @param return.boot Boolean whether to save the bootstrap samples of the statistics.
+#' @param return.boot Boolean whether to save the bootstrap samples of the
+#'   statistics.
 #' @param trace.it Boolean whether to display verbose tracking of the cycles.
-#' @param seed to initialize random number generator for reproducibility. Passed to \code{set.seed}.
+#' @param seed to initialize random number generator for reproducibility. Passed
+#'   to \code{set.seed}.
 #' @return a \code{\link{mfhlboot-class}} data object
 #' @seealso \code{\link{mfhlboot-class}}
-#' @export
-#' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}. \cr \cr
-#'  Siev D, (2005). An estimator of intervention effect on disease severity. \emph{Journal of Modern Applied Statistical Methods.} \bold{4:500--508}. \cr \cr
-#'  Efron B, Tibshirani RJ. \emph{An Introduction to the Bootstrap.} Chapman and Hall, New York, 1993.
+#' @references Hodges JL, Lehmann EL, (1963). Estimates of location based on
+#'   rank tests. \emph{Annals of Mathematical Statistics.} \bold{34:598--611}.
+#'   \cr \cr Siev D, (2005). An estimator of intervention effect on disease
+#'   severity. \emph{Journal of Modern Applied Statistical Methods.}
+#'   \bold{4:500--508}. \cr \cr Efron B, Tibshirani RJ. \emph{An Introduction to
+#'   the Bootstrap.} Chapman and Hall, New York, 1993.
 #' @author \link{MF-package}
 #' @examples
 #' HLBoot(lesion~group, calflung, seed = 12345)
 #'
 #' # Bootstrapping
-#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#' # . . . . . . . . . . . . . . . . . . . .
+#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#' # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#' # . . . . . . . . . . . . . . . . . . . . . . . .
 #' #
 #' # 10000 bootstrap samples
 #' # 95% confidence intervals
@@ -73,23 +81,26 @@
 #' # Q25  0.01250 0.01250 0.00125 0.026000
 #' # Q50  0.02675 0.02675 0.01665 0.144575
 #' # Q75  0.14700 0.14700 0.02810 0.219250
+#' @importFrom stats quantile median model.frame pnorm qnorm
+#' @export
+
 #--------------------------------------------------------------------
 # Bootstrap HL, quartiles, quartile diffs
 #--------------------------------------------------------------------
 #
 HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
-	alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE, trace.it = FALSE,
-	seed = sample(1:100000, 1)){
+                   alpha = 0.05, hpd = TRUE, bca = FALSE, return.boot = FALSE,
+                   trace.it = FALSE, seed = sample(1:100000, 1)) {
   # set seed
   set.seed(seed)
 
   # Wilcoxon rank sum statistic
-  w <- function(xy, n.x){
+  w <- function(xy, n.x) {
     sum(rank(xy)[1:n.x])
-	}
+  }
 
   # Hodges-Lehmann estimator
-  hl.fn <- function(xy, n.x){
+  hl.fn <- function(xy, n.x) {
     x <- xy[1:n.x]
     y <- xy[(n.x + 1):length(xy)]
     n.y <- length(xy) - n.x
@@ -107,9 +118,9 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 
   # shortcircuit if complete separation
   if (range(x)[1] < range(y)[1]) {
-   lowtx <- x
-   hitx <- y
-  } else{
+    lowtx <- x
+    hitx <- y
+  } else {
     lowtx <- y
     hitx <- x
   }
@@ -140,7 +151,7 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
 
   W <- H <- rep(NA, b * B)
   Qx <- Qy <- matrix(rep(NA, b * B * 3), b * B, 3,
-    dimnames = list(NULL, c("Q25", "Q50", "Q75")))
+                     dimnames = list(NULL, c("Q25", "Q50", "Q75")))
   cat("\nBootstrapping\n")
   for (i in 1:B) {
     x.b <- matrix(sample(x, size = b * n.x, replace = TRUE), b, n.x)
@@ -150,25 +161,27 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     W[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, w, n.x)
     H[(i - 1) * b + (1:b)] <- apply(cbind(x.b, y.b), 1, hl.fn, n.x)
     if (trace.it) {
-		  cat("bootstrap samples", (i - 1) * b + 1, "to", (i - 1) * b + b, "\n")
+      cat("bootstrap samples", (i - 1) * b + 1, "to", (i - 1) * b + b, "\n")
     } else {
-		  cat(". ")
-	  }
+      cat(". ")
+    }
   }
   cat("\n")
   Qdif <- Qy - Qx
   MF <- (2 * W - n.x * (1 + n.x + n.y)) / (n.x * n.y)
   qprob <- c(0.5, alpha / 2, 1 - alpha / 2)
   qmf <- quantile(MF, prob = qprob)
-  mfstat <- matrix(c(mf, qmf), 1, 4, dimnames = list(c("Equal Tailed"),
-	c("observed", "median", "lower", "upper")))
+  mfstat <- matrix(c(mf, qmf), 1, 4,
+                   dimnames = list(c("Equal Tailed"),
+                                   c("observed", "median", "lower", "upper")))
   qhl <- quantile(H, prob = qprob)
-  hlstat <- matrix(c(hl, qhl), 1, 4, dimnames = list(c("Equal Tailed"),
-	  c("observed", "median", "lower", "upper")))
+  hlstat <- matrix(c(hl, qhl), 1, 4,
+                   dimnames = list(c("Equal Tailed"),
+                                   c("observed", "median", "lower", "upper")))
   qqd <- t(apply(Qdif, 2, quantile, prob = qprob))
   qdifstat <- cbind(qdif, qqd)
   dimnames(qdifstat) <- list(dimnames(Qdif)[[2]], c("observed", "median",
-	  "lower", "upper"))
+                                                    "lower", "upper"))
   qqx <- t(apply(Qx, 2, quantile, prob = qprob))
   qxstat <- cbind(qx, qqx)
   dimnames(qxstat) <- list(dimnames(Qx)[[2]], c("observed", "median",
@@ -178,9 +191,9 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
   dimnames(qystat) <- list(dimnames(Qx)[[2]], c("observed", "median",
                                                 "lower", "upper"))
   if (hpd) {
-    hpdmf <- emp.hpd(MF, alpha = alpha)
+    hpdmf <- emp_hpd(MF, alpha = alpha)
     mfstat <- rbind(mfstat, "Highest Density" = c(mf, median(MF), hpdmf))
-    hpdhl <- emp.hpd(H, alpha = alpha)
+    hpdhl <- emp_hpd(H, alpha = alpha)
     hlstat <- rbind(hlstat, "Highest Density" = c(hl, median(H), hpdhl))
   }
 
@@ -191,33 +204,34 @@ HLBoot <- function(formula, data, compare = c("con", "vac"), b = 100, B = 100,
     ny.i <- rep(n.y - (0:1), c(n.x, n.y))
     theta <- rep(NA, n.x + n.y)
     for (i in 1:(n.x + n.y)) {
-          theta[i] <- (2 * w(xy[-i], nx.i[i]) - nx.i[i] *
-                          (1 + nx.i[i] + ny.i[i])) / (nx.i[i] * ny.i[i])
-	  }
+      theta[i] <- (2 * w(xy[-i], nx.i[i]) - nx.i[i] *
+                     (1 + nx.i[i] + ny.i[i])) / (nx.i[i] * ny.i[i])
+    }
     theta.hat <- mean(theta)
     acc <- sum((theta.hat - theta)^3) / (6 * sum((theta.hat - theta)^2)^(3 / 2))
     z1 <- qnorm(alpha / 2)
     z2 <- qnorm(1 - alpha / 2)
-    a1 <- pnorm(z0 + (z0 + z1)/(1 - acc * (z0 + z1)))
-    a2 <- pnorm(z0 + (z0 + z2)/(1 - acc * (z0 + z2)))
-    a5 <- pnorm(z0 + (z0 + 0)/(1 - acc * (z0 + 0)))
+    a1 <- pnorm(z0 + (z0 + z1) / (1 - acc * (z0 + z1)))
+    a2 <- pnorm(z0 + (z0 + z2) / (1 - acc * (z0 + z2)))
+    a5 <- pnorm(z0 + (z0 + 0) / (1 - acc * (z0 + 0)))
     qprob <- c(a5, a1, a2)
     stuff <- c(acc, z0, a1, a2)
     names(stuff) <- c("acc", "z0", "a1", "a2")
     if (trace.it) {
-		  print(round(stuff, 4))
-	  }
+      print(round(stuff, 4))
+    }
     qmf <- quantile(MF, prob = qprob)
     mfstat <- rbind(mfstat, "BC.a" = c(mf, qmf))
   }
 
-	if (return.boot) {
-		sample  <- list(MF = MF, HL = H, Qx = Qx, Qy = Qy)
-	} else {
-		sample <- NULL
-	}
+  if (return.boot) {
+    sample  <- list(MF = MF, HL = H, Qx = Qx, Qy = Qy)
+  } else {
+    sample <- NULL
+  }
 
-	return(mfhlboot$new(MFstat = mfstat, HLstat = hlstat, QDIFstat = qdifstat,
-		QXstat = qxstat, QYstat = qystat, nboot = nboot, alpha = alpha, seed = seed,
-		compare = compare, 	rng = rng, sample = sample))
+  return(mfhlboot$new(MFstat = mfstat, HLstat = hlstat, QDIFstat = qdifstat,
+                      QXstat = qxstat, QYstat = qystat, nboot = nboot,
+                      alpha = alpha, seed = seed, compare = compare,
+                      rng = rng, sample = sample))
 }

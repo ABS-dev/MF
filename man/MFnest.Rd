@@ -10,49 +10,57 @@ MFnest(Y, which.factor = "All")
 \item{Y}{rank table (tibble or data.frame), structured as \code{$coreTbl}
 output from \code{\link{MFh}} or returned object from \code{\link{MFh}()}.}
 
-\item{which.factor}{one or more grouping variable(s) of interest. This can be any of
-the core or nest variables from the data set. If none or \code{All} is
-specified, a summary MF will be calculated for the whole tree.}
+\item{which.factor}{one or more grouping variable(s) of interest. This can be
+any of the core or nest variables from the data set. If none or \code{All}
+is specified, a summary MF will be calculated for the whole tree.}
 }
 \value{
 A tibble with each unique level of a variable as a row. Other values
-include: \cr
-\describe{
-\item{\code{MF}}{Mitigated fraction for the particular level of the variable
-in this row.}
-\item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field of
-                  \code{\link{mfhierdata}} object output by \code{\link{MFh}}
-                   for this particular variable-level combination.}
-\item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
-                  \code{\link{mfhierdata}} object output by \code{\link{MFh}}
-                  for this particular variable-level combination.}
-\item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
-\code{\link{mfhierdata}} object output by \code{\link{MFh}}
-                   for this particular variable-level combination.}
-\item{\code{_medResp}}{Median of observed responses for each comparison group for
-this particular variable-level combination.}
-}
+  include: \cr
+
+  \describe{
+
+  \item{\code{MF}}{Mitigated fraction for the particular level of the
+  variable in this row.}
+
+  \item{\code{N1N2}}{Sum of the \code{n1n2} variable in \code{$coreTbl} field
+  of \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+  particular variable-level combination.}
+
+  \item{\code{U}}{Sum of u variable in \code{$coreTbl} field of
+  \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+  particular variable-level combination.}
+
+  \item{\code{_N}}{Sum of the \code{_n} variable in \code{$coreTbl} field of
+  \code{\link{mfhierdata}} object output by \code{\link{MFh}} for this
+  particular variable-level combination.}
+
+  \item{\code{_medResp}}{Median of observed responses for each comparison
+  group for this particular variable-level combination.}
+
+  }
 }
 \description{
 Summations to calculate the MF for nested data from a rank table.
 }
 \note{
-Core variable is the variable corresponding to the lowest nodes of the hierarchial
-tree. Nest variables are those above the core. All refers to a summary of the entire tree.
+Core variable is the variable corresponding to the lowest nodes of the
+  hierarchial tree. Nest variables are those above the core. All refers to a
+  summary of the entire tree.
 }
 \examples{
 a <- data.frame(
- room = paste('Room',rep(c('W','Z'),each=24)),
- pen = paste('Pen',rep(LETTERS[1:6],each=8)),
- litter = paste('Litter',rep(11:22,each=4)),
- tx = rep(rep(c('vac','con'),each=2),12),
+ room = paste('Room', rep(c('W','Z'), each=24)),
+ pen = paste('Pen', rep(LETTERS[1:6], each=8)),
+ litter = paste('Litter', rep(11:22, each=4)),
+ tx = rep(rep(c('vac','con'), each=2), 12),
  stringsAsFactors = FALSE
  )
 set.seed(76153)
-a$lung[a$tx=='vac'] <- rnorm(24,5,1.3)
-a$lung[a$tx=='con'] <- rnorm(24,7,1.3)
+a$lung[a$tx=='vac'] <- rnorm(24, 5, 1.3)
+a$lung[a$tx=='con'] <- rnorm(24, 7, 1.3)
 
-aCore <- MFh(lung ~ tx + room/pen/litter,a)
+aCore <- MFh(lung ~ tx + room / pen / litter, a)
 MFnest(aCore)
 # # A tibble: 1 x 9
 #   variable level    MF  N1N2     U con_N vac_N con_medResp vac_medResp
