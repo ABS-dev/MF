@@ -1,5 +1,3 @@
-context("HLBoot")
-
 test_that("output", {
   set.seed(12345)
   test1 <- HLBoot(lesion ~ group, calflung)

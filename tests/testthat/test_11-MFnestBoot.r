@@ -1,6 +1,3 @@
-context("MFnestBoot")
-
-
 test_that("output", {
 
   set.seed(76153)

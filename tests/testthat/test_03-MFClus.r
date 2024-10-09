@@ -1,5 +1,3 @@
-context("MFClus")
-
 require(tidyverse)
 
 

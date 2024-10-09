@@ -1,5 +1,3 @@
-context("classes")
-
 test_that("mf_seed", {
   ## make sure we can only use integer or numeric
   test14_int <- new("mf", seed = as.integer(123))

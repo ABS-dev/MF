@@ -1,6 +1,3 @@
-context("MFnest")
-
-
 test_that("output", {
   a <- data.frame(
     room = paste("Room", rep(c("W", "Z"), each = 24)),

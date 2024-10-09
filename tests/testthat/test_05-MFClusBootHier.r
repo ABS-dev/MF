@@ -1,5 +1,3 @@
-context("MFClusBootHier")
-
 test_that("output", {
 
   a <- data.frame(

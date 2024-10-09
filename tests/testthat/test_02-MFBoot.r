@@ -1,5 +1,3 @@
-context("MFBoot")
-
 test_that("output", {
   set.seed(12345)
   test2 <- MFBoot(lesion ~ group, calflung)

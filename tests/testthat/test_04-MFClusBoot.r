@@ -1,6 +1,3 @@
-context("MFClusBoot")
-
-
 test_that("output", {
   set.seed(12345)
   test4 <- MFClusBoot(lesion ~ group + cluster(litter), piglung)

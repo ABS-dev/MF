@@ -1,5 +1,3 @@
-context("MFr")
-
 test_that("output", {
   test12 <- MFr(lesion ~ group, calflung)
 
