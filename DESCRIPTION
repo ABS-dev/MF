@@ -13,7 +13,7 @@ Description: Calculate MF (mitigated fraction) with clustering and bootstrap
   claim, or warranty is implied for this package. It is made available for 
   investigational or pedagogical use only.
 License: file LICENSE
-URL: https://github.com/ABS-dev/MF/
+URL: https://github.com/ABS-dev/MF/, https://abs-dev.github.io/MF/
 BugReports: https://github.com/ABS-dev/MF/issues/
 LazyLoad: true
 LazyData: true

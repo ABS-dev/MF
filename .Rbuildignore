@@ -10,3 +10,5 @@ utilities
 ^docs$
 ^pkgdown$
 ^public$
+^_pkgdown\.yml$
+^\.github$

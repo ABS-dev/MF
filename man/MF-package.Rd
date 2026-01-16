@@ -14,6 +14,7 @@ Calculate MF (mitigated fraction) with clustering and bootstrap options. See htt
 Useful links:
 \itemize{
   \item \url{https://github.com/ABS-dev/MF/}
+  \item \url{https://abs-dev.github.io/MF/}
   \item Report bugs at \url{https://github.com/ABS-dev/MF/issues/}
 }
 
