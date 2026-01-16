@@ -16,14 +16,6 @@ devtools::install_github("ABS-dev/MF")
 devtools::install_github("ABS-dev/MF", ref = "4.4.11")
 ```
 
-## Vignettes
-
-This package contains the following manuals and vignettes:
-
--   MF Package
--   Algorithms for calculating MF from hierarchical data
--   Quick Start when calculating MF from Hierarchical Data
-
 ## Issues
 
 Report any issues or requests on the package
