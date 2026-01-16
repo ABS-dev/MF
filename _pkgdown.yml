@@ -1,4 +1,67 @@
 url: https://abs-dev.github.io/MF/
+destination: docs/
 template:
   bootstrap: 5
-
+  math-rendering: mathjax
+  light-switch: true
+repo:
+  url:
+    home:  https://github.com/ABS-dev/MF
+    issue: https://github.com/ABS-dev/MF/issues
+home:
+  sidebar:
+    structure: [links, license, community, citation, authors, dev, primary]
+    components:
+      primary:
+        title: All Packages
+        text: |
+          | [DiagTestKit](https://abs-dev.github.io/DiagTestKit/index.html)
+          | [MF](https://abs-dev.github.io/MF/index.html)
+          | [PF](https://abs-dev.github.io/PF/index.html)
+          | [skrmdb](https://abs-dev.github.io/skrmdb/index.html)
+reference:
+- title: Functions
+- subtitle: Not Bootstrapped
+- contents:
+  - MF
+  - MFSubj
+  - MFmp
+  - MFClus
+  - MFClusHier
+  - MFh
+  - MFnest
+  - MFr
+- subtitle: Bootstrapped
+- contents:
+  - MFBoot
+  - HLBoot
+  - MFClusBoot
+  - MFClusBootHier
+  - MFhBoot
+  - MFnestBoot
+- title: S3 and S4 classes
+- subtitle: Not Bootstrapped
+- contents:
+  - mf-class
+  - mfmp-class
+  - mfclushier-class
+  - mfcluster-class
+  - mfcomponents-class
+  - mfhierdata-class
+- subtitle: Bootstrapped
+- contents:
+  - mfboot-class
+  - mfbootcluster-class
+  - mfclusboothier-class
+  - mfhlboot-class
+- title: Data Sets
+- contents:
+  - calflung
+  - mlesions
+  - piglung
+articles:
+- title: Articles
+  navbar: ~
+  contents:
+  - QuickStartHierData
+  - MFHierarchicalData
