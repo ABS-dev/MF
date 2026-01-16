@@ -15,10 +15,10 @@ home:
       primary:
         title: All Packages
         text: |
-          | [DiagTestKit](https://abs-dev.github.io/DiagTestKit/index.html)
-          | [MF](https://abs-dev.github.io/MF/index.html)
-          | [PF](https://abs-dev.github.io/PF/index.html)
-          | [skrmdb](https://abs-dev.github.io/skrmdb/index.html)
+          | [DiagTestKit](https://abs-dev.github.io/DiagTestKit/)
+          | [MF](https://abs-dev.github.io/MF/)
+          | [PF](https://abs-dev.github.io/PF/)
+          | [skrmdb](https://abs-dev.github.io/skrmdb/)
 reference:
 - title: Functions
 - subtitle: Not Bootstrapped
