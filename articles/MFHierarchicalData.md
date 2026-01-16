@@ -148,7 +148,7 @@ are calculated for each level of that variable.
   particular factor level designated in the row.
 - `con_medResp` & `vac_medResp`: Median of responses for each comparison
   group matching the particular factor level of the row.
-- `MF`: $2*U/N1N2 - 1$.
+- `MF`: \\2 \* U/N1N2 - 1\\.
 
 The following example looks at the mitigated fraction of factors in
 variable “pen”. We can see that the values for “N1N2” have been summed

@@ -152,7 +152,7 @@ system.time(test1 <- MFhBoot(formula, a,
                              boot.unit = TRUE,
                              seed = 12345))
 #>    user  system elapsed 
-#>   1.873   0.013   1.886 
+#>   1.845   0.015   1.860 
 test1$bootmfh
 #> # A tibble: 120,000 × 11
 #>    bootID     w     u  n1n2 con_n vac_n con_medResp vac_medResp room   pen  

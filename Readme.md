@@ -7,7 +7,11 @@ use only.
 
 ## Installation
 
+    # Install latest version
     devtools::install_github("ABS-dev/MF")
+
+    # Install an older version
+    devtools::install_github("ABS-dev/MF", ref = "4.4.11")
 
 ## Vignettes
 

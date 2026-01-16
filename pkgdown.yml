@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   MFHierarchicalData: MFHierarchicalData.html
   QuickStartHierData: QuickStartHierData.html
-last_built: 2026-01-16T16:44Z
+last_built: 2026-01-16T17:10Z
 urls:
   reference: https://abs-dev.github.io/MF/reference
   article: https://abs-dev.github.io/MF/articles

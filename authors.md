@@ -15,9 +15,6 @@
 
 ## Citation
 
-Source:
-[`DESCRIPTION`](https://github.com/ABS-dev/MF/blob/main/DESCRIPTION)
-
 Siev D, Vendettuoli M, Kent T (2026). *MF: Mitigated Fraction*. R
 package version 4.4.11, <https://github.com/ABS-dev/MF/>.
 
