@@ -1,0 +1,106 @@
+# Clustered mitigated fraction
+
+Estimates mitigated fraction from clustered or stratified data.
+
+## Usage
+
+``` r
+MFClus(formula, data, compare = c("con", "vac"), trace.it = FALSE)
+```
+
+## Arguments
+
+- formula:
+
+  Formula of the form `y ~ x + cluster(w)`, where y is a continuous
+  response, x is a factor with two levels of treatment, and w is a
+  factor indicating the clusters.
+
+- data:
+
+  Data frame. See `Note` for handling of input data with more than two
+  levels.
+
+- compare:
+
+  Text vector stating the factor levels - `compare[1]` is the control or
+  reference group to which `compare[2]` is compared
+
+- trace.it:
+
+  Verbose tracking of the cycles? Default FALSE.
+
+## Value
+
+a [mfcluster](https://abs-dev.github.io/MF/reference/mfcluster-class.md)
+data object
+
+## Details
+
+Averages the U statistic over the clusters and computes MF from it.
+Clusters are excluded if they do not include both treatments.
+
+## Note
+
+If input data contains more than two levels of treatment, rows
+associated with unused treatment levels will be removed.
+
+Factor levels for treatments not present in the input data will be
+ignored.
+
+Clusters with missing treatments will be excluded. See
+[mfbootcluster](https://abs-dev.github.io/MF/reference/mfbootcluster-class.md)
+or use `trace.it` to identify excluded clusters.
+
+## References
+
+Siev D. (2005). An estimator of intervention effect on disease severity.
+*Journal of Modern Applied Statistical Methods.* **4:500–508**
+
+## See also
+
+[mfcluster](https://abs-dev.github.io/MF/reference/mfcluster-class.md)
+
+## Author
+
+[MF-package](https://abs-dev.github.io/MF/reference/MF-package.md)
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+MFClus(lesion ~ group + cluster(litter), piglung)
+
+#  Comparing vac to con
+#
+#  MF = 0.3533835
+#
+#  By Cluster
+#     w  u         r n1 n2         mf
+#  U 25 10 0.4000000  5  5 -0.2000000
+#  K 12  2 0.2500000  4  2 -0.5000000
+#  Z 16 10 0.8333333  3  4  0.6666667
+#  D  3  2 1.0000000  1  2  1.0000000
+#  N  1  0 0.0000000  1  3 -1.0000000
+#  T  8  5 0.8333333  2  3  0.6666667
+#  P  4  1 0.5000000  2  1  0.0000000
+#  L  3  2 0.6666667  1  3  0.3333333
+#  G 15  9 0.7500000  3  4  0.5000000
+#  J 15  9 1.0000000  3  3  1.0000000
+#  W  6  3 0.7500000  2  2  0.5000000
+#  A  9  3 0.3333333  3  3 -0.3333333
+#  X 12  6 1.0000000  3  2  1.0000000
+#  F 13  7 0.7777778  3  3  0.5555556
+#  S 21 11 0.9166667  4  3  0.8333333
+#  H 14  8 0.8888889  3  3  0.7777778
+#  Y  2  1 1.0000000  1  1  1.0000000
+#  E  2  1 1.0000000  1  1  1.0000000
+#
+#  All
+#        w  u         r n1 n2        mf
+#  All 181 90 0.6766917 50 52 0.3533835
+#
+#  Excluded Clusters
+#  [1] M, Q, R, B, O, V, I, C
+} # }
+```
