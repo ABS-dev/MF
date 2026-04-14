@@ -1,0 +1,124 @@
+# Identify ranks for use when evaluating MF for nested hierarchy.
+
+Identify ranks for use when evaluating MF for nested hierarchy.
+
+## Usage
+
+``` r
+MFh(formula, data, compare = c("con", "vac"))
+```
+
+## Arguments
+
+- formula:
+
+  Formula of the form y ~ x + a/b/c, where y is a continuous response, x
+  is a factor with two levels of treatment, and a/b/c are vgrouping
+  variables corresponding to the clusters. Nesting is assumed to be in
+  order, left to right, highest to lowest. So a single level of "a" will
+  contain multiple levels of "b" and a single level of "b" will contain
+  multiple levels of "c".
+
+- data:
+
+  a data.frame or tibble with the variables specified in formula.
+  Additional variables will be ignored.
+
+- compare:
+
+  Text vector stating the factor levels - `compare[1]` is the control or
+  reference group to which `compare[2]` is compared.
+
+## Value
+
+A
+[mfhierdata](https://abs-dev.github.io/MF/reference/mfhierdata-class.md)
+object, which is a list of three items.
+
+- `coreTbl` A
+  [dplyr::tibble](https://dplyr.tidyverse.org/reference/reexports.html)
+  with one row for each unique core level showing values for:
+
+  - `con_n` & `vac_n`: counts of observations for each treatment level
+    in the core level.
+
+  - `con_medResp` & `vac_medResp`: median of the `y` continuous response
+    for each treatment level.
+
+  - `n1n2`: product of the counts, `con_n` \\\times\\ `vac_n`.
+
+  - `w`: Wilcoxon statistic
+
+  - `u`: Mann-Whitney statistic
+
+- `data`: A
+  [dplyr::tibble](https://dplyr.tidyverse.org/reference/reexports.html)
+  of the restructured input data used for calculations.
+
+- `compare`: The compare variables as input by user.
+
+- `formula`: The formula as input by user.
+
+## Note
+
+Core variable is the variable corresponding to the lowest nodes of the
+hierarchial tree. Nest variables are those above the core.
+
+## See also
+
+[MFnest](https://abs-dev.github.io/MF/reference/MFnest.md) for
+calculation of MF for nest, core and all variables.
+[mfhierdata](https://abs-dev.github.io/MF/reference/mfhierdata-class.md)
+for returned object.
+[MFClusHier](https://abs-dev.github.io/MF/reference/MFClusHier.md) for a
+wrapper.
+
+## Author
+
+[MF-package](https://abs-dev.github.io/MF/reference/MF-package.md)
+
+## Examples
+
+``` r
+a <- data.frame(
+ room   = paste("Room", rep(c("W", "Z"), each = 24)),
+ pen    = paste("Pen", rep(LETTERS[1:6], each = 8)),
+ litter = paste("Litter", rep(11:22, each = 4)),
+ tx     = rep(rep(c("vac", "con"), each = 2), 12))
+set.seed(76153)
+a$lung[a$tx == "vac"] <- rnorm(24, 5, 1.3)
+a$lung[a$tx == "con"] <- rnorm(24, 7, 1.3)
+
+aCore <- MFh(lung ~ tx + room / pen / litter, a)
+aCore
+#> # A tibble: 12 × 10
+#>    room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2     u
+#>    <chr>  <chr> <chr>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl> <dbl>
+#>  1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4     4
+#>  2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4     2
+#>  3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4     4
+#>  4 Room W Pen B Litter 14        8.11     2     7        5.59     2     4     4
+#>  5 Room W Pen C Litter 15        8.09     2     7        5.26     2     4     4
+#>  6 Room W Pen C Litter 16        6.77     2     7        4.50     2     4     4
+#>  7 Room Z Pen D Litter 17        5.58     2     7        4.26     2     4     4
+#>  8 Room Z Pen D Litter 18        7.44     2     6        6.33     2     4     3
+#>  9 Room Z Pen E Litter 19        7.98     2     7        4.58     2     4     4
+#> 10 Room Z Pen E Litter 20        6.78     2     7        4.86     2     4     4
+#> 11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4     4
+#> 12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4     4
+#  A tibble: 12 x 10
+#     room   pen   litter    con_medResp con_n     w vac_medResp vac_n  n1n2
+#     <chr>  <chr> <chr>           <dbl> <dbl> <dbl>       <dbl> <dbl> <dbl>
+#   1 Room W Pen A Litter 11        8.24     2     7        5.13     2     4
+#   2 Room W Pen A Litter 12        4.91     2     5        3.81     2     4
+#   3 Room W Pen B Litter 13        8.10     2     7        5.23     2     4
+#   4 Room W Pen B Litter 14        8.11     2     7        5.59     2     4
+#   5 Room W Pen C Litter 15        8.09     2     7        5.26     2     4
+#   6 Room W Pen C Litter 16        6.77     2     7        4.50     2     4
+#   7 Room Z Pen D Litter 17        5.58     2     7        4.26     2     4
+#   8 Room Z Pen D Litter 18        7.44     2     6        6.33     2     4
+#   9 Room Z Pen E Litter 19        7.98     2     7        4.58     2     4
+#  10 Room Z Pen E Litter 20        6.78     2     7        4.86     2     4
+#  11 Room Z Pen F Litter 21        6.82     2     7        5.36     2     4
+#  12 Room Z Pen F Litter 22        7.27     2     7        5.13     2     4
+```
