@@ -114,7 +114,7 @@ aCore$data
 #> # ℹ 38 more rows
 aCore$formula
 #> lung ~ tx + room/pen/litter
-#> <environment: 0x562d2b9c8318>
+#> <environment: 0x000001ec0a1eabd8>
 aCore$compare
 #> [1] "con" "vac"
 ```

@@ -87,8 +87,8 @@ of both options are shown in this document.
 ### Technical requirements.
 
 Examples in this manual were created using MF version 4.4.11, R version
-4.5.3 (2026-03-11) on Windows. CVB has not tested code usage on other
-systems.
+4.5.0 (2025-04-11 ucrt) on Windows. CVB has not tested code usage on
+other systems.
 
 The package can be found online at:
 <https://github.com/ABS-dev/MF/blob/master/README.md>, including
@@ -669,42 +669,43 @@ a <- a[-48, ]
 sessionInfo()
 ```
 
-    ## R version 4.5.3 (2026-03-11)
-    ## Platform: x86_64-pc-linux-gnu
-    ## Running under: Ubuntu 24.04.4 LTS
+    ## R version 4.5.0 (2025-04-11 ucrt)
+    ## Platform: x86_64-w64-mingw32/x64
+    ## Running under: Windows 11 x64 (build 22631)
     ## 
     ## Matrix products: default
-    ## BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-    ## LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+    ##   LAPACK version 3.12.1
     ## 
     ## locale:
-    ##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
-    ##  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
-    ##  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-    ## [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+    ## [1] LC_COLLATE=English_United States.utf8 
+    ## [2] LC_CTYPE=English_United States.utf8   
+    ## [3] LC_MONETARY=English_United States.utf8
+    ## [4] LC_NUMERIC=C                          
+    ## [5] LC_TIME=English_United States.utf8    
     ## 
-    ## time zone: UTC
-    ## tzcode source: system (glibc)
+    ## time zone: America/Chicago
+    ## tzcode source: internal
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## other attached packages:
-    ##  [1] MF_4.4.11        lubridate_1.9.5  forcats_1.0.1    stringr_1.6.0   
-    ##  [5] dplyr_1.2.1      purrr_1.2.2      readr_2.2.0      tidyr_1.3.2     
-    ##  [9] tibble_3.3.1     ggplot2_4.0.2    tidyverse_2.0.0  kableExtra_1.4.0
+    ##  [1] MF_4.4.11        lubridate_1.9.4  forcats_1.0.1    stringr_1.6.0   
+    ##  [5] dplyr_1.1.4      purrr_1.2.1      readr_2.1.6      tidyr_1.3.2     
+    ##  [9] tibble_3.3.1     ggplot2_4.0.1    tidyverse_2.0.0  kableExtra_1.4.0
     ## 
     ## loaded via a namespace (and not attached):
     ##  [1] utf8_1.2.6         sass_0.4.10        generics_0.1.4     xml2_1.5.2        
-    ##  [5] stringi_1.8.7      hms_1.1.4          digest_0.6.39      magrittr_2.0.5    
-    ##  [9] evaluate_1.0.5     grid_4.5.3         timechange_0.4.0   RColorBrewer_1.1-3
-    ## [13] fastmap_1.2.0      plyr_1.8.9         jsonlite_2.0.0     viridisLite_0.4.3 
-    ## [17] scales_1.4.0       textshaping_1.0.5  jquerylib_0.1.4    cli_3.6.6         
-    ## [21] rlang_1.2.0        withr_3.0.2        cachem_1.1.0       yaml_2.3.12       
-    ## [25] tools_4.5.3        tzdb_0.5.0         vctrs_0.7.3        R6_2.6.1          
-    ## [29] lifecycle_1.0.5    fs_2.0.1           ragg_1.5.2         pkgconfig_2.0.3   
-    ## [33] desc_1.4.3         pkgdown_2.2.0      pillar_1.11.1      bslib_0.10.0      
-    ## [37] gtable_0.3.6       Rcpp_1.1.1         glue_1.8.0         systemfonts_1.3.2 
-    ## [41] xfun_0.57          tidyselect_1.2.1   rstudioapi_0.18.0  knitr_1.51        
-    ## [45] farver_2.1.2       htmltools_0.5.9    rmarkdown_2.31     svglite_2.2.2     
-    ## [49] compiler_4.5.3     S7_0.2.1
+    ##  [5] stringi_1.8.7      hms_1.1.4          digest_0.6.39      magrittr_2.0.4    
+    ##  [9] timechange_0.3.0   evaluate_1.0.5     grid_4.5.0         RColorBrewer_1.1-3
+    ## [13] fastmap_1.2.0      plyr_1.8.9         jsonlite_2.0.0     viridisLite_0.4.2 
+    ## [17] scales_1.4.0       textshaping_1.0.4  jquerylib_0.1.4    cli_3.6.5         
+    ## [21] rlang_1.1.7        withr_3.0.2        cachem_1.1.0       yaml_2.3.12       
+    ## [25] otel_0.2.0         tools_4.5.0        tzdb_0.5.0         vctrs_0.7.1       
+    ## [29] R6_2.6.1           lifecycle_1.0.5    fs_1.6.6           htmlwidgets_1.6.4 
+    ## [33] ragg_1.5.0         pkgconfig_2.0.3    desc_1.4.3         pkgdown_2.2.0     
+    ## [37] bslib_0.9.0        pillar_1.11.1      gtable_0.3.6       Rcpp_1.1.1        
+    ## [41] glue_1.8.0         systemfonts_1.3.1  xfun_0.56          tidyselect_1.2.1  
+    ## [45] rstudioapi_0.18.0  knitr_1.51         dichromat_2.0-0.1  farver_2.1.2      
+    ## [49] htmltools_0.5.9    rmarkdown_2.30     svglite_2.2.2      compiler_4.5.0    
+    ## [53] S7_0.2.1
